@@ -22,7 +22,7 @@ import {
   SHIELD_DURATION,
 } from "@/rules/data/powerTables.ts";
 import { computePowerCost, type AreaChoice, type PowerComponent } from "@/rules/powers.ts";
-import { TECHNIQUES } from "@/rules/data/equipment.ts";
+import { TechniquesPanel } from "./TechniquesPanel";
 import { deletePower, savePower, setQuickAccess, type PowerInput } from "../../inventory-actions";
 import type { SheetState } from "../Sheet";
 import { ActiveEffects, UsePowerButton } from "./actions-ui";
@@ -59,6 +59,12 @@ export function PowersTab({ state }: { state: SheetState }) {
         )}
       </header>
       <AbilityMeter state={state} />
+      {info.theme === "arsenal" && <TechniquesPanel state={state} />}
+      {info.theme === "arsenal" && (
+        <p className="label-mono pt-2">
+          Técnicas personalizadas (criadas com o Mestre) <span className="text-fg">({state.powers.length})</span>
+        </p>
+      )}
       {state.powers.length === 0 ? (
         <p className="border border-dashed border-line p-6 text-center text-sm text-fg-muted">Nada criado ainda. {info.description}</p>
       ) : (
@@ -344,26 +350,6 @@ function PowerCreator({ state, power, onClose }: { state: SheetState; power?: Po
           </Field>
         </div>
       </div>
-      {info.theme === "arsenal" && !power && (
-        <label className="mt-4 block text-sm">
-          <span className="label-mono mb-1 block text-holo">Técnica do livro (opcional)</span>
-          <select
-            className="field-input"
-            defaultValue=""
-            onChange={(e) => {
-              const t = TECHNIQUES.find((x) => x.id === e.target.value);
-              if (t) setMeta((m) => ({ ...m, name: t.name, description: t.requirements ? `${t.text}\nRequisitos: ${t.requirements}` : t.text, ability_type: "Técnica" }));
-            }}
-          >
-            <option value="">Escolher da lista de técnicas…</option>
-            {TECHNIQUES.map((t) => (
-              <option key={t.id} value={t.id}>
-                {t.name}
-              </option>
-            ))}
-          </select>
-        </label>
-      )}
       <div className="mt-4">
         <Field label="Descrição">
           <textarea rows={3} className="field-input resize-y" maxLength={5000} value={meta.description} onChange={(e) => setMeta({ ...meta, description: e.target.value })} />

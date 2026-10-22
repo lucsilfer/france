@@ -13,6 +13,7 @@ import { isValidDice, type RollResult } from "@/rules/dice.ts";
 import { computePowerCost, type PowerComponent } from "@/rules/powers.ts";
 import { ITEM_COLUMNS, POWER_COLUMNS, type ItemModifierRow, type ItemRow, type PowerRow } from "@/lib/character";
 import { abilityStatus } from "@/rules/abilities.ts";
+import { techniqueAttackOptions } from "@/rules/techniques.ts";
 import { dbMessage, editContext, fail, guard, int, logRoll, sheetContext, touch, uuid } from "./_shared";
 
 function detail(r: RollResult): DiceDetail {
@@ -277,7 +278,23 @@ export async function attackWithItem(characterId: string, itemId: string, option
       modifiers: item.item_modifiers.map((m) => m.modifier_id),
     };
     const skillValues = Object.fromEntries(sheet.skills.map((s) => [s.id, s.final]));
-    const plan = planAttack(weapon, { classId: form.kind === "base" ? c.class_id : null, originId: c.origin_id, pathId: c.origin_path_id, level: c.level, skillValues, options });
+    // Técnicas do Arsenal: só as aprendidas, não suspensas e disponíveis nesta cena entram no ataque.
+    const tecOptions = techniqueAttackOptions(bundle.techniques, c.level, bundle.techniqueUses, bundle.tracker);
+    const chosenTec = tecOptions.filter((t) => options.includes(t.key));
+    for (const t of chosenTec.filter((x) => x.consumes)) {
+      const { supabase } = await editContext(characterId);
+      const { error } = await supabase.rpc("use_technique", { p_character: characterId, p_technique: t.def.id, p_request: randomUUID(), p_data: { attack: item.name } });
+      if (error) return fail(dbMessage(error, `Não foi possível usar ${t.def.name}.`));
+    }
+    const plan = planAttack(weapon, {
+      classId: form.kind === "base" ? c.class_id : null,
+      originId: c.origin_id,
+      pathId: c.origin_path_id,
+      level: c.level,
+      skillValues,
+      options,
+      allowedTechniques: chosenTec.map((t) => t.def.id),
+    });
     const out = performAttack(plan);
     const payload: AttackPayload = {
       kind: "attack",
@@ -339,7 +356,7 @@ export async function savePower(characterId: string, input: PowerInput, powerId?
     if (!cost.valid) return fail(cost.errors[0]);
     if (!powerId) {
       // Vagas de habilidades (o banco confere de novo no trigger).
-      const st = abilityStatus({ level: c.level, originId: c.origin_id, pathId: c.origin_path_id, created: bundle.powers.length });
+      const st = abilityStatus({ level: c.level, originId: c.origin_id, pathId: c.origin_path_id, created: bundle.powers.length + bundle.techniques.length });
       if (!st.canCreate) return fail(`Sem habilidades disponíveis: ${st.created} de ${st.granted} já criadas no nível ${c.level}.`);
     }
     const effectDice = cost.components.map((x) => x.dice).filter(Boolean).join(" + ") || null;

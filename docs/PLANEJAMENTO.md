@@ -54,7 +54,8 @@ src/rules  ← motor de regras em TypeScript puro, sem dependências e sem React
 | `/personagens/[id]/criar` (assistente) | dono | 2 ✅ |
 | `/personagens/[id]` (ficha) | dono / Mestre autorizado | 2 ✅ · 3 ✅ (inventário, poderes, níveis, formas) |
 | `/personagens/[id]/lenda` (assistente da Lenda) | dono (Artificial) | 3 ✅ |
-| `/campanhas/[id]` e `/campanhas/[id]/escudo` | membros / Mestre | 4 |
+| `/campanhas/[id]` (central da campanha) | membros | 4 ✅ |
+| `/campanhas/[id]/escudo` (Escudo do Mestre) | Mestre | 4 ✅ |
 
 ## Banco de dados (resumo)
 
@@ -132,13 +133,17 @@ Permissões (RLS): dono vê/edita tudo do seu personagem; Mestre vê fichas vinc
 - [x] Troca instantânea de forma do Artificial e tema corrompido da Lenda
 - [ ] Conferir em navegador e `npm run build` (sem npm/navegador no ambiente de desenvolvimento)
 
-### Fase 4 — Campanhas
-- [ ] Vínculo de personagem com aviso de permissão
-- [ ] Escudo do Mestre: Agentes, Combates, Investigação, Relatórios, Dados, Anotações
-- [ ] Tempo real
+### Fase 4 — Campanhas ✅
+- [x] Técnicas do Arsenal: catálogo do livro, aprender/esquecer, vagas por nível par, suspensão ao baixar nível, limites de uso, ataques
+- [x] Criar campanha em janela, convite ativável/renovável, vínculo de personagem com aprovação do Mestre
+- [x] Escudo do Mestre: Agentes, Combates, Investigação (com quadro), Relatórios, Dados, Anotações
+- [x] NPCs/monstros da campanha e a partir do Homebrew (cópias independentes); dar itens do Homebrew
+- [x] Tempo real (Supabase Realtime) com nova leitura ao reconectar
+- [x] 20 fluxos testados no banco + regressão 3.5
+- [ ] Conferir em navegador e `npm run build` (sem npm/navegador no ambiente de desenvolvimento)
 
 ### Fase 5 — Homebrew
-- [ ] Editores de monstro e NPC; adicionar modelos a fichas (cópia independente) e a combates
+- [ ] Editores completos de monstro e NPC no Homebrew (a Fase 4 já instancia modelos em campanhas e combates)
 
 ### Fase 6 — Finalização
 - [ ] Revisão visual, testes de ponta a ponta, desempenho, publicação

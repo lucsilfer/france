@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-import { Copy, Crown, DoorOpen, Link2, Plus, RefreshCw, Trash2, UsersRound } from "lucide-react";
+import { Copy, Crown, DoorOpen, Link2, Plus, RefreshCw, Shield, Trash2, UsersRound } from "lucide-react";
+import { Modal } from "@/components/ui/Modal";
+import { CampaignForm } from "../campanhas/nova/CampaignForm";
 import type { CampaignSummary } from "@/lib/types";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/components/ui/Toast";
@@ -118,7 +120,21 @@ function CampaignCard({ c, onAsk }: { c: CampaignSummary; onAsk: ReturnType<type
           </div>
         )}
 
-        <div className="flex justify-end border-t border-line pt-3">
+        <div className="flex flex-wrap justify-end gap-2 border-t border-line pt-3">
+          <Link
+            href={`/campanhas/${c.id}`}
+            className="chamfer inline-flex items-center gap-2 border border-holo/60 bg-primary/15 px-3 py-1.5 font-mono text-[0.64rem] tracking-[0.18em] text-fg uppercase hover:border-holo hover:text-cyan"
+          >
+            Abrir campanha
+          </Link>
+          {isMaster && (
+            <Link
+              href={`/campanhas/${c.id}/escudo`}
+              className="chamfer inline-flex items-center gap-2 border border-line-strong bg-panel-2/80 px-3 py-1.5 font-mono text-[0.64rem] tracking-[0.18em] text-fg uppercase hover:border-holo hover:text-cyan"
+            >
+              <Shield className="h-3.5 w-3.5" aria-hidden /> Escudo
+            </Link>
+          )}
           {isMaster ? (
             <Button
               size="sm"
@@ -163,13 +179,11 @@ function CampaignCard({ c, onAsk }: { c: CampaignSummary; onAsk: ReturnType<type
 
 export function CampaignsPanel({ campaigns }: { campaigns: CampaignSummary[] }) {
   const { ask, dialog } = useConfirmedAction();
+  const [creating, setCreating] = useState(false);
   const create = (
-    <Link
-      href="/campanhas/nova"
-      className="chamfer inline-flex items-center gap-2 border border-holo/60 bg-gradient-to-r from-primary-deep to-primary/80 px-5 py-2.5 font-mono text-xs font-medium tracking-[0.18em] text-fg uppercase transition-[background,color] hover:from-primary/90 hover:to-holo/90 hover:text-white"
-    >
+    <Button onClick={() => setCreating(true)}>
       <Plus className="h-4 w-4" aria-hidden /> Criar campanha
-    </Link>
+    </Button>
   );
 
   return (
@@ -195,6 +209,9 @@ export function CampaignsPanel({ campaigns }: { campaigns: CampaignSummary[] }) 
         </>
       )}
       {dialog}
+      <Modal open={creating} onClose={() => setCreating(false)} title="Criar campanha" tag="Nova campanha" size="md">
+        <CampaignForm onDone={() => setCreating(false)} />
+      </Modal>
     </div>
   );
 }

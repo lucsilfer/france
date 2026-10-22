@@ -95,8 +95,8 @@ export function powersTabInfo(originId: string | null, pathId: string | null): P
         label: "Técnicas de Arsenal",
         singular: "técnica",
         plural: "técnicas",
-        newLabel: "Nova técnica",
-        description: "Técnicas de combate e armamentos. A cada nível par o Arsenal aprende uma técnica — da lista do livro ou criada com o Mestre. Sem custo de PC.",
+        newLabel: "Técnica personalizada",
+        description: "Técnicas de combate e armamentos. A cada nível par o Arsenal aprende uma técnica da lista do livro (ou uma técnica personalizada combinada com o Mestre). Técnicas e criações dividem as mesmas vagas. Sem custo de PC.",
       };
     if (pathId === "engrenagem")
       return {

@@ -13,7 +13,7 @@ import { fileURLToPath } from "node:url";
 import { RULES_CONFIG, RULES_VERSION } from "../src/rules/config.ts";
 import { ATTRIBUTE_IDS } from "../src/rules/data/attributes.ts";
 import { CLASSES } from "../src/rules/data/classes.ts";
-import { WEAPON_MODIFIERS } from "../src/rules/data/equipment.ts";
+import { TECHNIQUES, WEAPON_MODIFIERS } from "../src/rules/data/equipment.ts";
 import { ORIGINS } from "../src/rules/data/origins.ts";
 import {
   BUFFS,
@@ -32,8 +32,8 @@ import {
 import { SKILLS } from "../src/rules/data/skills.ts";
 import { parseDice } from "../src/rules/dice.ts";
 
-/** Versão atual. As anteriores (20261022000000_rules_sync.sql e 20261023000000_rules_sync_fase3.sql) ficam congeladas. */
-export const RULES_SQL_PATH = fileURLToPath(new URL("../supabase/migrations/20261024000000_rules_sync_3_5.sql", import.meta.url));
+/** Versão atual. As anteriores (rules_sync, rules_sync_fase3, rules_sync_3_5) ficam congeladas — já foram aplicadas. */
+export const RULES_SQL_PATH = fileURLToPath(new URL("../supabase/migrations/20261025000000_rules_sync_fase4.sql", import.meta.url));
 
 /** "1d12+2" → { count: 1, sides: 12, bonus: 2 } (só o formato usado na evolução). */
 function simpleDice(expr: string | null) {
@@ -97,6 +97,9 @@ export function rulesSnapshot() {
       },
     },
     weaponModifiers: Object.fromEntries(WEAPON_MODIFIERS.map((m) => [m.id, m.requires])),
+    techniques: Object.fromEntries(
+      TECHNIQUES.map((t) => [t.id, { name: t.name, usage: t.usage, requires: t.requires ?? {}, special: t.special ?? null }]),
+    ),
     maxWeaponModifiers: RULES_CONFIG.maxWeaponModifiers,
     powers: {
       damageSingle: DAMAGE_SINGLE.map((t) => t.cost),
@@ -317,6 +320,31 @@ begin
   return greatest(0, base + gains + f.pv_other_bonus);
 end $$;
 
+-- PC máximo da forma — mesma conta do motor: VIG ÷ 3 para baixo + ganhos de nível ativos + outros bônus.
+create or replace function public.form_pc_max(p_form uuid) returns int
+language plpgsql stable security definer set search_path = public as $$
+declare
+  cfg jsonb := public.rules_config();
+  f record;
+  cls jsonb;
+  vig int;
+  gains int;
+begin
+  select cf.id, cf.kind, cf.pc_other_bonus, c.class_id, c.level into f
+  from public.character_forms cf join public.characters c on c.id = cf.character_id
+  where cf.id = p_form;
+  if f.id is null then
+    return null;
+  end if;
+  cls := case when f.kind = 'base' and f.class_id is not null then cfg -> 'classes' -> f.class_id end;
+  select coalesce(fa.base_value, 0) + fa.other_bonus + fa.temp_bonus into vig
+  from public.form_attributes fa where fa.form_id = p_form and fa.attribute = 'VIG';
+  vig := coalesce(vig, 0) + coalesce((cls -> 'attributeBonus' ->> 'VIG')::int, 0);
+  select coalesce(sum(lp.pc_gain), 0) into gains
+  from public.level_progressions lp where lp.form_id = p_form and lp.level between 2 and f.level;
+  return greatest(0, floor(vig::numeric / 3)::int + gains + f.pc_other_bonus);
+end $$;
+
 -- ---------------------------------------------------------------------
 -- Vagas de habilidades — mesma conta do motor (abilities.ts).
 -- mode: standard | free (Elo) | none (Muto). Executa com as permissões de quem chama.
@@ -342,7 +370,10 @@ declare
   created int;
 begin
   select level, origin_id, origin_path_id into ch from public.characters where id = p_character;
-  select count(*) into created from public.powers where character_id = p_character;
+  -- Técnicas oficiais do Arsenal e poderes criados ocupam o mesmo conjunto de vagas (sem consumo duplicado).
+  select (select count(*) from public.powers where character_id = p_character)
+       + (select count(*) from public.character_techniques where character_id = p_character)
+    into created;
   return jsonb_build_object(
     'mode', coalesce(cfg -> 'originModes' ->> ch.origin_id, 'standard'),
     'granted', public.ability_granted(ch.origin_id, ch.origin_path_id, ch.level),
@@ -351,7 +382,7 @@ begin
 end $$;
 
 grant execute on function public.rules_config() to authenticated;
-grant execute on function public.form_pv_max(uuid), public.ability_granted(text, text, int), public.ability_status(uuid) to authenticated;
+grant execute on function public.form_pv_max(uuid), public.form_pc_max(uuid), public.ability_granted(text, text, int), public.ability_status(uuid) to authenticated;
 grant execute on function public.roll_attribute_set(uuid) to authenticated;
 grant execute on function public.skill_fixed_part(uuid, text), public.skill_cap(uuid) to authenticated;
 `;

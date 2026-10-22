@@ -18,7 +18,7 @@ export default async function InvitePage({ params }: { params: Promise<{ code: s
   if (!preview) {
     return (
       <PageShell eyebrow="Convite" title="Convite inválido">
-        <p className="text-fg-dim">Este link não existe mais ou foi substituído pelo Mestre. Peça um novo convite.</p>
+        <p className="text-fg-dim">Este link não existe, foi desativado ou foi substituído pelo Mestre. Peça um novo convite.</p>
       </PageShell>
     );
   }
@@ -31,15 +31,15 @@ export default async function InvitePage({ params }: { params: Promise<{ code: s
         {preview.already_member ? (
           <p className="text-fg">
             Você já participa desta campanha.{" "}
-            <Link href="/painel?aba=campanhas" className="text-cyan underline-offset-4 hover:underline">
-              Ver campanhas
+            <Link href={`/campanhas/${preview.id}`} className="text-cyan underline-offset-4 hover:underline">
+              Abrir campanha
             </Link>
           </p>
         ) : (
           <>
             <div className="rounded-sm border border-cyan-dim/50 bg-cyan/5 p-4 text-sm leading-relaxed text-fg-dim">
               Ao entrar você será <strong className="text-fg">Jogador</strong>. Quando vincular um personagem à campanha, o Mestre poderá
-              ver a ficha e, se você autorizar, alterar atributos, PV, PC e outros dados durante as sessões. Você poderá revogar essa
+              ver a ficha depois de aceitar o vínculo e, se você autorizar, alterar atributos, PV, PC e outros dados durante as sessões. Você poderá revogar essa
               autorização a qualquer momento.
             </div>
             <JoinButton code={code} />

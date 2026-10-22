@@ -163,27 +163,123 @@ export const GEAR: GearDef[] = [
   { id: "item_pericia", name: "Item de perícia", type: "equipamento", description: "Equipamento inicial do Detalhista. Escolha uma perícia (nenhuma da seção Lutar).", effect: "Vantagem nos testes da perícia escolhida" },
 ];
 
+export type TechniqueUsage =
+  | { kind: "passiva" }
+  | { kind: "por_cena"; times: number }
+  | { kind: "por_sessao"; times: number }
+  | { kind: "a_cada_turnos"; turns: number }
+  | { kind: "acao"; action: string };
+
 export interface TechniqueDef {
   id: string;
   name: string;
+  /** Texto do livro (Cap. VI — Técnicas). */
   text: string;
+  /** Requisitos como estão no livro. */
   requirements?: string;
+  /** Requisitos verificáveis (atributo final, sem bônus temporário; técnica já aprendida). */
+  requires?: { attributes?: Partial<Record<"FOR" | "DEX" | "INT" | "CON" | "MIT" | "PER" | "CAR" | "VIG", number>>; techniques?: string[] };
+  usage: TechniqueUsage;
+  /** Resumo do efeito mecânico (o que a ficha aplica ou registra). */
+  effect: string;
+  /** Efeito especial executado ao usar. */
+  special?: "recarregar_cena" | "recobrar" | "esquiva_rodada";
+  /** Opção que aparece no ataque (passiva = sempre; demais = consome o uso). */
+  attack?: { label: string; extraWeaponDice?: number; extraDamage?: string };
 }
 
-/** Técnicas (Livro do Jogador, p. 25). "Recobrar-se" aparece duplicada no livro — mantida uma vez. */
+/**
+ * Técnicas (Livro do Jogador, Cap. VI — "Armas e técnicas").
+ * "Recobrar-se" aparece duas vezes no livro com o mesmo texto — mantida uma vez.
+ */
 export const TECHNIQUES: TechniqueDef[] = [
-  { id: "arte_desarme", name: "Arte do Desarme", text: "Uma vez por cena, desfere um golpe de desarme: além de causar 1 dado extra de dano, o alvo precisa rolar um teste contra você para não ficar desarmado." },
-  { id: "arte_contra_ataque", name: "Arte do Contra-ataque", text: "Uma vez por cena, garante 100% de chance de acertar um contra-ataque. Quem sofre o golpe não pode fazer nada para impedi-lo." },
-  { id: "provocacao", name: "Provocação", text: "Uma vez por cena, provoca um inimigo para que ele ataque você. Todos os ataques dele contra você têm −10 de desvantagem." },
-  { id: "multiplos_alvos", name: "Múltiplos Alvos", text: "Uma vez por cena, ataca todos os alvos adjacentes a você — aliados incluídos." },
-  { id: "multiplos_golpes", name: "Múltiplos Golpes", text: "Uma vez a cada 2 turnos, ataca duas vezes o mesmo alvo, que pode reagir aos dois golpes." },
-  { id: "adrenalina", name: "Adrenalina", text: "Ação de movimento: todas as suas habilidades por cena são recarregadas." },
-  { id: "metavisao", name: "Metavisão", text: "Tudo fica lento e você enxerga cada passo dos inimigos. Uma vez por cena, ganha vantagem em todas as esquivas até o fim da rodada." },
-  { id: "recobrar_se", name: "Recobrar-se", text: "Uma vez por sessão, caso o ataque não te mate, você pode curar metade do dano recebido por ele; caso o ataque o mate, você pode voltar com 1 de vida." },
-  { id: "passos_leves", name: "Passos Leves", text: "Passiva que permite que você se mova livremente sem tomar ataques de oportunidade e aumenta o deslocamento para 12 m." },
-  { id: "ataque_furtivo", name: "Ataque Furtivo", text: "Enquanto estiver furtivo, seu ataque dá +1d8 de dano; esse dano extra ignora escudos e armaduras comuns." },
-  { id: "furtividade_rapida", name: "Furtividade Rápida", text: "Uma vez por cena você pode ficar instantaneamente furtivo e ninguém pode naturalmente saber onde você está.", requirements: "DEX 70+ e técnica Passos Leves" },
+  {
+    id: "arte_desarme",
+    name: "Arte do Desarme",
+    text: "Uma vez por cena, desfere um golpe de desarme: além de causar 1 dado extra de dano, o alvo precisa rolar um teste contra você para não ficar desarmado.",
+    usage: { kind: "por_cena", times: 1 },
+    effect: "+1 dado de dano da arma no golpe; o alvo testa contra você para não ser desarmado.",
+    attack: { label: "Arte do Desarme (+1 dado; alvo testa para não ser desarmado)", extraWeaponDice: 1 },
+  },
+  {
+    id: "arte_contra_ataque",
+    name: "Arte do Contra-ataque",
+    text: "Uma vez por cena, garante 100% de chance de acertar um contra-ataque. Quem sofre o golpe não pode fazer nada para impedi-lo.",
+    usage: { kind: "por_cena", times: 1 },
+    effect: "O contra-ataque acerta automaticamente e não pode ser impedido.",
+  },
+  {
+    id: "provocacao",
+    name: "Provocação",
+    text: "Uma vez por cena, provoca um inimigo para que ele ataque você. Todos os ataques dele contra você têm −10 de desvantagem.",
+    usage: { kind: "por_cena", times: 1 },
+    effect: "O inimigo provocado ataca você com −10 de desvantagem em todos os ataques contra você.",
+  },
+  {
+    id: "multiplos_alvos",
+    name: "Múltiplos Alvos",
+    text: "Uma vez por cena, ataca todos os alvos adjacentes a você — aliados incluídos.",
+    usage: { kind: "por_cena", times: 1 },
+    effect: "Um ataque contra todos os alvos adjacentes (aliados incluídos).",
+  },
+  {
+    id: "multiplos_golpes",
+    name: "Múltiplos Golpes",
+    text: "Uma vez a cada 2 turnos, ataca duas vezes o mesmo alvo, que pode reagir aos dois golpes.",
+    usage: { kind: "a_cada_turnos", turns: 2 },
+    effect: "Dois ataques contra o mesmo alvo; ele pode reagir aos dois.",
+  },
+  {
+    id: "adrenalina",
+    name: "Adrenalina",
+    text: "Ação de movimento: todas as suas habilidades por cena são recarregadas.",
+    usage: { kind: "acao", action: "Ação de movimento" },
+    effect: "Recarrega todas as técnicas de uso por cena.",
+    special: "recarregar_cena",
+  },
+  {
+    id: "metavisao",
+    name: "Metavisão",
+    text: "Tudo fica lento e você enxerga cada passo dos inimigos. Uma vez por cena, ganha vantagem em todas as esquivas até o fim da rodada.",
+    usage: { kind: "por_cena", times: 1 },
+    effect: "Vantagem em todas as esquivas até o fim da rodada.",
+    special: "esquiva_rodada",
+  },
+  {
+    id: "recobrar_se",
+    name: "Recobrar-se",
+    text: "Uma vez por sessão, caso o ataque não te mate, você pode curar metade do dano recebido por ele; caso o ataque o mate, você pode voltar com 1 de vida.",
+    usage: { kind: "por_sessao", times: 1 },
+    effect: "Cura metade do dano do ataque (arredondado para baixo) ou volta com 1 PV se o ataque te matou.",
+    special: "recobrar",
+  },
+  {
+    id: "passos_leves",
+    name: "Passos Leves",
+    text: "Passiva que permite que você se mova livremente sem tomar ataques de oportunidade e aumenta o deslocamento para 12 m.",
+    usage: { kind: "passiva" },
+    effect: "Sem ataques de oportunidade ao se mover; deslocamento 12 m.",
+  },
+  {
+    id: "ataque_furtivo",
+    name: "Ataque Furtivo",
+    text: "Enquanto estiver furtivo, seu ataque dá +1d8 de dano; esse dano extra ignora escudos e armaduras comuns.",
+    usage: { kind: "passiva" },
+    effect: "Furtivo: +1d8 de dano no ataque (o extra ignora escudos e armaduras comuns).",
+    attack: { label: "Furtivo — Ataque Furtivo (+1d8, ignora escudos e armaduras comuns)", extraDamage: "1d8" },
+  },
+  {
+    id: "furtividade_rapida",
+    name: "Furtividade Rápida",
+    text: "Uma vez por cena você pode ficar instantaneamente furtivo e ninguém pode naturalmente saber onde você está.",
+    requirements: "DEX 70+ e técnica Passos Leves",
+    requires: { attributes: { DEX: 70 }, techniques: ["passos_leves"] },
+    usage: { kind: "por_cena", times: 1 },
+    effect: "Fica furtivo instantaneamente; ninguém sabe naturalmente onde você está.",
+  },
 ];
+
+export const TECHNIQUE_BY_ID: Record<string, TechniqueDef> = Object.fromEntries(TECHNIQUES.map((t) => [t.id, t]));
 
 export function compatibleModifiers(tags: WeaponTag[]): WeaponModifierDef[] {
   return WEAPON_MODIFIERS.filter((m) => tags.includes(m.requires));

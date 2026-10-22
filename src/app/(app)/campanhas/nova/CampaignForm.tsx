@@ -10,11 +10,11 @@ import { useToast } from "@/components/ui/Toast";
 import { campaignSchema, type CampaignInput } from "@/lib/validation";
 import { createCampaign } from "../../actions";
 
-export function CampaignForm() {
+export function CampaignForm({ onDone }: { onDone?: () => void }) {
   const router = useRouter();
   const toast = useToast();
   const [pending, start] = useTransition();
-  const form = useForm<CampaignInput>({ resolver: zodResolver(campaignSchema), defaultValues: { name: "", description: "", cover_url: "" } });
+  const form = useForm<CampaignInput>({ resolver: zodResolver(campaignSchema), defaultValues: { name: "", description: "", cover_url: "", players_see_party: true, invites_enabled: true } });
   const { errors } = form.formState;
 
   const onSubmit = form.handleSubmit((values) =>
@@ -26,8 +26,8 @@ export function CampaignForm() {
         return;
       }
       toast(res.message ?? "Campanha criada.");
-      router.push("/painel?aba=campanhas");
-      router.refresh();
+      onDone?.();
+      router.push(`/campanhas/${res.data!.id}`);
     }),
   );
 
@@ -42,6 +42,24 @@ export function CampaignForm() {
       <Field label="Imagem de capa (opcional)" error={errors.cover_url?.message} hint="Link https:// de uma imagem já publicada.">
         <input type="url" inputMode="url" placeholder="https://" className="field-input" {...form.register("cover_url")} />
       </Field>
+      <fieldset className="space-y-2 rounded-sm border border-line bg-void/40 p-4">
+        <legend className="label-mono px-1 text-holo">Privacidade</legend>
+        <p className="text-xs text-fg-muted">A campanha é sempre privada: só quem entra pelo convite participa.</p>
+        <label className="flex items-start gap-2 text-sm">
+          <input type="checkbox" className="mt-1 accent-[var(--color-primary)]" {...form.register("invites_enabled")} />
+          <span>
+            <span className="block text-fg">Convite ativo</span>
+            <span className="block text-xs text-fg-dim">Você pode desativar ou renovar o link a qualquer momento.</span>
+          </span>
+        </label>
+        <label className="flex items-start gap-2 text-sm">
+          <input type="checkbox" className="mt-1 accent-[var(--color-primary)]" {...form.register("players_see_party")} />
+          <span>
+            <span className="block text-fg">Jogadores veem o grupo</span>
+            <span className="block text-xs text-fg-dim">Nome, classe, origem e nível dos personagens dos outros jogadores (nunca as fichas completas).</span>
+          </span>
+        </label>
+      </fieldset>
       <p className="text-sm text-fg-dim">Você será o Mestre desta campanha e receberá um link de convite para os jogadores.</p>
       <div className="flex justify-end">
         <Button type="submit" loading={pending}>

@@ -105,8 +105,9 @@ do $$ begin
   exception when insufficient_privilege then null; end;
 end $$;
 
--- B entra pelo convite e vincula o personagem
+-- B entra pelo convite e vincula o personagem (Fase 4: só personagem finalizado; fica pendente até o Mestre aceitar)
 reset role;
+update public.characters set status = 'active';
 select set_config('test.invite', (select code from public.campaign_invites limit 1), false);
 set role authenticated;
 select pg_temp.act('B');
@@ -124,8 +125,14 @@ do $$ declare cid uuid; ch uuid; begin
   assert (select count(*) from public.campaigns) = 1, 'jogador vê a campanha';
 end $$;
 
--- A (Mestre) agora vê e edita a ficha vinculada; C não
+-- A (Mestre) aceita o personagem; antes disso não vê a ficha
 select pg_temp.act('A');
+do $$ declare cid uuid; ch uuid; begin
+  select campaign_id, character_id into cid, ch from public.campaign_characters limit 1;
+  assert (select status from public.campaign_characters limit 1) = 'pending', 'vínculo do jogador começa pendente';
+  assert (select count(*) from public.characters) = 0, 'pendente: Mestre ainda não vê a ficha';
+  perform public.review_campaign_character(cid, ch, true);
+end $$;
 do $$ begin
   assert (select count(*) from public.characters) = 1, 'Mestre vê ficha vinculada';
   update public.character_forms set pv_current = 33;
@@ -166,12 +173,16 @@ select pg_temp.act('B');
 do $$ declare cid uuid; begin
   assert (select count(*) from public.roll_log where campaign_id is not null) = 1, 'jogador só vê rolagem pública';
   select id into cid from public.campaigns limit 1;
-  begin
-    insert into public.roll_log (user_id, campaign_id, label, expression, result, visibility)
-    values (auth.uid(), cid, 'x', '1d6', '{}', 'master');
-    assert false, 'jogador não cria rolagem de Mestre';
-  exception when insufficient_privilege then null; end;
+  -- Fase 4: rolagem privada do jogador = visível para ele e para o Mestre.
+  insert into public.roll_log (user_id, campaign_id, label, expression, result, visibility)
+  values (auth.uid(), cid, 'Privada do jogador', '1d6', '{}', 'master');
+  assert (select count(*) from public.roll_log where campaign_id is not null) = 2, 'jogador vê a pública e a própria privada';
 end $$;
+select pg_temp.act('A');
+do $$ begin
+  assert exists (select 1 from public.roll_log where label = 'Privada do jogador'), 'Mestre vê a rolagem privada do jogador';
+end $$;
+select pg_temp.act('B');
 
 -- ---------- Notas, pistas e combatentes ocultos ----------
 select pg_temp.act('A');

@@ -8,6 +8,7 @@ import { useToast } from "@/components/ui/Toast";
 import type { EffectRow, ItemRow, PowerRow } from "@/lib/character";
 import type { EffectTickPayload, PowerPayload } from "@/lib/rolls";
 import { attackOptions, isContinuous, planAttack, type WeaponLike } from "@/rules/combat.ts";
+import { techniqueAttackOptions } from "@/rules/techniques.ts";
 import { WEAPON_MODIFIER_BY_ID } from "@/rules/data/equipment.ts";
 import { SKILL_BY_ID } from "@/rules/data/skills.ts";
 import { advanceEffect, attackWithItem, endEffect, newRequestId, usePower } from "../../inventory-actions";
@@ -57,8 +58,12 @@ export function AttackButton({ state, item, compact = false }: { state: SheetSta
   const c = state.character;
   const classId = state.form.kind === "base" ? c.class_id : null;
   const hasOptions = useMemo(
-    () => (weapon ? attackOptions(weapon, { classId, originId: c.origin_id, pathId: c.origin_path_id }).length > 0 : false),
-    [weapon, classId, c.origin_id, c.origin_path_id],
+    () =>
+      weapon
+        ? attackOptions(weapon, { classId, originId: c.origin_id, pathId: c.origin_path_id }).length > 0 ||
+          techniqueAttackOptions(state.techniques, c.level, state.techniqueUses, state.tracker).length > 0
+        : false,
+    [weapon, classId, c.origin_id, c.origin_path_id, c.level, state.techniques, state.techniqueUses, state.tracker],
   );
   if (!weapon) return null;
   // Sem situações a marcar, o ataque é rolado direto (um clique).
@@ -78,16 +83,42 @@ function AttackDialog({ state, item, weapon, onClose }: { state: SheetState; ite
   const { character: c, form, sheet } = state;
   const [chosen, setChosen] = useState<string[]>([]);
   const classId = form.kind === "base" ? c.class_id : null;
-  const options = useMemo(() => attackOptions(weapon, { classId, originId: c.origin_id, pathId: c.origin_path_id }), [weapon, classId, c.origin_id, c.origin_path_id]);
+  const tecOptions = useMemo(
+    () => techniqueAttackOptions(state.techniques, c.level, state.techniqueUses, state.tracker),
+    [state.techniques, c.level, state.techniqueUses, state.tracker],
+  );
+  const options = useMemo(
+    () => [
+      ...attackOptions(weapon, { classId, originId: c.origin_id, pathId: c.origin_path_id }),
+      ...tecOptions.map((t) => ({ key: t.key, label: t.consumes ? `${t.label} — usa a técnica nesta cena` : t.label, source: t.source })),
+    ],
+    [weapon, classId, c.origin_id, c.origin_path_id, tecOptions],
+  );
   const skillValues = useMemo(() => Object.fromEntries(sheet.skills.map((s) => [s.id, s.final])), [sheet.skills]);
   const plan = useMemo(
-    () => planAttack(weapon, { classId, originId: c.origin_id, pathId: c.origin_path_id, level: c.level, skillValues, options: chosen }),
-    [weapon, classId, c.origin_id, c.origin_path_id, c.level, skillValues, chosen],
+    () =>
+      planAttack(weapon, {
+        classId,
+        originId: c.origin_id,
+        pathId: c.origin_path_id,
+        level: c.level,
+        skillValues,
+        options: chosen,
+        allowedTechniques: tecOptions.map((t) => t.def.id),
+      }),
+    [weapon, classId, c.origin_id, c.origin_path_id, c.level, skillValues, chosen, tecOptions],
   );
   const conditions = item.item_modifiers.map((m) => WEAPON_MODIFIER_BY_ID[m.modifier_id]).filter((m) => m?.condition);
 
   function attack() {
     fireAttack(state, item, chosen, (m) => toast(m, "error"));
+    // Técnicas que consomem uso: registra localmente (o servidor registrou de verdade).
+    const consumed = tecOptions.filter((t) => t.consumes && chosen.includes(t.key));
+    if (consumed.length)
+      state.setTechniqueUses((list) => [
+        ...consumed.map((t, i) => ({ id: Date.now() + i, technique_id: t.def.id, ...state.tracker, created_at: new Date().toISOString() })),
+        ...list,
+      ]);
     onClose();
   }
 

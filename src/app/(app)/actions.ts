@@ -67,10 +67,12 @@ export async function createCampaign(input: CampaignInput): Promise<ActionResult
       name: parsed.data.name,
       description: parsed.data.description,
       cover_url: parsed.data.cover_url || null,
+      settings: { players_see_party: parsed.data.players_see_party },
     })
     .select("id")
     .single();
   if (error || !data) return { ok: false, error: dbError(error?.message ?? "", "Não foi possível criar a campanha.") };
+  if (!parsed.data.invites_enabled) await supabase.rpc("set_invite_active", { p_campaign: data.id, p_active: false });
   revalidatePath("/painel");
   return { ok: true, data: { id: data.id as string }, message: "Campanha criada. Você é o Mestre." };
 }

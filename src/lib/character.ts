@@ -4,6 +4,7 @@ import { requireUser } from "@/lib/supabase/server";
 import type { StoredForm } from "@/rules/sheet.ts";
 import type { PowerComponent } from "@/rules/powers.ts";
 import type { AttackKind, WeaponTag } from "@/rules/data/equipment.ts";
+import type { Condition } from "@/lib/campaign-types";
 
 export interface CharacterRow {
   id: string;
@@ -33,6 +34,8 @@ export interface FormRow extends StoredForm {
   description: string;
   special_rules: string;
   setup_complete: boolean;
+  /** Condições ativas na forma (aplicadas pelo jogador ou pelo Mestre). */
+  conditions: Condition[];
 }
 
 export interface AttributeRollRow {
@@ -111,6 +114,28 @@ export interface HomebrewItemRow {
   data: Record<string, unknown>;
 }
 
+export interface TechniqueRow {
+  id: string;
+  technique_id: string;
+  learned_level: number;
+  created_at: string;
+}
+
+export interface TrackerRow {
+  scene: number;
+  session: number;
+  turn: number;
+}
+
+export interface TechniqueUseRow {
+  id: number;
+  technique_id: string;
+  scene: number;
+  session: number;
+  turn: number;
+  created_at: string;
+}
+
 export interface CharacterBundle {
   character: CharacterRow;
   base: FormRow;
@@ -120,6 +145,10 @@ export interface CharacterBundle {
   items: ItemRow[];
   powers: PowerRow[];
   effects: EffectRow[];
+  /** Técnicas oficiais do Arsenal aprendidas, contadores e usos da sessão atual. */
+  techniques: TechniqueRow[];
+  tracker: TrackerRow;
+  techniqueUses: TechniqueUseRow[];
   isOwner: boolean;
   canEdit: boolean;
 }
@@ -128,7 +157,7 @@ const CHARACTER_COLUMNS =
   "id, owner_id, status, creation_step, name, player_name, origin_id, origin_path_id, class_id, level, money, story, appearance, extra_info, personal_notes, active_form, starting_kit, updated_at";
 
 const FORM_COLUMNS =
-  "id, kind, name, description, special_rules, setup_complete, pv_current, pc_current, pv_other_bonus, pc_other_bonus, form_attributes(attribute, base_value, other_bonus, temp_bonus), form_skills(skill_id, points, other_bonus, temp_bonus), level_progressions(level, pv_gain, pc_gain)";
+  "id, kind, name, description, special_rules, setup_complete, conditions, pv_current, pc_current, pv_other_bonus, pc_other_bonus, form_attributes(attribute, base_value, other_bonus, temp_bonus), form_skills(skill_id, points, other_bonus, temp_bonus), level_progressions(level, pv_gain, pc_gain)";
 
 export const ITEM_COLUMNS =
   "id, source_kind, source_ref, kit_ref, name, description, item_type, category, quantity, effect_dice, effect_kind, attack_kind, damage_type, skill_override, tier, range, special_rules, tags, quick_access, created_at, item_modifiers(id, modifier_id, is_temporary)";
@@ -143,7 +172,7 @@ type RawForm = Omit<FormRow, "attributes" | "skills" | "progressions"> & {
 
 function toForm(raw: RawForm): FormRow {
   const { form_attributes, form_skills, level_progressions, ...rest } = raw;
-  return { ...rest, attributes: form_attributes ?? [], skills: form_skills ?? [], progressions: level_progressions ?? [] };
+  return { ...rest, conditions: rest.conditions ?? [], attributes: form_attributes ?? [], skills: form_skills ?? [], progressions: level_progressions ?? [] };
 }
 
 export async function loadCharacter(id: string): Promise<CharacterBundle> {
@@ -154,7 +183,7 @@ export async function loadCharacter(id: string): Promise<CharacterBundle> {
   if (!character) notFound();
 
   // Tudo em paralelo: uma ida ao banco por tabela, sem esperas em sequência.
-  const [{ data: forms, error: formErr }, { data: canEdit }, items, powers, effects, { data: pending }] = await Promise.all([
+  const [{ data: forms, error: formErr }, { data: canEdit }, items, powers, effects, { data: pending }, techniques, tracker, uses] = await Promise.all([
     supabase.from("character_forms").select(FORM_COLUMNS).eq("character_id", id),
     supabase.rpc("can_edit_character", { p_character: id }),
     supabase.from("items").select(ITEM_COLUMNS).eq("character_id", id).order("created_at", { ascending: true }),
@@ -172,6 +201,9 @@ export async function loadCharacter(id: string): Promise<CharacterBundle> {
       .eq("character_forms.kind", "base")
       .is("assigned_attribute", null)
       .maybeSingle(),
+    supabase.from("character_techniques").select("id, technique_id, learned_level, created_at").eq("character_id", id).order("created_at"),
+    supabase.from("character_trackers").select("scene, session, turn").eq("character_id", id).maybeSingle(),
+    supabase.from("technique_uses").select("id, technique_id, scene, session, turn, created_at").eq("character_id", id).order("id", { ascending: false }).limit(200),
   ]);
   if (formErr) throw new Error("Falha ao carregar a ficha.");
   const all = (forms as RawForm[] | null) ?? [];
@@ -189,6 +221,9 @@ export async function loadCharacter(id: string): Promise<CharacterBundle> {
     items: ((items.data ?? []) as ItemRow[]).map((i) => ({ ...i, tags: i.tags ?? [], item_modifiers: i.item_modifiers ?? [] })),
     powers: (powers.data ?? []) as PowerRow[],
     effects: (effects.data ?? []) as EffectRow[],
+    techniques: (techniques.data ?? []) as TechniqueRow[],
+    tracker: (tracker.data as TrackerRow | null) ?? { scene: 1, session: 1, turn: 1 },
+    techniqueUses: (uses.data ?? []) as TechniqueUseRow[],
     isOwner: row.owner_id === user.id,
     canEdit: Boolean(canEdit),
   };

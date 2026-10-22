@@ -9,7 +9,7 @@
 
 export type RoundingMode = "floor" | "round" | "ceil" | "none";
 
-export const RULES_VERSION = "livro-1.0+site-2026.10-3.5";
+export const RULES_VERSION = "livro-1.0+site-2026.10-fase4";
 
 export const RULES_CONFIG = {
   /** Geração de atributos: ficha → "rolar 3 dados de 3d6*5 e pegar o melhor". */

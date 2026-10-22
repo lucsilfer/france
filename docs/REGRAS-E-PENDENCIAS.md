@@ -119,6 +119,19 @@ Muto (partes consumidas), Elo (objeto místico), Amaldiçoado (buff/debuff do Me
 | 57 | 🟡 Granadas do Demolidor | Entregues como "Granada ×5"; tipo e dano continuam a cargo do Mestre (o livro não fixa) | `startingKits.ts`, catálogo |
 | 58 | 🟡 Prodígio sem PC | Custo cheio é calculado só como referência; nada é cobrado. Sem limites de PC e dados extras. Pode registrar sem efeito de dados | `prodigioPowers` |
 
+## 11. Decisões da Fase 4
+
+| # | Ponto | Decisão atual | Onde mudar |
+|---|---|---|---|
+| 59 | 🔴 Arsenal: técnicas por nível | 0 no nível 1, +1 por nível par (confirma #50). Técnicas do livro e técnicas personalizadas dividem as mesmas vagas | `abilities.pathOverrides["prodigio:arsenal"]`, `ability_status` |
+| 60 | 🟡 Nível reduzido | Técnicas aprendidas acima do nível atual ficam suspensas (não usam, não somem) | `isSuspended`, `use_technique` |
+| 61 | 🟡 Cena/sessão/turno | Contadores por personagem; iniciar um combate abre uma nova cena para os participantes; o início do turno do personagem conta um turno | `character_trackers`, `combat_control` |
+| 62 | 🟡 Condições com duração | Perdem 1 turno ao fim do turno de quem as tem; 0 = expira. Sem duração = até remover | `condition_tick` |
+| 63 | 🟡 Iniciativa | O livro não define: manual por padrão; "perícia Reflexo" e "1d20" são regras da mesa | `rollInitiative` |
+| 64 | 🟡 Rolagem privada do jogador | Visível ao jogador e ao Mestre; "secreta" só a quem rolou | `rolls_select`, `roll_dice` |
+| 65 | 🟡 Recobrar-se | Recupera metade do dano informado (arredondado para baixo) ou volta com 1 PV se caído | `use_technique` |
+| 66 | 🟡 Ataque de NPC | d100 contra o valor do ataque; crítico/extremo multiplicam o dano como nos personagens | `npcAttack` |
+
 ---
 
 ## Para confirmar com o autor (prioridade)
@@ -132,4 +145,4 @@ Muto (partes consumidas), Elo (objeto místico), Amaldiçoado (buff/debuff do Me
 
 ## Onde as regras vivem
 
-Todas as decisões ficam em `src/rules/config.ts` e `src/rules/data/*`. O banco **não** tem regras escritas à mão: `npm run rules:sql` gera `supabase/migrations/20261024000000_rules_sync_3_5.sql` (as versões anteriores, `20261022000000_rules_sync.sql` e `20261023000000_rules_sync_fase3.sql`, ficam congeladas porque já foram aplicadas) (rolagem de atributos, classes, origens, caminhos, perícias, limites, modificadores de arma, tabelas de poder e dados de evolução) a partir do motor, e um teste falha se o arquivo estiver desatualizado. Ao mudar uma regra: edite o motor → `npm run rules:sql` → aplique a migração.
+Todas as decisões ficam em `src/rules/config.ts` e `src/rules/data/*`. O banco **não** tem regras escritas à mão: `npm run rules:sql` gera `supabase/migrations/20261025000000_rules_sync_fase4.sql` (as versões anteriores, `20261022000000_rules_sync.sql`, `20261023000000_rules_sync_fase3.sql` e `20261024000000_rules_sync_3_5.sql`, ficam congeladas porque já foram aplicadas) (rolagem de atributos, classes, origens, caminhos, perícias, limites, modificadores de arma, tabelas de poder e dados de evolução) a partir do motor, e um teste falha se o arquivo estiver desatualizado. Ao mudar uma regra: edite o motor → `npm run rules:sql` → aplique a migração.

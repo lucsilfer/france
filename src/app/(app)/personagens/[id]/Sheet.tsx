@@ -9,7 +9,7 @@ import { useToast } from "@/components/ui/Toast";
 import { abilityStatus, powersTabInfo, type AbilityStatus, type PowersTabInfo } from "@/rules/abilities.ts";
 import { buildSheet, type ComputedSheet } from "@/rules/sheet.ts";
 import { ATTRIBUTES } from "@/rules/data/attributes.ts";
-import type { CharacterBundle, CharacterRow, EffectRow, FormRow, HomebrewItemRow, ItemRow, PowerRow } from "@/lib/character";
+import type { CharacterBundle, CharacterRow, EffectRow, FormRow, HomebrewItemRow, ItemRow, PowerRow, TechniqueRow, TechniqueUseRow, TrackerRow } from "@/lib/character";
 import type { RollEntry } from "@/lib/rolls";
 import type { RollSpeed } from "@/lib/types";
 import { rollCheck, setActiveForm } from "../actions";
@@ -20,6 +20,7 @@ import { SkillsSection } from "./SkillsSection";
 import { RightPanel, type Tab } from "./RightPanel";
 import { RollStack, type RollCard } from "./RollTray";
 import { FormSwitcher } from "./FormSwitcher";
+import { useRealtime, liveLabel } from "@/components/campaign/useRealtime";
 
 type Updater<T> = (fn: (prev: T) => T) => void;
 
@@ -37,6 +38,10 @@ export interface SheetState {
   powers: PowerRow[];
   effects: EffectRow[];
   homebrew: HomebrewItemRow[];
+  /** Técnicas oficiais do Arsenal (Prodígio), contadores de turno/cena/sessão e usos. */
+  techniques: TechniqueRow[];
+  tracker: TrackerRow;
+  techniqueUses: TechniqueUseRow[];
   abilities: AbilityStatus;
   powersTab: PowersTabInfo;
   canEdit: boolean;
@@ -50,6 +55,9 @@ export interface SheetState {
   setPowers: Updater<PowerRow[]>;
   setEffects: Updater<EffectRow[]>;
   setHomebrew: Updater<HomebrewItemRow[]>;
+  setTechniques: Updater<TechniqueRow[]>;
+  setTracker: (t: TrackerRow) => void;
+  setTechniqueUses: Updater<TechniqueUseRow[]>;
   /** Recarrega tudo do servidor (usado só quando necessário, ex.: evolução de nível). */
   refresh: () => void;
   /** Janelas de rolagem: abre na hora do clique e preenche quando o servidor responde. */
@@ -78,6 +86,9 @@ export function Sheet({ bundle, initialRolls, homebrew: initialHomebrew }: { bun
   const [powers, setPowers] = useState(bundle.powers);
   const [effects, setEffects] = useState(bundle.effects);
   const [homebrew, setHomebrew] = useState(initialHomebrew);
+  const [techniques, setTechniques] = useState(bundle.techniques);
+  const [tracker, setTracker] = useState(bundle.tracker);
+  const [techniqueUses, setTechniqueUses] = useState(bundle.techniqueUses);
   const [history, setHistory] = useState(initialRolls);
   const [cards, setCards] = useState<RollCard[]>([]);
   const [inflight, setInflight] = useState<ReadonlySet<string>>(new Set());
@@ -102,6 +113,9 @@ export function Sheet({ bundle, initialRolls, homebrew: initialHomebrew }: { bun
     setItems(bundle.items);
     setPowers(bundle.powers);
     setEffects(bundle.effects);
+    setTechniques(bundle.techniques);
+    setTracker(bundle.tracker);
+    setTechniqueUses(bundle.techniqueUses);
   }, [bundle]);
   useEffect(() => setHomebrew(initialHomebrew), [initialHomebrew]);
 
@@ -114,8 +128,8 @@ export function Sheet({ bundle, initialRolls, homebrew: initialHomebrew }: { bun
     [character.class_id, character.origin_id, character.level, form],
   );
   const abilities = useMemo(
-    () => abilityStatus({ level: character.level, originId: character.origin_id, pathId: character.origin_path_id, created: powers.length }),
-    [character.level, character.origin_id, character.origin_path_id, powers.length],
+    () => abilityStatus({ level: character.level, originId: character.origin_id, pathId: character.origin_path_id, created: powers.length + techniques.length }),
+    [character.level, character.origin_id, character.origin_path_id, powers.length, techniques.length],
   );
   const powersTab = useMemo(() => powersTabInfo(character.origin_id, character.origin_path_id), [character.origin_id, character.origin_path_id]);
 
@@ -176,6 +190,36 @@ export function Sheet({ bundle, initialRolls, homebrew: initialHomebrew }: { bun
     [flushForm, lenda?.setup_complete],
   );
 
+  // Tempo real: o Mestre (ou outro aparelho) alterou PV/PC/condições ou os contadores — a ficha atualiza sozinha.
+  const realtimeSubs = useMemo(
+    () => [
+      { table: "character_forms", filter: `character_id=eq.${character.id}`, event: "UPDATE" as const },
+      { table: "character_trackers", filter: `character_id=eq.${character.id}` },
+    ],
+    [character.id],
+  );
+  const live = useRealtime(
+    `sheet:${character.id}`,
+    realtimeSubs,
+    (ch) => {
+      if (ch.table === "character_forms") {
+        const n = ch.new as Partial<FormRow> & { id?: string };
+        if (!n.id) return;
+        const patch: Partial<FormRow> = {};
+        if (typeof n.pv_current === "number") patch.pv_current = n.pv_current;
+        if (typeof n.pc_current === "number") patch.pc_current = n.pc_current;
+        if (Array.isArray(n.conditions)) patch.conditions = n.conditions;
+        if (typeof n.pv_other_bonus === "number") patch.pv_other_bonus = n.pv_other_bonus;
+        if (typeof n.pc_other_bonus === "number") patch.pc_other_bonus = n.pc_other_bonus;
+        patchForm(n.id, patch);
+      } else if (ch.table === "character_trackers") {
+        const t = ch.new as { scene?: number; session?: number; turn?: number };
+        if (t.scene && t.session && t.turn) setTracker({ scene: t.scene, session: t.session, turn: t.turn });
+      }
+    },
+    () => router.refresh(),
+  );
+
   const openCreator = useCallback(() => {
     setTab("poderes");
     setCreatorRequest((n) => n + 1);
@@ -193,6 +237,9 @@ export function Sheet({ bundle, initialRolls, homebrew: initialHomebrew }: { bun
     powers,
     effects,
     homebrew,
+    techniques,
+    tracker,
+    techniqueUses,
     abilities,
     powersTab,
     canEdit: bundle.canEdit,
@@ -205,6 +252,9 @@ export function Sheet({ bundle, initialRolls, homebrew: initialHomebrew }: { bun
     setPowers,
     setEffects,
     setHomebrew,
+    setTechniques,
+    setTracker,
+    setTechniqueUses,
     refresh: () => router.refresh(),
     beginRoll,
     finishRoll,
@@ -249,6 +299,9 @@ export function Sheet({ bundle, initialRolls, homebrew: initialHomebrew }: { bun
               <Eye className="h-3.5 w-3.5" aria-hidden /> {bundle.canEdit ? "Ficha de jogador — edição autorizada" : "Ficha de jogador — somente leitura"}
             </span>
           )}
+          <span className={`font-mono text-[0.58rem] tracking-[0.2em] uppercase ${liveLabel(live).cls}`} title="Sincronização em tempo real">
+            ● {liveLabel(live).text}
+          </span>
           {character.origin_id === "artificial" && <FormSwitcher state={state} />}
         </div>
       </div>

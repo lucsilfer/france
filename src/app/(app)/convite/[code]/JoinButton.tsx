@@ -18,7 +18,7 @@ export function JoinButton({ code }: { code: string }) {
           const res = await joinCampaign(code);
           if (!res.ok) return toast(res.error, "error");
           toast(res.message ?? "Você entrou na campanha.");
-          router.push("/painel?aba=campanhas");
+          router.push(res.data?.id ? `/campanhas/${res.data.id}` : "/painel?aba=campanhas");
           router.refresh();
         })
       }

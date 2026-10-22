@@ -5,7 +5,8 @@ import { Minus, Plus } from "lucide-react";
 import { useToast } from "@/components/ui/Toast";
 import { ResourceBar } from "@/components/hud/ResourceBar";
 import type { ComputedSheet } from "@/rules/sheet.ts";
-import { adjustResource, updateResources } from "../actions";
+import { adjustResource, formCondition, updateResources } from "../actions";
+import { ConditionChips } from "@/components/campaign/ConditionChips";
 import { EditableSection, NumberCell } from "./EditableSection";
 import type { SheetState } from "./Sheet";
 import { LevelControl } from "./LevelControl";
@@ -45,6 +46,16 @@ export function ResourcePanel({ state, sheet }: { state: SheetState; sheet: Comp
       }
       if (pendingDelta.current[resource] === 0) state.patchForm(formId, { [key]: res.data!.value });
     }, 280);
+  }
+
+  const [condBusy, setCondBusy] = useState(false);
+  async function changeCondition(action: "add" | "remove", input: { name?: string; turns?: number | null; id?: string }) {
+    const formId = form.id;
+    setCondBusy(true);
+    const res = await formCondition(c.id, formId, action, input);
+    setCondBusy(false);
+    if (!res.ok) return toast(res.error, "error");
+    state.patchForm(formId, { conditions: res.data ?? [] });
   }
 
   function save() {
@@ -120,6 +131,15 @@ export function ResourcePanel({ state, sheet }: { state: SheetState; sheet: Comp
               )}
             </div>
           ))}
+          <div>
+            <p className="label-mono mb-1.5">Condições</p>
+            <ConditionChips
+              conditions={form.conditions ?? []}
+              busy={condBusy}
+              onAdd={state.canEdit ? (name, turns) => changeCondition("add", { name, turns }) : undefined}
+              onRemove={state.canEdit ? (id) => changeCondition("remove", { id }) : undefined}
+            />
+          </div>
           <details className="text-xs text-fg-muted">
             <summary className="cursor-pointer hover:text-fg-dim">Como o máximo é calculado</summary>
             <p className="mt-2 font-mono">

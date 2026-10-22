@@ -51,6 +51,9 @@ export const campaignSchema = z.object({
     .trim()
     .max(500)
     .refine((v) => v === "" || /^https:\/\/\S+$/.test(v), "Use um link https:// válido para a imagem."),
+  /** Privacidade: jogadores veem o grupo (personagens dos outros) e o convite fica ativo. */
+  players_see_party: z.boolean(),
+  invites_enabled: z.boolean(),
 });
 
 export const homebrewSchema = z.object({

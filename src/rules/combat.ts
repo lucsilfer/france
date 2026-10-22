@@ -4,7 +4,7 @@
  */
 import { RULES_CONFIG, applyRounding } from "./config.ts";
 import { OUTCOME_EFFECT, isSuccess, rollTest, type D100Test } from "./d100.ts";
-import { WEAPON_MODIFIER_BY_ID, type AttackKind, type RollEffect, type WeaponTag } from "./data/equipment.ts";
+import { TECHNIQUE_BY_ID, WEAPON_MODIFIER_BY_ID, type AttackKind, type RollEffect, type WeaponTag } from "./data/equipment.ts";
 import { prodigioExtraWeaponDice } from "./data/origins.ts";
 import { addDice, cryptoRng, formatDice, parseDice, rollExpression, type RollResult, type Rng } from "./dice.ts";
 import { componentCost, computePowerCost, type PowerComponent } from "./powers.ts";
@@ -27,8 +27,10 @@ export interface AttackContext {
   pathId: string | null;
   level: number;
   skillValues: Record<string, number>;
-  /** Opções situacionais marcadas: "mod:<modificador>:<opção>" ou "ctx:<id>". */
+  /** Opções situacionais marcadas: "mod:<modificador>:<opção>", "ctx:<id>" ou "tec:<técnica>". */
   options?: string[];
+  /** Técnicas do Arsenal que podem entrar neste ataque (aprendidas, não suspensas e disponíveis). */
+  allowedTechniques?: string[];
 }
 
 export interface AttackOption {
@@ -131,6 +133,13 @@ export function planAttack(weapon: WeaponLike, ctx: AttackContext): AttackPlan {
   if (opts.has("ctx:alvo_lenda") && ctx.classId === "esoterico") {
     acc.extra.push("1d6");
     applied.push("Ligação oculta (+1d6 contra lenda)");
+  }
+  for (const tid of ctx.allowedTechniques ?? []) {
+    const t = TECHNIQUE_BY_ID[tid];
+    if (!t?.attack || !opts.has(`tec:${tid}`)) continue;
+    acc.dice += t.attack.extraWeaponDice ?? 0;
+    if (t.attack.extraDamage) acc.extra.push(t.attack.extraDamage);
+    applied.push(`${t.name}${t.attack.extraWeaponDice ? ` (+${t.attack.extraWeaponDice} dado)` : t.attack.extraDamage ? ` (+${t.attack.extraDamage})` : ""}`);
   }
   let damageFactor = 1;
   if (opts.has("ctx:furtivo") && ctx.classId === "rato") {

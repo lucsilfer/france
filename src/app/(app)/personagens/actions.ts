@@ -400,7 +400,7 @@ export async function changeLevel(characterId: string, level: number): Promise<A
     const { bundle, supabase } = await sheetContext(characterId);
     const from = bundle.character.level;
     const ch = bundle.character;
-    const st = abilityStatus({ level: from, originId: ch.origin_id, pathId: ch.origin_path_id, created: bundle.powers.length });
+    const st = abilityStatus({ level: from, originId: ch.origin_id, pathId: ch.origin_path_id, created: bundle.powers.length + bundle.techniques.length });
     const blocked = checkLevelChange(st, from, level);
     if (blocked) return fail(blocked);
     const { data, error } = await supabase.rpc("set_character_level", { p_character: characterId, p_level: level });
@@ -583,3 +583,32 @@ export async function rollCheck(characterId: string, kind: "attribute" | "skill"
   });
 }
 
+
+// ===================================================================== Condições na ficha
+
+/** Adiciona/remove condição na forma (o dono ou o Mestre autorizado; o banco confere). */
+export async function formCondition(
+  characterId: string,
+  formId: string,
+  action: "add" | "remove",
+  input: { name?: string; turns?: number | null; id?: string },
+): Promise<ActionResult<import("@/lib/campaign-types").Condition[]>> {
+  return guard(async () => {
+    if (!uuid.safeParse(formId).success || !["add", "remove"].includes(action)) return fail("Dados inválidos.");
+    if (action === "add") {
+      const n = (input.name ?? "").trim();
+      if (!n || n.length > 80) return fail("Nome da condição inválido.");
+      if (input.turns != null && (!Number.isInteger(input.turns) || input.turns < 1 || input.turns > 100)) return fail("Duração inválida (1–100 turnos).");
+    }
+    const { supabase } = await editContext(characterId);
+    const { data, error } = await supabase.rpc("form_condition", {
+      p_form: formId,
+      p_action: action,
+      p_name: input.name ?? null,
+      p_turns: input.turns ?? null,
+      p_id: input.id ?? null,
+    });
+    if (error) return fail(dbMessage(error, "Não foi possível alterar a condição."));
+    return { ok: true, data: (data ?? []) as import("@/lib/campaign-types").Condition[] };
+  });
+}
