@@ -1,0 +1,41 @@
+{
+  "name": "france",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "description": "F.R.A.N.C.E — Sistema de Gerenciamento de Lendas (RPG Tríade das Lendas)",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"src/**/__tests__/*.test.ts\"",
+    "test:db": "bash supabase/tests/run-local.sh",
+    "rules:sql": "node scripts/generate-rules-sql.ts && node scripts/generate-parity-tests.ts",
+    "logo": "python3 scripts/prepare-logo.py public/brand/france-logo-original.png public/brand"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.0",
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.57.0",
+    "lucide-react": "^0.540.0",
+    "motion": "^12.23.0",
+    "next": "^16.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-hook-form": "^7.62.0",
+    "server-only": "^0.0.1",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.0",
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.0",
+    "typescript": "^5.9.0"
+  }
+}
