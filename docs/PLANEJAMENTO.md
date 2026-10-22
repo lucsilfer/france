@@ -122,6 +122,16 @@ Permissões (RLS): dono vê/edita tudo do seu personagem; Mestre vê fichas vinc
 - [x] Histórico de rolagens com testes, ataques, poderes e turnos
 - [ ] Conferir em navegador e compilar com `npm install && npm run build` (o ambiente de desenvolvimento não tem npm nem navegador)
 
+### Atualização 3.5 ✅
+- [x] PV = (FOR + CON) ÷ 3 no motor, banco e dados existentes (com registro)
+- [x] Vagas de habilidades (2 + 1 por nível par), indicador, bloqueio de evolução no front e no banco; exceções Muto/Elo; Prodígio por Caminho
+- [x] Equipamento inicial das classes: escolhas na criação, itens reais ao finalizar, resgate sem duplicar
+- [x] Prodígio: sem PC, sem limites, abas Técnicas de Arsenal / Aparatos Tecnológicos / Inventário Místico
+- [x] Velocidade das rolagens no perfil, janelas empilhadas sem barras de rolagem
+- [x] Atualização otimista, menos consultas, abas mantidas montadas
+- [x] Troca instantânea de forma do Artificial e tema corrompido da Lenda
+- [ ] Conferir em navegador e `npm run build` (sem npm/navegador no ambiente de desenvolvimento)
+
 ### Fase 4 — Campanhas
 - [ ] Vínculo de personagem com aviso de permissão
 - [ ] Escudo do Mestre: Agentes, Combates, Investigação, Relatórios, Dados, Anotações

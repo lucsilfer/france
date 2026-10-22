@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
-import { AlertTriangle, ChevronDown, Pencil, Plus, Star, Trash2, X, Zap } from "lucide-react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { AlertTriangle, ChevronDown, Cog, Gem, Pencil, Plus, Star, Swords, Trash2, X, Zap } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { Field } from "@/components/ui/Field";
@@ -22,27 +22,45 @@ import {
   SHIELD_DURATION,
 } from "@/rules/data/powerTables.ts";
 import { computePowerCost, type AreaChoice, type PowerComponent } from "@/rules/powers.ts";
+import { TECHNIQUES } from "@/rules/data/equipment.ts";
 import { deletePower, savePower, setQuickAccess, type PowerInput } from "../../inventory-actions";
 import type { SheetState } from "../Sheet";
 import { ActiveEffects, UsePowerButton } from "./actions-ui";
 
+const THEME_ICON = { default: Zap, arsenal: Swords, engrenagem: Cog, pacto: Gem } as const;
+
 export function PowersTab({ state }: { state: SheetState }) {
   const [creating, setCreating] = useState(false);
+  const { abilities: ab, powersTab: info } = state;
+  const Icon = THEME_ICON[info.theme];
+  // Pedido externo (ex.: "Abrir criador" no bloqueio de evolução).
+  const lastRequest = useRef(state.creatorRequest);
+  useEffect(() => {
+    if (state.creatorRequest !== lastRequest.current) {
+      lastRequest.current = state.creatorRequest;
+      if (state.canEdit && ab.canCreate) setCreating(true);
+    }
+  }, [state.creatorRequest, state.canEdit, ab.canCreate]);
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" data-powers-theme={info.theme}>
       <ActiveEffects state={state} />
-      <div className="flex items-center justify-between gap-2">
-        <p className="label-mono">
-          Poderes próprios <span className="text-fg">({state.powers.length})</span> · PC <span className="text-cyan">{state.form.pc_current}</span>
-        </p>
+      <header className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h2 className="flex items-center gap-2 text-lg tracking-[0.08em] text-holo uppercase">
+            <Icon className="h-4 w-4" aria-hidden /> {info.label}
+          </h2>
+          <p className="mt-1 max-w-md text-xs text-fg-dim">{info.description}</p>
+        </div>
         {state.canEdit && (
-          <Button size="sm" onClick={() => setCreating(true)}>
-            <Plus className="h-3.5 w-3.5" aria-hidden /> Criar poder
+          <Button size="sm" onClick={() => setCreating(true)} disabled={!ab.canCreate} title={ab.canCreate ? undefined : "Sem vagas disponíveis neste nível"}>
+            <Plus className="h-3.5 w-3.5" aria-hidden /> {info.newLabel}
           </Button>
         )}
-      </div>
+      </header>
+      <AbilityMeter state={state} />
       {state.powers.length === 0 ? (
-        <p className="border border-dashed border-line p-6 text-center text-sm text-fg-muted">Nenhum poder criado. O criador calcula o custo em PC com as tabelas do livro e respeita os limites do seu nível.</p>
+        <p className="border border-dashed border-line p-6 text-center text-sm text-fg-muted">Nada criado ainda. {info.description}</p>
       ) : (
         <ul className="space-y-2">
           {state.powers.map((p) => (
@@ -52,6 +70,33 @@ export function PowersTab({ state }: { state: SheetState }) {
       )}
       {state.isLenda && <p className="text-xs text-fg-muted">Os poderes são compartilhados entre as formas; o PC gasto é o da forma ativa.</p>}
       {creating && <PowerCreator state={state} onClose={() => setCreating(false)} />}
+    </div>
+  );
+}
+
+/** Vagas: adquiridas no nível, criadas e disponíveis (regra geral, Caminho do Prodígio, Elo e Muto). */
+function AbilityMeter({ state }: { state: SheetState }) {
+  const { abilities: ab, powersTab: info, character: c } = state;
+  if (ab.mode === "free")
+    return <p className="border border-line/60 px-3 py-2 text-xs text-fg-dim">Elo: cria {info.plural} quando quiser — sem limite de vagas e sem bloqueio de evolução.</p>;
+  if (ab.mode === "none")
+    return (
+      <p className="border border-line/60 px-3 py-2 text-xs text-fg-dim">
+        Muto não usa o sistema convencional de {info.plural}: a progressão segue a Mutação Adaptativa. Registros aqui não ocupam vagas nem bloqueiam a evolução.
+      </p>
+    );
+  return (
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-1 border border-line/60 px-3 py-2 font-mono text-[0.64rem] tracking-[0.12em] text-fg-dim uppercase">
+      <span>
+        Adquiridas (nível {c.level}): <span className="text-fg">{ab.granted}</span>
+      </span>
+      <span>
+        Criadas: <span className="text-fg">{ab.created}</span>
+      </span>
+      <span>
+        Disponíveis: <span className={ab.available > 0 ? "text-cyan" : "text-fg"}>{ab.available}</span>
+      </span>
+      {ab.rule.source !== "Regra geral" && <span className="text-fg-muted normal-case tracking-normal">({ab.rule.source})</span>}
     </div>
   );
 }
@@ -67,10 +112,13 @@ function PowerCard({ state, power }: { state: SheetState; power: PowerRow }) {
   const cost = useMemo(() => computePowerCost(power.components, state.character.level, state.character.origin_id), [power.components, state.character.level, state.character.origin_id]);
 
   function quick(v: boolean) {
-    start(async () => {
-      const res = await setQuickAccess(cid, "power", power.id, v);
-      if (!res.ok) return toast(res.error, "error");
-      state.refresh();
+    const patch = (value: boolean) => state.setPowers((list) => list.map((p) => (p.id === power.id ? { ...p, quick_access: value } : p)));
+    patch(v);
+    void setQuickAccess(cid, "power", power.id, v).then((res) => {
+      if (!res.ok) {
+        patch(!v);
+        toast(res.error, "error");
+      }
     });
   }
 
@@ -85,7 +133,7 @@ function PowerCard({ state, power }: { state: SheetState; power: PowerRow }) {
         )}
         <button onClick={() => setOpen((o) => !o)} aria-expanded={open} className="flex min-w-0 flex-1 items-center gap-2 text-left">
           <span className="truncate text-sm text-fg">{power.name}</span>
-          <span className="shrink-0 font-mono text-[0.65rem] text-cyan">{power.initial_cost} PC</span>
+          {!state.noPc && <span className="shrink-0 font-mono text-[0.65rem] text-cyan">{power.initial_cost} PC</span>}
           {power.per_turn_cost > 0 && <span className="shrink-0 font-mono text-[0.62rem] text-holo">+{power.per_turn_cost}/T</span>}
           {!cost.valid && <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-alert" aria-label="Acima do limite atual" />}
           <ChevronDown className={`ml-auto h-4 w-4 shrink-0 text-fg-muted transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
@@ -126,8 +174,8 @@ function PowerCard({ state, power }: { state: SheetState; power: PowerRow }) {
       {editing && <PowerCreator state={state} power={power} onClose={() => setEditing(false)} />}
       <ConfirmDialog
         open={confirm}
-        title="Excluir poder"
-        description={`Excluir “${power.name}”? Efeitos contínuos ativos dele deixam de ser cobrados.`}
+        title={`Excluir ${state.powersTab.singular}`}
+        description={`Excluir “${power.name}”? A vaga volta a ficar disponível e efeitos contínuos ativos dele deixam de ser cobrados.`}
         confirmLabel="Excluir"
         loading={pending}
         onCancel={() => setConfirm(false)}
@@ -137,7 +185,9 @@ function PowerCard({ state, power }: { state: SheetState; power: PowerRow }) {
             if (!res.ok) return toast(res.error, "error");
             toast(res.message ?? "Excluído.");
             setConfirm(false);
-            state.refresh();
+            // A vaga volta a ficar disponível (a contagem vem da lista de poderes).
+            state.setPowers((list) => list.filter((p) => p.id !== power.id));
+            state.setEffects((list) => list.filter((e) => e.power_id !== power.id));
           })
         }
       />
@@ -188,25 +238,28 @@ function PowerCreator({ state, power, onClose }: { state: SheetState; power?: Po
     range: power?.range ?? "",
     duration: power?.duration ?? "",
   });
-  const [components, setComponents] = useState<PowerComponent[]>(power?.components ?? [NEW_COMPONENT.damage]);
+  const noPc = state.noPc;
+  const info = state.powersTab;
+  const [components, setComponents] = useState<PowerComponent[]>(power?.components ?? (noPc ? [] : [NEW_COMPONENT.damage]));
   const cost = useMemo(() => computePowerCost(components, c.level, c.origin_id), [components, c.level, c.origin_id]);
   const continuous = isContinuous(components);
   const overPc = cost.errors.some((e) => e.includes("PC por habilidade"));
-  const overDice = cost.extraDice > cost.limits.maxExtraDice;
+  const overDice = !cost.unlimited && cost.extraDice > cost.limits.maxExtraDice;
 
   function patch(i: number, p: Partial<PowerComponent>) {
     setComponents((list) => list.map((x, k) => (k === i ? ({ ...x, ...p } as PowerComponent) : x)));
   }
 
   function save() {
-    if (!meta.name.trim()) return toast("Dê um nome ao poder.", "error");
+    if (!meta.name.trim()) return toast("Dê um nome.", "error");
     if (!cost.valid) return toast(cost.errors[0], "error");
     const input: PowerInput = { ...meta, name: meta.name.trim(), components };
     start(async () => {
       const res = await savePower(c.id, input, power?.id);
       if (!res.ok) return toast(res.error, "error");
       toast(res.message ?? "Salvo.");
-      state.refresh();
+      const row = res.data;
+      if (row) state.setPowers((list) => (power ? list.map((p) => (p.id === row.id ? row : p)) : [...list, row]));
       onClose();
     });
   }
@@ -215,10 +268,25 @@ function PowerCreator({ state, power, onClose }: { state: SheetState; power?: Po
     <Modal
       open
       onClose={onClose}
-      title={power ? `Editar: ${power.name}` : "Criar poder"}
-      tag="Poderes próprios"
+      title={power ? `Editar: ${power.name}` : info.newLabel}
+      tag={info.label}
       size="xl"
       header={
+        noPc ? (
+          <div className="flex flex-wrap items-end justify-between gap-3" aria-live="polite">
+            <p className="font-display text-2xl tracking-[0.08em] text-cyan text-glow">SEM CUSTO DE PC</p>
+            <p className="max-w-sm text-right text-xs text-fg-dim">Prodígio: sem limite de PC por habilidade e sem limite de dados extras. Escolha livremente os efeitos — ou nenhum, para registrar só o texto.</p>
+            {!cost.valid && (
+              <ul className="w-full space-y-0.5 text-xs text-alert">
+                {cost.errors.map((e) => (
+                  <li key={e} className="flex items-center gap-1.5">
+                    <AlertTriangle className="h-3.5 w-3.5" aria-hidden /> {e}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ) : (
         <div className={`flex flex-wrap items-end justify-between gap-3 ${cost.valid ? "" : "text-alert"}`} aria-live="polite">
           <div>
             <p className={`font-display text-3xl tracking-[0.08em] tabular-nums ${cost.valid ? "text-cyan text-glow" : "text-alert"}`}>
@@ -244,6 +312,7 @@ function PowerCreator({ state, power, onClose }: { state: SheetState; power?: Po
             </ul>
           )}
         </div>
+        )
       }
       footer={
         <>
@@ -251,7 +320,7 @@ function PowerCreator({ state, power, onClose }: { state: SheetState; power?: Po
             Cancelar
           </Button>
           <Button onClick={save} loading={pending} disabled={!cost.valid}>
-            <Zap className="h-3.5 w-3.5" aria-hidden /> {power ? "Salvar poder" : "Criar poder"}
+            <Zap className="h-3.5 w-3.5" aria-hidden /> {power ? "Salvar" : info.newLabel}
           </Button>
         </>
       }
@@ -260,7 +329,7 @@ function PowerCreator({ state, power, onClose }: { state: SheetState; power?: Po
         <Field label="Nome">
           <input className="field-input" maxLength={120} value={meta.name} onChange={(e) => setMeta({ ...meta, name: e.target.value })} />
         </Field>
-        <Field label="Tipo de habilidade">
+        <Field label={info.theme === "default" ? "Tipo de habilidade" : "Tipo"}>
           <input className="field-input" maxLength={60} placeholder="Ofensiva, suporte…" value={meta.ability_type} onChange={(e) => setMeta({ ...meta, ability_type: e.target.value })} />
         </Field>
         <Field label="Alvo">
@@ -275,6 +344,26 @@ function PowerCreator({ state, power, onClose }: { state: SheetState; power?: Po
           </Field>
         </div>
       </div>
+      {info.theme === "arsenal" && !power && (
+        <label className="mt-4 block text-sm">
+          <span className="label-mono mb-1 block text-holo">Técnica do livro (opcional)</span>
+          <select
+            className="field-input"
+            defaultValue=""
+            onChange={(e) => {
+              const t = TECHNIQUES.find((x) => x.id === e.target.value);
+              if (t) setMeta((m) => ({ ...m, name: t.name, description: t.requirements ? `${t.text}\nRequisitos: ${t.requirements}` : t.text, ability_type: "Técnica" }));
+            }}
+          >
+            <option value="">Escolher da lista de técnicas…</option>
+            {TECHNIQUES.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
       <div className="mt-4">
         <Field label="Descrição">
           <textarea rows={3} className="field-input resize-y" maxLength={5000} value={meta.description} onChange={(e) => setMeta({ ...meta, description: e.target.value })} />
@@ -282,7 +371,7 @@ function PowerCreator({ state, power, onClose }: { state: SheetState; power?: Po
       </div>
 
       <section className="mt-6">
-        <p className="label-mono mb-3 text-holo">Efeitos (Capítulo V do livro)</p>
+        <p className="label-mono mb-3 text-holo">Efeitos (Capítulo V do livro){noPc ? " — opcionais" : ""}</p>
         <ol className="space-y-3">
           {components.map((comp, i) => {
             const cc = cost.components[i];
@@ -303,18 +392,22 @@ function PowerCreator({ state, power, onClose }: { state: SheetState; power?: Po
                   </select>
                   {cc && (
                     <span className="font-mono text-xs text-cyan">
-                      {cc.initial} PC{cc.perTurn > 0 && ` + ${cc.perTurn}/turno`}
+                      {!noPc && (
+                        <>
+                          {cc.initial} PC{cc.perTurn > 0 && ` + ${cc.perTurn}/turno`}
+                        </>
+                      )}
                       {cc.dice && <span className="ml-2 text-fg">{cc.dice}</span>}
                     </span>
                   )}
-                  {components.length > 1 && (
+                  {(components.length > 1 || noPc) && (
                     <button onClick={() => setComponents((list) => list.filter((_, k) => k !== i))} className="ml-auto p-1 text-fg-muted hover:text-alert" aria-label="Remover efeito">
                       <X className="h-4 w-4" />
                     </button>
                   )}
                 </div>
                 <ComponentEditor comp={comp} onChange={(p) => patch(i, p)} />
-                {cc && <p className="mt-2 text-xs text-fg-muted">{cc.details.join(" · ")}</p>}
+                {cc && !noPc && <p className="mt-2 text-xs text-fg-muted">{cc.details.join(" · ")}</p>}
               </li>
             );
           })}
@@ -325,7 +418,11 @@ function PowerCreator({ state, power, onClose }: { state: SheetState; power?: Po
           </Button>
         )}
         {cost.bonusDamageDice && <p className="mt-3 text-xs text-cyan-dim">Amaldiçoado — a dívida a pagar: +{cost.bonusDamageDice} de dano ao usar.</p>}
-        {continuous && <p className="mt-2 text-xs text-fg-muted">Este poder tem custo por turno: ao usar, ele fica ativo e cada turno de manutenção cobra o PC indicado.</p>}
+        {continuous && (
+          <p className="mt-2 text-xs text-fg-muted">
+            {noPc ? "Efeito contínuo: ao usar, fica ativo pelos turnos escolhidos." : "Este poder tem custo por turno: ao usar, ele fica ativo e cada turno de manutenção cobra o PC indicado."}
+          </p>
+        )}
       </section>
     </Modal>
   );

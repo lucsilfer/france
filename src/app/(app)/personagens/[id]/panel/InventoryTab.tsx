@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useTransition } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { BookMarked, ChevronDown, Coins, Library, Pencil, Plus, Search, Star, Trash2, Wrench, X } from "lucide-react";
+import { BookMarked, ChevronDown, Coins, Library, Package, Pencil, Plus, Search, Star, Trash2, Wrench, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { Modal } from "@/components/ui/Modal";
@@ -27,13 +27,34 @@ import {
 } from "../../inventory-actions";
 import type { SheetState } from "../Sheet";
 import { AttackButton } from "./actions-ui";
+import { KitChoices } from "@/components/sheet/KitChoices";
+import { kitRef, startingKit, validateKitChoices, type KitChoices as Choices } from "@/rules/data/startingKits.ts";
+import { CLASS_BY_ID } from "@/rules/data/classes.ts";
+import { grantStartingKit } from "../../actions";
 import { ItemForm } from "./ItemForm";
 
 export function InventoryTab({ state }: { state: SheetState }) {
   const [adding, setAdding] = useState(false);
+  const [kitOpen, setKitOpen] = useState(false);
+  const c = state.character;
+  const kit = startingKit(c.class_id);
+  const received = kit.filter((s) => state.items.some((i) => i.kit_ref === kitRef(c.class_id ?? "", s.id))).map((s) => s.id);
+  const missingKit = kit.length > 0 && received.length < kit.length;
   return (
     <div className="space-y-5">
       <MoneyField state={state} />
+      {missingKit && state.canEdit && (
+        <button
+          onClick={() => setKitOpen(true)}
+          className="flex w-full items-center justify-between gap-3 border border-holo/50 bg-primary/10 px-4 py-2.5 text-left hover:bg-primary/15"
+        >
+          <span className="flex items-center gap-2 text-sm text-fg">
+            <Package className="h-4 w-4 text-cyan" aria-hidden /> Equipamento inicial da classe: {kit.length - received.length} pendente(s)
+          </span>
+          <span className="font-mono text-[0.6rem] tracking-[0.15em] text-cyan uppercase">Resgatar →</span>
+        </button>
+      )}
+      {kitOpen && <StartingKitModal state={state} received={received} onClose={() => setKitOpen(false)} />}
       <div className="flex items-center justify-between gap-2">
         <p className="label-mono">
           Itens <span className="text-fg">({state.items.length})</span>
@@ -110,13 +131,26 @@ function ItemCard({ state, item }: { state: SheetState; item: ItemRow }) {
   const compatible = weapon ? compatibleModifiers(item.tags).filter((m) => !mods.some((x) => x.modifier_id === m.id)) : [];
   const canAddMod = weapon && permanent < RULES_CONFIG.maxWeaponModifiers;
 
-  function run(fn: () => Promise<{ ok: boolean; error?: string; message?: string }>, after?: () => void) {
+  type Res<T> = { ok: true; data?: T; message?: string } | { ok: false; error: string };
+  /** Executa no servidor e aplica o resultado localmente (sem recarregar a ficha). */
+  function run<T>(fn: () => Promise<Res<T>>, apply?: (data: T | undefined) => void, quiet = false) {
     start(async () => {
       const res = await fn();
       if (!res.ok) return toast(res.error ?? "Erro.", "error");
-      if (res.message) toast(res.message);
-      after?.();
-      state.refresh();
+      if (res.message && !quiet) toast(res.message);
+      apply?.(res.data);
+    });
+  }
+  const patchItem = (patch: Partial<ItemRow>) => state.setItems((list) => list.map((i) => (i.id === item.id ? { ...i, ...patch } : i)));
+
+  function toggleQuick(value: boolean) {
+    // Otimista: marca na hora e desfaz se o banco recusar.
+    patchItem({ quick_access: value });
+    void setQuickAccess(cid, "item", item.id, value).then((res) => {
+      if (!res.ok) {
+        patchItem({ quick_access: !value });
+        toast(res.error, "error");
+      }
     });
   }
 
@@ -129,7 +163,7 @@ function ItemCard({ state, item }: { state: SheetState; item: ItemRow }) {
               type="checkbox"
               className="sr-only"
               checked={item.quick_access}
-              onChange={(e) => run(() => setQuickAccess(cid, "item", item.id, e.target.checked))}
+              onChange={(e) => toggleQuick(e.target.checked)}
               aria-label={`${item.name} no Inventário Rápido`}
             />
             <Star className={`h-4 w-4 ${item.quick_access ? "fill-cyan text-cyan" : "text-fg-muted hover:text-fg-dim"}`} aria-hidden />
@@ -156,7 +190,15 @@ function ItemCard({ state, item }: { state: SheetState; item: ItemRow }) {
                   submitLabel="Salvar item"
                   pending={pending}
                   onCancel={() => setEditing(false)}
-                  onSubmit={(input) => run(() => updateItem(cid, item.id, input), () => setEditing(false))}
+                  onSubmit={(input) =>
+                    run(
+                      () => updateItem(cid, item.id, input),
+                      (fresh) => {
+                        if (fresh) state.setItems((list) => list.map((i) => (i.id === item.id ? fresh : i)));
+                        setEditing(false);
+                      },
+                    )
+                  }
                 />
               ) : (
                 <>
@@ -202,7 +244,7 @@ function ItemCard({ state, item }: { state: SheetState; item: ItemRow }) {
                                 {def?.condition && <p className="mt-1 text-xs text-cyan-dim">Condição: {def.condition}</p>}
                               </div>
                               {state.canEdit && (
-                                <button onClick={() => run(() => removeModifier(cid, m.id))} className="shrink-0 p-1 text-fg-muted hover:text-alert" aria-label={`Remover ${def?.name ?? "modificador"}`} disabled={pending}>
+                                <button onClick={() => run(() => removeModifier(cid, m.id), () => patchItem({ item_modifiers: item.item_modifiers.filter((x) => x.id !== m.id) }))} className="shrink-0 p-1 text-fg-muted hover:text-alert" aria-label={`Remover ${def?.name ?? "modificador"}`} disabled={pending}>
                                   <X className="h-3.5 w-3.5" />
                                 </button>
                               )}
@@ -224,7 +266,15 @@ function ItemCard({ state, item }: { state: SheetState; item: ItemRow }) {
                                   </option>
                                 ))}
                               </select>
-                              <Button size="sm" variant="secondary" disabled={!modPick || pending} onClick={() => run(() => addModifier(cid, item.id, modPick), () => setModPick(""))}>
+                              <Button size="sm" variant="secondary" disabled={!modPick || pending} onClick={() =>
+                                  run(
+                                    () => addModifier(cid, item.id, modPick),
+                                    (row) => {
+                                      if (row) patchItem({ item_modifiers: [...item.item_modifiers, row] });
+                                      setModPick("");
+                                    },
+                                  )
+                                }>
                                 <Plus className="h-3.5 w-3.5" aria-hidden /> Adicionar modificador
                               </Button>
                             </>
@@ -260,7 +310,15 @@ function ItemCard({ state, item }: { state: SheetState; item: ItemRow }) {
         confirmLabel="Remover"
         loading={pending}
         onCancel={() => setConfirm(false)}
-        onConfirm={() => run(() => removeItem(cid, item.id), () => setConfirm(false))}
+        onConfirm={() =>
+          run(
+            () => removeItem(cid, item.id),
+            () => {
+              setConfirm(false);
+              state.setItems((list) => list.filter((i) => i.id !== item.id));
+            },
+          )
+        }
       />
     </li>
   );
@@ -299,14 +357,15 @@ function AddItemModal({ state, onClose }: { state: SheetState; onClose: () => vo
     [state.homebrew, q, type],
   );
 
-  function add(id: string, fn: () => Promise<{ ok: boolean; error?: string; message?: string }>) {
+  function add(id: string, fn: () => Promise<{ ok: true; data?: ItemRow; message?: string } | { ok: false; error: string }>) {
     setBusyId(id);
     start(async () => {
       const res = await fn();
       setBusyId(null);
       if (!res.ok) return toast(res.error ?? "Erro.", "error");
       toast(res.message ?? "Adicionado.");
-      state.refresh();
+      const row = res.data;
+      if (row) state.setItems((list) => [...list, row]);
     });
   }
 
@@ -408,13 +467,65 @@ function AddItemModal({ state, onClose }: { state: SheetState; onClose: () => vo
                 const res = await createCustomItem(cid, input);
                 if (!res.ok) return toast(res.error, "error");
                 toast(res.message ?? "Item criado.");
-                state.refresh();
+                const { item: row, homebrew } = res.data!;
+                state.setItems((list) => [...list, row]);
+                state.setHomebrew((list) => [...list, homebrew].sort((a, b) => a.name.localeCompare(b.name)));
                 onClose();
               })
             }
           />
         </>
       )}
+    </Modal>
+  );
+}
+
+// ------------------------------------------------------------------ Equipamento inicial (personagens já criados)
+
+function StartingKitModal({ state, received, onClose }: { state: SheetState; received: string[]; onClose: () => void }) {
+  const toast = useToast();
+  const c = state.character;
+  const [choices, setChoices] = useState<Choices>(() => ({ ...c.starting_kit }));
+  const [pending, start] = useTransition();
+  const pendingSlots = startingKit(c.class_id)
+    .filter((s) => !received.includes(s.id))
+    .map((s) => s.id);
+  const errors = validateKitChoices(c.class_id, c.origin_id, choices, pendingSlots);
+  const owned = state.items.filter((i) => i.source_kind === "catalog" && i.source_ref).map((i) => i.source_ref as string);
+
+  function submit() {
+    start(async () => {
+      const res = await grantStartingKit(c.id, choices);
+      if (!res.ok) return toast(res.error, "error");
+      toast(res.message ?? "Equipamento entregue.");
+      state.refresh();
+      onClose();
+    });
+  }
+
+  return (
+    <Modal
+      open
+      onClose={onClose}
+      title="Equipamento inicial"
+      tag={c.class_id ? CLASS_BY_ID[c.class_id]?.name : "Classe"}
+      size="md"
+      footer={
+        <>
+          <Button variant="ghost" onClick={onClose}>
+            Cancelar
+          </Button>
+          <Button onClick={submit} loading={pending} disabled={errors.length > 0}>
+            <Package className="h-3.5 w-3.5" aria-hidden /> Receber itens
+          </Button>
+        </>
+      }
+    >
+      <p className="mb-4 text-xs text-fg-muted">
+        Os itens entram no inventário como itens reais. O que já foi recebido não é entregue de novo, e o inventário atual não é alterado.
+      </p>
+      <KitChoices classId={c.class_id!} originId={c.origin_id} choices={choices} onChange={setChoices} onlySlots={pendingSlots} received={received} owned={owned} />
+      {errors.length > 0 && <p className="mt-3 text-xs text-fg-dim">{errors[0]}</p>}
     </Modal>
   );
 }

@@ -203,8 +203,8 @@ describe("evolução e Artificial", () => {
   it("forma Lenda: recursos próprios, sem bônus de classe", () => {
     const lenda: StoredForm = { kind: "lenda", pv_current: 0, pc_current: 0, pv_other_bonus: 0, pc_other_bonus: 0, attributes: attrs, skills: [], progressions: [{ level: 2, pv_gain: 5, pc_gain: 3 }] };
     const base = { ...lenda, kind: "base" as const, progressions: [] };
-    assert.equal(buildSheet({ classId: "tank", originId: "artificial", level: 2, form: lenda }).resources.pvMax, 95 + 5);
-    assert.equal(buildSheet({ classId: "tank", originId: "artificial", level: 2, form: base }).resources.pvMax, 115);
+    assert.equal(buildSheet({ classId: "tank", originId: "artificial", level: 2, form: lenda }).resources.pvMax, 41 + 5);
+    assert.equal(buildSheet({ classId: "tank", originId: "artificial", level: 2, form: base }).resources.pvMax, 61);
   });
   it("assistente da Lenda: sem origem e classe; exige atributos, perícias e nome", () => {
     const form: StoredForm = { kind: "lenda", pv_current: 0, pc_current: 0, pv_other_bonus: 0, pc_other_bonus: 0, attributes: attrs, skills: [

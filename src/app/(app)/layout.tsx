@@ -11,7 +11,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const shown = profile.display_name || profile.username;
 
   return (
-    <Providers reduceMotion={profile.reduce_motion}>
+    <Providers reduceMotion={profile.reduce_motion} rollSpeed={profile.roll_speed ?? "fast"}>
       <a href="#conteudo" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-panel focus:px-3 focus:py-2">
         Pular para o conteúdo
       </a>

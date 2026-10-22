@@ -16,3 +16,5 @@ export * from "./sheet.ts";
 export * from "./combat.ts";
 export * from "./unlocks.ts";
 export * from "./catalog.ts";
+export * from "./abilities.ts";
+export * from "./data/startingKits.ts";

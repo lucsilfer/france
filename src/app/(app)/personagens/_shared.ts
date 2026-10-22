@@ -28,9 +28,23 @@ export async function guard<T>(fn: () => Promise<ActionResult<T>>): Promise<Acti
   }
 }
 
-export function touch(id: string) {
-  revalidatePath(`/personagens/${id}`);
+/**
+ * Invalida só o painel (lista de personagens). A ficha aberta NÃO é recarregada:
+ * a interface já aplica a mudança localmente (atualização otimista), o que evita
+ * refazer todas as consultas da página a cada clique.
+ */
+export function touch(_id?: string) {
   revalidatePath("/painel");
+}
+
+/**
+ * Contexto leve para operações simples (favoritar, remover, renomear…): só autentica.
+ * A permissão é garantida pelo RLS do banco — quem não pode editar não altera nenhuma linha.
+ */
+export async function editContext(characterId: string) {
+  if (!uuid.safeParse(characterId).success) throw new Error("Personagem inválido.");
+  const { supabase, user } = await requireUser();
+  return { supabase, user };
 }
 
 /** Mensagem legível de erro vindo do banco (raise exception). */

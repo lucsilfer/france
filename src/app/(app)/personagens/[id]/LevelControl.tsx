@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ChevronsUp, ChevronsDown, History } from "lucide-react";
+import { ChevronsUp, ChevronsDown, History, Lock, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { HoloDie } from "@/components/dice/HoloDie";
 import { useToast } from "@/components/ui/Toast";
@@ -33,8 +33,12 @@ export function LevelControl({ state }: { state: SheetState }) {
   const [result, setResult] = useState<Result | null>(null);
   const [target, setTarget] = useState<number | null>(null);
 
+  const ab = state.abilities;
+  const maxLevel = ab.maxLevel;
+
   function apply(level: number) {
     if (level === c.level || pending) return;
+    if (level > maxLevel) return; // bloqueado por habilidades pendentes (o servidor também recusa)
     setTarget(level);
     start(async () => {
       const res = await changeLevel(c.id, level);
@@ -61,8 +65,9 @@ export function LevelControl({ state }: { state: SheetState }) {
             className="chamfer border border-holo/70 bg-primary/10 px-3 py-1 font-display text-lg tracking-[0.15em] text-holo tabular-nums focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan"
           >
             {LEVELS.map((l) => (
-              <option key={l} value={l} className="bg-panel text-fg">
+              <option key={l} value={l} disabled={l > maxLevel} className="bg-panel text-fg">
                 {String(l).padStart(2, "0")}
+                {l > maxLevel ? " — bloqueado" : ""}
               </option>
             ))}
           </select>
@@ -74,6 +79,20 @@ export function LevelControl({ state }: { state: SheetState }) {
         {pending && <span className="font-mono text-[0.62rem] tracking-[0.2em] text-cyan uppercase">Processando evolução…</span>}
         <span className="h-px flex-1 bg-gradient-to-r from-line to-transparent" aria-hidden />
       </div>
+
+      {state.canEdit && ab.blocked && (
+        <div role="alert" className="mb-5 border border-alert/60 bg-alert/5 p-3">
+          <p className="flex items-center gap-2 font-mono text-[0.7rem] tracking-[0.25em] text-alert uppercase">
+            <Lock className="h-3.5 w-3.5" aria-hidden /> Evolução bloqueada
+          </p>
+          <p className="mt-1 text-sm text-fg-dim">
+            Você ainda possui {state.powersTab.plural} disponíveis para criar ({ab.available}). Finalize suas {state.powersTab.plural} antes de avançar para o próximo nível.
+          </p>
+          <Button size="sm" variant="secondary" className="mt-2" onClick={state.openCreator}>
+            <Sparkles className="h-3.5 w-3.5" aria-hidden /> Abrir criador
+          </Button>
+        </div>
+      )}
 
       <AnimatePresence>{result && <LevelOverlay result={result} state={state} onClose={() => setResult(null)} />}</AnimatePresence>
     </>

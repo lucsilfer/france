@@ -22,6 +22,8 @@ export interface CharacterRow {
   extra_info: string;
   personal_notes: string;
   active_form: "base" | "lenda";
+  /** Escolhas do equipamento inicial feitas na criação. */
+  starting_kit: Record<string, string>;
   updated_at: string;
 }
 
@@ -52,6 +54,8 @@ export interface ItemRow {
   id: string;
   source_kind: "catalog" | "homebrew" | "custom";
   source_ref: string | null;
+  /** Vaga do equipamento inicial ("kit:<classe>:<vaga>"), quando veio do kit da classe. */
+  kit_ref: string | null;
   name: string;
   description: string;
   item_type: string;
@@ -121,15 +125,15 @@ export interface CharacterBundle {
 }
 
 const CHARACTER_COLUMNS =
-  "id, owner_id, status, creation_step, name, player_name, origin_id, origin_path_id, class_id, level, money, story, appearance, extra_info, personal_notes, active_form, updated_at";
+  "id, owner_id, status, creation_step, name, player_name, origin_id, origin_path_id, class_id, level, money, story, appearance, extra_info, personal_notes, active_form, starting_kit, updated_at";
 
 const FORM_COLUMNS =
   "id, kind, name, description, special_rules, setup_complete, pv_current, pc_current, pv_other_bonus, pc_other_bonus, form_attributes(attribute, base_value, other_bonus, temp_bonus), form_skills(skill_id, points, other_bonus, temp_bonus), level_progressions(level, pv_gain, pc_gain)";
 
-const ITEM_COLUMNS =
-  "id, source_kind, source_ref, name, description, item_type, category, quantity, effect_dice, effect_kind, attack_kind, damage_type, skill_override, tier, range, special_rules, tags, quick_access, created_at, item_modifiers(id, modifier_id, is_temporary)";
+export const ITEM_COLUMNS =
+  "id, source_kind, source_ref, kit_ref, name, description, item_type, category, quantity, effect_dice, effect_kind, attack_kind, damage_type, skill_override, tier, range, special_rules, tags, quick_access, created_at, item_modifiers(id, modifier_id, is_temporary)";
 
-const POWER_COLUMNS = "id, name, description, ability_type, target, range, duration, components, initial_cost, per_turn_cost, quick_access, created_at";
+export const POWER_COLUMNS = "id, name, description, ability_type, target, range, duration, components, initial_cost, per_turn_cost, quick_access, created_at";
 
 type RawForm = Omit<FormRow, "attributes" | "skills" | "progressions"> & {
   form_attributes: FormRow["attributes"];
@@ -149,7 +153,8 @@ export async function loadCharacter(id: string): Promise<CharacterBundle> {
   const { data: character } = await supabase.from("characters").select(CHARACTER_COLUMNS).eq("id", id).maybeSingle();
   if (!character) notFound();
 
-  const [{ data: forms, error: formErr }, { data: canEdit }, items, powers, effects] = await Promise.all([
+  // Tudo em paralelo: uma ida ao banco por tabela, sem esperas em sequência.
+  const [{ data: forms, error: formErr }, { data: canEdit }, items, powers, effects, { data: pending }] = await Promise.all([
     supabase.from("character_forms").select(FORM_COLUMNS).eq("character_id", id),
     supabase.rpc("can_edit_character", { p_character: id }),
     supabase.from("items").select(ITEM_COLUMNS).eq("character_id", id).order("created_at", { ascending: true }),
@@ -160,6 +165,13 @@ export async function loadCharacter(id: string): Promise<CharacterBundle> {
       .eq("character_id", id)
       .eq("active", true)
       .order("started_at", { ascending: true }),
+    supabase
+      .from("attribute_rolls")
+      .select("id, faces, results, best, assigned_attribute, created_at, character_forms!inner(character_id, kind)")
+      .eq("character_forms.character_id", id)
+      .eq("character_forms.kind", "base")
+      .is("assigned_attribute", null)
+      .maybeSingle(),
   ]);
   if (formErr) throw new Error("Falha ao carregar a ficha.");
   const all = (forms as RawForm[] | null) ?? [];
@@ -168,19 +180,12 @@ export async function loadCharacter(id: string): Promise<CharacterBundle> {
   const base = toForm(baseRaw);
   const lendaRaw = all.find((f) => f.kind === "lenda");
 
-  const { data: pending } = await supabase
-    .from("attribute_rolls")
-    .select("id, faces, results, best, assigned_attribute, created_at")
-    .eq("form_id", base.id)
-    .is("assigned_attribute", null)
-    .maybeSingle();
-
   const row = character as CharacterRow;
   return {
-    character: { ...row, money: Number(row.money ?? 0) },
+    character: { ...row, money: Number(row.money ?? 0), starting_kit: (row.starting_kit ?? {}) as Record<string, string> },
     base,
     lenda: lendaRaw ? toForm(lendaRaw) : null,
-    pendingRoll: (pending as AttributeRollRow | null) ?? null,
+    pendingRoll: pending ? (({ character_forms: _f, ...r }) => r as AttributeRollRow)(pending as AttributeRollRow & { character_forms: unknown }) : null,
     items: ((items.data ?? []) as ItemRow[]).map((i) => ({ ...i, tags: i.tags ?? [], item_modifiers: i.item_modifiers ?? [] })),
     powers: (powers.data ?? []) as PowerRow[],
     effects: (effects.data ?? []) as EffectRow[],

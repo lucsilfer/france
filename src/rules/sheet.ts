@@ -2,6 +2,7 @@
  * Monta a ficha calculada a partir dos valores ARMAZENADOS (base, bônus, pontos, ganhos de nível).
  * Nenhum valor derivado é guardado no banco: tudo é recalculado aqui.
  */
+import { validateKitChoices, type KitChoices } from "./data/startingKits.ts";
 import { RULES_CONFIG } from "./config.ts";
 import {
   baseResources,
@@ -156,6 +157,8 @@ export interface CreationState {
   name: string;
   playerName: string;
   form: StoredForm;
+  /** Escolhas do equipamento inicial da classe (vaga → opção). */
+  kitChoices?: KitChoices;
 }
 
 export interface StepCheck {
@@ -175,7 +178,8 @@ export function checkCreation(state: CreationState): StepCheck[] {
   else if (origin.paths?.length && !origin.paths.some((p) => p.id === state.originPathId)) s2.push(`Escolha o Caminho do ${origin.name}.`);
   else if (!origin.paths?.length && state.originPathId) s2.push("Esta origem não tem Caminho.");
 
-  const s3: string[] = state.classId && CLASS_BY_ID[state.classId] ? [] : ["Escolha uma classe."];
+  const s3: string[] =
+    state.classId && CLASS_BY_ID[state.classId] ? validateKitChoices(state.classId, state.originId, state.kitChoices ?? {}) : ["Escolha uma classe."];
 
   const s4 = skillStepErrors(sheet.skillCheck);
 

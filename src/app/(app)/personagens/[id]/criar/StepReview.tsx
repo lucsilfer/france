@@ -8,6 +8,7 @@ import { ClassDetails } from "@/components/sheet/ClassDetails";
 import { TraitList } from "@/components/sheet/TraitList";
 import { ATTRIBUTES } from "@/rules/data/attributes.ts";
 import { CLASS_BY_ID } from "@/rules/data/classes.ts";
+import { kitGrants } from "@/rules/data/startingKits.ts";
 import { formatThresholds } from "@/rules/d100.ts";
 import { buildSheet, originTraitsWithStatus, CREATION_STEPS, type StepCheck, type StoredForm } from "@/rules/sheet.ts";
 import { finalizeCharacter } from "../../actions";
@@ -39,6 +40,7 @@ export function StepReview({ characterId, character, form, checks, goTo, beforeF
   const [pending, start] = useTransition();
   const sheet = buildSheet({ classId: character.class_id, originId: character.origin_id, level: 1, form });
   const cls = character.class_id ? CLASS_BY_ID[character.class_id] : undefined;
+  const kit = kitGrants(character.class_id, character.origin_id, character.starting_kit ?? {});
   const { origin, path, traits } = originTraitsWithStatus(character.origin_id, character.origin_path_id, 1);
   const problems = checks.filter((c) => c.step < 6 && !c.complete);
   const chosenSkills = sheet.skills.filter((s) => s.points > 0 || s.classBonus !== 0);
@@ -107,9 +109,26 @@ export function StepReview({ characterId, character, form, checks, goTo, beforeF
             </div>
             <div className="rounded-sm border border-cyan-dim/60 bg-cyan/5 py-2">
               <span className="label-mono block">PC</span>
-              <span className="font-display text-2xl text-fg">{sheet.resources.pcMax}</span>
+              <span className="font-display text-2xl text-fg">{character.origin_id === "prodigio" ? "—" : sheet.resources.pcMax}</span>
+              {character.origin_id === "prodigio" && <span className="block text-[0.6rem] text-fg-muted">Prodígio não usa PC</span>}
             </div>
           </div>
+        </Block>
+
+        <Block title="Equipamento inicial" step={3} goTo={goTo}>
+          {kit.length === 0 ? (
+            <p className="text-sm text-fg-muted">Escolha a classe para ver o equipamento.</p>
+          ) : (
+            <ul className="space-y-1.5 text-sm">
+              {kit.map((g) => (
+                <li key={g.kitRef} className="flex justify-between gap-2">
+                  <span className="text-fg">{g.item.name}</span>
+                  {g.quantity > 1 && <span className="font-mono text-xs text-fg-dim">×{g.quantity}</span>}
+                </li>
+              ))}
+            </ul>
+          )}
+          <p className="mt-2 text-xs text-fg-muted">Entram no inventário ao finalizar.</p>
         </Block>
 
         <Block title="Perícias" step={4} goTo={goTo}>

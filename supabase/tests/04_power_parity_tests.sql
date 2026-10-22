@@ -1,4 +1,4 @@
--- GERADO por scripts/generate-parity-tests.ts — 1523 casos.
+-- GERADO por scripts/generate-parity-tests.ts — 1849 casos.
 -- Custo de poderes: banco (compute_power_cost) = motor (computePowerCost).
 \set ON_ERROR_STOP on
 do $$
@@ -6096,5 +6096,1309 @@ begin
   if (r->>'initial')::int <> 27 or (r->>'per_turn')::int <> 9 or (r->>'valid')::boolean <> true then
     raise exception 'divergência: % nível % → banco % / motor 27+9 true', '[{"type":"buff","buff":"acao"},{"type":"buff","buff":"grande"}]', 10, r;
   end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":0,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":0,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":0,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":0,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":0,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":0,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":0,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":0,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":0,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":0,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":0,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":0,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":0,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":0,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":0,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":0,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":0,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":0,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":0,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":0,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":0,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":0,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":0,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":0,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":0,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":0,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":0,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":0,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":1,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":1,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":1,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":1,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":1,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":1,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":1,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":1,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":1,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":1,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":1,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":1,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":1,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":1,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":1,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":1,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":1,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":1,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":1,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":1,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":1,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":1,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":1,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":1,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":1,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":1,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":1,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":1,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":2,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":2,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":2,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":2,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":2,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":2,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":2,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":2,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":2,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":2,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":2,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":2,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":2,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":2,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":2,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":2,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":2,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":2,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":2,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":2,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":2,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":2,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":2,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":2,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":2,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":2,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":2,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":2,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":3,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":3,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":3,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":3,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":3,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":3,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":3,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":3,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":3,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":3,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":3,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":3,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":3,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":3,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":3,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":3,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":3,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":3,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":3,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":3,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":3,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":3,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":3,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":3,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":3,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":3,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":3,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":3,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal_continuous","tier":0}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal_continuous","tier":0}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":0,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":0,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":0,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":0,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":0,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":0,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":0,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":0,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":0,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":0,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":0,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":0,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":0,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":0,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":0,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":0,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":0,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":0,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":0,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":0,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":0,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":0,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":0,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":0,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":0,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":0,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":0,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":0,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":1,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":1,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":1,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":1,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":1,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":1,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":1,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":1,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":1,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":1,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":1,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":1,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":1,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":1,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":1,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":1,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":1,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":1,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":1,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":1,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":1,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":1,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":1,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":1,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":1,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":1,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":1,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":1,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":2,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":2,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":2,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":2,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":2,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":2,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":2,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":2,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":2,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":2,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":2,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":2,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":2,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":2,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":2,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":2,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":2,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":2,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":2,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":2,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":2,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":2,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":2,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":2,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":2,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":2,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":2,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":2,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":3,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":3,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":3,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":3,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":3,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":3,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":3,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":3,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":3,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":3,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":3,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":3,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":3,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":3,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":3,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":3,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":3,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":3,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":3,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":3,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":3,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":3,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":3,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":3,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":3,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":3,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":3,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":3,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal_continuous","tier":1}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal_continuous","tier":1}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":0,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":0,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":0,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":0,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":0,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":0,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":0,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":0,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":0,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":0,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":0,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":0,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":0,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":0,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":0,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":0,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":0,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":0,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":0,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":0,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":0,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":0,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":0,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":0,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":0,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":0,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":0,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":0,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":1,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":1,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":1,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":1,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":1,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":1,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":1,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":1,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":1,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":1,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":1,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":1,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":1,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":1,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":1,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":1,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":1,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":1,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":1,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":1,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":1,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":1,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":1,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":1,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":1,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":1,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":1,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":1,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":2,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":2,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":2,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":2,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":2,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":2,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":2,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":2,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":2,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":2,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":2,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":2,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":2,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":2,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":2,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":2,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":2,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":2,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":2,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":2,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":2,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":2,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":2,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":2,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":2,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":2,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":2,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":2,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":3,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":3,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":3,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":3,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":3,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":3,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":3,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":3,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":3,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":3,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":3,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":3,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":3,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":3,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":3,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":3,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":3,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":3,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":3,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":3,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":3,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":3,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":3,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":3,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":3,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":3,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":3,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":3,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal_continuous","tier":2}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal_continuous","tier":2}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":0,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":0,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":0,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":0,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":0,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":0,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":0,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":0,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":0,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":0,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":0,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":0,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":0,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":0,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":0,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":0,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":0,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":0,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":0,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":0,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":0,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":0,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":0,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":0,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":0,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":0,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":0,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":0,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":1,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":1,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":1,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":1,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":1,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":1,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":1,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":1,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":1,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":1,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":1,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":1,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":1,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":1,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":1,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":1,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":1,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":1,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":1,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":1,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":1,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":1,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":1,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":1,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":1,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":1,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":1,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":1,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":2,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":2,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":2,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":2,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":2,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":2,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":2,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":2,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":2,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":2,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":2,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":2,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":2,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":2,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":2,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":2,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":2,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":2,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":2,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":2,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":2,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":2,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":2,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":2,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":2,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":2,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":2,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":2,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":3,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":3,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":3,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":3,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":3,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":3,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":3,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":3,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":3,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":3,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":3,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":3,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":3,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":3,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":3,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":3,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":3,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":3,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":3,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":3,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":3,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":3,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":3,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":3,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":3,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":3,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":3,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":3,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal_continuous","tier":3}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal_continuous","tier":3}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":0,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":0,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":0,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":0,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":0,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":0,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":0,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":0,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":0,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":0,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":0,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":0,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":0,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":0,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":0,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":0,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":0,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":0,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":0,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":0,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":0,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":0,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":0,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":0,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":0,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":0,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":0,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":0,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":1,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":1,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":1,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":1,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":1,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":1,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":1,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":1,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":1,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":1,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":1,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":1,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":1,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":1,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":1,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":1,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":1,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":1,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":1,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":1,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":1,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":1,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":1,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":1,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":1,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":1,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":1,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":1,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":2,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":2,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":2,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":2,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":2,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":2,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":2,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":2,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":2,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":2,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":2,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":2,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":2,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":2,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":2,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":2,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":2,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":2,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":2,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":2,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":2,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":2,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":2,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":2,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":2,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":2,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":2,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":2,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":3,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":3,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":3,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":3,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":3,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":3,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":3,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":3,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":3,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":3,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":3,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":3,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":3,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":3,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":3,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":3,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":3,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":3,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":3,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":3,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":3,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":3,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":3,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":3,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":3,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":3,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":3,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":3,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal_continuous","tier":4}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal_continuous","tier":4}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"condition","intensity":"leve"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"condition","intensity":"leve"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"condition","intensity":"moderada"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"condition","intensity":"moderada"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"condition","intensity":"forte"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"condition","intensity":"forte"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"condition","intensity":"severa"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"condition","intensity":"severa"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"condition","intensity":"extrema"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"condition","intensity":"extrema"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"buff","buff":"teste_1"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"buff","buff":"teste_1"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"buff","buff":"teste_2"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"buff","buff":"teste_2"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"buff","buff":"dano_1"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"buff","buff":"dano_1"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"buff","buff":"dano_2"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"buff","buff":"dano_2"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"buff","buff":"acao"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"buff","buff":"acao"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"buff","buff":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"buff","buff":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":0,"area":"alvo"},{"type":"heal","tier":0,"extraDice":0,"area":"alvo"},{"type":"damage","tier":0,"extraDice":0,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":0,"area":"alvo"},{"type":"heal","tier":0,"extraDice":0,"area":"alvo"},{"type":"damage","tier":0,"extraDice":0,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":0,"duration":"2t"},{"type":"shield","tier":0,"extraDice":0,"duration":"3t"},{"type":"shield","tier":0,"extraDice":0,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":0,"duration":"2t"},{"type":"shield","tier":0,"extraDice":0,"duration":"3t"},{"type":"shield","tier":0,"extraDice":0,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":1,"area":"enorme"},{"type":"heal","tier":0,"extraDice":1,"area":"enorme"},{"type":"shield","tier":0,"extraDice":1,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":1,"area":"enorme"},{"type":"heal","tier":0,"extraDice":1,"area":"enorme"},{"type":"shield","tier":0,"extraDice":1,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":0,"extraDice":2,"area":"media"},{"type":"damage","tier":0,"extraDice":2,"area":"grande"},{"type":"heal","tier":0,"extraDice":2,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":0,"extraDice":2,"area":"media"},{"type":"damage","tier":0,"extraDice":2,"area":"grande"},{"type":"heal","tier":0,"extraDice":2,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":0,"extraDice":3,"area":"pequena"},{"type":"heal","tier":0,"extraDice":3,"area":"pequena"},{"type":"damage","tier":0,"extraDice":3,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":0,"extraDice":3,"area":"pequena"},{"type":"heal","tier":0,"extraDice":3,"area":"pequena"},{"type":"damage","tier":0,"extraDice":3,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":0,"extraDice":3,"duration":"cena"},{"type":"heal_continuous","tier":0},{"type":"damage","tier":1,"extraDice":0,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":0,"extraDice":3,"duration":"cena"},{"type":"heal_continuous","tier":0},{"type":"damage","tier":1,"extraDice":0,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":0,"area":"enorme"},{"type":"shield","tier":1,"extraDice":0,"duration":"1t"},{"type":"shield","tier":1,"extraDice":0,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":0,"area":"enorme"},{"type":"shield","tier":1,"extraDice":0,"duration":"1t"},{"type":"shield","tier":1,"extraDice":0,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":1,"area":"grande"},{"type":"heal","tier":1,"extraDice":1,"area":"grande"},{"type":"damage","tier":1,"extraDice":1,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":1,"area":"grande"},{"type":"heal","tier":1,"extraDice":1,"area":"grande"},{"type":"damage","tier":1,"extraDice":1,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":1,"extraDice":2,"area":"pequena"},{"type":"damage","tier":1,"extraDice":2,"area":"media"},{"type":"heal","tier":1,"extraDice":2,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":1,"extraDice":2,"area":"pequena"},{"type":"damage","tier":1,"extraDice":2,"area":"media"},{"type":"heal","tier":1,"extraDice":2,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":1,"extraDice":3,"area":"alvo"},{"type":"heal","tier":1,"extraDice":3,"area":"alvo"},{"type":"damage","tier":1,"extraDice":3,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":1,"extraDice":3,"area":"alvo"},{"type":"heal","tier":1,"extraDice":3,"area":"alvo"},{"type":"damage","tier":1,"extraDice":3,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":1,"extraDice":3,"duration":"2t"},{"type":"shield","tier":1,"extraDice":3,"duration":"3t"},{"type":"shield","tier":1,"extraDice":3,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":1,"extraDice":3,"duration":"2t"},{"type":"shield","tier":1,"extraDice":3,"duration":"3t"},{"type":"shield","tier":1,"extraDice":3,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":0,"area":"grande"},{"type":"damage","tier":2,"extraDice":0,"area":"enorme"},{"type":"heal","tier":2,"extraDice":0,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":0,"area":"grande"},{"type":"damage","tier":2,"extraDice":0,"area":"enorme"},{"type":"heal","tier":2,"extraDice":0,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":2,"extraDice":1,"area":"media"},{"type":"heal","tier":2,"extraDice":1,"area":"media"},{"type":"damage","tier":2,"extraDice":1,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":2,"extraDice":1,"area":"media"},{"type":"heal","tier":2,"extraDice":1,"area":"media"},{"type":"damage","tier":2,"extraDice":1,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":2,"area":"alvo"},{"type":"damage","tier":2,"extraDice":2,"area":"pequena"},{"type":"heal","tier":2,"extraDice":2,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":2,"area":"alvo"},{"type":"damage","tier":2,"extraDice":2,"area":"pequena"},{"type":"heal","tier":2,"extraDice":2,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":2,"extraDice":2,"duration":"3t"},{"type":"shield","tier":2,"extraDice":2,"duration":"cena"},{"type":"damage","tier":2,"extraDice":3,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":2,"extraDice":2,"duration":"3t"},{"type":"shield","tier":2,"extraDice":2,"duration":"cena"},{"type":"damage","tier":2,"extraDice":3,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":2,"extraDice":3,"area":"enorme"},{"type":"shield","tier":2,"extraDice":3,"duration":"1t"},{"type":"shield","tier":2,"extraDice":3,"duration":"2t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":2,"extraDice":3,"area":"enorme"},{"type":"shield","tier":2,"extraDice":3,"duration":"1t"},{"type":"shield","tier":2,"extraDice":3,"duration":"2t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":0,"area":"media"},{"type":"damage","tier":3,"extraDice":0,"area":"grande"},{"type":"heal","tier":3,"extraDice":0,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":0,"area":"media"},{"type":"damage","tier":3,"extraDice":0,"area":"grande"},{"type":"heal","tier":3,"extraDice":0,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":3,"extraDice":1,"area":"pequena"},{"type":"heal","tier":3,"extraDice":1,"area":"pequena"},{"type":"damage","tier":3,"extraDice":1,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":3,"extraDice":1,"area":"pequena"},{"type":"heal","tier":3,"extraDice":1,"area":"pequena"},{"type":"damage","tier":3,"extraDice":1,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":1,"duration":"cena"},{"type":"damage","tier":3,"extraDice":2,"area":"alvo"},{"type":"heal","tier":3,"extraDice":2,"area":"alvo"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":1,"duration":"cena"},{"type":"damage","tier":3,"extraDice":2,"area":"alvo"},{"type":"heal","tier":3,"extraDice":2,"area":"alvo"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":3,"extraDice":2,"duration":"1t"},{"type":"shield","tier":3,"extraDice":2,"duration":"2t"},{"type":"shield","tier":3,"extraDice":2,"duration":"3t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":3,"extraDice":2,"duration":"1t"},{"type":"shield","tier":3,"extraDice":2,"duration":"2t"},{"type":"shield","tier":3,"extraDice":2,"duration":"3t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":3,"extraDice":3,"area":"grande"},{"type":"damage","tier":3,"extraDice":3,"area":"enorme"},{"type":"heal","tier":3,"extraDice":3,"area":"enorme"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":3,"extraDice":3,"area":"grande"},{"type":"damage","tier":3,"extraDice":3,"area":"enorme"},{"type":"heal","tier":3,"extraDice":3,"area":"enorme"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":0,"area":"pequena"},{"type":"damage","tier":4,"extraDice":0,"area":"media"},{"type":"heal","tier":4,"extraDice":0,"area":"media"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":0,"area":"pequena"},{"type":"damage","tier":4,"extraDice":0,"area":"media"},{"type":"heal","tier":4,"extraDice":0,"area":"media"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":1,"area":"alvo"},{"type":"heal","tier":4,"extraDice":1,"area":"alvo"},{"type":"damage","tier":4,"extraDice":1,"area":"pequena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":1,"area":"alvo"},{"type":"heal","tier":4,"extraDice":1,"area":"alvo"},{"type":"damage","tier":4,"extraDice":1,"area":"pequena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"shield","tier":4,"extraDice":1,"duration":"2t"},{"type":"shield","tier":4,"extraDice":1,"duration":"3t"},{"type":"shield","tier":4,"extraDice":1,"duration":"cena"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"shield","tier":4,"extraDice":1,"duration":"2t"},{"type":"shield","tier":4,"extraDice":1,"duration":"3t"},{"type":"shield","tier":4,"extraDice":1,"duration":"cena"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"damage","tier":4,"extraDice":2,"area":"enorme"},{"type":"heal","tier":4,"extraDice":2,"area":"enorme"},{"type":"shield","tier":4,"extraDice":2,"duration":"1t"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"damage","tier":4,"extraDice":2,"area":"enorme"},{"type":"heal","tier":4,"extraDice":2,"area":"enorme"},{"type":"shield","tier":4,"extraDice":2,"duration":"1t"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"heal","tier":4,"extraDice":3,"area":"media"},{"type":"damage","tier":4,"extraDice":3,"area":"grande"},{"type":"heal","tier":4,"extraDice":3,"area":"grande"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"heal","tier":4,"extraDice":3,"area":"media"},{"type":"damage","tier":4,"extraDice":3,"area":"grande"},{"type":"heal","tier":4,"extraDice":3,"area":"grande"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[{"type":"condition","intensity":"moderada"},{"type":"condition","intensity":"forte"},{"type":"condition","intensity":"severa"}]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[{"type":"condition","intensity":"moderada"},{"type":"condition","intensity":"forte"},{"type":"condition","intensity":"severa"}]', 1, r;
+  end if;
+  r := public.compute_power_cost('[]'::jsonb, 1, 'prodigio');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> true then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 true', '[]', 1, r;
+  end if;
+  r := public.compute_power_cost('[]'::jsonb, 5, null);
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> false then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 false', '[]', 5, r;
+  end if;
+  r := public.compute_power_cost('[]'::jsonb, 5, 'amaldicoado');
+  if (r->>'initial')::int <> 0 or (r->>'per_turn')::int <> 0 or (r->>'valid')::boolean <> false then
+    raise exception 'divergência: % nível % → banco % / motor 0+0 false', '[]', 5, r;
+  end if;
 end $$;
-select 'PARIDADE BANCO x MOTOR: 1523 CASOS OK' as resultado;
+select 'PARIDADE BANCO x MOTOR: 1849 CASOS OK' as resultado;

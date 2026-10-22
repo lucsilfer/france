@@ -32,7 +32,8 @@ import {
 import { SKILLS } from "../src/rules/data/skills.ts";
 import { parseDice } from "../src/rules/dice.ts";
 
-export const RULES_SQL_PATH = fileURLToPath(new URL("../supabase/migrations/20261023000000_rules_sync_fase3.sql", import.meta.url));
+/** Versão atual. As anteriores (20261022000000_rules_sync.sql e 20261023000000_rules_sync_fase3.sql) ficam congeladas. */
+export const RULES_SQL_PATH = fileURLToPath(new URL("../supabase/migrations/20261024000000_rules_sync_3_5.sql", import.meta.url));
 
 /** "1d12+2" → { count: 1, sides: 12, bonus: 2 } (só o formato usado na evolução). */
 function simpleDice(expr: string | null) {
@@ -49,6 +50,9 @@ export function rulesSnapshot() {
   return {
     version: RULES_VERSION,
     attributeRoll: RULES_CONFIG.attributeRoll,
+    pvFormula: RULES_CONFIG.pvFormula,
+    abilities: RULES_CONFIG.abilities,
+    prodigioPowers: RULES_CONFIG.prodigioPowers,
     levels: RULES_CONFIG.levels,
     attributes: ATTRIBUTE_IDS,
     skills: SKILLS.map((s) => s.id),
@@ -77,6 +81,7 @@ export function rulesSnapshot() {
           skillBonus: c.skillBonus,
           maxSkillTotal: c.maxPerSkillOverride,
           skillPointsBonus: c.skillPointsBonus,
+          pvBonusAtLevel1: c.pvBonusAtLevel1,
         },
       ]),
     ),
@@ -273,7 +278,80 @@ drop trigger if exists form_skills_validate on public.form_skills;
 create trigger form_skills_validate before insert or update on public.form_skills
   for each row execute function public.validate_form_skill();
 
+-- ---------------------------------------------------------------------
+-- PV máximo da forma — mesma conta do motor (buildSheet):
+-- (FOR + CON) ÷ 3 para baixo + bônus de classe + ganhos de nível ativos + outros bônus.
+-- ---------------------------------------------------------------------
+create or replace function public.form_pv_max(p_form uuid) returns int
+language plpgsql stable security definer set search_path = public as $$
+declare
+  cfg jsonb := public.rules_config();
+  f record;
+  cls jsonb;
+  str int;
+  con int;
+  base int;
+  gains int;
+begin
+  select cf.id, cf.kind, cf.pv_other_bonus, c.class_id, c.level into f
+  from public.character_forms cf join public.characters c on c.id = cf.character_id
+  where cf.id = p_form;
+  if f.id is null then
+    return null;
+  end if;
+  cls := case when f.kind = 'base' and f.class_id is not null then cfg -> 'classes' -> f.class_id end;
+  select coalesce(fa.base_value, 0) + fa.other_bonus + fa.temp_bonus into str
+  from public.form_attributes fa where fa.form_id = p_form and fa.attribute = 'FOR';
+  select coalesce(fa.base_value, 0) + fa.other_bonus + fa.temp_bonus into con
+  from public.form_attributes fa where fa.form_id = p_form and fa.attribute = 'CON';
+  str := coalesce(str, 0) + coalesce((cls -> 'attributeBonus' ->> 'FOR')::int, 0);
+  con := coalesce(con, 0) + coalesce((cls -> 'attributeBonus' ->> 'CON')::int, 0);
+  if cfg ->> 'pvFormula' = 'sum_div3' then
+    base := floor((str + con)::numeric / 3)::int;
+  else
+    base := str + floor(con::numeric / 3)::int;
+  end if;
+  base := base + coalesce((cls ->> 'pvBonusAtLevel1')::int, 0);
+  select coalesce(sum(lp.pv_gain), 0) into gains
+  from public.level_progressions lp where lp.form_id = p_form and lp.level between 2 and f.level;
+  return greatest(0, base + gains + f.pv_other_bonus);
+end $$;
+
+-- ---------------------------------------------------------------------
+-- Vagas de habilidades — mesma conta do motor (abilities.ts).
+-- mode: standard | free (Elo) | none (Muto). Executa com as permissões de quem chama.
+-- ---------------------------------------------------------------------
+create or replace function public.ability_granted(p_origin text, p_path text, p_level int) returns int
+language plpgsql immutable set search_path = public as $$
+declare
+  cfg jsonb := public.rules_config() -> 'abilities';
+  ov jsonb := cfg -> 'pathOverrides' -> (p_origin || ':' || p_path);
+begin
+  if coalesce(cfg -> 'originModes' ->> p_origin, 'standard') <> 'standard' then
+    return 0;
+  end if;
+  return coalesce((ov ->> 'base')::int, (cfg ->> 'base')::int)
+       + coalesce((ov ->> 'perEvenLevel')::int, (cfg ->> 'perEvenLevel')::int) * (greatest(p_level, 1) / 2);
+end $$;
+
+create or replace function public.ability_status(p_character uuid) returns jsonb
+language plpgsql stable set search_path = public as $$
+declare
+  cfg jsonb := public.rules_config() -> 'abilities';
+  ch record;
+  created int;
+begin
+  select level, origin_id, origin_path_id into ch from public.characters where id = p_character;
+  select count(*) into created from public.powers where character_id = p_character;
+  return jsonb_build_object(
+    'mode', coalesce(cfg -> 'originModes' ->> ch.origin_id, 'standard'),
+    'granted', public.ability_granted(ch.origin_id, ch.origin_path_id, ch.level),
+    'created', created,
+    'level', ch.level);
+end $$;
+
 grant execute on function public.rules_config() to authenticated;
+grant execute on function public.form_pv_max(uuid), public.ability_granted(text, text, int), public.ability_status(uuid) to authenticated;
 grant execute on function public.roll_attribute_set(uuid) to authenticated;
 grant execute on function public.skill_fixed_part(uuid, text), public.skill_cap(uuid) to authenticated;
 `;

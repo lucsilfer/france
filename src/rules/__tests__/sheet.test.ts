@@ -16,7 +16,7 @@ describe("ficha calculada", () => {
     const s = buildSheet({ classId: "brawler", originId: "muto", level: 1, form: form({ skills: [{ skill_id: "luta", points: 30, other_bonus: 0, temp_bonus: 0 }] }) });
     assert.equal(s.attributes.FOR.final, 84);
     assert.equal(s.skills.find((x) => x.id === "luta")!.final, 42 + 30);
-    assert.equal(s.resources.pvMax, 84 + 15);
+    assert.equal(s.resources.pvMax, Math.floor((84 + 45) / 3));
     assert.equal(s.resources.pcMax, 23);
     assert.deepEqual(s.missingAttributes, []);
   });
@@ -30,12 +30,12 @@ describe("ficha calculada", () => {
   });
   it("ganhos de nível só contam até o nível atual", () => {
     const f = form({ progressions: [{ level: 2, pv_gain: 7, pc_gain: 4 }, { level: 3, pv_gain: 5, pc_gain: 2 }], pv_other_bonus: 3 });
-    assert.equal(buildSheet({ classId: null, originId: null, level: 2, form: f }).resources.pvMax, 95 + 7 + 3);
+    assert.equal(buildSheet({ classId: null, originId: null, level: 2, form: f }).resources.pvMax, 41 + 7 + 3);
     assert.equal(buildSheet({ classId: null, originId: null, level: 1, form: f }).resources.pcMax, 23);
   });
   it("forma Lenda não recebe bônus de classe", () => {
     const s = buildSheet({ classId: "tank", originId: "artificial", level: 1, form: form({ kind: "lenda" }) });
-    assert.equal(s.resources.pvMax, 95);
+    assert.equal(s.resources.pvMax, 41);
   });
   it("lista atributos faltantes", () => {
     const s = buildSheet({ classId: null, originId: null, level: 1, form: form({ attributes: attrs({ FOR: 80, DEX: null }) }) });
@@ -50,6 +50,7 @@ describe("criação por etapas", () => {
     originPathId: "arsenal",
     name: "Iara",
     playerName: "Luciano",
+    kitChoices: { arma_refinada: "espada_curta", arma_simples: "faca" },
     form: form({
       skills: [
         // Brawler: Luta 42 (+33 = 75), Reflexo 25 (+50 = 75), Pontaria 25 (+50 = 75), Intuição 10 (+17)

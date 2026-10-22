@@ -24,6 +24,7 @@ export default async function CreatePage({ params }: { params: Promise<{ id: str
         origin_id: c.origin_id,
         origin_path_id: c.origin_path_id,
         class_id: c.class_id,
+        starting_kit: c.starting_kit ?? {},
       }}
       initialForm={bundle.base}
       initialPending={bundle.pendingRoll ? { id: bundle.pendingRoll.id, faces: bundle.pendingRoll.faces, results: bundle.pendingRoll.results, best: bundle.pendingRoll.best } : null}

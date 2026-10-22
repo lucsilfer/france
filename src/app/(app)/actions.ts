@@ -33,6 +33,7 @@ export async function updateProfile(input: ProfileInput): Promise<ActionResult> 
       username: parsed.data.username,
       display_name: parsed.data.display_name || null,
       reduce_motion: parsed.data.reduce_motion,
+      roll_speed: parsed.data.roll_speed,
     })
     .eq("id", user.id);
   if (error) {

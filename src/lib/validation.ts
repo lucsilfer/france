@@ -40,6 +40,7 @@ export const profileSchema = z.object({
   username: usernameSchema,
   display_name: z.string().trim().max(60, "Máximo de 60 caracteres."),
   reduce_motion: z.boolean(),
+  roll_speed: z.enum(["instant", "fast", "normal"]),
 });
 
 export const campaignSchema = z.object({

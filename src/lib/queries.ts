@@ -1,12 +1,14 @@
 import "server-only";
+import { cache } from "react";
 import { requireUser } from "@/lib/supabase/server";
 import type { CampaignSummary, CharacterSummary, HomebrewEntry, Profile } from "@/lib/types";
 
-export async function getSessionProfile() {
+/** Perfil da sessão — memorizado por requisição (layout e página compartilham a mesma consulta). */
+export const getSessionProfile = cache(async function getSessionProfile() {
   const { supabase, user } = await requireUser();
   const { data } = await supabase
     .from("profiles")
-    .select("id, username, display_name, avatar_url, reduce_motion")
+    .select("id, username, display_name, avatar_url, reduce_motion, roll_speed")
     .eq("id", user.id)
     .single();
   const profile: Profile = (data as Profile | null) ?? {
@@ -15,9 +17,10 @@ export async function getSessionProfile() {
     display_name: null,
     avatar_url: null,
     reduce_motion: false,
+    roll_speed: "fast",
   };
   return { supabase, user, profile };
-}
+});
 
 export async function getDashboardData() {
   const { supabase, user, profile } = await getSessionProfile();

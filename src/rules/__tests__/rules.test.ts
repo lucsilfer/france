@@ -151,15 +151,15 @@ describe("d100", () => {
 });
 
 describe("recursos e perícias", () => {
-  it("PV = FOR + CON÷3 e PC = VIG÷3 (para baixo)", () => {
+  it("PV = (FOR + CON)÷3 e PC = VIG÷3 (para baixo)", () => {
     const r = baseResources(ATTRS, null);
-    assert.equal(r.pv, 80 + 15);
+    assert.equal(r.pv, Math.floor((80 + 45) / 3)); // 41 — nunca FOR + CON÷3 (= 95)
     assert.equal(r.pc, 23);
   });
   it("Tank recebe +20 PV no nível 1; Brawler muda PV via FOR", () => {
-    assert.equal(baseResources(ATTRS, "tank").pv, 115);
+    assert.equal(baseResources(ATTRS, "tank").pv, 41 + 20);
     const f = finalAttributes(computeAttributes({ baseAttributes: ATTRS, classId: "brawler" }));
-    assert.equal(baseResources(f, "brawler").pv, 99);
+    assert.equal(baseResources(f, "brawler").pv, Math.floor((84 + 45) / 3));
   });
   it("perícias derivadas acompanham atributos", () => {
     const s = Object.fromEntries(computeSkills({ baseAttributes: ATTRS, classId: null, skillPoints: { luta: 30 } }).map((x) => [x.id, x]));

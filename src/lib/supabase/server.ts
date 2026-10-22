@@ -1,10 +1,11 @@
 import "server-only";
+import { cache } from "react";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { supabaseEnv } from "./env";
 
-export async function createClient() {
+export const createClient = cache(async function createClient() {
   const { url, anonKey } = supabaseEnv();
   const cookieStore = await cookies();
   return createServerClient(url, anonKey, {
@@ -21,14 +22,17 @@ export async function createClient() {
       },
     },
   });
-}
+});
 
-/** Garante usuário autenticado (validado no servidor do Supabase, não só pelo cookie). */
-export async function requireUser() {
+/**
+ * Garante usuário autenticado (validado no servidor do Supabase, não só pelo cookie).
+ * Memorizado por requisição: várias chamadas na mesma ação/página fazem UMA consulta de autenticação.
+ */
+export const requireUser = cache(async function requireUser() {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect("/entrar");
   return { supabase, user };
-}
+});

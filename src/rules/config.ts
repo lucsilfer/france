@@ -9,7 +9,7 @@
 
 export type RoundingMode = "floor" | "round" | "ceil" | "none";
 
-export const RULES_VERSION = "livro-1.0+site-2026.10-fase3";
+export const RULES_VERSION = "livro-1.0+site-2026.10-3.5";
 
 export const RULES_CONFIG = {
   /** Geração de atributos: ficha → "rolar 3 dados de 3d6*5 e pegar o melhor". */
@@ -28,11 +28,12 @@ export const RULES_CONFIG = {
   },
 
   /**
-   * PV inicial. Ficha: "FOR + CON / 3" (ambíguo).
-   * Decisão do site: FOR + floor(CON / 3).
-   * Alternativa: "(FOR + CON) / 3" → pvFormula: "sum_div3".
+   * PV inicial. Ficha: "FOR + CON / 3".
+   * CORREÇÃO (autor, Atualização 3.5): PV = (FOR + CON) ÷ 3 — soma ANTES da divisão, arredondado para baixo.
+   * Bônus de classe (ex.: Tank +20) e ganhos de nível são somados depois.
+   * A fórmula antiga "FOR + (CON ÷ 3)" estava errada; fica disponível só para comparação.
    */
-  pvFormula: "for_plus_con_div3" as "for_plus_con_div3" | "sum_div3",
+  pvFormula: "sum_div3" as "for_plus_con_div3" | "sum_div3",
   pcFormula: "vig_div3" as const,
   resourceRounding: "floor" as RoundingMode,
 
@@ -103,6 +104,45 @@ export const RULES_CONFIG = {
   amaldicoadoLimitUsesFullCost: true,
 
   levels: { min: 1, max: 20 },
+
+  /**
+   * Vagas de habilidades (Atualização 3.5, regra do autor):
+   * nível 1 = 2 habilidades; +1 a cada nível par. Disponíveis = adquiridas − criadas.
+   * Com habilidades pendentes o personagem não sobe de nível.
+   */
+  abilities: {
+    base: 2,
+    perEvenLevel: 1,
+    blockLevelUpWhenPending: true,
+    /**
+     * Exceções por origem:
+     *  - "none": não usa o sistema convencional (Muto — Mutação Adaptativa). Sem vagas, sem pendências, sem bloqueio.
+     *  - "free": cria quando quiser, sem limite de vagas e sem bloqueio (Elo).
+     */
+    originModes: { muto: "none", elo: "free" } as Record<string, "none" | "free">,
+    /**
+     * Prodígio: quantidade definida pelo Caminho quando o livro é diferente da regra geral.
+     *  - Arsenal: "a cada nível par, aprende uma técnica" → 0 + 1 por nível par.
+     *  - Engrenagem: o instrumento + "a cada nível par, cria uma habilidade ligada a ele" → 1 + 1 por nível par.
+     *  - Pacto: o livro não dá quantidade → regra geral.
+     * [decisão do site — confirmar com o autor]
+     */
+    pathOverrides: {
+      "prodigio:arsenal": { base: 0, perEvenLevel: 1 },
+      "prodigio:engrenagem": { base: 1, perEvenLevel: 1 },
+    } as Record<string, { base: number; perEvenLevel: number }>,
+  },
+
+  /**
+   * Prodígio (Atualização 3.5): não usa PC.
+   * Sem barra de PC, sem custo ao usar, sem limite de PC por habilidade nem de dados extras,
+   * e pode registrar técnicas/aparatos/objetos sem efeito de dados.
+   */
+  prodigioPowers: { noPcCost: true, noLimits: true, allowNoEffects: true },
+
+  /** Velocidade das rolagens (configuração do usuário). Duração da animação em ms. */
+  rollSpeeds: { instant: 0, fast: 300, normal: 800 } as Record<"instant" | "fast" | "normal", number>,
+  defaultRollSpeed: "fast" as "instant" | "fast" | "normal",
 } as const;
 
 export function applyRounding(value: number, mode: RoundingMode): number {

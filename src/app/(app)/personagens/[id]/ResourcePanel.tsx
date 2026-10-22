@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import { Minus, Plus } from "lucide-react";
 import { useToast } from "@/components/ui/Toast";
 import { ResourceBar } from "@/components/hud/ResourceBar";
@@ -17,30 +17,43 @@ export function ResourcePanel({ state, sheet }: { state: SheetState; sheet: Comp
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState({ pv_current: form.pv_current, pc_current: form.pc_current, pv_other_bonus: form.pv_other_bonus, pc_other_bonus: form.pc_other_bonus });
   const [saving, start] = useTransition();
-  const [busy, setBusy] = useState<string | null>(null);
+  // Cliques rápidos em ±1: a tela muda na hora e os ajustes são somados e enviados juntos (sem travar os botões).
+  const pendingDelta = useRef({ pv: 0, pc: 0 });
+  const timers = useRef<{ pv?: ReturnType<typeof setTimeout>; pc?: ReturnType<typeof setTimeout> }>({});
+  const resources = ["pv", "pc"] as const;
+  const shown: readonly ("pv" | "pc")[] = state.noPc ? ["pv"] : resources;
 
-  async function nudge(resource: "pv" | "pc", delta: number) {
-    if (busy) return;
+  function nudge(resource: "pv" | "pc", delta: number) {
+    const formId = form.id;
+    const key = resource === "pv" ? "pv_current" : "pc_current";
     const max = resource === "pv" ? r.pvMax : r.pcMax;
-    const cur = resource === "pv" ? form.pv_current : form.pc_current;
-    const optimistic = Math.max(0, Math.min(max, cur + delta));
-    state.setForm(resource === "pv" ? { pv_current: optimistic } : { pc_current: optimistic });
-    setBusy(resource);
-    const res = await adjustResource(c.id, resource, delta, form.id);
-    setBusy(null);
-    if (!res.ok) {
-      state.setForm(resource === "pv" ? { pv_current: cur } : { pc_current: cur });
-      return toast(res.error, "error");
-    }
-    state.setForm(resource === "pv" ? { pv_current: res.data!.value } : { pc_current: res.data!.value });
+    const cur = form[key];
+    const next = Math.max(0, Math.min(max, cur + delta));
+    if (next === cur) return;
+    state.patchForm(formId, { [key]: next });
+    pendingDelta.current[resource] += next - cur;
+    clearTimeout(timers.current[resource]);
+    timers.current[resource] = setTimeout(async () => {
+      const d = pendingDelta.current[resource];
+      pendingDelta.current[resource] = 0;
+      if (d === 0) return;
+      const res = await adjustResource(c.id, resource, d, formId);
+      if (!res.ok) {
+        toast(`${res.error} Recuperando os valores salvos…`, "error");
+        state.refresh();
+        return;
+      }
+      if (pendingDelta.current[resource] === 0) state.patchForm(formId, { [key]: res.data!.value });
+    }, 280);
   }
 
   function save() {
     start(async () => {
-      const res = await updateResources(c.id, draft, form.id);
+      const formId = form.id;
+      const res = await updateResources(c.id, draft, formId);
       if (!res.ok) return toast(res.error, "error");
-      state.refresh();
-      state.setForm({ ...draft });
+      state.patchForm(formId, { ...draft });
+      if (res.data?.clamped) state.refresh();
       setEditing(false);
       toast(res.message ?? "Salvo.");
     });
@@ -65,8 +78,8 @@ export function ResourcePanel({ state, sheet }: { state: SheetState; sheet: Comp
       <LevelControl state={state} />
 
       {editing ? (
-        <div className="grid grid-cols-2 gap-4">
-          {(["pv", "pc"] as const).map((k) => (
+        <div className={`grid gap-4 ${state.noPc ? "grid-cols-1" : "grid-cols-2"}`}>
+          {shown.map((k) => (
             <fieldset key={k} className="space-y-2">
               <legend className="label-mono mb-1 text-holo">{k.toUpperCase()}</legend>
               <label className="block text-xs text-fg-dim">
@@ -82,7 +95,7 @@ export function ResourcePanel({ state, sheet }: { state: SheetState; sheet: Comp
         </div>
       ) : (
         <div className="space-y-4">
-          {(["pv", "pc"] as const).map((k) => (
+          {shown.map((k) => (
             <div key={k} className="flex items-end gap-2">
               <div className="flex-1">
                 <ResourceBar short={k.toUpperCase()} label={k === "pv" ? "Pontos de Vida" : "Pontos de Consumo"} current={k === "pv" ? r.pvCurrent : r.pcCurrent} max={k === "pv" ? r.pvMax : r.pcMax} tone={k} />
@@ -91,7 +104,6 @@ export function ResourcePanel({ state, sheet }: { state: SheetState; sheet: Comp
                 <div className="flex gap-1">
                   <button
                     onClick={() => nudge(k, -1)}
-                    disabled={busy !== null}
                     aria-label={`Diminuir ${k.toUpperCase()} em 1`}
                     className="rounded-sm border border-line p-1.5 text-fg-dim hover:border-alert hover:text-alert disabled:opacity-40"
                   >
@@ -99,7 +111,6 @@ export function ResourcePanel({ state, sheet }: { state: SheetState; sheet: Comp
                   </button>
                   <button
                     onClick={() => nudge(k, 1)}
-                    disabled={busy !== null}
                     aria-label={`Aumentar ${k.toUpperCase()} em 1`}
                     className="rounded-sm border border-line p-1.5 text-fg-dim hover:border-cyan hover:text-cyan disabled:opacity-40"
                   >
@@ -112,14 +123,18 @@ export function ResourcePanel({ state, sheet }: { state: SheetState; sheet: Comp
           <details className="text-xs text-fg-muted">
             <summary className="cursor-pointer hover:text-fg-dim">Como o máximo é calculado</summary>
             <p className="mt-2 font-mono">
-              PV {r.pvMax} = {b.pvFromAttrs} (FOR + CON÷3){b.classPv ? ` + ${b.classPv} (classe)` : ""}
+              PV {r.pvMax} = {b.pvFromAttrs} ((FOR + CON) ÷ 3){b.classPv ? ` + ${b.classPv} (classe)` : ""}
               {b.levelPv ? ` + ${b.levelPv} (níveis)` : ""}
               {b.otherPv ? ` ${b.otherPv > 0 ? "+" : "−"} ${Math.abs(b.otherPv)} (bônus)` : ""}
             </p>
-            <p className="font-mono">
-              PC {r.pcMax} = {b.pcFromAttrs} (VIG÷3){b.levelPc ? ` + ${b.levelPc} (níveis)` : ""}
-              {b.otherPc ? ` ${b.otherPc > 0 ? "+" : "−"} ${Math.abs(b.otherPc)} (bônus)` : ""}
-            </p>
+            {state.noPc ? (
+              <p className="font-mono">Prodígio: não usa PC (técnicas e habilidades não consomem PC).</p>
+            ) : (
+              <p className="font-mono">
+                PC {r.pcMax} = {b.pcFromAttrs} (VIG÷3){b.levelPc ? ` + ${b.levelPc} (níveis)` : ""}
+                {b.otherPc ? ` ${b.otherPc > 0 ? "+" : "−"} ${Math.abs(b.otherPc)} (bônus)` : ""}
+              </p>
+            )}
           </details>
         </div>
       )}

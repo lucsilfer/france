@@ -13,7 +13,7 @@ import type { SheetState } from "./Sheet";
 
 type Row = { attribute: string; base_value: number; other_bonus: number; temp_bonus: number };
 
-export function AttributesSection({ state, sheet, onRoll, rolling }: { state: SheetState; sheet: ComputedSheet; onRoll: (id: string) => void; rolling: string | null }) {
+export function AttributesSection({ state, sheet, onRoll, rolling }: { state: SheetState; sheet: ComputedSheet; onRoll: (id: string) => void; rolling: ReadonlySet<string> }) {
   const toast = useToast();
   const [editing, setEditing] = useState(false);
   const [rows, setRows] = useState<Row[]>([]);
@@ -33,7 +33,7 @@ export function AttributesSection({ state, sheet, onRoll, rolling }: { state: Sh
     start(async () => {
       const res = await updateAttributes(state.character.id, rows, state.form.id);
       if (!res.ok) return toast(res.error, "error");
-      state.setForm({ attributes: rows.map((r) => ({ ...r })) });
+      state.setForm({ attributes: rows.map((r) => ({ ...r })), ...(res.data ?? {}) });
       setEditing(false);
       toast(res.message ?? "Atributos salvos.");
     });
@@ -93,7 +93,7 @@ export function AttributesSection({ state, sheet, onRoll, rolling }: { state: Sh
               <li key={a.id}>
                 <button
                   onClick={() => onRoll(a.id)}
-                  disabled={!state.canEdit || rolling !== null}
+                  disabled={!state.canEdit}
                   title={state.canEdit ? `Rolar teste de ${a.name}` : a.name}
                   aria-label={`${a.name}: ${t.normal} / ${t.good} / ${t.extreme}. ${state.canEdit ? "Rolar teste." : ""}`}
                   className="group relative flex w-full border border-line bg-panel-3/70 px-2.5 pt-2.5 pb-2 transition-[border-color,box-shadow,background] enabled:hover:border-holo enabled:hover:bg-primary/10 enabled:hover:shadow-[var(--shadow-glow)] disabled:cursor-default"
@@ -111,7 +111,7 @@ export function AttributesSection({ state, sheet, onRoll, rolling }: { state: Sh
                       {v.temporary}
                     </span>
                   )}
-                  {rolling === key && <Loader2 className="absolute top-2.5 right-1 h-3 w-3 animate-spin text-cyan" aria-hidden />}
+                  {rolling.has(key) && <Loader2 className="absolute top-2.5 right-1 h-3 w-3 animate-spin text-cyan" aria-hidden />}
                 </button>
               </li>
             );

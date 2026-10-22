@@ -20,6 +20,7 @@ export interface DraftCharacter extends IdentityInput {
   origin_id: string | null;
   origin_path_id: string | null;
   class_id: string | null;
+  starting_kit: Record<string, string>;
 }
 
 interface Props {
@@ -44,6 +45,7 @@ export function Wizard({ characterId, initialStep, initialCharacter, initialForm
         name: character.name,
         playerName: character.player_name,
         form,
+        kitChoices: character.starting_kit,
       }),
     [character, form],
   );
@@ -160,7 +162,16 @@ export function Wizard({ characterId, initialStep, initialCharacter, initialForm
             />
           )}
           {step === 3 && (
-            <StepClass characterId={characterId} classId={character.class_id} form={form} track={track} onSaved={(class_id) => setCharacter((c) => ({ ...c, class_id }))} />
+            <StepClass
+              characterId={characterId}
+              classId={character.class_id}
+              originId={character.origin_id}
+              form={form}
+              kitChoices={character.starting_kit}
+              track={track}
+              onSaved={(class_id) => setCharacter((c) => ({ ...c, class_id, starting_kit: {} }))}
+              onKitChange={(starting_kit) => setCharacter((c) => ({ ...c, starting_kit }))}
+            />
           )}
           {step === 4 && <StepSkills classId={character.class_id} form={form} onChange={updateSkills} />}
           {step === 5 && <StepIdentity character={character} onChange={updateIdentity} />}

@@ -223,6 +223,13 @@ select pg_temp.act('B');
 do $$
 declare r jsonb; row jsonb;
 begin
+  -- Atualização 3.5: subir exige as habilidades do nível (Pacto: regra geral, 2 no nível 1, 3 no nível 2).
+  insert into public.powers (character_id, name, components) values
+    ('33333333-3333-3333-3333-333333333334', 'P1', '[{"type":"damage","tier":0,"extraDice":0,"area":"alvo"}]'),
+    ('33333333-3333-3333-3333-333333333334', 'P2', '[{"type":"damage","tier":0,"extraDice":0,"area":"alvo"}]');
+  r := public.set_character_level('33333333-3333-3333-3333-333333333334', 2);
+  insert into public.powers (character_id, name, components) values
+    ('33333333-3333-3333-3333-333333333334', 'P3', '[{"type":"damage","tier":0,"extraDice":0,"area":"alvo"}]');
   r := public.set_character_level('33333333-3333-3333-3333-333333333334', 3);
   for row in select * from jsonb_array_elements(r -> 'rows') loop
     assert (row ->> 'pv_gain')::int between 3 and 14, 'PV 1d12+2';
@@ -265,13 +272,16 @@ begin
     r := public.roll_attribute_set(lf);
     perform public.assign_attribute_roll(r.id, a);
   end loop;
-  perform public.complete_lenda_form(lf, 50, 20);
+  perform public.complete_lenda_form(lf, 1, 20);
   update public.characters set active_form = 'lenda' where id = '33333333-3333-3333-3333-333333333333';
+  -- Atualização 3.5: no nível 2 (Artificial, regra geral) são 3 habilidades antes de subir.
+  insert into public.powers (character_id, name, components)
+  values ('33333333-3333-3333-3333-333333333333', 'Terceira', '[{"type":"damage","tier":0,"extraDice":0,"area":"alvo"}]');
   perform public.set_character_level('33333333-3333-3333-3333-333333333333', 3);
   select count(*) into n from public.level_progressions where form_id = lf;
   assert n = 2, 'Lenda tem progressão própria';
   -- Recursos independentes
-  assert (select pv_current from public.character_forms where id = lf) = 50, 'PV próprio da Lenda';
+  assert (select pv_current from public.character_forms where id = lf) = 1, 'PV próprio da Lenda';
   -- Inventário e poderes são do personagem (compartilhados)
   assert (select count(*) from public.items where character_id = '33333333-3333-3333-3333-333333333333') = 2, 'inventário compartilhado';
 end $$;

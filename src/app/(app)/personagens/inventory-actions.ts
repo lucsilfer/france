@@ -11,7 +11,9 @@ import { WEAPON_MODIFIER_BY_ID, type WeaponTag } from "@/rules/data/equipment.ts
 import { SKILL_BY_ID } from "@/rules/data/skills.ts";
 import { isValidDice, type RollResult } from "@/rules/dice.ts";
 import { computePowerCost, type PowerComponent } from "@/rules/powers.ts";
-import { dbMessage, fail, guard, int, logRoll, sheetContext, touch, uuid } from "./_shared";
+import { ITEM_COLUMNS, POWER_COLUMNS, type ItemModifierRow, type ItemRow, type PowerRow } from "@/lib/character";
+import { abilityStatus } from "@/rules/abilities.ts";
+import { dbMessage, editContext, fail, guard, int, logRoll, sheetContext, touch, uuid } from "./_shared";
 
 function detail(r: RollResult): DiceDetail {
   return { expression: r.expression, rolls: r.terms.flatMap((t) => t.rolls), total: r.total };
@@ -22,9 +24,9 @@ function detail(r: RollResult): DiceDetail {
 export async function saveMoney(characterId: string, value: number): Promise<ActionResult> {
   return guard(async () => {
     if (typeof value !== "number" || !Number.isFinite(value) || value < -1e9 || value > 1e9) return fail("Valor inválido.");
-    const { supabase } = await sheetContext(characterId);
-    const { error } = await supabase.from("characters").update({ money: Math.round(value * 100) / 100 }).eq("id", characterId);
-    if (error) return fail("Não foi possível salvar o dinheiro.");
+    const { supabase } = await editContext(characterId);
+    const { data, error } = await supabase.from("characters").update({ money: Math.round(value * 100) / 100 }).eq("id", characterId).select("id");
+    if (error || !data?.length) return fail("Não foi possível salvar o dinheiro.");
     return { ok: true };
   });
 }
@@ -79,12 +81,16 @@ function itemRow(d: ItemInput) {
   };
 }
 
-export async function addCatalogItem(characterId: string, catalogId: string, quantity = 1): Promise<ActionResult> {
+function normalizeItem(i: ItemRow): ItemRow {
+  return { ...i, tags: i.tags ?? [], item_modifiers: i.item_modifiers ?? [] };
+}
+
+export async function addCatalogItem(characterId: string, catalogId: string, quantity = 1): Promise<ActionResult<ItemRow>> {
   return guard(async () => {
     const c = CATALOG_BY_ID[catalogId];
     if (!c || !Number.isInteger(quantity) || quantity < 1 || quantity > 999) return fail("Item inválido.");
-    const { supabase } = await sheetContext(characterId);
-    const { error } = await supabase.from("items").insert({
+    const { supabase } = await editContext(characterId);
+    const { data, error } = await supabase.from("items").insert({
       character_id: characterId,
       source_kind: "catalog",
       source_ref: c.id,
@@ -101,17 +107,17 @@ export async function addCatalogItem(characterId: string, catalogId: string, qua
       range: c.range,
       special_rules: c.effectDice ? "" : c.effectText,
       tags: c.tags,
-    });
-    if (error) return fail(dbMessage(error, "Não foi possível adicionar o item."));
+    }).select(ITEM_COLUMNS).single();
+    if (error || !data) return fail(dbMessage(error, "Não foi possível adicionar o item."));
     touch(characterId);
-    return { ok: true, message: `${c.name} adicionado ao inventário.` };
+    return { ok: true, data: normalizeItem(data as unknown as ItemRow), message: `${c.name} adicionado ao inventário.` };
   });
 }
 
-export async function addHomebrewItem(characterId: string, homebrewId: string): Promise<ActionResult> {
+export async function addHomebrewItem(characterId: string, homebrewId: string): Promise<ActionResult<ItemRow>> {
   return guard(async () => {
     if (!uuid.safeParse(homebrewId).success) return fail("Item inválido.");
-    const { supabase, user } = await sheetContext(characterId);
+    const { supabase, user } = await editContext(characterId);
     const { data: hb } = await supabase.from("homebrew").select("kind, name, description, data").eq("id", homebrewId).eq("owner_id", user.id).maybeSingle();
     if (!hb || !["item", "arma"].includes(hb.kind as string)) return fail("Item da biblioteca não encontrado.");
     const d = (hb.data ?? {}) as Record<string, unknown>;
@@ -133,19 +139,23 @@ export async function addHomebrewItem(characterId: string, homebrewId: string): 
     });
     if (!parsed.success) return fail(`Este modelo está incompleto: ${parsed.error.issues[0]?.message}`);
     // Cópia independente: editar na ficha não altera o modelo da biblioteca.
-    const { error } = await supabase.from("items").insert({ ...itemRow(parsed.data), character_id: characterId, source_kind: "homebrew", source_ref: homebrewId });
-    if (error) return fail(dbMessage(error, "Não foi possível adicionar o item."));
+    const { data, error } = await supabase
+      .from("items")
+      .insert({ ...itemRow(parsed.data), character_id: characterId, source_kind: "homebrew", source_ref: homebrewId })
+      .select(ITEM_COLUMNS)
+      .single();
+    if (error || !data) return fail(dbMessage(error, "Não foi possível adicionar o item."));
     touch(characterId);
-    return { ok: true, message: `${hb.name} adicionado (cópia da biblioteca).` };
+    return { ok: true, data: normalizeItem(data as unknown as ItemRow), message: `${hb.name} adicionado (cópia da biblioteca).` };
   });
 }
 
 /** Cria item personalizado: vai para a ficha E para a biblioteca Homebrew. */
-export async function createCustomItem(characterId: string, input: ItemInput): Promise<ActionResult> {
+export async function createCustomItem(characterId: string, input: ItemInput): Promise<ActionResult<{ item: ItemRow; homebrew: { id: string; kind: "item" | "arma"; name: string; description: string; data: Record<string, unknown> } }>> {
   return guard(async () => {
     const parsed = itemSchema.safeParse(input);
     if (!parsed.success) return fail(parsed.error.issues[0]?.message ?? "Revise os campos.");
-    const { supabase, user } = await sheetContext(characterId);
+    const { supabase, user } = await editContext(characterId);
     const row = itemRow(parsed.data);
     const { data: hb, error: hbErr } = await supabase
       .from("homebrew")
@@ -159,34 +169,48 @@ export async function createCustomItem(characterId: string, input: ItemInput): P
       .select("id")
       .single();
     if (hbErr || !hb) return fail("Não foi possível salvar na biblioteca Homebrew.");
-    const { error } = await supabase.from("items").insert({ ...row, character_id: characterId, source_kind: "homebrew", source_ref: hb.id });
-    if (error) return fail(dbMessage(error, "Não foi possível adicionar o item."));
+    const { data, error } = await supabase
+      .from("items")
+      .insert({ ...row, character_id: characterId, source_kind: "homebrew", source_ref: hb.id })
+      .select(ITEM_COLUMNS)
+      .single();
+    if (error || !data) return fail(dbMessage(error, "Não foi possível adicionar o item."));
     touch(characterId);
-    return { ok: true, message: "Item criado, adicionado à ficha e salvo na sua biblioteca." };
+    const kind = row.item_type === "arma" ? "arma" : "item";
+    return {
+      ok: true,
+      data: { item: normalizeItem(data as unknown as ItemRow), homebrew: { id: hb.id as string, kind, name: row.name, description: row.description, data: { ...row } } },
+      message: "Item criado, adicionado à ficha e salvo na sua biblioteca.",
+    };
   });
 }
 
-export async function updateItem(characterId: string, itemId: string, input: ItemInput): Promise<ActionResult> {
+export async function updateItem(characterId: string, itemId: string, input: ItemInput): Promise<ActionResult<ItemRow>> {
   return guard(async () => {
     if (!uuid.safeParse(itemId).success) return fail("Item inválido.");
     const parsed = itemSchema.safeParse(input);
     if (!parsed.success) return fail(parsed.error.issues[0]?.message ?? "Revise os campos.");
-    const { supabase } = await sheetContext(characterId);
+    const { supabase } = await editContext(characterId);
     const { data, error } = await supabase.from("items").update(itemRow(parsed.data)).eq("id", itemId).eq("character_id", characterId).select("id");
     if (error || !data?.length) return fail(dbMessage(error, "Não foi possível salvar o item."));
     // Modificadores que ficaram incompatíveis com as novas categorias são removidos.
     const { data: mods } = await supabase.from("item_modifiers").select("id, modifier_id").eq("item_id", itemId);
     const bad = (mods ?? []).filter((m) => !parsed.data.tags.includes(WEAPON_MODIFIER_BY_ID[m.modifier_id as string]?.requires));
     if (bad.length) await supabase.from("item_modifiers").delete().in("id", bad.map((m) => m.id));
+    const { data: fresh } = await supabase.from("items").select(ITEM_COLUMNS).eq("id", itemId).single();
     touch(characterId);
-    return { ok: true, message: bad.length ? "Item salvo. Modificadores incompatíveis foram removidos." : "Item salvo." };
+    return {
+      ok: true,
+      data: fresh ? normalizeItem(fresh as unknown as ItemRow) : undefined,
+      message: bad.length ? "Item salvo. Modificadores incompatíveis foram removidos." : "Item salvo.",
+    };
   });
 }
 
 export async function removeItem(characterId: string, itemId: string): Promise<ActionResult> {
   return guard(async () => {
     if (!uuid.safeParse(itemId).success) return fail("Item inválido.");
-    const { supabase } = await sheetContext(characterId);
+    const { supabase } = await editContext(characterId);
     const { data, error } = await supabase.from("items").delete().eq("id", itemId).eq("character_id", characterId).select("id");
     if (error || !data?.length) return fail("Não foi possível remover.");
     touch(characterId);
@@ -197,7 +221,7 @@ export async function removeItem(characterId: string, itemId: string): Promise<A
 export async function setQuickAccess(characterId: string, kind: "item" | "power", id: string, value: boolean): Promise<ActionResult> {
   return guard(async () => {
     if (!uuid.safeParse(id).success || typeof value !== "boolean") return fail("Dados inválidos.");
-    const { supabase } = await sheetContext(characterId);
+    const { supabase } = await editContext(characterId);
     const table = kind === "item" ? "items" : "powers";
     const { data, error } = await supabase.from(table).update({ quick_access: value }).eq("id", id).eq("character_id", characterId).select("id");
     if (error || !data?.length) return fail("Não foi possível atualizar o Inventário Rápido.");
@@ -206,27 +230,30 @@ export async function setQuickAccess(characterId: string, kind: "item" | "power"
   });
 }
 
-export async function addModifier(characterId: string, itemId: string, modifierId: string, temporary = false): Promise<ActionResult> {
+export async function addModifier(characterId: string, itemId: string, modifierId: string, temporary = false): Promise<ActionResult<ItemModifierRow>> {
   return guard(async () => {
     if (!uuid.safeParse(itemId).success || !WEAPON_MODIFIER_BY_ID[modifierId]) return fail("Modificador inválido.");
-    const { bundle, supabase } = await sheetContext(characterId);
-    const item = bundle.items.find((i) => i.id === itemId);
+    const { supabase } = await editContext(characterId);
+    const { data: item } = await supabase.from("items").select("attack_kind, tags").eq("id", itemId).eq("character_id", characterId).maybeSingle();
     if (!item?.attack_kind) return fail("Modificadores só podem ser aplicados a armas.");
-    if (!item.tags.includes(WEAPON_MODIFIER_BY_ID[modifierId].requires)) return fail("Modificador incompatível com esta arma.");
-    const { error } = await supabase.from("item_modifiers").insert({ item_id: itemId, modifier_id: modifierId, is_temporary: temporary });
-    if (error) return fail(error.code === "23505" ? "Este modificador já está na arma." : dbMessage(error, "Não foi possível adicionar o modificador."));
+    if (!(item.tags as string[]).includes(WEAPON_MODIFIER_BY_ID[modifierId].requires)) return fail("Modificador incompatível com esta arma.");
+    const { data, error } = await supabase
+      .from("item_modifiers")
+      .insert({ item_id: itemId, modifier_id: modifierId, is_temporary: temporary })
+      .select("id, modifier_id, is_temporary")
+      .single();
+    if (error || !data) return fail(error?.code === "23505" ? "Este modificador já está na arma." : dbMessage(error, "Não foi possível adicionar o modificador."));
     touch(characterId);
-    return { ok: true, message: `${WEAPON_MODIFIER_BY_ID[modifierId].name} adicionado.` };
+    return { ok: true, data: data as ItemModifierRow, message: `${WEAPON_MODIFIER_BY_ID[modifierId].name} adicionado.` };
   });
 }
 
 export async function removeModifier(characterId: string, itemModifierId: string): Promise<ActionResult> {
   return guard(async () => {
     if (!uuid.safeParse(itemModifierId).success) return fail("Modificador inválido.");
-    const { bundle, supabase } = await sheetContext(characterId);
-    if (!bundle.items.some((i) => i.item_modifiers.some((m) => m.id === itemModifierId))) return fail("Modificador não encontrado.");
-    const { error } = await supabase.from("item_modifiers").delete().eq("id", itemModifierId);
-    if (error) return fail("Não foi possível remover o modificador.");
+    const { supabase } = await editContext(characterId);
+    const { data, error } = await supabase.from("item_modifiers").delete().eq("id", itemModifierId).select("id");
+    if (error || !data?.length) return fail("Não foi possível remover o modificador.");
     touch(characterId);
     return { ok: true, message: "Modificador removido." };
   });
@@ -295,12 +322,13 @@ const powerSchema = z.object({
   target: z.string().trim().max(120),
   range: z.string().trim().max(60),
   duration: z.string().trim().max(60),
-  components: z.array(componentSchema).min(1, "Adicione pelo menos um efeito.").max(10),
+  // Mínimo de efeitos é decidido pelo motor (Prodígio pode registrar técnica só de texto).
+  components: z.array(componentSchema).max(10, "Efeitos demais."),
 });
 export type PowerInput = z.infer<typeof powerSchema>;
 
 /** Salva o poder. O motor valida aqui; o banco recalcula o custo e valida de novo. */
-export async function savePower(characterId: string, input: PowerInput, powerId?: string | null): Promise<ActionResult> {
+export async function savePower(characterId: string, input: PowerInput, powerId?: string | null): Promise<ActionResult<PowerRow>> {
   return guard(async () => {
     const parsed = powerSchema.safeParse(input);
     if (!parsed.success) return fail(parsed.error.issues[0]?.message ?? "Revise os campos.");
@@ -309,22 +337,28 @@ export async function savePower(characterId: string, input: PowerInput, powerId?
     const c = bundle.character;
     const cost = computePowerCost(parsed.data.components, c.level, c.origin_id);
     if (!cost.valid) return fail(cost.errors[0]);
+    if (!powerId) {
+      // Vagas de habilidades (o banco confere de novo no trigger).
+      const st = abilityStatus({ level: c.level, originId: c.origin_id, pathId: c.origin_path_id, created: bundle.powers.length });
+      if (!st.canCreate) return fail(`Sem habilidades disponíveis: ${st.created} de ${st.granted} já criadas no nível ${c.level}.`);
+    }
     const effectDice = cost.components.map((x) => x.dice).filter(Boolean).join(" + ") || null;
     const row = { ...parsed.data, initial_cost: cost.initial, per_turn_cost: cost.perTurn, effect_dice: effectDice };
     const q = powerId
-      ? supabase.from("powers").update(row).eq("id", powerId).eq("character_id", characterId).select("id")
-      : supabase.from("powers").insert({ ...row, character_id: characterId }).select("id");
+      ? supabase.from("powers").update(row).eq("id", powerId).eq("character_id", characterId).select(POWER_COLUMNS)
+      : supabase.from("powers").insert({ ...row, character_id: characterId }).select(POWER_COLUMNS);
     const { data, error } = await q;
     if (error || !data?.length) return fail(dbMessage(error, "Não foi possível salvar o poder."));
     touch(characterId);
-    return { ok: true, message: powerId ? "Poder atualizado." : `Poder criado: ${cost.initial} PC${cost.perTurn ? ` + ${cost.perTurn} PC/turno` : ""}.` };
+    const costText = c.origin_id === "prodigio" ? "sem custo de PC" : `${cost.initial} PC${cost.perTurn ? ` + ${cost.perTurn} PC/turno` : ""}`;
+    return { ok: true, data: data[0] as unknown as PowerRow, message: powerId ? "Salvo." : `Criado: ${costText}.` };
   });
 }
 
 export async function deletePower(characterId: string, powerId: string): Promise<ActionResult> {
   return guard(async () => {
     if (!uuid.safeParse(powerId).success) return fail("Poder inválido.");
-    const { supabase } = await sheetContext(characterId);
+    const { supabase } = await editContext(characterId);
     const { data, error } = await supabase.from("powers").delete().eq("id", powerId).eq("character_id", characterId).select("id");
     if (error || !data?.length) return fail("Não foi possível excluir.");
     touch(characterId);
@@ -406,7 +440,7 @@ export async function advanceEffect(characterId: string, effectId: string, reque
 export async function endEffect(characterId: string, effectId: string): Promise<ActionResult> {
   return guard(async () => {
     if (!uuid.safeParse(effectId).success) return fail("Efeito inválido.");
-    const { supabase } = await sheetContext(characterId);
+    const { supabase } = await editContext(characterId);
     const { error } = await supabase.rpc("end_effect", { p_effect: effectId });
     if (error) return fail(dbMessage(error, "Não foi possível encerrar."));
     touch(characterId);

@@ -264,3 +264,157 @@ html[data-reduce-motion="true"] *::after {
   .scanline { display: none; }
   .boot__ring--rev { display: none; }
 }
+
+/* ------------------------------------------------------------------
+   Atualização 3.5 — Forma Lenda do Artificial: "sistema corrompido".
+   Só vale dentro da ficha (.sheet-root) de um Artificial com a Lenda ativa.
+   Os mesmos tokens são redefinidos; nenhum componente precisa saber do tema.
+   As cores são propriedades registradas, então a troca é gradual (≈0,4 s).
+------------------------------------------------------------------- */
+@property --color-void { syntax: "<color>"; inherits: true; initial-value: #050a12; }
+@property --color-panel { syntax: "<color>"; inherits: true; initial-value: #0b1626; }
+@property --color-panel-2 { syntax: "<color>"; inherits: true; initial-value: #102037; }
+@property --color-panel-3 { syntax: "<color>"; inherits: true; initial-value: #08111f; }
+@property --color-line { syntax: "<color>"; inherits: true; initial-value: #235377; }
+@property --color-line-strong { syntax: "<color>"; inherits: true; initial-value: #2f7aad; }
+@property --color-primary { syntax: "<color>"; inherits: true; initial-value: #159bff; }
+@property --color-primary-deep { syntax: "<color>"; inherits: true; initial-value: #0b4f86; }
+@property --color-holo { syntax: "<color>"; inherits: true; initial-value: #48c7ff; }
+@property --color-cyan { syntax: "<color>"; inherits: true; initial-value: #73e8ff; }
+@property --color-cyan-dim { syntax: "<color>"; inherits: true; initial-value: #3aa6c2; }
+@property --color-fg-dim { syntax: "<color>"; inherits: true; initial-value: #8ba8bf; }
+@property --color-fg-muted { syntax: "<color>"; inherits: true; initial-value: #5f7d95; }
+@property --glow-rgb { syntax: "*"; inherits: true; initial-value: 72 199 255; }
+
+.sheet-root {
+  --glow-rgb: 72 199 255;
+  position: relative;
+  transition:
+    --color-void 0.4s ease, --color-panel 0.4s ease, --color-panel-2 0.4s ease, --color-panel-3 0.4s ease,
+    --color-line 0.4s ease, --color-line-strong 0.4s ease, --color-primary 0.4s ease, --color-primary-deep 0.4s ease,
+    --color-holo 0.4s ease, --color-cyan 0.4s ease, --color-cyan-dim 0.4s ease, --color-fg-dim 0.4s ease, --color-fg-muted 0.4s ease;
+}
+
+.sheet-root[data-sheet-theme="corrupted"] {
+  --color-void: #030104;
+  --color-panel: #0c0509;
+  --color-panel-2: #150810;
+  --color-panel-3: #080306;
+  --color-line: #3d1428;
+  --color-line-strong: #6b1d3c;
+  --color-primary: #a3173f;      /* vermelho-escuro */
+  --color-primary-deep: #4c0a20;
+  --color-holo: #c42a55;         /* linhas "holográficas" instáveis */
+  --color-cyan: #a678ff;         /* destaque roxo */
+  --color-cyan-dim: #7449b8;
+  --color-fg-dim: #b49aac;
+  --color-fg-muted: #7e6276;
+  --glow-rgb: 196 42 85;
+  --shadow-panel: 0 0 0 1px rgb(196 42 85 / 0.06) inset, 0 20px 50px -30px rgb(0 0 0 / 0.95);
+  --shadow-glow: 0 0 24px -6px rgb(196 42 85 / 0.55);
+}
+.sheet-root[data-sheet-theme="corrupted"] .hud-panel {
+  background-image:
+    linear-gradient(180deg, rgb(196 42 85 / 0.06), transparent 40%),
+    repeating-linear-gradient(0deg, rgb(166 120 255 / 0.025) 0 1px, transparent 1px 3px);
+}
+.sheet-root[data-sheet-theme="corrupted"] .hud-panel::before { animation: corrupt-jitter 7s steps(1) infinite; }
+.sheet-root[data-sheet-theme="corrupted"] .hud-panel::after { animation: corrupt-jitter 9s steps(1) infinite reverse; border-color: var(--color-cyan); }
+.sheet-root[data-sheet-theme="corrupted"] .hud-tag { text-shadow: 1px 0 rgb(196 42 85 / 0.7), -1px 0 rgb(166 120 255 / 0.6); animation: corrupt-flicker 5s steps(1) infinite; }
+.sheet-root[data-sheet-theme="corrupted"] .text-glow { text-shadow: 0 0 16px rgb(196 42 85 / 0.6), 1px 0 rgb(166 120 255 / 0.5); }
+.sheet-root[data-sheet-theme="corrupted"] .field-input:focus { box-shadow: 0 0 0 3px rgb(196 42 85 / 0.18), 0 0 18px -4px rgb(196 42 85 / 0.6); }
+.sheet-root[data-sheet-theme="corrupted"] ::selection { background: rgb(163 23 63 / 0.5); }
+
+/* Fundo preto profundo com ruído discreto, só atrás da ficha. */
+.corrupt-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 45% at 50% -10%, rgb(163 23 63 / 0.18), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 100% 110%, rgb(116 73 184 / 0.12), transparent 70%),
+    linear-gradient(rgb(61 20 40 / 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(61 20 40 / 0.18) 1px, transparent 1px),
+    #030104;
+  background-size: auto, auto, 44px 44px, 44px 44px, auto;
+  animation: corrupt-bg-in 0.4s ease-out both;
+}
+.corrupt-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, rgb(255 255 255 / 0.018) 0 1px, transparent 1px 4px);
+  animation: corrupt-drift 9s linear infinite;
+}
+
+/* Transição de forma (≈0,42 s): escurece, interferência nas linhas, faixa de corrupção percorre os painéis. */
+.form-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  animation: form-fx-dim 0.42s ease-out forwards;
+}
+.form-fx::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 22%;
+  top: -22%;
+  background: linear-gradient(180deg, transparent, rgb(var(--fx-rgb) / 0.22) 45%, rgb(var(--fx-rgb2) / 0.3) 50%, rgb(var(--fx-rgb) / 0.22) 55%, transparent);
+  mix-blend-mode: screen;
+  animation: form-fx-sweep 0.42s cubic-bezier(0.3, 0.6, 0.3, 1) forwards;
+}
+.form-fx::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, rgb(var(--fx-rgb) / 0.1) 0 2px, transparent 2px 5px);
+  animation: form-fx-noise 0.42s steps(4) forwards;
+}
+.form-fx-in { --fx-rgb: 196 42 85; --fx-rgb2: 166 120 255; }
+.form-fx-out { --fx-rgb: 72 199 255; --fx-rgb2: 115 232 255; }
+
+/* O conteúdo da forma nova entra com uma breve interferência (sem flash). */
+.form-swap { animation: form-swap-in 0.34s ease-out both; }
+
+@keyframes form-fx-dim { 0% { background: rgb(0 0 0 / 0); } 35% { background: rgb(0 0 0 / 0.45); } 100% { background: rgb(0 0 0 / 0); } }
+@keyframes form-fx-sweep { to { top: 100%; } }
+@keyframes form-fx-noise { 0% { opacity: 0.9; transform: translateX(0); } 50% { opacity: 0.6; transform: translateX(-2px); } 100% { opacity: 0; transform: translateX(1px); } }
+@keyframes form-swap-in {
+  0% { opacity: 0; clip-path: inset(0 0 100% 0); transform: translateX(-3px); }
+  45% { opacity: 1; transform: translateX(2px); }
+  100% { opacity: 1; clip-path: inset(0 0 0 0); transform: none; }
+}
+@keyframes corrupt-bg-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes corrupt-drift { from { transform: translateY(0); } to { transform: translateY(8px); } }
+@keyframes corrupt-jitter { 0%, 92%, 100% { transform: none; opacity: 0.75; } 93% { transform: translate(2px, -1px); opacity: 0.4; } 95% { transform: translate(-1px, 1px); opacity: 0.9; } }
+@keyframes corrupt-flicker { 0%, 94%, 100% { opacity: 1; } 95% { opacity: 0.55; } 97% { opacity: 0.85; } }
+
+/* Revelação das rolagens */
+.roll-settle { animation: roll-settle 0.18s ease-out; }
+@keyframes roll-settle { from { opacity: 0.4; filter: blur(3px); } to { opacity: 1; filter: none; } }
+.roll-card { overflow-wrap: anywhere; animation: roll-card-in 0.16s ease-out; }
+@keyframes roll-card-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* Reduzir animações (sistema ou perfil): troca instantânea, sem glitches. */
+@media (prefers-reduced-motion: reduce) {
+  .form-fx, .corrupt-backdrop::after { display: none; }
+  .form-swap, .roll-settle, .roll-card, .corrupt-backdrop { animation: none; }
+  .sheet-root { transition: none; }
+  .sheet-root[data-sheet-theme="corrupted"] .hud-panel::before,
+  .sheet-root[data-sheet-theme="corrupted"] .hud-panel::after,
+  .sheet-root[data-sheet-theme="corrupted"] .hud-tag { animation: none; }
+}
+html[data-reduce-motion="true"] .form-fx,
+html[data-reduce-motion="true"] .corrupt-backdrop::after { display: none; }
+html[data-reduce-motion="true"] .form-swap,
+html[data-reduce-motion="true"] .roll-settle,
+html[data-reduce-motion="true"] .roll-card,
+html[data-reduce-motion="true"] .corrupt-backdrop { animation: none; }
+html[data-reduce-motion="true"] .sheet-root { transition: none; }
+html[data-reduce-motion="true"] .sheet-root[data-sheet-theme="corrupted"] .hud-panel::before,
+html[data-reduce-motion="true"] .sheet-root[data-sheet-theme="corrupted"] .hud-panel::after,
+html[data-reduce-motion="true"] .sheet-root[data-sheet-theme="corrupted"] .hud-tag { animation: none; }

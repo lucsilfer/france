@@ -9,17 +9,23 @@ import { ATTRIBUTE_IDS } from "@/rules/data/attributes.ts";
 import { CLASSES } from "@/rules/data/classes.ts";
 import { buildSheet, type StoredForm } from "@/rules/sheet.ts";
 import { levelDice } from "@/rules/progression.ts";
-import { saveClass } from "../../actions";
+import { saveClass, saveKitChoices } from "../../actions";
+import { KitChoices } from "@/components/sheet/KitChoices";
+import { kitChoiceSlots, type KitChoices as Choices } from "@/rules/data/startingKits.ts";
+import { CLASS_BY_ID } from "@/rules/data/classes.ts";
 
 interface Props {
   characterId: string;
   classId: string | null;
+  originId: string | null;
   form: StoredForm;
+  kitChoices: Choices;
   track: <T extends { ok: boolean }>(p: Promise<T>) => Promise<T>;
   onSaved: (classId: string) => void;
+  onKitChange: (choices: Choices) => void;
 }
 
-export function StepClass({ characterId, classId, form, track, onSaved }: Props) {
+export function StepClass({ characterId, classId, originId, form, kitChoices, track, onSaved, onKitChange }: Props) {
   const toast = useToast();
   const [saving, start] = useTransition();
   const sheet = buildSheet({ classId, originId: null, level: 1, form });
@@ -29,6 +35,7 @@ export function StepClass({ characterId, classId, form, track, onSaved }: Props)
       const res = await track(saveClass(characterId, id));
       if (!res.ok) return toast(res.error, "error");
       onSaved(id);
+      onKitChange({}); // escolhas da classe anterior são descartadas
       toast(`Classe selecionada: ${res.message}`);
     });
   }
@@ -65,7 +72,7 @@ export function StepClass({ characterId, classId, form, track, onSaved }: Props)
             <span className="font-mono text-fg">{sheet.resources.pcMax}</span>
           </div>
         </div>
-        <p className="mt-3 text-xs text-fg-muted">PV = FOR + CON ÷ 3 · PC = VIG ÷ 3 (arredondados para baixo), mais benefícios da classe.</p>
+        <p className="mt-3 text-xs text-fg-muted">PV = (FOR + CON) ÷ 3 · PC = VIG ÷ 3 (arredondados para baixo), mais benefícios da classe.</p>
       </div>
 
       <ul className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -89,6 +96,27 @@ export function StepClass({ characterId, classId, form, track, onSaved }: Props)
           );
         })}
       </ul>
+      {classId && CLASS_BY_ID[classId] && (
+        <div className="hud-panel px-4 pt-8 pb-5 sm:px-6">
+          <span className="hud-tag">Equipamento inicial — {CLASS_BY_ID[classId].name}</span>
+          <p className="mb-4 text-sm text-fg-dim">
+            {kitChoiceSlots(classId).length
+              ? "Escolha os itens. Eles entram no inventário como itens reais quando você finalizar o personagem."
+              : "Estes itens entram no inventário quando você finalizar o personagem."}
+          </p>
+          <KitChoices
+            classId={classId}
+            originId={originId}
+            choices={kitChoices}
+            onChange={(next) => {
+              onKitChange(next);
+              void track(saveKitChoices(characterId, next)).then((r) => {
+                if (!r.ok) toast(r.error, "error");
+              });
+            }}
+          />
+        </div>
+      )}
       <p className="text-xs text-fg-muted">
         Observação: a origem Prodígio substitui a evolução de PV/PC da classe ({levelDice("brawler", "prodigio").pv} PV, sem PC por nível).
       </p>

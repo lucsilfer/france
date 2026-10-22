@@ -15,7 +15,7 @@ export default async function ProfilePage() {
           E-mail da conta: <span className="text-fg">{user.email}</span>
         </p>
         <ProfileForm
-          defaults={{ username: profile.username, display_name: profile.display_name ?? "", reduce_motion: profile.reduce_motion }}
+          defaults={{ username: profile.username, display_name: profile.display_name ?? "", reduce_motion: profile.reduce_motion, roll_speed: profile.roll_speed ?? "fast" }}
         />
       </PageShell>
       <div className="mx-auto max-w-2xl">

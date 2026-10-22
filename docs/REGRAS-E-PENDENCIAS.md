@@ -12,7 +12,7 @@ Legenda: 🔴 bloqueia implementação fiel · 🟡 tem decisão provisória · 
 
 | # | Ponto | O que está escrito | Decisão atual | Onde mudar |
 |---|---|---|---|---|
-| 1 | 🟡 PV inicial | Ficha: "FOR + CON / 3" (ordem ambígua) | `FOR + ⌊CON ÷ 3⌋` (pedido) | `pvFormula` |
+| 1 | 🟢 PV inicial (corrigido na 3.5) | Ficha: "FOR + CON / 3" | **(FOR + CON) ÷ 3**, para baixo (autor). A fórmula antiga `FOR + ⌊CON ÷ 3⌋` estava errada | `pvFormula`, `form_pv_max` |
 | 2 | 🟡 Conhecimento Bélico | Ficha: "(1/INT)" | metade de INT (pedido) | `conhecimentoBelicoDivisor` |
 | 3 | 🟢 PC inicial | "VIG/3" | `⌊VIG ÷ 3⌋` | `resourceRounding` |
 | 4 | 🟡 PV/PC usam atributo com bônus de classe? | Não dito | Sim — o Brawler (+4 FOR) ganha +4 PV | `character.ts › baseResources` |
@@ -103,11 +103,28 @@ Muto (partes consumidas), Elo (objeto místico), Amaldiçoado (buff/debuff do Me
 | 47 | 🟢 Não automatizado | Talismã de energia (uso sem custo 1×/luta), vantagem do Demolidor com arremessáveis, Engrenagem além do −15, efeitos narrativos de origem: exibidos como texto para o Mestre aplicar | — |
 | 48 | 🟢 Descer de nível | Os ganhos dos níveis acima ficam guardados (`level_progressions`), não entram no máximo e voltam iguais ao subir de novo — nunca são rolados de novo | `set_character_level` |
 
+
+## 10. Decisões da Atualização 3.5
+
+| # | Ponto | Decisão atual | Onde mudar |
+|---|---|---|---|
+| 49 | 🟢 PV de personagens existentes | O máximo é recalculado dos atributos (nada guardado muda). Só o PV atual acima do novo máximo é reduzido, com registro em `pv_formula_fix_log` | `fix_pv_after_formula_change` |
+| 50 | 🔴 Arsenal: técnicas | Livro: "a cada nível par, aprende uma técnica" → **0 no nível 1**, +1 por nível par (nível 2 = 1). O Arsenal não cria nada no nível 1 | `abilities.pathOverrides["prodigio:arsenal"]` |
+| 51 | 🔴 Engrenagem: aparatos | Instrumento inicial + "a cada nível par, cria uma habilidade ligada a ele" → **1 no nível 1**, +1 por nível par. Dispositivos do Tecnólogo (interlúdio) podem ser registrados como itens no inventário | `abilities.pathOverrides["prodigio:engrenagem"]` |
+| 52 | 🟡 Pacto | O livro não dá quantidade → regra geral (2 + 1 por nível par) | `abilities` |
+| 53 | 🟡 Muto | Não usa vagas nem bloqueio; ainda pode registrar poderes (ex.: partes roubadas) sem ocupar vagas | `abilities.originModes.muto = "none"` |
+| 54 | 🟡 Criação sem vaga | Sem vagas disponíveis, criar é bloqueado (navegador, servidor e banco). Elo e Muto são livres | trigger `validate_power` |
+| 55 | 🟡 Receptáculo | Segue a regra geral da 3.5 (prioridade sobre o "1 poder inicial + 1 por nível par" do livro) | `abilities` |
+| 56 | 🟡 Rato: "arma leve" | O livro não define; interpretado como **arma simples** | `startingKits.ts` |
+| 57 | 🟡 Granadas do Demolidor | Entregues como "Granada ×5"; tipo e dano continuam a cargo do Mestre (o livro não fixa) | `startingKits.ts`, catálogo |
+| 58 | 🟡 Prodígio sem PC | Custo cheio é calculado só como referência; nada é cobrado. Sem limites de PC e dados extras. Pode registrar sem efeito de dados | `prodigioPowers` |
+
 ---
 
 ## Para confirmar com o autor (prioridade)
 
-1. Categoria de cada arma para os modificadores (#18).
+1. Técnicas do Arsenal e aparatos da Engrenagem por nível (#50, #51).
+2. Categoria de cada arma para os modificadores (#18).
 2. Mecânica de "vantagem" sem número (#13).
 3. Custo por turno entra no limite? (#26)
 4. Chicote: 1d18? (#17)
@@ -115,4 +132,4 @@ Muto (partes consumidas), Elo (objeto místico), Amaldiçoado (buff/debuff do Me
 
 ## Onde as regras vivem
 
-Todas as decisões ficam em `src/rules/config.ts` e `src/rules/data/*`. O banco **não** tem regras escritas à mão: `npm run rules:sql` gera `supabase/migrations/20261023000000_rules_sync_fase3.sql` (a versão anterior, `20261022000000_rules_sync.sql`, fica congelada porque já foi aplicada) (rolagem de atributos, classes, origens, caminhos, perícias, limites, modificadores de arma, tabelas de poder e dados de evolução) a partir do motor, e um teste falha se o arquivo estiver desatualizado. Ao mudar uma regra: edite o motor → `npm run rules:sql` → aplique a migração.
+Todas as decisões ficam em `src/rules/config.ts` e `src/rules/data/*`. O banco **não** tem regras escritas à mão: `npm run rules:sql` gera `supabase/migrations/20261024000000_rules_sync_3_5.sql` (as versões anteriores, `20261022000000_rules_sync.sql` e `20261023000000_rules_sync_fase3.sql`, ficam congeladas porque já foram aplicadas) (rolagem de atributos, classes, origens, caminhos, perícias, limites, modificadores de arma, tabelas de poder e dados de evolução) a partir do motor, e um teste falha se o arquivo estiver desatualizado. Ao mudar uma regra: edite o motor → `npm run rules:sql` → aplique a migração.

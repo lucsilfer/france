@@ -45,6 +45,8 @@ export interface PowerCost {
   perTurn: number;
   extraDice: number;
   limits: { maxPc: number; maxExtraDice: number };
+  /** Sem limites de PC e dados extras (Prodígio). */
+  unlimited: boolean;
   /** Dano bônus do Amaldiçoado: +1d6 a cada 2 dados de dano. */
   bonusDamageDice: string | null;
   valid: boolean;
@@ -130,21 +132,30 @@ export function computePowerCost(components: PowerComponent[], level: number, or
       errors.push((e as Error).message);
     }
   }
-  if (components.length === 0) errors.push("Adicione pelo menos um efeito.");
+  const prodigio = originId === "prodigio";
+  const pp = RULES_CONFIG.prodigioPowers;
+  if (components.length === 0 && !(prodigio && pp.allowNoEffects)) errors.push("Adicione pelo menos um efeito.");
+  if (components.length > 10) errors.push("Efeitos demais.");
 
   const fullInitial = parts.reduce((a, p) => a + p.initial, 0);
   const perTurn = parts.reduce((a, p) => a + p.perTurn, 0);
   const extraDice = parts.reduce((a, p) => a + p.extraDice, 0);
   const limits = powerLimits(level);
   const cursed = originId === "amaldicoado";
-  const initial = cursed ? applyRounding(fullInitial / 2, RULES_CONFIG.amaldicoadoCostRounding) : fullInitial;
-  const perTurnFinal = cursed ? applyRounding(perTurn / 2, RULES_CONFIG.amaldicoadoCostRounding) : perTurn;
+  let initial = cursed ? applyRounding(fullInitial / 2, RULES_CONFIG.amaldicoadoCostRounding) : fullInitial;
+  let perTurnFinal = cursed ? applyRounding(perTurn / 2, RULES_CONFIG.amaldicoadoCostRounding) : perTurn;
+  // Prodígio não usa PC: nada é cobrado (o custo cheio fica só como referência).
+  if (prodigio && pp.noPcCost) {
+    initial = 0;
+    perTurnFinal = 0;
+  }
 
   const costForLimit =
     (cursed && !RULES_CONFIG.amaldicoadoLimitUsesFullCost ? initial : fullInitial) +
     (RULES_CONFIG.perTurnCostCountsTowardLimit ? perTurn : 0);
-  if (costForLimit > limits.maxPc) errors.push(`Custo de ${costForLimit} PC acima do limite de ${limits.maxPc} PC por habilidade no nível ${level}.`);
-  if (extraDice > limits.maxExtraDice) errors.push(`${extraDice} dados extras acima do máximo de +${limits.maxExtraDice} no nível ${level}.`);
+  const limited = !(prodigio && pp.noLimits);
+  if (limited && costForLimit > limits.maxPc) errors.push(`Custo de ${costForLimit} PC acima do limite de ${limits.maxPc} PC por habilidade no nível ${level}.`);
+  if (limited && extraDice > limits.maxExtraDice) errors.push(`${extraDice} dados extras acima do máximo de +${limits.maxExtraDice} no nível ${level}.`);
 
   let bonusDamageDice: string | null = null;
   if (cursed) {
@@ -153,7 +164,7 @@ export function computePowerCost(components: PowerComponent[], level: number, or
     if (bonus > 0) bonusDamageDice = `${bonus}d6`;
   }
 
-  return { components: parts, fullInitial, initial, perTurn: perTurnFinal, extraDice, limits, bonusDamageDice, valid: errors.length === 0, errors };
+  return { components: parts, fullInitial, initial, perTurn: perTurnFinal, extraDice, limits, unlimited: !limited, bonusDamageDice, valid: errors.length === 0, errors };
 }
 
 /** Verificação de gasto de PC (a operação atômica real acontece no banco). */

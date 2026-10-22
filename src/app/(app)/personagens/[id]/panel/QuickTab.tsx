@@ -51,10 +51,16 @@ export function QuickTab({ state, goTo }: { state: SheetState; goTo: (tab: "inve
       </section>
       <section>
         <p className="label-mono mb-2">
-          Poderes · PC <span className="text-cyan">{form.pc_current}</span>
+          {state.powersTab.label}
+          {!state.noPc && (
+            <>
+              {" "}
+              · PC <span className="text-cyan">{form.pc_current}</span>
+            </>
+          )}
         </p>
         {powers.length === 0 ? (
-          <Empty text="Nenhum poder no Inventário Rápido." action="Marque ★ em Poderes Próprios" onClick={() => goTo("poderes")} />
+          <Empty text={`Nada de ${state.powersTab.label} no Inventário Rápido.`} action={`Marque ★ em ${state.powersTab.label}`} onClick={() => goTo("poderes")} />
         ) : (
           <ul className="space-y-2">
             {powers.map((p) => (
@@ -63,7 +69,7 @@ export function QuickTab({ state, goTo }: { state: SheetState; goTo: (tab: "inve
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm text-fg">{p.name}</p>
                   <p className="font-mono text-[0.62rem] text-fg-dim">
-                    {p.initial_cost} PC{p.per_turn_cost > 0 && ` + ${p.per_turn_cost}/TURNO`}
+                    {state.noPc ? "SEM CUSTO DE PC" : `${p.initial_cost} PC${p.per_turn_cost > 0 ? ` + ${p.per_turn_cost}/TURNO` : ""}`}
                   </p>
                 </div>
                 <UsePowerButton state={state} power={p} />

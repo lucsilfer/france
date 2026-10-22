@@ -26,6 +26,10 @@ for (const b of BUFFS) singles.push({ type: "buff", buff: b.id });
 const cases: { components: PowerComponent[]; level: number; origin: string | null }[] = [];
 for (const c of singles) for (const level of [1, 3, 6, 12, 20]) cases.push({ components: [c], level, origin: level === 6 ? "amaldicoado" : null });
 for (let i = 0; i + 1 < singles.length; i += 7) cases.push({ components: [singles[i], singles[i + 1]], level: 10, origin: i % 2 ? "amaldicoado" : null });
+// Atualização 3.5: Prodígio sem custo e sem limites; registro sem efeito de dados.
+for (const c of singles) cases.push({ components: [c], level: 1, origin: "prodigio" });
+for (let i = 0; i + 2 < singles.length; i += 11) cases.push({ components: [singles[i], singles[i + 1], singles[i + 2]], level: 1, origin: "prodigio" });
+cases.push({ components: [], level: 1, origin: "prodigio" }, { components: [], level: 5, origin: null }, { components: [], level: 5, origin: "amaldicoado" });
 
 const lines = cases.map((c) => {
   const e = computePowerCost(c.components, c.level, c.origin);

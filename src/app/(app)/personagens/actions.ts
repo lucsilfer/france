@@ -14,7 +14,9 @@ import { SKILL_BY_ID, SKILLS } from "@/rules/data/skills.ts";
 import { checkSkillEdit } from "@/rules/character.ts";
 import { rollTest, OUTCOME_LABEL } from "@/rules/d100.ts";
 import { buildSheet, checkCreation, checkLendaCreation, SHEET_LIMITS } from "@/rules/sheet.ts";
-import { dbMessage, fail, guard, int, logRoll, sheetContext, touch, uuid } from "./_shared";
+import { abilityStatus, checkLevelChange } from "@/rules/abilities.ts";
+import { kitGrants, startingKit, validateKitChoices, type KitChoices } from "@/rules/data/startingKits.ts";
+import { dbMessage, editContext, fail, guard, int, logRoll, sheetContext, touch, uuid } from "./_shared";
 
 export type { RollEntry } from "@/lib/rolls";
 
@@ -99,10 +101,28 @@ export async function saveClass(characterId: string, classId: string): Promise<A
   return guard(async () => {
     if (!CLASS_BY_ID[classId]) return fail("Classe inválida.");
     const { supabase } = await creationContext(characterId);
-    const { error } = await supabase.from("characters").update({ class_id: classId }).eq("id", characterId);
+    // Trocar de classe apaga as escolhas de equipamento anteriores (o banco também garante isso).
+    const { error } = await supabase.from("characters").update({ class_id: classId, starting_kit: {} }).eq("id", characterId);
     if (error) return fail("Não foi possível salvar a classe.");
     touch(characterId);
     return { ok: true, message: CLASS_BY_ID[classId].name };
+  });
+}
+
+const kitSchema = z.record(z.string().regex(/^[a-z_]+$/), z.string().regex(/^[a-z_]+$/));
+
+/** Guarda as escolhas do equipamento inicial (os itens só entram no inventário ao finalizar). */
+export async function saveKitChoices(characterId: string, choices: KitChoices): Promise<ActionResult> {
+  return guard(async () => {
+    const parsed = kitSchema.safeParse(choices);
+    if (!parsed.success) return fail("Escolha inválida.");
+    const { supabase, ch } = await creationContext(characterId);
+    const valid: KitChoices = Object.fromEntries(Object.entries(parsed.data as KitChoices).filter(([slot]) => startingKit(ch.class_id as string).some((s) => s.id === slot)));
+    const errors = validateKitChoices(ch.class_id as string, ch.origin_id as string | null, valid, Object.keys(valid));
+    if (errors.length) return fail(errors[0]);
+    const { error } = await supabase.from("characters").update({ starting_kit: valid }).eq("id", characterId);
+    if (error) return fail("Não foi possível salvar o equipamento.");
+    return { ok: true };
   });
 }
 
@@ -174,13 +194,88 @@ export async function saveCreationStep(characterId: string, step: number): Promi
   });
 }
 
+function kitItemRow(characterId: string, g: ReturnType<typeof kitGrants>[number]) {
+  const it = g.item;
+  return {
+    character_id: characterId,
+    source_kind: "catalog",
+    source_ref: it.id,
+    kit_ref: g.kitRef,
+    name: it.name,
+    description: [it.description, it.note].filter(Boolean).join("\n"),
+    item_type: it.type,
+    category: it.category,
+    quantity: g.quantity,
+    effect_kind: it.effectKind,
+    effect_dice: it.effectDice,
+    attack_kind: it.attackKind,
+    damage_type: it.damageType,
+    tier: it.tier,
+    range: it.range,
+    special_rules: it.effectDice ? "" : it.effectText,
+    tags: it.tags,
+  };
+}
+
+/**
+ * Personagens já criados: entrega as vagas do equipamento inicial que ainda não foram recebidas.
+ * Não mexe no inventário atual e não duplica (kit_ref único). Itens fixos que o personagem
+ * já possui pelo catálogo são marcados como recebidos sem criar outra cópia.
+ */
+export async function grantStartingKit(characterId: string, choices: KitChoices): Promise<ActionResult<{ added: number; skipped: string[] }>> {
+  return guard(async () => {
+    const parsed = kitSchema.safeParse(choices);
+    if (!parsed.success) return fail("Escolha inválida.");
+    const { bundle, supabase } = await sheetContext(characterId);
+    const c = bundle.character;
+    const kit = startingKit(c.class_id);
+    if (!kit.length) return fail("Esta classe não tem equipamento inicial.");
+    const received = new Set(bundle.items.map((i) => i.kit_ref).filter(Boolean));
+    const pending = kit.filter((s) => !received.has(`kit:${c.class_id}:${s.id}`)).map((s) => s.id);
+    if (!pending.length) return fail("Todo o equipamento inicial já foi recebido.");
+    const errors = validateKitChoices(c.class_id, c.origin_id, parsed.data, pending);
+    if (errors.length) return fail(errors[0]);
+    const owned = new Set(bundle.items.filter((i) => i.source_kind === "catalog").map((i) => i.source_ref));
+    const grants = kitGrants(c.class_id, c.origin_id, parsed.data, pending);
+    const skipped = grants.filter((g) => kit.find((s) => s.id === g.slotId)?.kind === "item" && owned.has(g.item.id));
+    const toAdd = grants.filter((g) => !skipped.includes(g));
+    if (skipped.length) {
+      // Marca como recebido no item que já existe (sem duplicar), se ele ainda não tem marcação de kit.
+      for (const g of skipped) {
+        const existing = bundle.items.find((i) => i.source_kind === "catalog" && i.source_ref === g.item.id && !i.kit_ref);
+        if (existing) await supabase.from("items").update({ kit_ref: g.kitRef }).eq("id", existing.id);
+      }
+    }
+    if (toAdd.length) {
+      const { error } = await supabase
+        .from("items")
+        .upsert(toAdd.map((g) => kitItemRow(characterId, g)), { onConflict: "character_id,kit_ref", ignoreDuplicates: true });
+      if (error) return fail(dbMessage(error, "Não foi possível entregar o equipamento."));
+    }
+    touch(characterId);
+    return {
+      ok: true,
+      data: { added: toAdd.length, skipped: skipped.map((g) => g.item.name) },
+      message: `${toAdd.length} item(ns) adicionado(s) ao inventário${skipped.length ? `; já possuía: ${skipped.map((g) => g.item.name).join(", ")}` : ""}.`,
+    };
+  });
+}
+
 export async function finalizeCharacter(characterId: string): Promise<ActionResult> {
   const result = await guard(async () => {
     const bundle = await loadCharacter(characterId);
     const { character: c, base } = bundle;
     if (!bundle.isOwner) return fail("Apenas o dono pode finalizar.");
     if (c.status !== "draft") return fail("Este personagem já foi finalizado.");
-    const checks = checkCreation({ classId: c.class_id, originId: c.origin_id, originPathId: c.origin_path_id, name: c.name, playerName: c.player_name, form: base });
+    const checks = checkCreation({
+      classId: c.class_id,
+      originId: c.origin_id,
+      originPathId: c.origin_path_id,
+      name: c.name,
+      playerName: c.player_name,
+      form: base,
+      kitChoices: c.starting_kit,
+    });
     const pending = checks.filter((s) => s.step < 6 && !s.complete);
     if (pending.length) return fail(pending[0].errors[0]);
 
@@ -191,6 +286,14 @@ export async function finalizeCharacter(characterId: string): Promise<ActionResu
       .update({ pv_current: sheet.resources.pvMax, pc_current: sheet.resources.pcMax })
       .eq("id", base.id);
     if (fErr) return fail("Não foi possível calcular os recursos.");
+    // Equipamento inicial vira item real do inventário. kit_ref único: reenviar nunca duplica.
+    const grants = kitGrants(c.class_id, c.origin_id, c.starting_kit);
+    if (grants.length) {
+      const { error: kErr } = await supabase
+        .from("items")
+        .upsert(grants.map((g) => kitItemRow(characterId, g)), { onConflict: "character_id,kit_ref", ignoreDuplicates: true });
+      if (kErr) return fail(dbMessage(kErr, "Não foi possível entregar o equipamento inicial."));
+    }
     const { data, error } = await supabase
       .from("characters")
       .update({ status: "active", creation_step: 6, level: 1 })
@@ -268,11 +371,10 @@ export async function completeLendaForm(characterId: string): Promise<ActionResu
 export async function setActiveForm(characterId: string, kind: "base" | "lenda"): Promise<ActionResult> {
   return guard(async () => {
     if (kind !== "base" && kind !== "lenda") return fail("Forma inválida.");
-    const { bundle, supabase } = await sheetContext(characterId);
-    if (kind === "lenda" && !bundle.lenda?.setup_complete) return fail("A ficha da Lenda ainda não foi criada.");
-    const { error } = await supabase.from("characters").update({ active_form: kind }).eq("id", characterId);
-    if (error) return fail(dbMessage(error, "Não foi possível alternar a forma."));
-    touch(characterId);
+    // Só grava a forma ativa: os dados das duas formas já estão na tela. O banco recusa "lenda" sem ficha pronta.
+    const { supabase } = await editContext(characterId);
+    const { data, error } = await supabase.from("characters").update({ active_form: kind }).eq("id", characterId).select("active_form");
+    if (error || !data?.length) return fail(dbMessage(error, "Não foi possível alternar a forma."));
     return { ok: true };
   });
 }
@@ -297,6 +399,10 @@ export async function changeLevel(characterId: string, level: number): Promise<A
     if (!Number.isInteger(level) || level < SHEET_LIMITS.levels.min || level > SHEET_LIMITS.levels.max) return fail("Nível inválido.");
     const { bundle, supabase } = await sheetContext(characterId);
     const from = bundle.character.level;
+    const ch = bundle.character;
+    const st = abilityStatus({ level: from, originId: ch.origin_id, pathId: ch.origin_path_id, created: bundle.powers.length });
+    const blocked = checkLevelChange(st, from, level);
+    if (blocked) return fail(blocked);
     const { data, error } = await supabase.rpc("set_character_level", { p_character: characterId, p_level: level });
     if (error || !data) return fail(dbMessage(error, "Não foi possível mudar o nível."));
     const res = data as { created: { form_id: string; level: number }[]; rows: Omit<LevelRow, "isNew">[] };
@@ -334,17 +440,30 @@ const attributeRowsSchema = z
   )
   .max(8);
 
-export async function updateAttributes(characterId: string, rows: z.infer<typeof attributeRowsSchema>, formId?: string | null): Promise<ActionResult> {
+export async function updateAttributes(
+  characterId: string,
+  rows: z.infer<typeof attributeRowsSchema>,
+  formId?: string | null,
+): Promise<ActionResult<{ pv_current: number; pc_current: number }>> {
   return guard(async () => {
     const parsed = attributeRowsSchema.safeParse(rows);
     if (!parsed.success) return fail("Valores de atributo inválidos (base 0–200, bônus −100 a 100).");
-    const { form, supabase } = await sheetContext(characterId, formId);
+    const { bundle, form, supabase } = await sheetContext(characterId, formId);
     const { error } = await supabase
       .from("form_attributes")
       .upsert(parsed.data.map((r) => ({ ...r, form_id: form.id })), { onConflict: "form_id,attribute" });
     if (error) return fail(dbMessage(error, "Não foi possível salvar os atributos."));
-    touch(characterId);
-    return { ok: true, message: "Atributos salvos." };
+    // PV/PC atuais nunca ficam acima do novo máximo (ex.: FOR ou CON reduzidos).
+    const c = bundle.character;
+    const attributes = form.attributes.map((a) => ({ ...a, ...(parsed.data.find((r) => r.attribute === a.attribute) ?? {}) }));
+    for (const r of parsed.data) if (!attributes.some((a) => a.attribute === r.attribute)) attributes.push(r);
+    const after = buildSheet({ classId: c.class_id, originId: c.origin_id, level: c.level, form: { ...form, attributes } });
+    const pv = Math.min(form.pv_current, after.resources.pvMax);
+    const pc = Math.min(form.pc_current, after.resources.pcMax);
+    if (pv !== form.pv_current || pc !== form.pc_current) {
+      await supabase.from("character_forms").update({ pv_current: pv, pc_current: pc }).eq("id", form.id);
+    }
+    return { ok: true, data: { pv_current: pv, pc_current: pc }, message: "Atributos salvos." };
   });
 }
 

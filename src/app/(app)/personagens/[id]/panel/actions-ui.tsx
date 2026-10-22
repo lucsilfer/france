@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useMemo, useState } from "react";
 import { Crosshair, Power, Square, StepForward, Zap } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
@@ -35,15 +35,37 @@ export function weaponOf(item: ItemRow): WeaponLike | null {
   };
 }
 
+/** Dispara o ataque sem esperar: a janela de resultado abre no clique e se preenche quando o servidor responde. */
+function fireAttack(state: SheetState, item: ItemRow, options: string[], onError: (msg: string) => void) {
+  const token = state.beginRoll(`Ataque: ${item.name}`);
+  void attackWithItem(state.character.id, item.id, options, state.form.id).then((res) => {
+    if (!res.ok) {
+      state.failRoll(token);
+      onError(res.error);
+      return;
+    }
+    state.finishRoll(token, res.data!);
+  });
+}
+
 // ============================================================== Ataque
 
 export function AttackButton({ state, item, compact = false }: { state: SheetState; item: ItemRow; compact?: boolean }) {
+  const toast = useToast();
   const [open, setOpen] = useState(false);
   const weapon = weaponOf(item);
+  const c = state.character;
+  const classId = state.form.kind === "base" ? c.class_id : null;
+  const hasOptions = useMemo(
+    () => (weapon ? attackOptions(weapon, { classId, originId: c.origin_id, pathId: c.origin_path_id }).length > 0 : false),
+    [weapon, classId, c.origin_id, c.origin_path_id],
+  );
   if (!weapon) return null;
+  // Sem situações a marcar, o ataque é rolado direto (um clique).
+  const onClick = () => (hasOptions ? setOpen(true) : fireAttack(state, item, [], (m) => toast(m, "error")));
   return (
     <>
-      <Button size="sm" variant="primary" onClick={() => setOpen(true)} disabled={!state.canEdit} aria-label={`Atacar com ${item.name}`}>
+      <Button size="sm" variant="primary" onClick={onClick} disabled={!state.canEdit} aria-label={`Atacar com ${item.name}`} title={hasOptions ? "Escolher situação e atacar" : "Rolar ataque"}>
         <Crosshair className="h-3.5 w-3.5" aria-hidden /> {compact ? "" : "Atacar"}
       </Button>
       {open && <AttackDialog state={state} item={item} weapon={weapon} onClose={() => setOpen(false)} />}
@@ -55,7 +77,6 @@ function AttackDialog({ state, item, weapon, onClose }: { state: SheetState; ite
   const toast = useToast();
   const { character: c, form, sheet } = state;
   const [chosen, setChosen] = useState<string[]>([]);
-  const [pending, start] = useTransition();
   const classId = form.kind === "base" ? c.class_id : null;
   const options = useMemo(() => attackOptions(weapon, { classId, originId: c.origin_id, pathId: c.origin_path_id }), [weapon, classId, c.origin_id, c.origin_path_id]);
   const skillValues = useMemo(() => Object.fromEntries(sheet.skills.map((s) => [s.id, s.final])), [sheet.skills]);
@@ -66,16 +87,8 @@ function AttackDialog({ state, item, weapon, onClose }: { state: SheetState; ite
   const conditions = item.item_modifiers.map((m) => WEAPON_MODIFIER_BY_ID[m.modifier_id]).filter((m) => m?.condition);
 
   function attack() {
-    state.showResult(null, true);
-    start(async () => {
-      const res = await attackWithItem(c.id, item.id, chosen, form.id);
-      if (!res.ok) {
-        state.showResult(null, false);
-        return toast(res.error, "error");
-      }
-      state.showResult(res.data!, false);
-      onClose();
-    });
+    fireAttack(state, item, chosen, (m) => toast(m, "error"));
+    onClose();
   }
 
   return (
@@ -90,7 +103,7 @@ function AttackDialog({ state, item, weapon, onClose }: { state: SheetState; ite
           <Button variant="ghost" onClick={onClose}>
             Cancelar
           </Button>
-          <Button onClick={attack} loading={pending}>
+          <Button onClick={attack}>
             <Crosshair className="h-3.5 w-3.5" aria-hidden /> Rolar ataque
           </Button>
         </>
@@ -105,7 +118,7 @@ function AttackDialog({ state, item, weapon, onClose }: { state: SheetState; ite
         </div>
         <div>
           <dt className="label-mono">Dano</dt>
-          <dd className="font-mono text-fg">
+          <dd className="font-mono break-words text-fg">
             {plan.damageExpr}
             {plan.damageFactor !== 1 && <span className="text-cyan"> ×{plan.damageFactor}</span>}
           </dd>
@@ -155,24 +168,68 @@ function AttackDialog({ state, item, weapon, onClose }: { state: SheetState; ite
           </ul>
         </div>
       )}
-      <p className="mt-4 text-xs text-fg-muted">
-        Falha não causa dano. Acerto extremo ×1,5 e 1 natural ×2 (não acumulam). A rolagem acontece no servidor.
-      </p>
+      <p className="mt-4 text-xs text-fg-muted">Falha não causa dano. Acerto extremo ×1,5 e 1 natural ×2 (não acumulam). A rolagem acontece no servidor.</p>
     </Modal>
   );
 }
 
 // ============================================================== Poder
 
+function needsPowerDialog(state: SheetState, power: PowerRow) {
+  const classId = state.form.kind === "base" ? state.character.class_id : null;
+  return isContinuous(power.components) || (classId === "esoterico" && power.components.some((x) => x.type === "damage"));
+}
+
+/** Usa o poder: abre a janela de resultado na hora; PC (quando houver) é descontado pelo banco uma única vez. */
+async function firePower(state: SheetState, power: PowerRow, opts: { turns: number; options: string[] }, requestId: string, onError: (m: string) => void) {
+  const formId = state.form.id;
+  const token = state.beginRoll(`Poder: ${power.name}`);
+  const res = await usePower(state.character.id, power.id, requestId, { turns: opts.turns, options: opts.options, formId });
+  if (!res.ok) {
+    state.failRoll(token);
+    onError(res.error);
+    return false;
+  }
+  const p = res.data!.result as PowerPayload;
+  state.patchForm(formId, { pc_current: p.pcAfter });
+  if (p.continuous) {
+    const eff: EffectRow = {
+      id: p.continuous.effectId,
+      form_id: formId,
+      power_id: power.id,
+      label: power.name,
+      per_turn_cost: p.continuous.perTurn,
+      turns_paid: 0,
+      turns_total: p.continuous.turns,
+      active: true,
+      started_at: new Date().toISOString(),
+    };
+    state.setEffects((list) => [...list.filter((e) => e.id !== eff.id), eff]);
+  }
+  state.finishRoll(token, res.data!);
+  return true;
+}
+
 export function UsePowerButton({ state, power }: { state: SheetState; power: PowerRow }) {
+  const toast = useToast();
   const [open, setOpen] = useState(false);
-  const enough = state.form.pc_current >= power.initial_cost;
+  const [busy, setBusy] = useState(false);
+  const enough = state.noPc || state.form.pc_current >= power.initial_cost;
+
+  async function onClick() {
+    if (needsPowerDialog(state, power)) return setOpen(true);
+    setBusy(true);
+    await firePower(state, power, { turns: 0, options: [] }, await makeRequestId(), (m) => toast(m, "error"));
+    setBusy(false);
+  }
+
   return (
     <>
       <Button
         size="sm"
         variant="primary"
-        onClick={() => setOpen(true)}
+        onClick={onClick}
+        loading={busy}
         disabled={!state.canEdit || !enough}
         title={enough ? undefined : `PC insuficiente (precisa de ${power.initial_cost})`}
         aria-label={`Usar ${power.name}`}
@@ -186,32 +243,24 @@ export function UsePowerButton({ state, power }: { state: SheetState; power: Pow
 
 function UsePowerDialog({ state, power, onClose }: { state: SheetState; power: PowerRow; onClose: () => void }) {
   const toast = useToast();
-  const { character: c, form } = state;
-  const continuous = isContinuous(power.components) && power.per_turn_cost > 0;
+  const { character: c, form, noPc } = state;
+  const continuous = isContinuous(power.components);
   const [turns, setTurns] = useState(continuous ? 1 : 0);
   const [lenda, setLenda] = useState(false);
-  const [pending, start] = useTransition();
+  const [busy, setBusy] = useState(false);
   // Um id por abertura do diálogo: cliques repetidos não cobram duas vezes.
   const [reqId, setReqId] = useState<string | null>(null);
   const classId = form.kind === "base" ? c.class_id : null;
-  const enough = form.pc_current >= power.initial_cost;
+  const enough = noPc || form.pc_current >= power.initial_cost;
 
-  function use() {
-    state.showResult(null, true);
-    start(async () => {
-      const id = reqId ?? (await makeRequestId());
-      setReqId(id);
-      const res = await usePower(c.id, power.id, id, { turns: continuous ? turns : 0, options: lenda ? ["alvo_lenda"] : [], formId: form.id });
-      if (!res.ok) {
-        state.showResult(null, false);
-        return toast(res.error, "error");
-      }
-      const p = res.data!.result as PowerPayload;
-      state.setForm({ pc_current: p.pcAfter });
-      state.showResult(res.data!, false);
-      state.refresh();
-      onClose();
-    });
+  async function use() {
+    if (busy) return;
+    setBusy(true);
+    const id = reqId ?? (await makeRequestId());
+    setReqId(id);
+    const ok = await firePower(state, power, { turns: continuous ? turns : 0, options: lenda ? ["alvo_lenda"] : [] }, id, (m) => toast(m, "error"));
+    setBusy(false);
+    if (ok) onClose();
   }
 
   return (
@@ -219,23 +268,25 @@ function UsePowerDialog({ state, power, onClose }: { state: SheetState; power: P
       open
       onClose={onClose}
       title={power.name}
-      tag="Usar poder"
+      tag={`Usar ${state.powersTab.singular}`}
       size="md"
       footer={
         <>
           <Button variant="ghost" onClick={onClose}>
             Cancelar
           </Button>
-          <Button onClick={use} loading={pending} disabled={!enough}>
-            <Zap className="h-3.5 w-3.5" aria-hidden /> Gastar {power.initial_cost} PC e usar
+          <Button onClick={use} loading={busy} disabled={!enough}>
+            <Zap className="h-3.5 w-3.5" aria-hidden /> {noPc || power.initial_cost === 0 ? "Usar" : `Gastar ${power.initial_cost} PC e usar`}
           </Button>
         </>
       }
     >
-      <p className="font-mono text-sm text-fg-dim">
-        PC ATUAL <span className="text-fg">{form.pc_current}</span> · CUSTO <span className="text-cyan">{power.initial_cost}</span>
-        {power.per_turn_cost > 0 && <> · +{power.per_turn_cost}/turno</>}
-      </p>
+      {!noPc && (
+        <p className="font-mono text-sm text-fg-dim">
+          PC ATUAL <span className="text-fg">{form.pc_current}</span> · CUSTO <span className="text-cyan">{power.initial_cost}</span>
+          {power.per_turn_cost > 0 && <> · +{power.per_turn_cost}/turno</>}
+        </p>
+      )}
       {!enough && <p className="mt-2 text-sm text-alert">PC insuficiente para ativar este poder.</p>}
       {power.description && <p className="mt-3 text-sm leading-relaxed text-fg-dim">{power.description}</p>}
       {continuous && (
@@ -243,7 +294,9 @@ function UsePowerDialog({ state, power, onClose }: { state: SheetState; power: P
           <span className="label-mono mb-1 block text-holo">Turnos de manutenção</span>
           <input type="number" min={1} max={100} value={turns} onChange={(e) => setTurns(Math.max(1, Math.min(100, Number(e.target.value) || 1)))} className="field-input w-28 font-mono" />
           <span className="mt-1 block text-xs text-fg-muted">
-            O custo inicial é cobrado agora. Cada turno de manutenção cobra {power.per_turn_cost} PC quando você clicar em “Próximo turno”; você pode encerrar antes.
+            {power.per_turn_cost > 0
+              ? `O custo inicial é cobrado agora. Cada turno de manutenção cobra ${power.per_turn_cost} PC quando você clicar em “Próximo turno”; você pode encerrar antes.`
+              : "O efeito fica ativo pelos turnos escolhidos; avance com “Próximo turno” ou encerre antes."}
           </span>
         </label>
       )}
@@ -253,7 +306,7 @@ function UsePowerDialog({ state, power, onClose }: { state: SheetState; power: P
           Alvo é uma lenda (+1d6 — Esotérico)
         </label>
       )}
-      <p className="mt-4 text-xs text-fg-muted">Poderes não fazem teste de acerto: só os dados de efeito são rolados, no servidor.</p>
+      <p className="mt-4 text-xs text-fg-muted">Sem teste de acerto: só os dados de efeito são rolados, no servidor.</p>
     </Modal>
   );
 }
@@ -268,25 +321,30 @@ export function ActiveEffects({ state }: { state: SheetState }) {
 
   async function advance(e: EffectRow) {
     setBusy(e.id);
-    state.showResult(null, true);
+    const token = state.beginRoll(`Turno: ${e.label}`);
     const res = await advanceEffect(state.character.id, e.id, await makeRequestId());
     setBusy(null);
     if (!res.ok) {
-      state.showResult(null, false);
+      state.failRoll(token);
       return toast(res.error, "error");
     }
-    state.setForm({ pc_current: (res.data!.result as EffectTickPayload).pcAfter });
-    state.showResult(res.data!, false);
-    state.refresh();
+    const p = res.data!.result as EffectTickPayload;
+    if (e.form_id) state.patchForm(e.form_id, { pc_current: p.pcAfter });
+    state.setEffects((list) => list.map((x) => (x.id === e.id ? { ...x, turns_paid: p.turnsPaid, active: p.active } : x)).filter((x) => x.active));
+    state.finishRoll(token, res.data!);
   }
 
   async function end(e: EffectRow) {
     setBusy(e.id);
+    // Otimista: some da lista na hora; volta se o banco recusar.
+    state.setEffects((list) => list.filter((x) => x.id !== e.id));
     const res = await endEffect(state.character.id, e.id);
     setBusy(null);
-    if (!res.ok) return toast(res.error, "error");
+    if (!res.ok) {
+      state.setEffects((list) => [...list, e]);
+      return toast(res.error, "error");
+    }
     toast(res.message ?? "Encerrado.");
-    state.refresh();
   }
 
   return (
@@ -299,17 +357,17 @@ export function ActiveEffects({ state }: { state: SheetState }) {
           const remaining = e.turns_total ? Math.max(0, e.turns_total - e.turns_paid) : null;
           return (
             <li key={e.id} className="flex flex-wrap items-center justify-between gap-2 border-b border-line/50 pb-2">
-              <div>
-                <p className="text-sm text-fg">{e.label}</p>
+              <div className="min-w-0">
+                <p className="text-sm break-words text-fg">{e.label}</p>
                 <p className="font-mono text-[0.62rem] text-fg-dim">
-                  {e.per_turn_cost} PC/TURNO · TURNO {e.turns_paid}
+                  {e.per_turn_cost > 0 ? `${e.per_turn_cost} PC/TURNO · ` : ""}TURNO {e.turns_paid}
                   {e.turns_total ? `/${e.turns_total}` : ""}
                   {remaining !== null && ` · ${remaining} RESTANTE(S)`}
                 </p>
               </div>
               {state.canEdit && (
                 <div className="flex gap-2">
-                  <Button size="sm" variant="secondary" onClick={() => advance(e)} loading={busy === e.id} disabled={state.form.pc_current < e.per_turn_cost}>
+                  <Button size="sm" variant="secondary" onClick={() => advance(e)} loading={busy === e.id} disabled={!state.noPc && state.form.pc_current < e.per_turn_cost}>
                     <StepForward className="h-3.5 w-3.5" aria-hidden /> Próximo turno
                   </Button>
                   <Button size="sm" variant="danger" onClick={() => end(e)} disabled={busy === e.id}>

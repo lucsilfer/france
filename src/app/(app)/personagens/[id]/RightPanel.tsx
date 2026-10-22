@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BookOpen, Feather, LockOpen } from "lucide-react";
+import { BookOpen, Feather, LockOpen, Sparkles } from "lucide-react";
 import { Field } from "@/components/ui/Field";
 import { SaveIndicator } from "@/components/SaveIndicator";
 import { combineStatus, useAutosave } from "@/components/useAutosave";
@@ -16,30 +16,35 @@ import { QuickTab } from "./panel/QuickTab";
 import { InventoryTab } from "./panel/InventoryTab";
 import { PowersTab } from "./panel/PowersTab";
 
-type Tab = "rapido" | "inventario" | "habilidades" | "poderes" | "descricao";
+export type Tab = "rapido" | "inventario" | "habilidades" | "poderes" | "descricao";
 
-const TABS: { id: Tab; label: string }[] = [
-  { id: "rapido", label: "Inventário Rápido" },
-  { id: "inventario", label: "Inventário" },
-  { id: "habilidades", label: "Habilidades de Classe" },
-  { id: "poderes", label: "Poderes Próprios" },
-  { id: "descricao", label: "Descrição" },
-];
-
+const TAB_IDS: Tab[] = ["rapido", "inventario", "habilidades", "poderes", "descricao"];
 const TAB_KEY = "france:sheet-tab";
 
 export function RightPanel({ state }: { state: SheetState }) {
-  const [tab, setTabState] = useState<Tab>("rapido");
+  const { tab, setTab: setTabState, abilities, powersTab } = state;
+  const TABS: { id: Tab; label: string }[] = [
+    { id: "rapido", label: "Inventário Rápido" },
+    { id: "inventario", label: "Inventário" },
+    { id: "habilidades", label: "Habilidades de Classe" },
+    { id: "poderes", label: powersTab.label },
+    { id: "descricao", label: "Descrição" },
+  ];
+  // Abas já abertas continuam montadas (escondidas): voltar a elas é instantâneo e não perde o que estava aberto.
+  const [visited, setVisited] = useState<ReadonlySet<Tab>>(() => new Set([tab]));
+  useEffect(() => {
+    setVisited((v) => (v.has(tab) ? v : new Set(v).add(tab)));
+  }, [tab]);
   // Lembra a última aba (conveniência por navegador; lido após montar para não divergir do servidor).
   useEffect(() => {
     try {
       const saved = window.localStorage.getItem(TAB_KEY) as Tab | null;
-      if (saved && TABS.some((t) => t.id === saved)) setTabState(saved);
+      if (saved && TAB_IDS.includes(saved)) setTabState(saved);
     } catch {
       // armazenamento indisponível
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const available = TABS;
   function setTab(t: Tab) {
     setTabState(t);
     try {
@@ -52,14 +57,28 @@ export function RightPanel({ state }: { state: SheetState }) {
   function onKey(e: React.KeyboardEvent) {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
     e.preventDefault();
-    const i = available.findIndex((t) => t.id === tab);
-    const next = available[(i + (e.key === "ArrowRight" ? 1 : available.length - 1)) % available.length];
-    setTab(next.id);
-    document.getElementById(`sheet-tab-${next.id}`)?.focus();
+    const i = TAB_IDS.indexOf(tab);
+    const next = TAB_IDS[(i + (e.key === "ArrowRight" ? 1 : TAB_IDS.length - 1)) % TAB_IDS.length];
+    setTab(next);
+    document.getElementById(`sheet-tab-${next}`)?.focus();
   }
+
+  const pending = abilities.mode === "standard" ? abilities.available : 0;
 
   return (
     <div className="hud-panel">
+      {pending > 0 && (
+        <button
+          onClick={() => setTab("poderes")}
+          className="flex w-full items-center justify-between gap-3 border-b border-holo/50 bg-primary/10 px-5 py-2.5 text-left hover:bg-primary/15"
+        >
+          <span className="flex items-center gap-2 font-mono text-[0.68rem] tracking-[0.2em] text-cyan uppercase">
+            <Sparkles className="h-3.5 w-3.5" aria-hidden />
+            {pending} {pending === 1 ? `${powersTab.singular} disponível` : `${powersTab.plural} disponíveis`}
+          </span>
+          <span className="font-mono text-[0.6rem] tracking-[0.15em] text-fg-dim uppercase">Abrir →</span>
+        </button>
+      )}
       <div role="tablist" aria-label="Painel da ficha" className="flex overflow-x-auto border-b border-line">
         {TABS.map((t) => {
           const active = tab === t.id;
@@ -76,18 +95,25 @@ export function RightPanel({ state }: { state: SheetState }) {
               className={`relative flex shrink-0 items-center gap-1.5 px-4 py-3 font-mono text-[0.65rem] tracking-[0.15em] uppercase transition-colors ${active ? "text-fg" : "text-fg-muted hover:text-fg-dim"}`}
             >
               {t.label}
+              {t.id === "poderes" && pending > 0 && (
+                <span className="rounded-full bg-primary px-1.5 font-mono text-[0.58rem] text-fg" aria-label={`${pending} disponíveis`}>
+                  {pending}
+                </span>
+              )}
               {active && <span className="absolute inset-x-2 -bottom-px h-0.5 bg-cyan shadow-[0_0_8px_var(--color-cyan)]" />}
             </button>
           );
         })}
       </div>
-      <div id={`sheet-panel-${tab}`} role="tabpanel" aria-labelledby={`sheet-tab-${tab}`} className="p-5">
-        {tab === "rapido" && <QuickTab state={state} goTo={setTab} />}
-        {tab === "inventario" && <InventoryTab state={state} />}
-        {tab === "habilidades" && <AbilitiesTab state={state} />}
-        {tab === "poderes" && <PowersTab state={state} />}
-        {tab === "descricao" && <DescriptionTab state={state} />}
-      </div>
+      {TAB_IDS.filter((id) => visited.has(id) || id === tab).map((id) => (
+        <div key={id} id={`sheet-panel-${id}`} role="tabpanel" aria-labelledby={`sheet-tab-${id}`} hidden={id !== tab} className="p-5">
+          {id === "rapido" && <QuickTab state={state} goTo={setTab} />}
+          {id === "inventario" && <InventoryTab state={state} />}
+          {id === "habilidades" && <AbilitiesTab state={state} />}
+          {id === "poderes" && <PowersTab state={state} />}
+          {id === "descricao" && <DescriptionTab state={state} />}
+        </div>
+      ))}
     </div>
   );
 }

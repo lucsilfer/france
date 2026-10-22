@@ -13,7 +13,7 @@ import type { SheetState } from "./Sheet";
 type Row = { skill_id: string; points: number; other_bonus: number; temp_bonus: number };
 const GROUP_LABEL = { lutar: "Lutar", outros: "Outros" } as const;
 
-export function SkillsSection({ state, sheet, onRoll, rolling }: { state: SheetState; sheet: ComputedSheet; onRoll: (id: string) => void; rolling: string | null }) {
+export function SkillsSection({ state, sheet, onRoll, rolling }: { state: SheetState; sheet: ComputedSheet; onRoll: (id: string) => void; rolling: ReadonlySet<string> }) {
   const toast = useToast();
   const [editing, setEditing] = useState(false);
   const [rows, setRows] = useState<Row[]>([]);
@@ -113,12 +113,12 @@ export function SkillsSection({ state, sheet, onRoll, rolling }: { state: SheetS
                     <li key={s.id}>
                       <button
                         onClick={() => onRoll(s.id)}
-                        disabled={!state.canEdit || rolling !== null}
+                        disabled={!state.canEdit}
                         aria-label={`${s.name}: ${t.normal} / ${t.good} / ${t.extreme}. ${state.canEdit ? "Rolar teste." : ""}`}
                         className="flex w-full items-center justify-between gap-2 rounded-sm px-2 py-1.5 text-left text-sm transition-colors enabled:hover:bg-primary-deep/15 disabled:cursor-default"
                       >
                         <span className={`flex items-center gap-1.5 ${s.points > 0 || s.classBonus ? "text-fg" : "text-fg-dim"}`}>
-                          {rolling === key && <Loader2 className="h-3 w-3 animate-spin text-cyan" aria-hidden />}
+                          {rolling.has(key) && <Loader2 className="h-3 w-3 animate-spin text-cyan" aria-hidden />}
                           {s.name}
                           {s.temporary !== 0 && <span className="font-mono text-[0.6rem] text-cyan">({s.temporary > 0 ? "+" : ""}{s.temporary})</span>}
                           {s.overCap && <span className="font-mono text-[0.6rem] text-alert">acima do limite</span>}

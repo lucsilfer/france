@@ -2,9 +2,10 @@
 
 **Sistema de Gerenciamento de Lendas** — plataforma digital do RPG de mesa **Tríade das Lendas**: contas, fichas, rolagens, campanhas, Escudo do Mestre e homebrew.
 
-> Versão **Fase 3** (sistemas avançados de personagem) sobre o redesign holográfico. Usa o mesmo banco: só acrescenta duas migrações incrementais.
+> Versão **Atualização 3.5** sobre a Fase 3. Usa o mesmo banco: só acrescenta duas migrações incrementais.
 
-- O que entrou nesta fase, resultados dos testes e pendências: [`docs/FASE3.md`](docs/FASE3.md)
+- O que mudou na 3.5, resultados dos testes e problemas em aberto: [`docs/ATUALIZACAO-3.5.md`](docs/ATUALIZACAO-3.5.md)
+- Fase 3 (inventário, poderes, níveis, forma Lenda): [`docs/FASE3.md`](docs/FASE3.md)
 
 - Sistema visual (cores, componentes, logotipo, inicialização): [`docs/DESIGN.md`](docs/DESIGN.md)
 - Planejamento e progresso: [`docs/PLANEJAMENTO.md`](docs/PLANEJAMENTO.md)
@@ -12,15 +13,20 @@
 
 ## Atualizar uma instalação existente (mesmo Supabase)
 
-Vale para quem já roda a Fase 2 / redesign F.R.A.N.C.E. **Não crie outro banco e não rode de novo as migrações antigas.**
+**Não crie outro banco e não rode de novo as migrações antigas.** Nenhum personagem, conta, poder ou inventário é apagado.
 
-1. **Backup (recomendado)** — no Supabase: *Database → Backups*, ou exporte com `supabase db dump`.
-2. **Banco** — em *SQL Editor*, execute **somente** estes dois arquivos, nesta ordem:
-   1. `supabase/migrations/20261023000000_rules_sync_fase3.sql` — regras geradas do motor (limite de perícia por valor total, tabelas de poder, modificadores). Só `create or replace` / `drop trigger if exists`.
-   2. `supabase/migrations/20261023000100_fase3_sistemas.sql` — colunas novas (`add column if not exists`), validações, RPCs de nível, poderes, efeitos contínuos e forma Lenda.
-   
-   Se as migrações anteriores foram aplicadas pela CLI, `supabase db push` aplica só as duas novas.
-   Nenhuma tabela é recriada e nenhum dado é apagado. Personagens que já tinham perícias acima do novo limite continuam como estão: a ficha mostra o aviso e permite reduzir.
+1. **Backup (recomendado)** — no Supabase: *Database → Backups*, ou `supabase db dump`.
+2. **Banco** — em *SQL Editor*, execute **somente** as migrações que você ainda não aplicou, nesta ordem:
+   - Vindo da **Fase 3** (já tem `20261023000100_fase3_sistemas.sql`): rode só
+     1. `supabase/migrations/20261024000000_rules_sync_3_5.sql`
+     2. `supabase/migrations/20261024000100_atualizacao_3_5.sql`
+   - Vindo da **Fase 2 / redesign**: rode antes as duas da Fase 3 (`20261023000000_rules_sync_fase3.sql` e `20261023000100_fase3_sistemas.sql`) e depois as duas acima.
+
+   Se as migrações anteriores foram aplicadas pela CLI, `supabase db push` aplica só as novas.
+   As duas migrações da 3.5 podem ser reaplicadas sem efeito colateral. O que elas fazem com dados existentes:
+   - **PV**: o máximo passa a ser (FOR + CON) ÷ 3 — ele é sempre calculado a partir dos atributos, então nada derivado é apagado. Só o **PV atual** que ficou acima do novo máximo é reduzido, e cada ajuste é gravado na tabela `pv_formula_fix_log` (o SQL Editor mostra quantas formas foram ajustadas).
+   - **Prodígios**: poderes já criados passam a custar 0 PC.
+   - **Habilidades**: nada é apagado. Personagens com habilidades pendentes só ficam impedidos de **subir** de nível até criá-las.
 3. **Código** — substitua os arquivos do projeto pelos deste pacote, mantendo seu `.env.local` (ele não vem no ZIP).
 4. `npm install && npm run build && npm start` (ou `npm run dev`).
 
@@ -30,7 +36,8 @@ Requisitos: Node 22.6+ e um projeto no [Supabase](https://supabase.com) (o plano
 
 1. **Banco** — no Supabase, abra *SQL Editor* e execute, **nesta ordem**, os arquivos de `supabase/migrations/`:
    `20261021000000_folkara_schema.sql` → `20261022000000_rules_sync.sql` → `20261022000100_phase2_character.sql` →
-   `20261023000000_rules_sync_fase3.sql` → `20261023000100_fase3_sistemas.sql`.
+   `20261023000000_rules_sync_fase3.sql` → `20261023000100_fase3_sistemas.sql` →
+   `20261024000000_rules_sync_3_5.sql` → `20261024000100_atualizacao_3_5.sql`.
    (Com a CLI: `supabase link` e `supabase db push`.)
 2. **Autenticação** — em *Authentication → URL Configuration*:
    - *Site URL*: `http://localhost:3000` (depois, a URL de produção)
@@ -48,7 +55,7 @@ Requisitos: Node 22.6+ e um projeto no [Supabase](https://supabase.com) (o plano
 npm test           # motor de regras + sincronia regras↔banco (node:test, sem dependências)
 npm run rules:sql  # regenera a migração de regras após mudar src/rules
 npm run typecheck  # TypeScript do projeto todo
-npm run test:db    # migrações + RLS + regras da Fase 3 + paridade motor×banco (1523 casos) num PostgreSQL local
+npm run test:db    # migrações + RLS + Fase 2/3 + Atualização 3.5 + paridade motor×banco (1849 casos) num PostgreSQL local
 ```
 
 `test:db` usa `supabase/tests/00_supabase_shim.sql`, que simula `auth.users`/`auth.uid()` — **não** rode o shim no Supabase real.

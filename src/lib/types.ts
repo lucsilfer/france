@@ -4,7 +4,11 @@ export interface Profile {
   display_name: string | null;
   avatar_url: string | null;
   reduce_motion: boolean;
+  /** Velocidade das rolagens: instantânea, rápida (padrão) ou normal. */
+  roll_speed: RollSpeed;
 }
+
+export type RollSpeed = "instant" | "fast" | "normal";
 
 export interface CharacterSummary {
   id: string;
