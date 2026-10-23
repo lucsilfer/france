@@ -31,7 +31,7 @@ import type { SheetState } from "../Sheet";
 import { AttackButton, UseItemButton } from "./actions-ui";
 import { customModifierCompatible, modifierSlotsUsed } from "@/rules/combat.ts";
 import { KitChoices } from "@/components/sheet/KitChoices";
-import { kitRef, startingKit, validateKitChoices, type KitChoices as Choices } from "@/rules/data/startingKits.ts";
+import { slotReceived, startingKit, validateKitChoices, type KitChoices as Choices } from "@/rules/data/startingKits.ts";
 import { CLASS_BY_ID } from "@/rules/data/classes.ts";
 import { grantStartingKit } from "../../actions";
 import { ItemForm } from "./ItemForm";
@@ -41,7 +41,7 @@ export function InventoryTab({ state }: { state: SheetState }) {
   const [kitOpen, setKitOpen] = useState(false);
   const c = state.character;
   const kit = startingKit(c.class_id);
-  const received = kit.filter((s) => state.items.some((i) => i.kit_ref === kitRef(c.class_id ?? "", s.id))).map((s) => s.id);
+  const received = kit.filter((s) => slotReceived(c.class_id ?? "", s.id, state.items.map((i) => i.kit_ref))).map((s) => s.id);
   const missingKit = kit.length > 0 && received.length < kit.length;
   return (
     <div className="space-y-5">

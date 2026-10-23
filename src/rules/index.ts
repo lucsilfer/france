@@ -20,3 +20,4 @@ export * from "./abilities.ts";
 export * from "./data/startingKits.ts";
 export * from "./techniques.ts";
 export * from "./creatures.ts";
+export * from "./opposed.ts";

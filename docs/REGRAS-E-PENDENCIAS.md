@@ -148,7 +148,23 @@ Muto (partes consumidas), Elo (objeto místico), Amaldiçoado (buff/debuff do Me
 
 ---
 
+## 13. Decisões da versão 6.0
+
+| # | Ponto | Decisão atual | Onde mudar |
+|---|---|---|---|
+| 74 | 🔴 Confronto | Atacante e defensor rolam 1d100; **vence o maior** (pedido do autor). Qualidade = d100 do atacante contra a perícia (menor é melhor). Efeito: 1 só vence em empate; 100 sempre vence | `RULES_CONFIG.opposed.winner` |
+| 75 | 🟡 Dano ao vencer | Normal/bom/“falha” de qualidade = dano padrão; extremo ×1,5; resultado 1 ×2; sem acumular | `confrontOutcome` / `confront_outcome` |
+| 76 | 🟡 Desempate | Jogador × NPC/monstro: jogador vence. PvP e NPC × NPC: maior perícia (ataque × reação, com bônus temporários); igual → nova rolagem automática (até 10) | `RULES_CONFIG.opposed` |
+| 77 | 🟡 Reação padrão | Corpo a corpo → Luta (bloquear); distância e fogo → Reflexo (esquivar). O defensor pode escolher | `opposed.defaultReaction` |
+| 78 | 🟡 Dano de ataque de jogador | Fica pendente até o Mestre aplicar (evita dano aplicado sem conferência) | `combat_confront` |
+| 79 | 🟡 Granadas | Um confronto Pontaria × Reflexo por alvo; Incendiária = Em chamas (1d6/turno, 2 turnos); Concussão = Atordoado 1 turno a critério do Mestre; Fumaça = cobertura 3 turnos em quem lançou; Explosiva pesada é rara (fora do kit) | `GRENADES`, `combat_use_grenade` |
+| 80 | 🟡 Dano aplicado | Dano final com decimais (10,5) é arredondado para baixo ao descontar do PV | `opposed.appliedRounding` |
+
+---
+
 ## Para confirmar com o autor (prioridade)
+
+0. Confronto: o **maior** ou o **menor** d100 vence? (#74 — hoje: maior, como pedido).
 
 1. Técnicas do Arsenal e aparatos da Engrenagem por nível (#50, #51).
 2. Categoria de cada arma para os modificadores (#18).
@@ -159,4 +175,4 @@ Muto (partes consumidas), Elo (objeto místico), Amaldiçoado (buff/debuff do Me
 
 ## Onde as regras vivem
 
-Todas as decisões ficam em `src/rules/config.ts` e `src/rules/data/*`. O banco **não** tem regras escritas à mão: `npm run rules:sql` gera `supabase/migrations/20261025000000_rules_sync_fase4.sql` (as versões anteriores, `20261022000000_rules_sync.sql`, `20261023000000_rules_sync_fase3.sql` e `20261024000000_rules_sync_3_5.sql`, ficam congeladas porque já foram aplicadas) (rolagem de atributos, classes, origens, caminhos, perícias, limites, modificadores de arma, tabelas de poder e dados de evolução) a partir do motor, e um teste falha se o arquivo estiver desatualizado. Ao mudar uma regra: edite o motor → `npm run rules:sql` → aplique a migração.
+Todas as decisões ficam em `src/rules/config.ts` e `src/rules/data/*`. O banco **não** tem regras escritas à mão: `npm run rules:sql` gera `supabase/migrations/20261027000000_rules_sync_v6.sql` (as versões anteriores, `20261022000000_rules_sync.sql`, `20261023000000_rules_sync_fase3.sql`, `20261024000000_rules_sync_3_5.sql` e `20261025000000_rules_sync_fase4.sql`, ficam congeladas porque já foram aplicadas) (rolagem de atributos, classes, origens, caminhos, perícias, limites, modificadores de arma, tabelas de poder e dados de evolução) a partir do motor, e um teste falha se o arquivo estiver desatualizado. Ao mudar uma regra: edite o motor → `npm run rules:sql` → aplique a migração.

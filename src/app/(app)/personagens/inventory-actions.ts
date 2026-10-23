@@ -3,7 +3,7 @@
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import type { ActionResult } from "@/lib/types";
-import type { AttackPayload, DiceDetail, EffectTickPayload, PowerPayload, RollEntry } from "@/lib/rolls";
+import { confrontFromRow, type AttackPayload, type DiceDetail, type EffectTickPayload, type PowerPayload, type RollEntry } from "@/lib/rolls";
 import { CATALOG_BY_ID } from "@/rules/catalog.ts";
 import { customModifierCompatible, modifierSlotsUsed, performAttack, planAttack, planPowerUse, rollPowerEffects, type CustomModifier, type WeaponLike } from "@/rules/combat.ts";
 import { RULES_CONFIG } from "@/rules/config.ts";
@@ -347,40 +347,46 @@ export async function removeModifier(characterId: string, itemModifierId: string
 
 // ===================================================================== Ataques
 
+/** Monta o ataque da arma (modificadores, classe, origem, técnicas escolhidas) — a mesma conta do diálogo de ataque. */
+async function buildAttack(characterId: string, itemId: string, options: string[], formId?: string | null) {
+  if (!uuid.safeParse(itemId).success || !Array.isArray(options) || options.length > 20 || options.some((o) => typeof o !== "string")) throw new Error("Dados inválidos.");
+  const { bundle, form, sheet } = await sheetContext(characterId, formId);
+  const item = bundle.items.find((i) => i.id === itemId);
+  if (!item || !item.attack_kind || !item.effect_dice) throw new Error("Este item não é uma arma.");
+  const c = bundle.character;
+  const weapon: WeaponLike = {
+    name: item.name,
+    damage: item.effect_dice,
+    attackKind: item.attack_kind,
+    tags: item.tags,
+    skillOverride: item.skill_override,
+    modifiers: item.item_modifiers.map((m) => m.modifier_id),
+    customModifiers: item.custom_modifiers ?? [],
+  };
+  const skillValues = Object.fromEntries(sheet.skills.map((s) => [s.id, s.final]));
+  // Técnicas do Arsenal: só as aprendidas, não suspensas e disponíveis nesta cena entram no ataque.
+  const tecOptions = techniqueAttackOptions(bundle.techniques, c.level, bundle.techniqueUses, bundle.tracker);
+  const chosenTec = tecOptions.filter((t) => options.includes(t.key));
+  for (const t of chosenTec.filter((x) => x.consumes)) {
+    const { supabase } = await editContext(characterId);
+    const { error } = await supabase.rpc("use_technique", { p_character: characterId, p_technique: t.def.id, p_request: randomUUID(), p_data: { attack: item.name } });
+    if (error) throw new Error(dbMessage(error, `Não foi possível usar ${t.def.name}.`));
+  }
+  const plan = planAttack(weapon, {
+    classId: form.kind === "base" ? c.class_id : null,
+    originId: c.origin_id,
+    pathId: c.origin_path_id,
+    level: c.level,
+    skillValues,
+    options,
+    allowedTechniques: chosenTec.map((t) => t.def.id),
+  });
+  return { bundle, form, item, plan };
+}
+
 export async function attackWithItem(characterId: string, itemId: string, options: string[], formId?: string | null): Promise<ActionResult<RollEntry>> {
   return guard(async () => {
-    if (!uuid.safeParse(itemId).success || !Array.isArray(options) || options.length > 20 || options.some((o) => typeof o !== "string")) return fail("Dados inválidos.");
-    const { bundle, form, sheet } = await sheetContext(characterId, formId);
-    const item = bundle.items.find((i) => i.id === itemId);
-    if (!item || !item.attack_kind || !item.effect_dice) return fail("Este item não é uma arma.");
-    const c = bundle.character;
-    const weapon: WeaponLike = {
-      name: item.name,
-      damage: item.effect_dice,
-      attackKind: item.attack_kind,
-      tags: item.tags,
-      skillOverride: item.skill_override,
-      modifiers: item.item_modifiers.map((m) => m.modifier_id),
-      customModifiers: item.custom_modifiers ?? [],
-    };
-    const skillValues = Object.fromEntries(sheet.skills.map((s) => [s.id, s.final]));
-    // Técnicas do Arsenal: só as aprendidas, não suspensas e disponíveis nesta cena entram no ataque.
-    const tecOptions = techniqueAttackOptions(bundle.techniques, c.level, bundle.techniqueUses, bundle.tracker);
-    const chosenTec = tecOptions.filter((t) => options.includes(t.key));
-    for (const t of chosenTec.filter((x) => x.consumes)) {
-      const { supabase } = await editContext(characterId);
-      const { error } = await supabase.rpc("use_technique", { p_character: characterId, p_technique: t.def.id, p_request: randomUUID(), p_data: { attack: item.name } });
-      if (error) return fail(dbMessage(error, `Não foi possível usar ${t.def.name}.`));
-    }
-    const plan = planAttack(weapon, {
-      classId: form.kind === "base" ? c.class_id : null,
-      originId: c.origin_id,
-      pathId: c.origin_path_id,
-      level: c.level,
-      skillValues,
-      options,
-      allowedTechniques: chosenTec.map((t) => t.def.id),
-    });
+    const { form, item, plan } = await buildAttack(characterId, itemId, options, formId);
     const out = performAttack(plan);
     const payload: AttackPayload = {
       kind: "attack",
@@ -403,6 +409,76 @@ export async function attackWithItem(characterId: string, itemId: string, option
     };
     const prefix = form.kind === "lenda" ? `[${form.name || "Lenda"}] ` : "";
     const entry = await logRoll(characterId, `${prefix}Ataque: ${item.name}`, `1d100 + ${plan.damageExpr}`, payload);
+    return { ok: true, data: entry };
+  });
+}
+
+/** Combate em andamento em que o personagem participa + alvos visíveis (para o diálogo de ataque). */
+export async function combatTargets(characterId: string): Promise<ActionResult<{ combatId: string; combatName: string; attackerId: string; targets: { id: string; name: string; kind: string }[] } | null>> {
+  return guard(async () => {
+    const { supabase } = await editContext(characterId);
+    const { data: mine } = await supabase.from("combatants_public").select("id, combat_id").eq("character_id", characterId);
+    const entries = (mine ?? []) as { id: string; combat_id: string }[];
+    if (!entries.length) return { ok: true, data: null };
+    const { data: active } = await supabase
+      .from("combats")
+      .select("id, name")
+      .in("id", entries.map((e) => e.combat_id))
+      .eq("status", "active")
+      .order("created_at", { ascending: false })
+      .limit(1);
+    const cb = ((active ?? []) as { id: string; name: string }[])[0];
+    if (!cb) return { ok: true, data: null };
+    const row = { ...entries.find((e) => e.combat_id === cb.id)!, combats: { name: cb.name } };
+    const { data: list } = await supabase.from("combatants_public").select("id, name, kind, sort_order").eq("combat_id", row.combat_id).order("sort_order");
+    return {
+      ok: true,
+      data: { combatId: row.combat_id, combatName: row.combats.name, attackerId: row.id, targets: ((list ?? []) as { id: string; name: string; kind: string }[]).filter((t) => t.id !== row.id) },
+    };
+  });
+}
+
+/**
+ * Ataque dentro do combate (Fase 6): ROLAGENS OPOSTAS no banco — o atacante e o alvo rolam 1d100,
+ * vence o maior; a qualidade e o dano seguem a perícia de ataque. O dano fica para o Mestre confirmar.
+ */
+export async function attackInCombat(
+  characterId: string,
+  itemId: string,
+  options: string[],
+  targetId: string,
+  reaction: string | null,
+  formId?: string | null,
+): Promise<ActionResult<RollEntry>> {
+  return guard(async () => {
+    if (!uuid.safeParse(targetId).success || (reaction && !SKILL_BY_ID[reaction])) return fail("Alvo inválido.");
+    const ctx = await combatTargets(characterId);
+    if (!ctx.ok || !ctx.data) return fail("Seu personagem não está num combate em andamento.");
+    const { form, item, plan } = await buildAttack(characterId, itemId, options, formId);
+    const { supabase } = await editContext(characterId);
+    const { data, error } = await supabase.rpc("combat_confront", {
+      p_combat: ctx.data.combatId,
+      p_attacker: ctx.data.attackerId,
+      p_defender: targetId,
+      p_attack: {
+        label: item.name,
+        skill: plan.skillId,
+        damage: plan.damageExpr,
+        critical: plan.criticalExpr,
+        modifier: plan.rollModifier,
+        factor: plan.damageFactor,
+        attack_kind: item.attack_kind,
+        conditions: [],
+      },
+      p_reaction: reaction,
+      p_request: randomUUID(),
+      p_apply: false,
+      p_public: true,
+    });
+    if (error || !data) return fail(dbMessage(error, "Não foi possível realizar o ataque."));
+    const payload = confrontFromRow(data as Record<string, unknown>);
+    const prefix = form.kind === "lenda" ? `[${form.name || "Lenda"}] ` : "";
+    const entry = await logRoll(characterId, `${prefix}Confronto: ${item.name} → ${payload.defender}`, `1d100 × 1d100 + ${plan.damageExpr}`, payload);
     return { ok: true, data: entry };
   });
 }
@@ -554,4 +630,41 @@ export async function endEffect(characterId: string, effectId: string): Promise<
 /** Gera um identificador de requisição no servidor (para clientes sem crypto.randomUUID). */
 export async function newRequestId(): Promise<string> {
   return randomUUID();
+}
+
+// ===================================================================== Granadas (Fase 6)
+
+/**
+ * Lança uma granada durante o combate: o banco desconta 1 unidade (uma vez por clique) e resolve um confronto
+ * por alvo — Pontaria de quem lança × Reflexo do alvo, dados rolados no banco. Fora de combate, use `useItem`.
+ */
+export async function throwGrenade(
+  characterId: string,
+  itemId: string,
+  targetIds: string[],
+  requestId: string,
+): Promise<ActionResult<{ entries: RollEntry[]; quantity: number; selfCondition: string | null }>> {
+  return guard(async () => {
+    if (!uuid.safeParse(itemId).success || !uuid.safeParse(requestId).success || !Array.isArray(targetIds) || targetIds.length > 12 || targetIds.some((t) => !uuid.safeParse(t).success))
+      return fail("Dados inválidos.");
+    const ctx = await combatTargets(characterId);
+    if (!ctx.ok || !ctx.data) return fail("Seu personagem não está num combate em andamento.");
+    const { supabase } = await editContext(characterId);
+    const { data, error } = await supabase.rpc("combat_use_grenade", { p_combat: ctx.data.combatId, p_attacker: ctx.data.attackerId, p_item: itemId, p_targets: targetIds, p_request: requestId });
+    if (error || !data) return fail(dbMessage(error, "Não foi possível lançar a granada."));
+    const out = data as { grenade: string; quantity: number; confronts: Record<string, unknown>[]; self_condition: { name: string; turns: number } | null; duplicate?: boolean };
+    const entries: RollEntry[] = [];
+    if (!out.duplicate) {
+      for (const row of out.confronts ?? []) {
+        const payload = confrontFromRow(row);
+        entries.push(await logRoll(characterId, `Granada: ${out.grenade} → ${payload.defender}`, `1d100 × 1d100 + ${payload.damage?.expression ?? "—"}`, payload));
+      }
+    }
+    touch(characterId);
+    return {
+      ok: true,
+      data: { entries, quantity: out.quantity, selfCondition: out.self_condition ? `${out.self_condition.name} (${out.self_condition.turns} turnos)` : null },
+      message: out.self_condition ? `${out.grenade}: ${out.self_condition.name} por ${out.self_condition.turns} turnos.` : undefined,
+    };
+  });
 }

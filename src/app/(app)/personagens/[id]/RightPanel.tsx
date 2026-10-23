@@ -66,7 +66,7 @@ export function RightPanel({ state }: { state: SheetState }) {
   const pending = abilities.mode === "standard" ? abilities.available : 0;
 
   return (
-    <div className="hud-panel">
+    <div className="hud-panel min-w-0">
       {pending > 0 && (
         <button
           onClick={() => setTab("poderes")}
@@ -79,7 +79,22 @@ export function RightPanel({ state }: { state: SheetState }) {
           <span className="font-mono text-[0.6rem] tracking-[0.15em] text-fg-dim uppercase">Abrir →</span>
         </button>
       )}
-      <div role="tablist" aria-label="Painel da ficha" className="flex overflow-x-auto border-b border-line">
+      {/* Telas pequenas: menu compacto (nenhuma aba some e não há rolagem lateral). */}
+      <div className="border-b border-line p-2 sm:hidden">
+        <label htmlFor="sheet-tab-select" className="sr-only">
+          Seção da ficha
+        </label>
+        <select id="sheet-tab-select" className="field-input py-2 font-mono text-xs tracking-[0.12em] uppercase" value={tab} onChange={(e) => setTab(e.target.value as Tab)}>
+          {TABS.map((t) => (
+            <option key={t.id} value={t.id}>
+              {t.label}
+              {t.id === "poderes" && pending > 0 ? ` (${pending})` : ""}
+            </option>
+          ))}
+        </select>
+      </div>
+      {/* Telas maiores: as abas quebram em duas linhas quando não cabem (sem barra horizontal). */}
+      <div role="tablist" aria-label="Painel da ficha" className="hidden flex-wrap border-b border-line sm:flex">
         {TABS.map((t) => {
           const active = tab === t.id;
           return (
@@ -92,9 +107,9 @@ export function RightPanel({ state }: { state: SheetState }) {
               tabIndex={active ? 0 : -1}
               onClick={() => setTab(t.id)}
               onKeyDown={onKey}
-              className={`relative flex shrink-0 items-center gap-1.5 px-4 py-3 font-mono text-[0.65rem] tracking-[0.15em] uppercase transition-colors ${active ? "text-fg" : "text-fg-muted hover:text-fg-dim"}`}
+              className={`relative flex min-w-0 items-center gap-1.5 px-3 py-2.5 text-left font-mono text-[0.62rem] tracking-[0.12em] uppercase transition-colors focus-visible:outline-1 focus-visible:outline-cyan ${active ? "text-fg" : "text-fg-muted hover:text-fg-dim"}`}
             >
-              {t.label}
+              <span className="break-words">{t.label}</span>
               {t.id === "poderes" && pending > 0 && (
                 <span className="rounded-full bg-primary px-1.5 font-mono text-[0.58rem] text-fg" aria-label={`${pending} disponíveis`}>
                   {pending}
@@ -106,7 +121,7 @@ export function RightPanel({ state }: { state: SheetState }) {
         })}
       </div>
       {TAB_IDS.filter((id) => visited.has(id) || id === tab).map((id) => (
-        <div key={id} id={`sheet-panel-${id}`} role="tabpanel" aria-labelledby={`sheet-tab-${id}`} hidden={id !== tab} className="p-5">
+        <div key={id} id={`sheet-panel-${id}`} role="tabpanel" aria-labelledby={`sheet-tab-${id}`} hidden={id !== tab} className="min-w-0 p-3 sm:p-4">
           {id === "rapido" && <QuickTab state={state} goTo={setTab} />}
           {id === "inventario" && <InventoryTab state={state} />}
           {id === "habilidades" && <AbilitiesTab state={state} />}

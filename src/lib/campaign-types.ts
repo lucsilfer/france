@@ -41,6 +41,8 @@ export interface PartyRow {
   status: "pending" | "accepted";
   is_mine: boolean;
   active_form: "base" | "lenda";
+  /** Foto da forma ativa (v6). */
+  portrait_path?: string | null;
 }
 
 export interface CombatRow {
@@ -232,6 +234,8 @@ export interface AgentRow {
   };
   masterCanEdit: boolean;
   forms: AgentForm[];
+  /** Armas da ficha (para o Mestre conduzir um confronto pelo agente). */
+  weapons?: { id: string; name: string; effect_dice: string | null; attack_kind: string | null; quantity: number; source_ref: string | null }[];
 }
 
 export interface ShieldHomebrew {

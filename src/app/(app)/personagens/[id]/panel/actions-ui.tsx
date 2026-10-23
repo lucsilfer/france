@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Crosshair, Power, Square, StepForward, Zap } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
@@ -9,9 +9,9 @@ import type { EffectRow, ItemRow, PowerRow } from "@/lib/character";
 import type { EffectTickPayload, PowerPayload } from "@/lib/rolls";
 import { attackOptions, isContinuous, planAttack, type WeaponLike } from "@/rules/combat.ts";
 import { techniqueAttackOptions } from "@/rules/techniques.ts";
-import { WEAPON_MODIFIER_BY_ID } from "@/rules/data/equipment.ts";
+import { GRENADE_BY_ID, WEAPON_MODIFIER_BY_ID } from "@/rules/data/equipment.ts";
 import { SKILL_BY_ID } from "@/rules/data/skills.ts";
-import { advanceEffect, attackWithItem, endEffect, newRequestId, useItem, usePower } from "../../inventory-actions";
+import { advanceEffect, attackInCombat, attackWithItem, endEffect, newRequestId, throwGrenade, useItem, usePower } from "../../inventory-actions";
 import type { SheetState } from "../Sheet";
 
 /** Identificador único por intenção de uso (evita cobrança dupla em cliques repetidos ou reenvio). */
@@ -42,13 +42,17 @@ export function isUsableItem(item: ItemRow): boolean {
   return !item.attack_kind && (Boolean(item.effect_dice) || item.uses_max != null || item.item_type === "consumivel");
 }
 
-/** Usa o item: desconta quantidade/uso no banco e aplica a cura na forma ativa; a rolagem aparece na bandeja. */
+/** Usa o item: desconta quantidade/uso no banco e aplica a cura na forma ativa; a rolagem aparece na bandeja.
+ *  Granadas em combate abrem a escolha dos alvos (confronto por alvo, rolado no banco). */
 export function UseItemButton({ state, item }: { state: SheetState; item: ItemRow }) {
   const toast = useToast();
   const [busy, setBusy] = useState(false);
+  const [grenadeOpen, setGrenadeOpen] = useState(false);
   const exhausted = item.uses_max != null ? (item.uses_left ?? 0) <= 0 : item.item_type === "consumivel" && item.quantity <= 0;
+  const grenade = item.source_ref ? GRENADE_BY_ID[item.source_ref] : undefined;
   if (!state.canEdit || !isUsableItem(item)) return null;
   async function use() {
+    if (grenade && state.combat) return setGrenadeOpen(true);
     setBusy(true);
     const token = item.effect_dice ? state.beginRoll(`Usar: ${item.name}`) : null;
     const res = await useItem(state.character.id, item.id, state.form.id);
@@ -65,9 +69,83 @@ export function UseItemButton({ state, item }: { state: SheetState; item: ItemRo
     if (res.message) toast(res.message);
   }
   return (
-    <Button size="sm" variant="secondary" onClick={use} disabled={busy || exhausted} title={exhausted ? "Sem usos ou quantidade" : "Usar item"}>
-      Usar
-    </Button>
+    <>
+      <Button size="sm" variant="secondary" onClick={use} disabled={busy || exhausted} title={exhausted ? "Sem usos ou quantidade" : grenade ? "Lançar granada" : "Usar item"}>
+        {grenade ? "Lançar" : "Usar"}
+      </Button>
+      {grenadeOpen && grenade && <GrenadeDialog state={state} item={item} onClose={() => setGrenadeOpen(false)} />}
+    </>
+  );
+}
+
+function GrenadeDialog({ state, item, onClose }: { state: SheetState; item: ItemRow; onClose: () => void }) {
+  const toast = useToast();
+  const g = GRENADE_BY_ID[item.source_ref ?? ""];
+  const targets = state.combat?.targets ?? [];
+  const [chosen, setChosen] = useState<string[]>([]);
+  const [busy, setBusy] = useState(false);
+  const needsTarget = Boolean(g?.damage);
+  async function go() {
+    setBusy(true);
+    const tokens = chosen.map((id) => state.beginRoll(`${item.name} → ${targets.find((t) => t.id === id)?.name ?? "alvo"}`));
+    const res = await throwGrenade(state.character.id, item.id, chosen, await makeRequestId());
+    setBusy(false);
+    if (!res.ok) {
+      tokens.forEach((t) => state.failRoll(t));
+      return toast(res.error, "error");
+    }
+    const d = res.data!;
+    state.setItems((list) => list.map((i) => (i.id === item.id ? { ...i, quantity: d.quantity } : i)));
+    d.entries.forEach((e, i) => (tokens[i] ? state.finishRoll(tokens[i], e) : null));
+    tokens.slice(d.entries.length).forEach((t) => state.failRoll(t));
+    if (res.message) toast(res.message);
+    onClose();
+  }
+  return (
+    <Modal
+      open
+      onClose={onClose}
+      title={`Lançar: ${item.name}`}
+      tag={state.combat?.combatName}
+      size="md"
+      footer={
+        <>
+          <Button variant="ghost" onClick={onClose}>
+            Cancelar
+          </Button>
+          <Button onClick={go} loading={busy} disabled={needsTarget && chosen.length === 0}>
+            Lançar ({item.quantity} restante{item.quantity === 1 ? "" : "s"})
+          </Button>
+        </>
+      }
+    >
+      <p className="text-sm text-fg-dim">
+        {g?.damage ? `${g.damage} de dano · ` : ""}
+        {g?.area} · {g?.effect}
+      </p>
+      {needsTarget ? (
+        <fieldset className="mt-3 space-y-1.5">
+          <legend className="label-mono mb-1">Alvos na área</legend>
+          {targets.map((t) => (
+            <label key={t.id} className="flex items-center gap-2 text-sm text-fg">
+              <input
+                type="checkbox"
+                className="accent-[var(--color-holo)]"
+                checked={chosen.includes(t.id)}
+                onChange={(e) => setChosen(e.target.checked ? [...chosen, t.id] : chosen.filter((x) => x !== t.id))}
+              />
+              {t.name}
+            </label>
+          ))}
+          {targets.length === 0 && <p className="text-xs text-fg-muted">Nenhum alvo visível no combate.</p>}
+        </fieldset>
+      ) : (
+        <p className="mt-3 text-xs text-fg-muted">Sem alvo: a cobertura é aplicada em você.</p>
+      )}
+      <p className="mt-3 text-[0.68rem] text-fg-muted">
+        Para cada alvo: sua Pontaria × Reflexo do alvo, 1d100 contra 1d100 no servidor; vence o maior. Desconta 1 granada (uma vez por lançamento). O Mestre confirma o dano.
+      </p>
+    </Modal>
   );
 }
 
@@ -75,6 +153,19 @@ export function UseItemButton({ state, item }: { state: SheetState; item: ItemRo
 function fireAttack(state: SheetState, item: ItemRow, options: string[], onError: (msg: string) => void) {
   const token = state.beginRoll(`Ataque: ${item.name}`);
   void attackWithItem(state.character.id, item.id, options, state.form.id).then((res) => {
+    if (!res.ok) {
+      state.failRoll(token);
+      onError(res.error);
+      return;
+    }
+    state.finishRoll(token, res.data!);
+  });
+}
+
+/** Ataque em combate: confronto de rolagens opostas contra o alvo (rolado no banco). */
+function fireConfront(state: SheetState, item: ItemRow, options: string[], target: { id: string; name: string }, reaction: string | null, onError: (msg: string) => void) {
+  const token = state.beginRoll(`Confronto: ${item.name} → ${target.name}`);
+  void attackInCombat(state.character.id, item.id, options, target.id, reaction, state.form.id).then((res) => {
     if (!res.ok) {
       state.failRoll(token);
       onError(res.error);
@@ -101,8 +192,8 @@ export function AttackButton({ state, item, compact = false }: { state: SheetSta
     [weapon, classId, c.origin_id, c.origin_path_id, c.level, state.techniques, state.techniqueUses, state.tracker],
   );
   if (!weapon) return null;
-  // Sem situações a marcar, o ataque é rolado direto (um clique).
-  const onClick = () => (hasOptions ? setOpen(true) : fireAttack(state, item, [], (m) => toast(m, "error")));
+  // Sem situações a marcar e fora de combate, o ataque é rolado direto (um clique). Em combate, escolhe o alvo.
+  const onClick = () => (hasOptions || state.combat ? setOpen(true) : fireAttack(state, item, [], (m) => toast(m, "error")));
   return (
     <>
       <Button size="sm" variant="primary" onClick={onClick} disabled={!state.canEdit} aria-label={`Atacar com ${item.name}`} title={hasOptions ? "Escolher situação e atacar" : "Rolar ataque"}>
@@ -117,6 +208,17 @@ function AttackDialog({ state, item, weapon, onClose }: { state: SheetState; ite
   const toast = useToast();
   const { character: c, form, sheet } = state;
   const [chosen, setChosen] = useState<string[]>([]);
+  const [combat, setCombat] = useState(state.combat);
+  const [target, setTarget] = useState<string>(state.combat?.targets[0]?.id ?? "");
+  const [reaction, setReaction] = useState<string>("");
+  useEffect(() => {
+    // Atualiza os alvos ao abrir (alguém pode ter entrado ou saído do combate).
+    void state.refreshCombat().then((ctx) => {
+      setCombat(ctx);
+      setTarget((t) => (ctx && (t === "" || ctx.targets.some((x) => x.id === t)) ? t || ctx.targets[0]?.id || "" : ""));
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const classId = form.kind === "base" ? c.class_id : null;
   const tecOptions = useMemo(
     () => techniqueAttackOptions(state.techniques, c.level, state.techniqueUses, state.tracker),
@@ -146,7 +248,9 @@ function AttackDialog({ state, item, weapon, onClose }: { state: SheetState; ite
   const conditions = item.item_modifiers.map((m) => WEAPON_MODIFIER_BY_ID[m.modifier_id]).filter((m) => m?.condition);
 
   function attack() {
-    fireAttack(state, item, chosen, (m) => toast(m, "error"));
+    const t = combat?.targets.find((x) => x.id === target);
+    if (t) fireConfront(state, item, chosen, t, reaction || null, (m) => toast(m, "error"));
+    else fireAttack(state, item, chosen, (m) => toast(m, "error"));
     // Técnicas que consomem uso: registra localmente (o servidor registrou de verdade).
     const consumed = tecOptions.filter((t) => t.consumes && chosen.includes(t.key));
     if (consumed.length)
@@ -170,11 +274,40 @@ function AttackDialog({ state, item, weapon, onClose }: { state: SheetState; ite
             Cancelar
           </Button>
           <Button onClick={attack}>
-            <Crosshair className="h-3.5 w-3.5" aria-hidden /> Rolar ataque
+            <Crosshair className="h-3.5 w-3.5" aria-hidden /> {combat && target ? "Rolar confronto" : "Rolar ataque"}
           </Button>
         </>
       }
     >
+      {combat && (
+        <div className="mb-4 space-y-2 border border-holo/50 bg-holo/5 p-3">
+          <p className="label-mono text-holo">Combate: {combat.combatName}</p>
+          <div className="grid gap-2 sm:grid-cols-2">
+            <label className="text-xs text-fg-dim">
+              Alvo
+              <select className="field-input mt-1 text-sm" value={target} onChange={(e) => setTarget(e.target.value)}>
+                <option value="">Sem alvo (teste fora do confronto)</option>
+                {combat.targets.map((t) => (
+                  <option key={t.id} value={t.id}>
+                    {t.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="text-xs text-fg-dim">
+              Reação do alvo
+              <select className="field-input mt-1 text-sm" value={reaction} onChange={(e) => setReaction(e.target.value)} disabled={!target}>
+                <option value="">Automática ({item.attack_kind === "melee" ? "Luta" : "Reflexo"})</option>
+                <option value="luta">Bloquear (Luta)</option>
+                <option value="reflexo">Esquivar (Reflexo)</option>
+              </select>
+            </label>
+          </div>
+          <p className="text-[0.68rem] text-fg-muted">
+            Rolagens opostas: você e o alvo rolam 1d100 no servidor; vence o maior. A sua perícia define a qualidade do acerto. O Mestre confirma o dano.
+          </p>
+        </div>
+      )}
       <dl className="grid grid-cols-2 gap-3 text-sm">
         <div>
           <dt className="label-mono">Perícia</dt>
@@ -234,7 +367,9 @@ function AttackDialog({ state, item, weapon, onClose }: { state: SheetState; ite
           </ul>
         </div>
       )}
-      <p className="mt-4 text-xs text-fg-muted">Falha não causa dano. Acerto extremo ×1,5 e 1 natural ×2 (não acumulam). A rolagem acontece no servidor.</p>
+      <p className="mt-4 text-xs text-fg-muted">
+        {combat && target ? "Se você vencer o confronto: extremo ×1,5 e resultado 1 ×2 (não acumulam)." : "Fora de combate: falha não causa dano. Acerto extremo ×1,5 e 1 natural ×2 (não acumulam)."} A rolagem acontece no servidor.
+      </p>
     </Modal>
   );
 }

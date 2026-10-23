@@ -13,6 +13,7 @@ import type { CharacterBundle, CharacterRow, EffectRow, FormRow, HomebrewItemRow
 import type { RollEntry } from "@/lib/rolls";
 import type { RollSpeed } from "@/lib/types";
 import { rollCheck, setActiveForm } from "../actions";
+import { combatTargets } from "../inventory-actions";
 import { IdentityCard } from "./IdentityCard";
 import { ResourcePanel } from "./ResourcePanel";
 import { AttributesSection } from "./AttributesSection";
@@ -71,6 +72,16 @@ export interface SheetState {
   openCreator: () => void;
   creatorRequest: number;
   switchForm: (kind: "base" | "lenda") => void;
+  /** Combate em andamento em que o personagem está (ataques viram confrontos de rolagens opostas). */
+  combat: CombatContext | null;
+  refreshCombat: () => Promise<CombatContext | null>;
+}
+
+export interface CombatContext {
+  combatId: string;
+  combatName: string;
+  attackerId: string;
+  targets: { id: string; name: string; kind: string }[];
 }
 
 let tokenSeq = 0;
@@ -106,6 +117,18 @@ export function Sheet({
   const [tab, setTab] = useState<Tab>("rapido");
   const [creatorRequest, setCreatorRequest] = useState(0);
   const [fx, setFx] = useState(0);
+  const [combat, setCombat] = useState<CombatContext | null>(null);
+  const refreshCombat = useCallback(async () => {
+    if (!bundle.canEdit) return null;
+    const r = await combatTargets(bundle.character.id);
+    const ctx = r.ok ? (r.data ?? null) : null;
+    setCombat(ctx);
+    return ctx;
+  }, [bundle.canEdit, bundle.character.id]);
+  // Carrega em segundo plano (não atrasa a abertura da ficha).
+  useEffect(() => {
+    void refreshCombat();
+  }, [refreshCombat]);
 
   // Alternância de forma: otimista e serializada (cliques rápidos nunca se perdem nem se sobrepõem).
   const desiredForm = useRef(bundle.character.active_form);
@@ -276,6 +299,8 @@ export function Sheet({
     openCreator,
     creatorRequest,
     switchForm,
+    combat,
+    refreshCombat,
   };
 
   async function roll(kind: "attribute" | "skill", id: string) {
@@ -320,14 +345,14 @@ export function Sheet({
 
       <SheetHeader state={state} portraits={portraits} />
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-start">
-        <div key={form.id} className={`space-y-6 ${fx > 0 ? "form-swap" : ""}`}>
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-start xl:grid-cols-[minmax(0,4fr)_minmax(0,6fr)]">
+        <div key={form.id} className={`min-w-0 space-y-6 ${fx > 0 ? "form-swap" : ""}`}>
           <IdentityCard state={state} />
           <ResourcePanel state={state} sheet={sheet} />
           <AttributesSection state={state} sheet={sheet} onRoll={(id) => roll("attribute", id)} rolling={inflight} />
           <SkillsSection state={state} sheet={sheet} onRoll={(id) => roll("skill", id)} rolling={inflight} />
         </div>
-        <div className="lg:sticky lg:top-20">
+        <div className="min-w-0 lg:sticky lg:top-20">
           <RightPanel state={state} />
         </div>
       </div>

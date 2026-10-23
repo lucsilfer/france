@@ -156,10 +156,13 @@ describe("equipamento inicial", () => {
     assert.equal(validateKitChoices("tank", null, { arma_refinada: "fuzil_assalto" }).length, 1, "Tank: refinada que não seja de fogo");
   });
   it("Demolidor: arma de fogo só para Prodígio", () => {
-    assert.equal(validateKitChoices("demolidor", "muto", { arma_distancia: "revolver" }).length, 1);
-    assert.equal(validateKitChoices("demolidor", "prodigio", { arma_distancia: "revolver" }).length, 0);
-    const g = kitGrants("demolidor", "muto", { arma_distancia: "balestra" });
-    assert.equal(g.find((x) => x.item.id === "granada")!.quantity, 5);
+    const mix = "fragmentacao:2,incendiaria:1,concussao:1,fumaca:1";
+    assert.equal(validateKitChoices("demolidor", "muto", { arma_distancia: "revolver", granadas: mix }).length, 1);
+    assert.equal(validateKitChoices("demolidor", "prodigio", { arma_distancia: "revolver", granadas: mix }).length, 0);
+    const g = kitGrants("demolidor", "muto", { arma_distancia: "balestra", granadas: mix });
+    // Fase 6: cinco granadas à escolha, uma linha por tipo.
+    assert.equal(g.find((x) => x.item.id === "granada_fragmentacao")!.quantity, 2);
+    assert.equal(g.filter((x) => x.slotId === "granadas").reduce((a, x) => a + x.quantity, 0), 5);
   });
   it("Detalhista: item de perícia fora da seção Lutar", () => {
     const slot = startingKit("detalhista")[1] as Extract<KitSlot, { kind: "skill_item" }>;

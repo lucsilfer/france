@@ -9,7 +9,7 @@
 
 export type RoundingMode = "floor" | "round" | "ceil" | "none";
 
-export const RULES_VERSION = "livro-1.0+site-2026.10-fase4";
+export const RULES_VERSION = "livro-1.0+site-2026.10-v6";
 
 export const RULES_CONFIG = {
   /** Geração de atributos: ficha → "rolar 3 dados de 3d6*5 e pegar o melhor". */
@@ -85,6 +85,25 @@ export const RULES_CONFIG = {
   },
   /** Arredondamento do dano final. "none" mantém decimais (ex.: 10,5). */
   damageRounding: "none" as RoundingMode,
+
+  /**
+   * COMBATE POR ROLAGENS OPOSTAS (Fase 6 — regra do autor):
+   * atacante e defensor rolam 1d100; vence o confronto quem tirar o MAIOR resultado.
+   * A QUALIDADE do acerto continua sendo a classificação normal do d100 (menor é melhor) contra a perícia
+   * do atacante; só multiplica o dano quando o ataque vence (extremo ×1,5; resultado 1 ×2; nunca acumula).
+   * `winner: "lower"` inverte a comparação numa linha, se o autor decidir que o menor vence.
+   */
+  opposed: {
+    winner: "higher" as "higher" | "lower",
+    /** Empate jogador × NPC/monstro: o jogador vence (atacando ou defendendo). */
+    tiePlayerWins: true,
+    /** Novas rolagens automáticas quando o desempate pela perícia também empata. */
+    maxRerolls: 10,
+    /** Perícia de reação padrão do defensor por tipo de ataque. */
+    defaultReaction: { melee: "luta", ranged: "reflexo", firearm: "reflexo" } as Record<"melee" | "ranged" | "firearm", string>,
+    /** Dano aplicado ao PV (inteiro): arredondamento do dano final com decimais (ex.: 10,5). */
+    appliedRounding: "floor" as RoundingMode,
+  },
 
   /** Modificações por arma (livro: "Cada arma suporta naturalmente até 2 modificações"). */
   maxWeaponModifiers: 2,

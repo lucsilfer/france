@@ -152,5 +152,11 @@ Permissões (RLS): dono vê/edita tudo do seu personagem; Mestre vê fichas vinc
 - [x] 20 fluxos testados no banco (com Storage simulado) + regressão
 - [ ] Conferir em navegador, `npm run build` e Storage real
 
-### Fase 6 — Finalização
-- [ ] Revisão visual, testes de ponta a ponta, desempenho, publicação
+### Fase 6 — Finalização (versão 6.0) ✅
+- [x] Combate por rolagens opostas (banco rola os dados), desempates, qualidade separada do vencedor
+- [x] Confrontos na ficha, no Escudo e na central da campanha; dano de jogador confirmado pelo Mestre
+- [x] Granadas (5 tipos), kit do Demolidor combinável sem duplicar, dano contínuo
+- [x] Layout da ficha sem barras desnecessárias; menu compacto no celular
+- [x] Auditoria de segurança, testes 08/09 + regressão, guias de GitHub e Vercel
+- [ ] `npm run build` e testes em navegador (sem acesso ao npm/navegador no ambiente de desenvolvimento)
+- [ ] Publicação na Vercel (guia pronto: `docs/DEPLOY-VERCEL.md`)

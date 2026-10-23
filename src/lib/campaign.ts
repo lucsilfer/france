@@ -95,7 +95,7 @@ export async function loadShield(id: string): Promise<ShieldData> {
     supabase
       .from("campaign_characters")
       .select(
-        "status, master_can_edit, characters!inner(id, name, player_name, class_id, origin_id, origin_path_id, level, owner_id, active_form, character_forms(id, kind, name, setup_complete, pv_current, pc_current, pv_other_bonus, pc_other_bonus, conditions, portrait_path, form_attributes(attribute, base_value, other_bonus, temp_bonus), form_skills(skill_id, points, other_bonus, temp_bonus), level_progressions(level, pv_gain, pc_gain)))",
+        "status, master_can_edit, characters!inner(id, name, player_name, class_id, origin_id, origin_path_id, level, owner_id, active_form, items(id, name, effect_dice, attack_kind, quantity, source_ref), character_forms(id, kind, name, setup_complete, pv_current, pc_current, pv_other_bonus, pc_other_bonus, conditions, portrait_path, form_attributes(attribute, base_value, other_bonus, temp_bonus), form_skills(skill_id, points, other_bonus, temp_bonus), level_progressions(level, pv_gain, pc_gain)))",
       )
       .eq("campaign_id", id)
       .eq("status", "accepted"),
@@ -123,8 +123,8 @@ export async function loadShield(id: string): Promise<ShieldData> {
 
   type RawAgent = { status: string; master_can_edit: boolean; characters: AgentRow["character"] & { character_forms: AgentRow["forms"][number][] } };
   const agents: AgentRow[] = ((agentsQ.data ?? []) as unknown as RawAgent[]).map((a) => {
-    const { character_forms, ...character } = a.characters;
-    return { character, masterCanEdit: a.master_can_edit, forms: (character_forms ?? []).map((f) => ({ ...f, conditions: f.conditions ?? [] })) };
+    const { character_forms, items, ...character } = a.characters as typeof a.characters & { items?: AgentRow["weapons"] };
+    return { character, weapons: (items ?? []).filter((i) => i.attack_kind && i.effect_dice), masterCanEdit: a.master_can_edit, forms: (character_forms ?? []).map((f) => ({ ...f, conditions: f.conditions ?? [] })) };
   });
   // Segredos, pistas e quadro: o RLS entrega os de todas as campanhas que o usuário mestra; ficam só os desta.
   const invIds = new Set(((investigations.data ?? []) as InvestigationRow[]).map((i) => i.id));

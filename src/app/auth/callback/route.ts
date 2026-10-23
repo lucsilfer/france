@@ -8,7 +8,8 @@ export async function GET(request: NextRequest) {
   const tokenHash = searchParams.get("token_hash");
   const type = searchParams.get("type");
   const nextParam = searchParams.get("next") ?? "/painel";
-  const next = nextParam.startsWith("/") && !nextParam.startsWith("//") ? nextParam : "/painel";
+  // Só caminhos internos (bloqueia "//site" e "/\\site", que alguns navegadores tratam como outro domínio).
+  const next = nextParam.startsWith("/") && !nextParam.startsWith("//") && !nextParam.includes("\\") ? nextParam : "/painel";
 
   const supabase = await createClient();
   let ok = false;

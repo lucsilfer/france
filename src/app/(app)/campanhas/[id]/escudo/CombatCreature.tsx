@@ -12,7 +12,10 @@ import { creatureSummary, normalizeCreature, testValue, usesLabel, type Creature
 import { thresholds } from "@/rules/d100.ts";
 import { ATTRIBUTES } from "@/rules/data/attributes.ts";
 import { SKILL_BY_ID } from "@/rules/data/skills.ts";
-import { addCombatant, combatApply, combatCondition, combatantAbility, combatantAttack } from "../../shield-actions";
+import { addCombatant, applyConfront, combatApply, combatCondition, combatConfront, combatantAbility, type ConfrontAttack } from "../../shield-actions";
+import { ConfrontCard } from "@/components/campaign/ConfrontCard";
+import type { ConfrontPayload } from "@/lib/rolls";
+import { SKILLS } from "@/rules/data/skills.ts";
 import { NumInput as NumberField } from "@/components/homebrew/kit";
 import { newId, useAct } from "./kit";
 
@@ -191,7 +194,6 @@ export function AddCombatantModal({
 
 // ===================================================================== Ações da criatura no combate
 
-type AttackResult = { attack: string; value: number; natural: number; outcomeLabel: string; hit: boolean; damage: { expression: string; rolls: number[]; total: number } | null; multiplier: number; finalDamage: number; conditions: CreatureCondition[] };
 type AbilityResult = {
   ability: string;
   success: boolean;
@@ -228,8 +230,10 @@ export function CreatureActions({
     return own.attacks.length || own.abilities.length || !npc ? own : normalizeCreature(npc.data);
   }, [combatant.data, npc]);
   const [target, setTarget] = useState<string>(targets[0]?.id ?? "");
-  const [pub, setPub] = useState(false);
-  const [last, setLast] = useState<{ type: "attack"; r: AttackResult } | { type: "ability"; r: AbilityResult } | null>(null);
+  const [pub, setPub] = useState(true);
+  const [reaction, setReaction] = useState("");
+  const [autoApply, setAutoApply] = useState(true);
+  const [last, setLast] = useState<{ type: "confront"; r: ConfrontPayload } | { type: "ability"; r: AbilityResult } | null>(null);
   const [applied, setApplied] = useState<Set<string>>(new Set());
   const [details, setDetails] = useState(false);
   if (sheet.attacks.length === 0 && sheet.abilities.length === 0 && !Object.keys(sheet.attributes).length) return null;
@@ -259,8 +263,12 @@ export function CreatureActions({
             </option>
           ))}
         </select>
+        <ReactionSelect value={reaction} onChange={setReaction} />
         <label className="flex items-center gap-1 text-[0.65rem] text-fg-muted">
-          <input type="checkbox" className="accent-[var(--color-holo)]" checked={pub} onChange={(e) => setPub(e.target.checked)} /> rolagem pública
+          <input type="checkbox" className="accent-[var(--color-holo)]" checked={autoApply} onChange={(e) => setAutoApply(e.target.checked)} /> aplicar dano ao vencer
+        </label>
+        <label className="flex items-center gap-1 text-[0.65rem] text-fg-muted">
+          <input type="checkbox" className="accent-[var(--color-holo)]" checked={pub} onChange={(e) => setPub(e.target.checked)} /> visível aos jogadores
         </label>
         <button type="button" className="ml-auto font-mono text-[0.6rem] tracking-[0.15em] text-cyan uppercase hover:underline" onClick={() => setDetails(!details)}>
           {details ? "Ocultar ficha" : "Ver ficha"}
@@ -272,15 +280,15 @@ export function CreatureActions({
           <button
             key={a.id}
             type="button"
-            disabled={busy || disabled}
-            title={[a.description, a.effects].filter(Boolean).join("\n") || undefined}
+            disabled={busy || disabled || !target}
+            title={[a.description, a.effects, !target && "Escolha o alvo"].filter(Boolean).join("\n") || undefined}
             onClick={() =>
               act(
-                () => combatantAttack(campaignId, combatant.id, a.id, pub),
+                () => combatConfront(campaignId, combatant.combat_id, combatant.id, target, { kind: "creature", attackId: a.id }, reaction || null, autoApply, pub),
                 (r) => {
                   if (!r) return;
                   setApplied(new Set());
-                  setLast({ type: "attack", r: r as AttackResult });
+                  setLast({ type: "confront", r });
                   onChanged();
                 },
                 true,
@@ -319,42 +327,19 @@ export function CreatureActions({
 
       {last && (
         <div className="space-y-2 border border-cyan/40 bg-cyan/5 p-2 text-xs" role="status">
-          {last.type === "attack" ? (
-            <>
-              <p className="text-fg">
-                <strong>{last.r.attack}</strong>: d100 <span className="font-mono text-cyan">{last.r.natural}</span> contra {last.r.value} — {last.r.outcomeLabel}
-                {last.r.hit && last.r.damage && (
-                  <>
-                    {" "}
-                    · dano <span className="font-mono">{last.r.damage.expression}</span> = {last.r.damage.total}
-                    {last.r.multiplier > 1 && ` ×${last.r.multiplier}`} → <strong className="text-cyan">{last.r.finalDamage}</strong>
-                  </>
-                )}
-              </p>
-              {last.r.hit && (
-                <div className="flex flex-wrap gap-1.5">
-                  <Button
-                    size="sm"
-                    disabled={!target || applied.has("dmg") || busy}
-                    onClick={() => apply("dmg", () => combatApply(campaignId, target, "damage", last.r.finalDamage, newId(), `${combatant.name}: ${last.r.attack}`), `${last.r.finalDamage} de dano em ${targetName}.`)}
-                  >
-                    Aplicar {last.r.finalDamage} de dano em {targetName}
+          {last.type === "confront" ? (
+            <ConfrontCard
+              r={last.r}
+              ms={300}
+              compact
+              actions={
+                last.r.winner === "attacker" && !last.r.applied && (last.r.appliedDamage > 0 || last.r.conditions.length > 0) ? (
+                  <Button size="sm" disabled={busy} onClick={() => act(() => applyConfront(campaignId, last.r.id), (r) => (r && setLast({ type: "confront", r }), onChanged()))}>
+                    Aplicar no alvo
                   </Button>
-                  {last.r.conditions.map((cd, i) => (
-                    <Button
-                      key={i}
-                      size="sm"
-                      variant="secondary"
-                      disabled={!target || applied.has(`c${i}`) || busy}
-                      onClick={() => apply(`c${i}`, () => combatCondition(campaignId, target, "add", { name: cd.name, turns: cd.turns }), `${cd.name} aplicado em ${targetName}.`)}
-                    >
-                      Aplicar {cd.name}
-                      {cd.turns ? ` (${cd.turns}t)` : ""}
-                    </Button>
-                  ))}
-                </div>
-              )}
-            </>
+                ) : null
+              }
+            />
           ) : (
             <>
               <p className="text-fg">
@@ -450,5 +435,156 @@ export function CreatureActions({
         </div>
       )}
     </div>
+  );
+}
+
+export function ReactionSelect({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  return (
+    <select className="field-input w-auto py-1 text-xs" value={value} onChange={(e) => onChange(e.target.value)} aria-label="Reação do alvo">
+      <option value="">Reação automática</option>
+      <option value="luta">Bloquear (Luta)</option>
+      <option value="reflexo">Esquivar (Reflexo)</option>
+    </select>
+  );
+}
+
+/**
+ * Confronto conduzido pelo Mestre para um AGENTE (arma da ficha) ou ataque livre de qualquer participante.
+ * Atacante e defensor rolam 1d100 no banco; vence o maior; a perícia do atacante define a qualidade.
+ */
+export function AgentConfront({
+  campaignId,
+  combatant,
+  weapons,
+  targets,
+  disabled,
+  onChanged,
+}: {
+  campaignId: string;
+  combatant: CombatantRow;
+  weapons: { id: string; name: string; effect_dice: string | null; attack_kind: string | null }[];
+  targets: { id: string; name: string }[];
+  disabled?: boolean;
+  onChanged: () => void;
+}) {
+  const { act, busy } = useAct();
+  const [open, setOpen] = useState(false);
+  const [target, setTarget] = useState(targets[0]?.id ?? "");
+  const [weapon, setWeapon] = useState(weapons[0]?.id ?? "livre");
+  const [free, setFree] = useState({ label: "Ataque", skill: "luta", damage: "1d6", attackKind: "melee" as "melee" | "ranged" | "firearm" });
+  const [reaction, setReaction] = useState("");
+  const [autoApply, setAutoApply] = useState(true);
+  const [last, setLast] = useState<ConfrontPayload | null>(null);
+  if (!open)
+    return (
+      <button type="button" disabled={disabled} onClick={() => setOpen(true)} className="mt-2 font-mono text-[0.6rem] tracking-[0.15em] text-cyan uppercase hover:underline disabled:opacity-40">
+        Conduzir confronto
+      </button>
+    );
+  const attack: ConfrontAttack = weapon === "livre" ? { kind: "free", ...free } : { kind: "weapon", itemId: weapon };
+  return (
+    <div className="mt-2 space-y-2 border-t border-line/40 pt-2">
+      <div className="flex flex-wrap items-center gap-2">
+        <select className="field-input w-auto py-1 text-xs" value={weapon} onChange={(e) => setWeapon(e.target.value)} aria-label="Ataque">
+          {weapons.map((w) => (
+            <option key={w.id} value={w.id}>
+              {w.name} ({w.effect_dice})
+            </option>
+          ))}
+          <option value="livre">Ataque livre…</option>
+        </select>
+        <span className="label-mono">contra</span>
+        <select className="field-input w-auto py-1 text-xs" value={target} onChange={(e) => setTarget(e.target.value)} aria-label="Alvo">
+          <option value="">— alvo —</option>
+          {targets.map((t) => (
+            <option key={t.id} value={t.id}>
+              {t.name}
+            </option>
+          ))}
+        </select>
+        <ReactionSelect value={reaction} onChange={setReaction} />
+        <label className="flex items-center gap-1 text-[0.65rem] text-fg-muted">
+          <input type="checkbox" className="accent-[var(--color-holo)]" checked={autoApply} onChange={(e) => setAutoApply(e.target.checked)} /> aplicar dano
+        </label>
+      </div>
+      {weapon === "livre" && (
+        <div className="grid gap-2 sm:grid-cols-4">
+          <input className="field-input py-1 text-xs" maxLength={120} value={free.label} onChange={(e) => setFree({ ...free, label: e.target.value })} aria-label="Nome do ataque" />
+          <select className="field-input py-1 text-xs" value={free.skill} onChange={(e) => setFree({ ...free, skill: e.target.value })} aria-label="Perícia">
+            {SKILLS.map((k) => (
+              <option key={k.id} value={k.id}>
+                {k.name}
+              </option>
+            ))}
+          </select>
+          <input className="field-input py-1 font-mono text-xs" maxLength={60} value={free.damage} onChange={(e) => setFree({ ...free, damage: e.target.value })} aria-label="Dano" placeholder="1d6 (vazio = sem dano)" />
+          <select className="field-input py-1 text-xs" value={free.attackKind} onChange={(e) => setFree({ ...free, attackKind: e.target.value as typeof free.attackKind })} aria-label="Tipo">
+            <option value="melee">Corpo a corpo</option>
+            <option value="ranged">Distância</option>
+            <option value="firearm">Arma de fogo</option>
+          </select>
+        </div>
+      )}
+      <div className="flex gap-2">
+        <Button
+          size="sm"
+          disabled={busy || disabled || !target}
+          onClick={() => act(() => combatConfront(campaignId, combatant.combat_id, combatant.id, target, attack, reaction || null, autoApply, true), (r) => (r && setLast(r), onChanged()), true)}
+        >
+          <Crosshair className="h-3.5 w-3.5" aria-hidden /> Rolar confronto
+        </Button>
+        <Button size="sm" variant="ghost" onClick={() => setOpen(false)}>
+          Fechar
+        </Button>
+      </div>
+      {last && (
+        <div className="border border-cyan/40 bg-cyan/5 p-2">
+          <ConfrontCard
+            r={last}
+            ms={300}
+            compact
+            actions={
+              last.winner === "attacker" && !last.applied && (last.appliedDamage > 0 || last.conditions.length > 0) ? (
+                <Button size="sm" disabled={busy} onClick={() => act(() => applyConfront(campaignId, last.id), (r) => (r && setLast(r), onChanged()))}>
+                  Aplicar no alvo
+                </Button>
+              ) : null
+            }
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Confrontos recentes do combate; os vencidos por jogadores aguardam o Mestre aplicar o dano. */
+export function ConfrontList({ campaignId, items, onChanged }: { campaignId: string; items: ConfrontPayload[]; onChanged: () => void }) {
+  const { act, busy } = useAct();
+  const pending = items.filter((c) => c.winner === "attacker" && !c.applied && (c.appliedDamage > 0 || c.conditions.some((x) => (x as { automatic?: boolean }).automatic !== false)));
+  if (items.length === 0) return null;
+  return (
+    <section className="space-y-2">
+      <h3 className="font-mono text-xs tracking-[0.22em] text-holo uppercase">
+        Confrontos {pending.length > 0 && <span className="text-alert">· {pending.length} aguardando aplicação</span>}
+      </h3>
+      <ul className="grid gap-2 md:grid-cols-2">
+        {items.slice(0, 8).map((c) => (
+          <li key={c.id} className={`border p-2 ${pending.includes(c) ? "border-alert/60" : "border-line/60"} bg-panel-2/40`}>
+            <ConfrontCard
+              r={c}
+              ms={0}
+              compact
+              actions={
+                pending.includes(c) ? (
+                  <Button size="sm" disabled={busy} onClick={() => act(() => applyConfront(campaignId, c.id), () => onChanged())}>
+                    Aplicar {c.appliedDamage > 0 ? `${c.appliedDamage} de dano` : "condições"} em {c.defender}
+                  </Button>
+                ) : null
+              }
+            />
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }

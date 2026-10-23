@@ -1,8 +1,26 @@
+# Dependências e builds
 node_modules
 .next
 out
-.env*.local
-.env
+build
+coverage
 *.tsbuildinfo
 next-env.d.ts
+
+# Variáveis de ambiente (nunca versionar credenciais)
+.env
+.env.*
+!.env.example
+
+# Vercel / editores / sistema
+.vercel
+.idea
+.vscode
 .DS_Store
+Thumbs.db
+
+# Logs e temporários
+*.log
+npm-debug.log*
+*.zip
+tmp

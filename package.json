@@ -1,11 +1,11 @@
 {
   "name": "france",
-  "version": "0.7.0",
+  "version": "6.0.0",
   "private": true,
   "type": "module",
   "description": "F.R.A.N.C.E — Sistema de Gerenciamento de Lendas (RPG Tríade das Lendas)",
   "engines": {
-    "node": ">=22.6"
+    "node": ">=22.18"
   },
   "scripts": {
     "dev": "next dev",
@@ -14,8 +14,9 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test \"src/**/__tests__/*.test.ts\"",
     "test:db": "bash supabase/tests/run-local.sh",
-    "rules:sql": "node scripts/generate-rules-sql.ts && node scripts/generate-parity-tests.ts",
-    "logo": "python3 scripts/prepare-logo.py public/brand/france-logo-original.png public/brand"
+    "rules:sql": "node scripts/generate-rules-sql.ts && node scripts/generate-parity-tests.ts && node scripts/generate-confront-parity.ts",
+    "logo": "python3 scripts/prepare-logo.py public/brand/france-logo-original.png public/brand",
+    "check": "npm run typecheck && npm test"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.0",

@@ -13,7 +13,7 @@ import { fileURLToPath } from "node:url";
 import { RULES_CONFIG, RULES_VERSION } from "../src/rules/config.ts";
 import { ATTRIBUTE_IDS } from "../src/rules/data/attributes.ts";
 import { CLASSES } from "../src/rules/data/classes.ts";
-import { TECHNIQUES, WEAPON_MODIFIERS } from "../src/rules/data/equipment.ts";
+import { GRENADES, TECHNIQUES, WEAPON_MODIFIERS } from "../src/rules/data/equipment.ts";
 import { ORIGINS } from "../src/rules/data/origins.ts";
 import {
   BUFFS,
@@ -32,8 +32,8 @@ import {
 import { SKILLS } from "../src/rules/data/skills.ts";
 import { parseDice } from "../src/rules/dice.ts";
 
-/** Versão atual. As anteriores (rules_sync, rules_sync_fase3, rules_sync_3_5) ficam congeladas — já foram aplicadas. */
-export const RULES_SQL_PATH = fileURLToPath(new URL("../supabase/migrations/20261025000000_rules_sync_fase4.sql", import.meta.url));
+/** Versão atual. As anteriores (rules_sync, rules_sync_fase3, rules_sync_3_5, rules_sync_fase4) ficam congeladas — já foram aplicadas. */
+export const RULES_SQL_PATH = fileURLToPath(new URL("../supabase/migrations/20261027000000_rules_sync_v6.sql", import.meta.url));
 
 /** "1d12+2" → { count: 1, sides: 12, bonus: 2 } (só o formato usado na evolução). */
 function simpleDice(expr: string | null) {
@@ -101,6 +101,14 @@ export function rulesSnapshot() {
       TECHNIQUES.map((t) => [t.id, { name: t.name, usage: t.usage, requires: t.requires ?? {}, special: t.special ?? null }]),
     ),
     maxWeaponModifiers: RULES_CONFIG.maxWeaponModifiers,
+    // Fase 6: granadas oficiais (o banco usa ao lançar em combate).
+    grenades: Object.fromEntries(GRENADES.map((g) => [g.id, { name: g.name, damage: g.damage, area: g.area, condition: g.condition ?? null }])),
+    // Fase 6: classificação do d100 e combate por rolagens opostas (o banco rola os dados).
+    thresholds: RULES_CONFIG.thresholds,
+    damageMultiplier: RULES_CONFIG.damageMultiplier,
+    damageRounding: RULES_CONFIG.damageRounding,
+    attackSkill: RULES_CONFIG.attackSkill,
+    opposed: RULES_CONFIG.opposed,
     powers: {
       damageSingle: DAMAGE_SINGLE.map((t) => t.cost),
       damageArea: DAMAGE_AREA.map((t) => t.cost),

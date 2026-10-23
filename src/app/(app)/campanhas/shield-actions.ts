@@ -11,7 +11,10 @@ import { OUTCOME_LABEL, rollTest, isSuccess } from "@/rules/d100.ts";
 import { isValidDice, rollExpression } from "@/rules/dice.ts";
 import { RULES_CONFIG } from "@/rules/config.ts";
 import { buildSheet } from "@/rules/sheet.ts";
-import { normalizeCreature, rollCreatureAbility, rollCreatureAttack } from "@/rules/creatures.ts";
+import { normalizeCreature, rollCreatureAbility, rollCreatureAttack, testValue } from "@/rules/creatures.ts";
+import { planAttack } from "@/rules/combat.ts";
+import { SKILL_BY_ID } from "@/rules/data/skills.ts";
+import { confrontFromRow, type ConfrontPayload } from "@/lib/rolls";
 import { campaignNpcData, inventoryRowFrom, type CampaignNpcFormValue } from "@/lib/homebrew";
 import type { HomebrewKind } from "@/lib/types";
 import { isMediaPath } from "@/lib/media-shared";
@@ -679,13 +682,108 @@ export async function fetchCombat(campaignId: string, combatId: string) {
   return run(async () => {
     if (!uuid.safeParse(combatId).success) return fail("Combate inválido.");
     const { supabase } = await master(campaignId);
-    const [cb, list, log] = await Promise.all([
+    const [cb, list, log, conf] = await Promise.all([
       supabase.from("combats").select(COMBAT_COLUMNS).eq("id", combatId).maybeSingle(),
       supabase.from("combatants").select(COMBATANT_COLUMNS).eq("combat_id", combatId),
       supabase.from("combat_log").select("id, combat_id, round, turn_index, kind, message, public, created_at").eq("combat_id", combatId).order("id", { ascending: false }).limit(150),
+      supabase.from("combat_confrontations").select("*").eq("combat_id", combatId).order("created_at", { ascending: false }).limit(30),
     ]);
     if (!cb.data) return fail("Combate não encontrado.");
-    return { ok: true, data: { combat: cb.data as CombatRow, combatants: (list.data ?? []) as CombatantRow[], log: log.data ?? [] } };
+    return {
+      ok: true,
+      data: {
+        combat: cb.data as CombatRow,
+        combatants: (list.data ?? []) as CombatantRow[],
+        log: log.data ?? [],
+        confrontations: ((conf.data ?? []) as Record<string, unknown>[]).map(confrontFromRow),
+      },
+    };
+  });
+}
+
+// ===================================================================== Confrontos (rolagens opostas — Fase 6)
+
+export type ConfrontAttack =
+  | { kind: "creature"; attackId: string }
+  | { kind: "weapon"; itemId: string }
+  | { kind: "free"; label: string; skill: string; damage: string; attackKind: "melee" | "ranged" | "firearm" };
+
+/**
+ * Confronto entre dois participantes: atacante e defensor rolam 1d100 NO BANCO, vence o maior.
+ * O Mestre conduz qualquer confronto (criatura × agente, agente × criatura, PvP, NPC × NPC).
+ */
+export async function combatConfront(
+  campaignId: string,
+  combatId: string,
+  attackerId: string,
+  defenderId: string,
+  attack: ConfrontAttack,
+  reaction: string | null,
+  apply = true,
+  publicLog = true,
+): Promise<ActionResult<ConfrontPayload>> {
+  return run(async () => {
+    if (![combatId, attackerId, defenderId].every((x) => uuid.safeParse(x).success)) return fail("Dados inválidos.");
+    if (reaction && !SKILL_BY_ID[reaction]) return fail("Reação inválida.");
+    const { supabase } = await master(campaignId);
+    const { data: att } = await supabase.from("combatants").select("id, combat_id, name, npc_id, data, character_id, form_id").eq("id", attackerId).eq("combat_id", combatId).maybeSingle();
+    if (!att) return fail("Atacante não encontrado.");
+    let p: Record<string, unknown>;
+    if (attack.kind === "creature") {
+      const sheet = await combatantSheet(supabase, att as { data: Record<string, unknown>; npc_id: string | null });
+      const a = sheet.attacks.find((x) => x.id === attack.attackId);
+      if (!a) return fail("Ataque não encontrado.");
+      const [k, ...rest] = (a.uses ?? "valor").split(":");
+      const sk = rest.join(":");
+      const official = k === "skill" && SKILL_BY_ID[sk];
+      p = {
+        label: a.name,
+        skill: official ? sk : null,
+        value: official ? null : testValue(sheet, a.uses, a.value),
+        damage: a.damage,
+        attack_kind: /\d/.test(a.range ?? "") && !/corpo/i.test(a.range ?? "") ? "ranged" : "melee",
+        conditions: (a.conditions ?? []).map((c) => ({ name: c.name, turns: c.turns, automatic: true })),
+      };
+    } else if (attack.kind === "weapon") {
+      if (!att.character_id || !uuid.safeParse(attack.itemId).success) return fail("Arma inválida.");
+      const b = await loadCharacter(att.character_id as string);
+      const form = [b.base, b.lenda].find((f) => f?.id === att.form_id) ?? b.base;
+      const item = b.items.find((i) => i.id === attack.itemId);
+      if (!item?.attack_kind || !item.effect_dice) return fail("Esta arma não está na ficha do agente.");
+      const sheet = buildSheet({ classId: b.character.class_id, originId: b.character.origin_id, level: b.character.level, form });
+      const plan = planAttack(
+        { name: item.name, damage: item.effect_dice, attackKind: item.attack_kind, tags: item.tags, skillOverride: item.skill_override, modifiers: item.item_modifiers.map((m) => m.modifier_id), customModifiers: item.custom_modifiers ?? [] },
+        { classId: form.kind === "base" ? b.character.class_id : null, originId: b.character.origin_id, pathId: b.character.origin_path_id, level: b.character.level, skillValues: Object.fromEntries(sheet.skills.map((s) => [s.id, s.final])) },
+      );
+      p = { label: item.name, skill: plan.skillId, damage: plan.damageExpr, critical: plan.criticalExpr, modifier: plan.rollModifier, factor: plan.damageFactor, attack_kind: item.attack_kind, conditions: [] };
+    } else {
+      const label = (attack.label ?? "").trim().slice(0, 120) || "Ataque";
+      if (!SKILL_BY_ID[attack.skill] || (attack.damage && !isValidDice(attack.damage)) || !["melee", "ranged", "firearm"].includes(attack.attackKind)) return fail("Ataque livre inválido.");
+      p = { label, skill: attack.skill, damage: attack.damage || null, attack_kind: attack.attackKind, conditions: [] };
+    }
+    const { data, error } = await supabase.rpc("combat_confront", {
+      p_combat: combatId,
+      p_attacker: attackerId,
+      p_defender: defenderId,
+      p_attack: p,
+      p_reaction: reaction,
+      p_request: randomUUID(),
+      p_apply: apply,
+      p_public: publicLog,
+    });
+    if (error || !data) return fail(msg(error, "Não foi possível resolver o confronto."));
+    return { ok: true, data: confrontFromRow(data as Record<string, unknown>) };
+  });
+}
+
+/** Confirma o dano (e as condições) de um confronto vencido — ex.: ataque feito por um jogador. Aplica uma vez só. */
+export async function applyConfront(campaignId: string, confrontId: string): Promise<ActionResult<ConfrontPayload>> {
+  return run(async () => {
+    if (!uuid.safeParse(confrontId).success) return fail("Confronto inválido.");
+    const { supabase } = await master(campaignId);
+    const { data, error } = await supabase.rpc("combat_confront_apply", { p_confront: confrontId });
+    if (error || !data) return fail(msg(error, "Não foi possível aplicar."));
+    return { ok: true, data: confrontFromRow(data as Record<string, unknown>), message: "Dano aplicado." };
   });
 }
 

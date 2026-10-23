@@ -3,7 +3,7 @@
 import { Check, Package } from "lucide-react";
 import { DAMAGE_TYPE_LABEL } from "@/rules/data/equipment.ts";
 import { CATALOG_BY_ID } from "@/rules/catalog.ts";
-import { skillOptions, startingKit, weaponOptions, type KitChoices as Choices } from "@/rules/data/startingKits.ts";
+import { KIT_GRENADES, formatGrenadeMix, parseGrenadeMix, skillOptions, startingKit, weaponOptions, type KitChoices as Choices } from "@/rules/data/startingKits.ts";
 
 /**
  * Equipamento inicial da classe: itens fixos e escolhas (respeitando as restrições da classe).
@@ -66,6 +66,7 @@ export function KitChoices({
                 </select>
               </label>
             )}
+            {!done && slot.kind === "grenade_mix" && <GrenadeMix total={slot.total} value={choices[slot.id]} disabled={disabled} onChange={(v) => onChange({ ...choices, [slot.id]: v })} />}
             {!done && slot.kind === "skill_item" && (
               <label className="mt-2 block pl-6">
                 <span className="sr-only">{slot.label}</span>
@@ -83,5 +84,39 @@ export function KitChoices({
         );
       })}
     </ul>
+  );
+}
+
+/** Escolha de várias granadas combinando tipos (soma exata). */
+function GrenadeMix({ total, value, onChange, disabled }: { total: number; value: string | undefined; onChange: (v: string) => void; disabled?: boolean }) {
+  const mix = parseGrenadeMix(value);
+  const sum = Object.values(mix).reduce((a, b) => a + b, 0);
+  const set = (key: string, n: number) => onChange(formatGrenadeMix({ ...mix, [key]: Math.max(0, n) }));
+  const btn = "h-7 w-7 border border-line-strong font-mono text-sm text-fg hover:border-cyan disabled:opacity-30";
+  return (
+    <div className="mt-2 space-y-1.5 pl-6">
+      {KIT_GRENADES.map((g) => {
+        const n = mix[g.key] ?? 0;
+        return (
+          <div key={g.key} className="flex flex-wrap items-center gap-2">
+            <button type="button" className={btn} disabled={disabled || n === 0} onClick={() => set(g.key, n - 1)} aria-label={`Menos ${g.name}`}>
+              −
+            </button>
+            <span className="w-5 text-center font-mono text-sm text-fg tabular-nums" aria-live="polite">
+              {n}
+            </span>
+            <button type="button" className={btn} disabled={disabled || sum >= total} onClick={() => set(g.key, n + 1)} aria-label={`Mais ${g.name}`}>
+              +
+            </button>
+            <span className="min-w-0 flex-1 text-xs text-fg">
+              {g.name} <span className="text-fg-dim">— {g.damage ?? "sem dano"} · {g.effect}</span>
+            </span>
+          </div>
+        );
+      })}
+      <p className={`font-mono text-[0.62rem] tracking-[0.15em] uppercase ${sum === total ? "text-ok" : "text-alert"}`}>
+        {sum}/{total} granadas escolhidas
+      </p>
+    </div>
   );
 }

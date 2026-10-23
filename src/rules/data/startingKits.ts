@@ -5,7 +5,7 @@
  */
 import { CATALOG_BY_ID, type CatalogItem } from "../catalog.ts";
 import { SKILLS, SKILL_BY_ID } from "./skills.ts";
-import { WEAPONS, type AttackKind, type WeaponDef } from "./equipment.ts";
+import { GRENADES, GRENADE_BY_KEY, WEAPONS, type AttackKind, type WeaponDef } from "./equipment.ts";
 
 export type KitSlot =
   | { id: string; kind: "item"; label: string; catalogId: string; quantity?: number }
@@ -18,7 +18,9 @@ export type KitSlot =
       /** Restrição que o Prodígio ignora (ex.: Demolidor: "que não seja de fogo (exceto para Prodígios)"). */
       prodigioAlsoAllows?: AttackKind[];
     }
-  | { id: string; kind: "skill_item"; label: string; excludeGroups: ("lutar" | "outros")[] };
+  | { id: string; kind: "skill_item"; label: string; excludeGroups: ("lutar" | "outros")[] }
+  /** Várias unidades à escolha, combinando tipos (ex.: 5 granadas do Demolidor). Escolha: "fragmentacao:2,fumaca:3". */
+  | { id: string; kind: "grenade_mix"; label: string; total: number };
 
 const NOT_FIREARM: AttackKind[] = ["melee", "ranged"];
 
@@ -29,7 +31,7 @@ export const STARTING_KITS: Record<string, KitSlot[]> = {
     { id: "armadura", kind: "item", label: "Armadura simples (redução de 5 de dano físico)", catalogId: "armadura_simples" },
   ],
   demolidor: [
-    { id: "granadas", kind: "item", label: "Cinco granadas à escolha do jogador", catalogId: "granada", quantity: 5 },
+    { id: "granadas", kind: "grenade_mix", label: "Cinco granadas à escolha do jogador (pode combinar os tipos)", total: 5 },
     {
       id: "arma_distancia",
       kind: "weapon",
@@ -77,6 +79,32 @@ export function kitRef(classId: string, slotId: string): string {
   return `kit:${classId}:${slotId}`;
 }
 
+/** Vaga já recebida? Granadas viram uma linha por tipo ("kit:demolidor:granadas.fragmentacao"); a linha antiga ("…:granadas") também conta. */
+export function slotReceived(classId: string, slotId: string, kitRefs: readonly (string | null | undefined)[]): boolean {
+  const ref = kitRef(classId, slotId);
+  return kitRefs.some((r) => r === ref || (typeof r === "string" && r.startsWith(`${ref}.`)));
+}
+
+/** "fragmentacao:2,fumaca:3" → { fragmentacao: 2, fumaca: 3 } (ignora o que não for válido). */
+export function parseGrenadeMix(value: string | undefined): Record<string, number> {
+  const out: Record<string, number> = {};
+  for (const part of (value ?? "").split(",")) {
+    const [key, n] = part.split(":");
+    const q = Number(n);
+    if (GRENADE_BY_KEY[key] && Number.isInteger(q) && q > 0) out[key] = (out[key] ?? 0) + q;
+  }
+  return out;
+}
+
+export function formatGrenadeMix(mix: Record<string, number>): string {
+  return GRENADES.filter((g) => (mix[g.key] ?? 0) > 0)
+    .map((g) => `${g.key}:${mix[g.key]}`)
+    .join(",");
+}
+
+/** Tipos permitidos no kit (a Explosiva Pesada é rara: não entra no equipamento inicial). */
+export const KIT_GRENADES = GRENADES.filter((g) => !g.rare);
+
 /** Vagas que exigem escolha do jogador. */
 export function kitChoiceSlots(classId: string | null | undefined): KitSlot[] {
   return startingKit(classId).filter((s) => s.kind !== "item");
@@ -103,6 +131,15 @@ export function validateKitChoices(classId: string | null, originId: string | nu
       errors.push(`Escolha: ${slot.label}.`);
       continue;
     }
+    if (slot.kind === "grenade_mix") {
+      const raw = v.split(",").filter(Boolean);
+      const mix = parseGrenadeMix(v);
+      const total = Object.values(mix).reduce((a, b) => a + b, 0);
+      const valid = raw.every((p) => KIT_GRENADES.some((g) => p.startsWith(`${g.key}:`)));
+      if (!valid) errors.push(`Tipo de granada não permitido em “${slot.label}”.`);
+      else if (total !== slot.total) errors.push(`Escolha exatamente ${slot.total} granadas (agora: ${total}).`);
+      continue;
+    }
     const ok = slot.kind === "weapon" ? weaponOptions(slot, originId).some((w) => w.id === v) : slot.kind === "skill_item" ? skillOptions(slot).some((s) => s.id === v) : true;
     if (!ok) errors.push(`Opção não permitida para “${slot.label}”.`);
   }
@@ -123,6 +160,15 @@ export function kitGrants(classId: string | null, originId: string | null, choic
   for (const slot of startingKit(classId)) {
     if (onlySlots && !onlySlots.includes(slot.id)) continue;
     let item: CatalogItem | undefined;
+    if (slot.kind === "grenade_mix") {
+      // Uma linha por tipo, com a quantidade escolhida (kit_ref único por tipo: reabrir a ficha não duplica).
+      const mix = parseGrenadeMix(choices[slot.id]);
+      for (const g of KIT_GRENADES) {
+        const q = mix[g.key] ?? 0;
+        if (q > 0 && CATALOG_BY_ID[g.id]) out.push({ slotId: slot.id, kitRef: `${kitRef(classId, slot.id)}.${g.key}`, item: CATALOG_BY_ID[g.id], quantity: q });
+      }
+      continue;
+    }
     if (slot.kind === "item") item = CATALOG_BY_ID[slot.catalogId];
     else if (slot.kind === "weapon") item = weaponOptions(slot, originId).some((w) => w.id === choices[slot.id]) ? CATALOG_BY_ID[choices[slot.id]] : undefined;
     else {

@@ -155,13 +155,74 @@ export const GEAR: GearDef[] = [
   { id: "armadura_simples", name: "Armadura simples", type: "armadura", description: "Equipamento inicial do Brawler.", effect: "Redução de 5 de dano físico" },
   { id: "armadura_7", name: "Armadura (+7 de defesa)", type: "armadura", description: "Equipamento inicial do Tank.", effect: "+7 de defesa" },
   { id: "armadura_2", name: "Armadura (+2 de defesa)", type: "armadura", description: "Equipamento inicial do Líder.", effect: "+2 de defesa" },
-  { id: "granada", name: "Granada", type: "consumivel", description: "Equipamento inicial do Demolidor (cinco, à escolha do jogador). O Demolidor monta uma com teste de INT bem-sucedido (limite de 5).", effect: "Tipo e dano à escolha do jogador/Mestre — o livro não fixa valores" },
+  // Item genérico das versões anteriores (fichas antigas continuam com ele). Os tipos oficiais estão em GRENADES.
+  { id: "granada", name: "Granada (genérica)", type: "consumivel", description: "Granada sem tipo definido (versões anteriores). O Demolidor monta uma com teste de INT bem-sucedido (limite de 5).", effect: "Tipo e dano à escolha do Mestre" },
   { id: "kit_medicina", name: "Kit de medicina", type: "equipamento", description: "Equipamento inicial do Healer.", effect: "Permite reviver uma pessoa por sessão" },
   { id: "talisma_energia", name: "Talismã de energia", type: "equipamento", description: "Equipamento inicial do Esotérico.", effect: "Permite usar uma habilidade sem custo de PC por luta" },
   { id: "roupa_furtividade", name: "Roupa de furtividade", type: "equipamento", description: "Equipamento inicial do Rato.", effect: "Dobra o dano contra qualquer alvo enquanto estiver furtivo" },
   { id: "mira", name: "Mira", type: "equipamento", description: "Equipamento inicial do Atirador, acoplada à arma de fogo.", effect: "Ao gastar a ação para mirar, ganha 2 vantagens" },
   { id: "item_pericia", name: "Item de perícia", type: "equipamento", description: "Equipamento inicial do Detalhista. Escolha uma perícia (nenhuma da seção Lutar).", effect: "Vantagem nos testes da perícia escolhida" },
 ];
+
+// ------------------------------------------------------------------ Granadas (Fase 6 — tabela do autor)
+
+export interface GrenadeCondition {
+  name: string;
+  turns: number;
+  /** Dano contínuo rolado no fim de cada turno de quem tem a condição. */
+  dot?: string;
+  /** true: aplicada sozinha quando acerta; false: o Mestre decide ("pode deixar…"). */
+  automatic: boolean;
+  /** "alvo": em quem foi atingido · "lancador": em quem lançou (ex.: cobertura de fumaça). */
+  target: "alvo" | "lancador";
+}
+
+export interface GrenadeDef {
+  id: string;
+  /** Chave curta usada no kit do Demolidor. */
+  key: string;
+  name: string;
+  damage: string | null;
+  area: string;
+  effect: string;
+  condition?: GrenadeCondition;
+  rare?: boolean;
+}
+
+export const GRENADES: GrenadeDef[] = [
+  { id: "granada_fragmentacao", key: "fragmentacao", name: "Granada de Fragmentação", damage: "3d8", area: "Área pequena", effect: "Explosão em área pequena." },
+  {
+    id: "granada_incendiaria",
+    key: "incendiaria",
+    name: "Granada Incendiária",
+    damage: "2d6",
+    area: "Área pequena",
+    effect: "+1d6 de fogo por 2 turnos.",
+    condition: { name: "Em chamas", turns: 2, dot: "1d6", automatic: true, target: "alvo" },
+  },
+  {
+    id: "granada_concussao",
+    key: "concussao",
+    name: "Granada de Concussão",
+    damage: "2d6",
+    area: "Área pequena",
+    effect: "Pode deixar atordoado por 1 turno (o Mestre decide).",
+    condition: { name: "Atordoado", turns: 1, automatic: false, target: "alvo" },
+  },
+  { id: "granada_explosiva_pesada", key: "explosiva_pesada", name: "Granada Explosiva Pesada", damage: "5d8", area: "Área média", effect: "Explosão em área média. Item raro.", rare: true },
+  {
+    id: "granada_fumaca",
+    key: "fumaca",
+    name: "Granada de Fumaça",
+    damage: null,
+    area: "Área pequena",
+    effect: "Cria cobertura por 3 turnos (sem dano).",
+    condition: { name: "Cobertura de fumaça", turns: 3, automatic: true, target: "lancador" },
+  },
+];
+
+export const GRENADE_BY_ID: Record<string, GrenadeDef> = Object.fromEntries(GRENADES.map((g) => [g.id, g]));
+export const GRENADE_BY_KEY: Record<string, GrenadeDef> = Object.fromEntries(GRENADES.map((g) => [g.key, g]));
 
 export type TechniqueUsage =
   | { kind: "passiva" }

@@ -7,7 +7,8 @@ import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { useToast } from "@/components/ui/Toast";
 import { ConditionChips } from "@/components/campaign/ConditionChips";
 import type { AgentRow, CombatantRow, CombatLogRow, CombatRow, NpcRow, ShieldHomebrew } from "@/lib/campaign-types";
-import { AddCombatantModal, CombatAvatar, CreatureActions } from "./CombatCreature";
+import { AddCombatantModal, AgentConfront, CombatAvatar, ConfrontList, CreatureActions } from "./CombatCreature";
+import type { ConfrontPayload } from "@/lib/rolls";
 import {
   addCombatant,
   combatApply,
@@ -65,6 +66,7 @@ export function CombatTab({
   const [confirmEnd, setConfirmEnd] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [adding, setAdding] = useState(false);
+  const [confronts, setConfronts] = useState<ConfrontPayload[]>([]);
 
   const combat = combats.find((c) => c.id === selected) ?? null;
   const list = useMemo(() => orderOf(combatants.filter((c) => c.combat_id === selected)), [combatants, selected]);
@@ -80,6 +82,7 @@ export function CombatTab({
       setCombats((cs) => (cs.some((c) => c.id === d.combat.id) ? cs.map((c) => (c.id === d.combat.id ? d.combat : c)) : [d.combat, ...cs]));
       setCombatants((cs) => [...cs.filter((c) => c.combat_id !== id), ...d.combatants]);
       setLog((ls) => [...ls.filter((l) => l.combat_id !== id), ...(d.log as CombatLogRow[])]);
+      setConfronts(d.confrontations ?? []);
     },
     [campaignId, selected],
   );
@@ -87,6 +90,11 @@ export function CombatTab({
   useEffect(() => {
     if (tick > 0) void reload();
   }, [tick, reload]);
+  // Confrontos não vêm no carregamento inicial: busca ao abrir o combate.
+  useEffect(() => {
+    if (selected) void reload(selected);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function control(action: Parameters<typeof combatControl>[2]) {
     if (!combat) return;
@@ -255,6 +263,7 @@ export function CombatTab({
                     stats={liveStats(c)}
                     npc={c.npc_id ? npcs.find((n) => n.id === c.npc_id) : undefined}
                     targets={list.filter((x) => x.id !== c.id).map((x) => ({ id: x.id, name: x.name }))}
+                    weapons={c.character_id ? (agents.find((a) => a.character.id === c.character_id)?.weapons ?? []) : []}
                     portrait={c.character_id ? (agents.find((a) => a.character.id === c.character_id)?.forms.find((f) => f.id === c.form_id)?.portrait_path ?? null) : (c.image_path ?? null)}
                     onMove={(dir) => {
                       const ids = list.map((x) => x.id);
@@ -279,6 +288,8 @@ export function CombatTab({
             {combat.status !== "ended" && (
               <AddCombatantModal open={adding} onClose={() => setAdding(false)} campaignId={campaignId} combat={combat} agents={agents} npcs={npcs} homebrew={homebrew} present={list} onAdded={() => void reload()} />
             )}
+
+            <ConfrontList campaignId={campaignId} items={confronts} onChanged={() => void reload()} />
 
             <div className="grid gap-4 lg:grid-cols-2">
               <NoteBox campaignId={campaignId} combatId={combat.id} onDone={() => void reload()} />
@@ -352,6 +363,7 @@ function CombatantCard({
   stats,
   npc,
   targets,
+  weapons,
   portrait,
   onMove,
   onChanged,
@@ -366,6 +378,7 @@ function CombatantCard({
   stats: { pv: number | null; pvMax: number | null; pc: number | null; pcMax: number | null; prodigio: boolean; conditions: CombatantRow["conditions"] };
   npc?: NpcRow;
   targets: { id: string; name: string }[];
+  weapons: { id: string; name: string; effect_dice: string | null; attack_kind: string | null }[];
   portrait: string | null;
   onMove: (dir: -1 | 1) => void;
   onChanged: (patch?: Partial<CombatantRow>) => void;
@@ -477,8 +490,18 @@ function CombatantCard({
           onRemove={ended ? undefined : (id) => act(() => combatCondition(campaignId, c.id, "remove", { id }), (conds) => onChanged(conds && !c.character_id ? { conditions: conds } : undefined), true)}
         />
       </div>
-      {!c.character_id && <CreatureActions campaignId={campaignId} combatant={c} npc={npc} targets={targets} disabled={ended} onChanged={() => onChanged()} />}
-      {c.character_id && <p className="mt-1 text-[0.65rem] text-fg-muted">Ataques e poderes do agente são rolados pelo jogador na ficha; o PC é cobrado lá, uma única vez.</p>}
+      {!c.character_id && (
+        <>
+          <CreatureActions campaignId={campaignId} combatant={c} npc={npc} targets={targets} disabled={ended} onChanged={() => onChanged()} />
+          <AgentConfront campaignId={campaignId} combatant={c} weapons={[]} targets={targets} disabled={ended} onChanged={() => onChanged()} />
+        </>
+      )}
+      {c.character_id && (
+        <>
+          <p className="mt-1 text-[0.65rem] text-fg-muted">O jogador ataca pela ficha (confronto contra o alvo escolhido). Se precisar, conduza o confronto daqui.</p>
+          <AgentConfront campaignId={campaignId} combatant={c} weapons={weapons} targets={targets} disabled={ended} onChanged={() => onChanged()} />
+        </>
+      )}
     </li>
   );
 }

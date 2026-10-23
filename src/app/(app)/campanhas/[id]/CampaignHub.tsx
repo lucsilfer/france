@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useMemo, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Check, Copy, Crown, Dice5, FileText, RefreshCw, Search, Shield, StickyNote, Swords, Trash2, UserPlus, UsersRound, X, Network } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -13,6 +13,10 @@ import { CLASS_BY_ID } from "@/rules/data/classes.ts";
 import { ORIGIN_BY_ID } from "@/rules/data/origins.ts";
 import { HudTabs } from "@/components/campaign/HudTabs";
 import { CombatView } from "@/components/campaign/CombatView";
+import { ConfrontCard } from "@/components/campaign/ConfrontCard";
+import { confrontFromRow, type ConfrontPayload } from "@/lib/rolls";
+import { HoloFrame } from "@/components/media/ImageField";
+import { useMediaUrl } from "@/components/media/media-client";
 import { DicePanel } from "@/components/campaign/DicePanel";
 import { useRealtime, liveLabel } from "@/components/campaign/useRealtime";
 import { regenerateInvite } from "../../actions";
@@ -35,6 +39,15 @@ export function CampaignHub({ data }: { data: HubData }) {
   const [rolls, setRolls] = useState<RollRow[]>(data.rolls);
   const [invite, setInvite] = useState(data.invite);
 
+  const [confronts, setConfronts] = useState<ConfrontPayload[]>([]);
+  const refetchConfronts = useCallback(async (combatId: string | null) => {
+    if (!combatId) return setConfronts([]);
+    const { data: rows } = await sb.from("combat_confrontations").select("*").eq("combat_id", combatId).order("created_at", { ascending: false }).limit(6);
+    setConfronts(((rows ?? []) as Record<string, unknown>[]).map(confrontFromRow));
+  }, [sb]);
+  useEffect(() => {
+    void refetchConfronts(data.combat?.id ?? null);
+  }, [refetchConfronts, data.combat?.id]);
   const refetchCombat = useCallback(async () => {
     const { data: cbs } = await sb.from("combats").select("id, name, status, round, turn_index, version, initiative_mode, started_at, ended_at, created_at").eq("campaign_id", campaign.id).neq("status", "ended").order("created_at", { ascending: false }).limit(1);
     const cb = ((cbs ?? []) as CombatRow[])[0] ?? null;
@@ -43,7 +56,8 @@ export function CampaignHub({ data }: { data: HubData }) {
       const { data: list } = await sb.from("combatants_public").select("*").eq("combat_id", cb.id);
       setCombatants((list ?? []) as PublicCombatant[]);
     } else setCombatants([]);
-  }, [sb, campaign.id]);
+    void refetchConfronts(cb?.id ?? null);
+  }, [sb, campaign.id, refetchConfronts]);
   const refetchClues = useCallback(async () => {
     const { data: c } = await sb.rpc("revealed_clues", { p_campaign: campaign.id });
     setClues((c ?? []) as RevealedClue[]);
@@ -147,7 +161,23 @@ export function CampaignHub({ data }: { data: HubData }) {
             case "geral":
               return <Overview data={data} party={party} myLinks={myLinks} invite={invite} setInvite={setInvite} onChanged={refetchParty} />;
             case "combate":
-              return <CombatView combat={combat} combatants={combatants} />;
+              return (
+                <div className="space-y-4">
+                  <CombatView combat={combat} combatants={combatants} />
+                  {confronts.length > 0 && (
+                    <section className="space-y-2">
+                      <p className="label-mono text-holo">Últimos confrontos</p>
+                      <ul className="grid gap-2 md:grid-cols-2">
+                        {confronts.map((c) => (
+                          <li key={c.id} className="border border-line/60 bg-panel-2/40 p-2">
+                            <ConfrontCard r={c} ms={0} compact />
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                  )}
+                </div>
+              );
             case "investigacoes":
               return <CluesList clues={clues} />;
             case "relatorios":
@@ -220,7 +250,8 @@ function Overview({
               return (
                 <li key={p.character_id} className={`border p-3 ${p.status === "pending" ? "border-alert/50" : "border-line/70"} bg-panel-2/40`}>
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="min-w-0">
+                    <PartyPortrait path={p.portrait_path} name={p.name} lenda={p.active_form === "lenda"} />
+                    <div className="min-w-0 flex-1">
                       <p className="truncate text-fg">
                         {p.name}
                         {p.active_form === "lenda" && <span className="ml-2 font-mono text-[0.58rem] text-alert">FORMA LENDA</span>}
@@ -512,5 +543,14 @@ function SharedNotes({ notes }: { notes: NoteRow[] }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+function PartyPortrait({ path, name, lenda }: { path?: string | null; name: string; lenda?: boolean }) {
+  const url = useMediaUrl(path ?? null);
+  return (
+    <div className="w-12 shrink-0">
+      <HoloFrame url={url} alt={`Foto de ${name}`} variant={lenda ? "corrupted" : "holo"} />
+    </div>
   );
 }

@@ -1,5 +1,5 @@
 /** Catálogo oficial de itens do Livro do Jogador, no formato usado pelo inventário. */
-import { DAMAGE_TYPE_LABEL, GEAR, WEAPONS, compatibleModifiers, type AttackKind, type WeaponTag } from "./data/equipment.ts";
+import { DAMAGE_TYPE_LABEL, GEAR, GRENADES, WEAPONS, compatibleModifiers, type AttackKind, type WeaponTag } from "./data/equipment.ts";
 
 export type ItemType = "arma" | "armadura" | "equipamento" | "consumivel" | "outro";
 export type EffectKind = "dano" | "cura" | "condicao" | "utilidade" | "personalizado";
@@ -77,6 +77,23 @@ export const CATALOG: CatalogItem[] = [
     tags: [],
     tier: null,
     modifiers: [],
+  })),
+  ...GRENADES.map<CatalogItem>((g) => ({
+    id: g.id,
+    name: g.name,
+    type: "consumivel",
+    category: g.rare ? "Granada (rara)" : "Granada",
+    description: `${g.area}. ${g.effect}`,
+    effectKind: g.damage ? "dano" : "utilidade",
+    effectDice: g.damage,
+    effectText: [g.damage ? `${g.damage} de dano` : "Sem dano", g.effect].join(" · "),
+    range: "Arremesso",
+    damageType: null,
+    attackKind: null,
+    tags: [],
+    tier: null,
+    modifiers: [],
+    note: g.condition ? `Condição: ${g.condition.name} (${g.condition.turns} turno${g.condition.turns > 1 ? "s" : ""}${g.condition.dot ? `, ${g.condition.dot} por turno` : ""})${g.condition.automatic ? "" : " — o Mestre decide"}` : undefined,
   })),
 ];
 

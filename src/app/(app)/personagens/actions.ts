@@ -15,7 +15,7 @@ import { checkSkillEdit } from "@/rules/character.ts";
 import { rollTest, OUTCOME_LABEL } from "@/rules/d100.ts";
 import { buildSheet, checkCreation, checkLendaCreation, SHEET_LIMITS } from "@/rules/sheet.ts";
 import { abilityStatus, checkLevelChange } from "@/rules/abilities.ts";
-import { kitGrants, startingKit, validateKitChoices, type KitChoices } from "@/rules/data/startingKits.ts";
+import { kitGrants, slotReceived, startingKit, validateKitChoices, type KitChoices } from "@/rules/data/startingKits.ts";
 import { dbMessage, editContext, fail, guard, int, logRoll, sheetContext, touch, uuid } from "./_shared";
 
 export type { RollEntry } from "@/lib/rolls";
@@ -109,7 +109,8 @@ export async function saveClass(characterId: string, classId: string): Promise<A
   });
 }
 
-const kitSchema = z.record(z.string().regex(/^[a-z_]+$/), z.string().regex(/^[a-z_]+$/));
+// Valores: id simples ("faca") ou mistura de granadas ("fragmentacao:2,fumaca:3").
+const kitSchema = z.record(z.string().regex(/^[a-z_]+$/), z.string().regex(/^[a-z0-9_:,]{1,200}$/));
 
 /** Guarda as escolhas do equipamento inicial (os itens só entram no inventário ao finalizar). */
 export async function saveKitChoices(characterId: string, choices: KitChoices): Promise<ActionResult> {
@@ -230,8 +231,8 @@ export async function grantStartingKit(characterId: string, choices: KitChoices)
     const c = bundle.character;
     const kit = startingKit(c.class_id);
     if (!kit.length) return fail("Esta classe não tem equipamento inicial.");
-    const received = new Set(bundle.items.map((i) => i.kit_ref).filter(Boolean));
-    const pending = kit.filter((s) => !received.has(`kit:${c.class_id}:${s.id}`)).map((s) => s.id);
+    const refs = bundle.items.map((i) => i.kit_ref);
+    const pending = kit.filter((s) => !slotReceived(c.class_id!, s.id, refs)).map((s) => s.id);
     if (!pending.length) return fail("Todo o equipamento inicial já foi recebido.");
     const errors = validateKitChoices(c.class_id, c.origin_id, parsed.data, pending);
     if (errors.length) return fail(errors[0]);

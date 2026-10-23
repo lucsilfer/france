@@ -5,7 +5,8 @@ import { History, Loader2, X } from "lucide-react";
 import type { Outcome } from "@/rules/d100.ts";
 import type { RollSpeed } from "@/lib/types";
 import { RULES_CONFIG } from "@/rules/config.ts";
-import { payloadKind, type AttackPayload, type DiceDetail, type EffectTickPayload, type PowerPayload, type RollEntry, type TestPayload } from "@/lib/rolls";
+import { payloadKind, type AttackPayload, type ConfrontPayload, type DiceDetail, type EffectTickPayload, type PowerPayload, type RollEntry, type TestPayload } from "@/lib/rolls";
+import { ConfrontCard } from "@/components/campaign/ConfrontCard";
 
 /** Uma janela de rolagem: criada no clique (entry = null) e preenchida quando o servidor responde. */
 export interface RollCard {
@@ -213,6 +214,7 @@ function PowerBody({ r, done }: { r: PowerPayload | EffectTickPayload; done: boo
 function cardTone(r: RollEntry["result"]) {
   const k = payloadKind(r);
   if (k === "test" || k === "attack") return TONE[(r as TestPayload).outcome].box;
+  if (k === "confront") return (r as ConfrontPayload).winner === "attacker" ? TONE[(r as ConfrontPayload).quality].box : "border-line-strong";
   return "border-holo/70";
 }
 
@@ -268,6 +270,10 @@ function Card({ card, speed, onClose, compact }: { card: RollCard; speed: RollSp
             <p className="font-mono text-[0.58rem] tracking-[0.25em] text-holo uppercase">Rolando…</p>
           </div>
         </div>
+      ) : kind === "confront" ? (
+        <div className="pr-5">
+          <ConfrontCard r={r as ConfrontPayload} ms={ms} compact />
+        </div>
       ) : kind === "attack" ? (
         <AttackBody r={r as AttackPayload} done={done} />
       ) : kind === "power" || kind === "effect" ? (
@@ -285,6 +291,10 @@ function historyLine(h: RollEntry): { value: string; text: string; cls: string }
     case "attack": {
       const a = r as AttackPayload;
       return { value: pad(a.natural), text: a.hit ? `${a.finalDamage} DANO` : a.outcomeLabel.toUpperCase(), cls: TONE[a.outcome].text };
+    }
+    case "confront": {
+      const c = r as ConfrontPayload;
+      return { value: `${pad(c.attackRoll)}×${pad(c.defendRoll)}`, text: c.winner === "attacker" ? (c.damage ? `${c.finalDamage} DANO` : "ACERTOU") : "DEFENDIDO", cls: c.winner === "attacker" ? "text-cyan" : "text-fg-dim" };
     }
     case "power": {
       const p = r as PowerPayload;

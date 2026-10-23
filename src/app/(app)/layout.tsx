@@ -16,7 +16,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         Pular para o conteúdo
       </a>
       <header className="sticky top-0 z-40 border-b border-line/70 bg-void/80 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
+        <div className="mx-auto flex h-16 max-w-[96rem] items-center justify-between gap-3 px-4 sm:px-6">
           <Link href="/painel" aria-label={`${SYSTEM_NAME} — central de controle`} className="group flex items-center gap-3">
             <Logo size={38} priority className="transition-transform duration-300 group-hover:scale-105" />
             <span className="flex flex-col leading-none">
@@ -47,7 +47,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         </div>
         <div className="h-px bg-gradient-to-r from-transparent via-holo/60 to-transparent" aria-hidden />
       </header>
-      <main id="conteudo" className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10">
+      <main id="conteudo" className="mx-auto max-w-[96rem] px-3 py-6 sm:px-6 sm:py-8">
         {children}
       </main>
     </Providers>
