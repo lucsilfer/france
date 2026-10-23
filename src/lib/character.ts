@@ -1,3 +1,4 @@
+import type { CustomModifier } from "@/rules/combat.ts";
 import "server-only";
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
@@ -36,6 +37,8 @@ export interface FormRow extends StoredForm {
   setup_complete: boolean;
   /** Condições ativas na forma (aplicadas pelo jogador ou pelo Mestre). */
   conditions: Condition[];
+  /** Foto desta forma no Storage (caminho; o link assinado é gerado à parte). */
+  portrait_path: string | null;
 }
 
 export interface AttributeRollRow {
@@ -76,6 +79,11 @@ export interface ItemRow {
   quick_access: boolean;
   created_at: string;
   item_modifiers: ItemModifierRow[];
+  /** Fase 5: imagem (do modelo Homebrew), modificadores personalizados copiados e usos limitados. */
+  image_path?: string | null;
+  custom_modifiers: CustomModifier[];
+  uses_max?: number | null;
+  uses_left?: number | null;
 }
 
 export interface PowerRow {
@@ -108,7 +116,7 @@ export interface EffectRow {
 /** Modelo de item da biblioteca Homebrew do usuário. */
 export interface HomebrewItemRow {
   id: string;
-  kind: "item" | "arma";
+  kind: "item" | "arma" | "item_especial" | "modificador" | "outro";
   name: string;
   description: string;
   data: Record<string, unknown>;
@@ -157,10 +165,10 @@ const CHARACTER_COLUMNS =
   "id, owner_id, status, creation_step, name, player_name, origin_id, origin_path_id, class_id, level, money, story, appearance, extra_info, personal_notes, active_form, starting_kit, updated_at";
 
 const FORM_COLUMNS =
-  "id, kind, name, description, special_rules, setup_complete, conditions, pv_current, pc_current, pv_other_bonus, pc_other_bonus, form_attributes(attribute, base_value, other_bonus, temp_bonus), form_skills(skill_id, points, other_bonus, temp_bonus), level_progressions(level, pv_gain, pc_gain)";
+  "id, kind, name, description, special_rules, setup_complete, conditions, portrait_path, pv_current, pc_current, pv_other_bonus, pc_other_bonus, form_attributes(attribute, base_value, other_bonus, temp_bonus), form_skills(skill_id, points, other_bonus, temp_bonus), level_progressions(level, pv_gain, pc_gain)";
 
 export const ITEM_COLUMNS =
-  "id, source_kind, source_ref, kit_ref, name, description, item_type, category, quantity, effect_dice, effect_kind, attack_kind, damage_type, skill_override, tier, range, special_rules, tags, quick_access, created_at, item_modifiers(id, modifier_id, is_temporary)";
+  "id, source_kind, source_ref, kit_ref, name, description, item_type, category, quantity, effect_dice, effect_kind, attack_kind, damage_type, skill_override, tier, range, special_rules, tags, quick_access, created_at, image_path, custom_modifiers, uses_max, uses_left, item_modifiers(id, modifier_id, is_temporary)";
 
 export const POWER_COLUMNS = "id, name, description, ability_type, target, range, duration, components, initial_cost, per_turn_cost, quick_access, created_at";
 
@@ -172,7 +180,7 @@ type RawForm = Omit<FormRow, "attributes" | "skills" | "progressions"> & {
 
 function toForm(raw: RawForm): FormRow {
   const { form_attributes, form_skills, level_progressions, ...rest } = raw;
-  return { ...rest, conditions: rest.conditions ?? [], attributes: form_attributes ?? [], skills: form_skills ?? [], progressions: level_progressions ?? [] };
+  return { ...rest, portrait_path: rest.portrait_path ?? null, conditions: rest.conditions ?? [], attributes: form_attributes ?? [], skills: form_skills ?? [], progressions: level_progressions ?? [] };
 }
 
 export async function loadCharacter(id: string): Promise<CharacterBundle> {
@@ -218,7 +226,7 @@ export async function loadCharacter(id: string): Promise<CharacterBundle> {
     base,
     lenda: lendaRaw ? toForm(lendaRaw) : null,
     pendingRoll: pending ? (({ character_forms: _f, ...r }) => r as AttributeRollRow)(pending as AttributeRollRow & { character_forms: unknown }) : null,
-    items: ((items.data ?? []) as ItemRow[]).map((i) => ({ ...i, tags: i.tags ?? [], item_modifiers: i.item_modifiers ?? [] })),
+    items: ((items.data ?? []) as ItemRow[]).map((i) => ({ ...i, tags: i.tags ?? [], item_modifiers: i.item_modifiers ?? [], custom_modifiers: i.custom_modifiers ?? [] })),
     powers: (powers.data ?? []) as PowerRow[],
     effects: (effects.data ?? []) as EffectRow[],
     techniques: (techniques.data ?? []) as TechniqueRow[],

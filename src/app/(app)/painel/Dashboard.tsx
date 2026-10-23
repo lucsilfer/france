@@ -22,11 +22,12 @@ interface Props {
   characters: CharacterSummary[];
   campaigns: CampaignSummary[];
   homebrew: HomebrewEntry[];
+  sharedHomebrew?: HomebrewEntry[];
   loadError: string | null;
   initialTab: Tab;
 }
 
-export function Dashboard({ profile, characters, campaigns, homebrew, loadError, initialTab }: Props) {
+export function Dashboard({ profile, characters, campaigns, homebrew, sharedHomebrew = [], loadError, initialTab }: Props) {
   const [tab, setTab] = useState<Tab>(initialTab);
 
   function select(t: Tab) {
@@ -113,7 +114,7 @@ export function Dashboard({ profile, characters, campaigns, homebrew, loadError,
         >
           {tab === "personagens" && <CharactersPanel characters={characters} />}
           {tab === "campanhas" && <CampaignsPanel campaigns={campaigns} />}
-          {tab === "homebrew" && <HomebrewPanel entries={homebrew} />}
+          {tab === "homebrew" && <HomebrewPanel entries={homebrew} shared={sharedHomebrew} />}
         </motion.section>
       </AnimatePresence>
     </div>

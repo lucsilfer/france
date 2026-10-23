@@ -18,6 +18,10 @@ export interface CharacterSummary {
   origin_id: string | null;
   level: number;
   updated_at: string;
+  portrait_path?: string | null;
+  portrait_url?: string | null;
+  /** A foto exibida é a da forma Lenda (moldura corrompida). */
+  lenda?: boolean;
 }
 
 export interface CampaignSummary {
@@ -33,13 +37,17 @@ export interface CampaignSummary {
 }
 
 export const HOMEBREW_KINDS = [
-  { id: "item", label: "Item" },
-  { id: "arma", label: "Arma" },
-  { id: "modificador", label: "Modificador" },
-  { id: "monstro", label: "Monstro" },
-  { id: "npc", label: "NPC" },
-  { id: "outro", label: "Outro" },
+  { id: "monstro", label: "Monstro", plural: "Monstros" },
+  { id: "npc", label: "NPC", plural: "NPCs" },
+  { id: "arma", label: "Arma", plural: "Armas" },
+  { id: "item", label: "Equipamento", plural: "Equipamentos" },
+  { id: "modificador", label: "Modificador", plural: "Modificadores" },
+  { id: "item_especial", label: "Item especial", plural: "Itens especiais" },
+  { id: "outro", label: "Outro", plural: "Outros conteúdos" },
 ] as const;
+
+/** Conteúdos que o Mestre pode disponibilizar aos jogadores de uma campanha. */
+export const SHAREABLE_KINDS: readonly HomebrewKind[] = ["item", "arma", "modificador", "item_especial", "outro"];
 
 export type HomebrewKind = (typeof HOMEBREW_KINDS)[number]["id"];
 
@@ -50,6 +58,8 @@ export interface HomebrewEntry {
   description: string;
   data: Record<string, unknown>;
   updated_at: string;
+  image_path?: string | null;
+  image_url?: string | null;
 }
 
 export type ActionResult<T = undefined> =

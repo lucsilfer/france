@@ -74,9 +74,13 @@ export interface CombatantRow {
   hidden: boolean;
   hide_stats: boolean;
   notes: string;
+  /** Fase 5: ficha copiada da criatura (ataques, habilidades, atributos…) — independente do modelo. */
+  data?: Record<string, unknown>;
+  image_path?: string | null;
+  homebrew_id?: string | null;
 }
 
-export type PublicCombatant = Omit<CombatantRow, "hide_stats" | "notes">;
+export type PublicCombatant = Omit<CombatantRow, "hide_stats" | "notes" | "data" | "homebrew_id">;
 
 export interface CombatLogRow {
   id: number;
@@ -89,13 +93,8 @@ export interface CombatLogRow {
   created_at: string;
 }
 
-export interface NpcData {
-  description?: string;
-  attributes?: Partial<Record<string, number>>;
-  attacks?: { name: string; skill: number; damage: string }[];
-  abilities?: string;
-  notes?: string;
-}
+/** Ficha de criatura (ver normalizeCreature) + textos. Aceita o formato antigo da Fase 4. */
+export type NpcData = Record<string, unknown> & { description?: string; appearance?: string; master_notes?: string };
 
 export interface NpcRow {
   id: string;
@@ -109,6 +108,7 @@ export interface NpcRow {
   conditions: Condition[];
   visible_to_players: boolean;
   source_homebrew_id: string | null;
+  image_path?: string | null;
   created_at: string;
 }
 
@@ -212,6 +212,7 @@ export interface AgentForm {
   pv_other_bonus: number;
   pc_other_bonus: number;
   conditions: Condition[];
+  portrait_path?: string | null;
   form_attributes: StoredAttribute[];
   form_skills: StoredSkill[];
   level_progressions: StoredProgression[];
@@ -235,10 +236,11 @@ export interface AgentRow {
 
 export interface ShieldHomebrew {
   id: string;
-  kind: "npc" | "monstro" | "item" | "arma";
+  kind: "npc" | "monstro" | "item" | "arma" | "item_especial" | "modificador" | "outro";
   name: string;
   description: string;
   data: Record<string, unknown>;
+  image_path?: string | null;
 }
 
 export interface CampaignHub {
@@ -277,4 +279,6 @@ export interface ShieldData {
   notes: NoteRow[];
   rolls: RollRow[];
   homebrew: ShieldHomebrew[];
+  /** Links assinados das imagens (fotos dos agentes, NPCs, combatentes, modelos). */
+  media: Record<string, string>;
 }

@@ -20,6 +20,7 @@ import { SkillsSection } from "./SkillsSection";
 import { RightPanel, type Tab } from "./RightPanel";
 import { RollStack, type RollCard } from "./RollTray";
 import { FormSwitcher } from "./FormSwitcher";
+import { SheetHeader } from "./SheetHeader";
 import { useRealtime, liveLabel } from "@/components/campaign/useRealtime";
 
 type Updater<T> = (fn: (prev: T) => T) => void;
@@ -75,7 +76,17 @@ export interface SheetState {
 let tokenSeq = 0;
 const MAX_CARDS = 3;
 
-export function Sheet({ bundle, initialRolls, homebrew: initialHomebrew }: { bundle: CharacterBundle; initialRolls: RollEntry[]; homebrew: HomebrewItemRow[] }) {
+export function Sheet({
+  bundle,
+  initialRolls,
+  homebrew: initialHomebrew,
+  portraits = {},
+}: {
+  bundle: CharacterBundle;
+  initialRolls: RollEntry[];
+  homebrew: HomebrewItemRow[];
+  portraits?: Record<string, string>;
+}) {
   const router = useRouter();
   const toast = useToast();
   const prefs = usePrefs();
@@ -211,6 +222,7 @@ export function Sheet({ bundle, initialRolls, homebrew: initialHomebrew }: { bun
         if (Array.isArray(n.conditions)) patch.conditions = n.conditions;
         if (typeof n.pv_other_bonus === "number") patch.pv_other_bonus = n.pv_other_bonus;
         if (typeof n.pc_other_bonus === "number") patch.pc_other_bonus = n.pc_other_bonus;
+        if ("portrait_path" in n) patch.portrait_path = (n.portrait_path as string | null) ?? null;
         patchForm(n.id, patch);
       } else if (ch.table === "character_trackers") {
         const t = ch.new as { scene?: number; session?: number; turn?: number };
@@ -305,6 +317,8 @@ export function Sheet({ bundle, initialRolls, homebrew: initialHomebrew }: { bun
           {character.origin_id === "artificial" && <FormSwitcher state={state} />}
         </div>
       </div>
+
+      <SheetHeader state={state} portraits={portraits} />
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-start">
         <div key={form.id} className={`space-y-6 ${fx > 0 ? "form-swap" : ""}`}>

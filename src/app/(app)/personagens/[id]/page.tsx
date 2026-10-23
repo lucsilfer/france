@@ -5,6 +5,7 @@ import { requireUser } from "@/lib/supabase/server";
 import { Sheet } from "./Sheet";
 import type { RollEntry } from "@/lib/rolls";
 import type { HomebrewItemRow } from "@/lib/character";
+import { signMedia } from "@/lib/media";
 
 export const metadata: Metadata = { title: "Ficha" };
 
@@ -22,9 +23,12 @@ export default async function CharacterPage({ params }: { params: Promise<{ id: 
     .is("campaign_id", null)
     .order("created_at", { ascending: false })
     .limit(15),
-    // Biblioteca Homebrew do próprio usuário (itens e armas reutilizáveis).
-    supabase.from("homebrew").select("id, kind, name, description, data").eq("owner_id", user.id).in("kind", ["item", "arma"]).order("name").limit(200),
+    // Biblioteca Homebrew: a do usuário + conteúdos que Mestres disponibilizaram nas campanhas dele (o RLS decide).
+    supabase.from("homebrew").select("id, kind, name, description, data").in("kind", ["item", "arma", "item_especial", "outro", "modificador"]).order("name").limit(300),
   ]);
 
-  return <Sheet bundle={bundle} initialRolls={(rolls ?? []) as RollEntry[]} homebrew={(homebrew ?? []) as HomebrewItemRow[]} />;
+  // Fotos (bucket privado): links assinados com a sessão de quem abre a ficha.
+  const portraits = await signMedia(supabase, [bundle.base.portrait_path, bundle.lenda?.portrait_path]);
+
+  return <Sheet bundle={bundle} initialRolls={(rolls ?? []) as RollEntry[]} homebrew={(homebrew ?? []) as HomebrewItemRow[]} portraits={portraits} />;
 }

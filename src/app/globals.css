@@ -418,3 +418,42 @@ html[data-reduce-motion="true"] .sheet-root { transition: none; }
 html[data-reduce-motion="true"] .sheet-root[data-sheet-theme="corrupted"] .hud-panel::before,
 html[data-reduce-motion="true"] .sheet-root[data-sheet-theme="corrupted"] .hud-panel::after,
 html[data-reduce-motion="true"] .sheet-root[data-sheet-theme="corrupted"] .hud-tag { animation: none; }
+
+/* ---------------------------------------------------------------- Fase 5: molduras de imagem */
+.holo-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--color-holo) 70%, transparent);
+  background: var(--color-panel-2);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--color-void) 80%, transparent) inset, 0 0 22px -8px var(--color-holo);
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+.holo-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, color-mix(in oklab, var(--color-holo) 7%, transparent) 3px 4px);
+  mix-blend-mode: screen;
+}
+.holo-frame-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  border-color: var(--color-cyan);
+  filter: drop-shadow(0 0 4px var(--color-cyan));
+}
+.holo-frame-corner.tl { top: 3px; left: 3px; border-top: 2px solid; border-left: 2px solid; }
+.holo-frame-corner.br { bottom: 3px; right: 3px; border-bottom: 2px solid; border-right: 2px solid; }
+.holo-frame-corrupted {
+  border-color: rgb(196 42 85 / 0.8);
+  box-shadow: 0 0 24px -6px rgb(196 42 85 / 0.8), 2px 0 0 rgb(166 120 255 / 0.35) inset, -2px 0 0 rgb(196 42 85 / 0.35) inset;
+}
+.holo-frame-corrupted img { filter: saturate(1.15) contrast(1.05) hue-rotate(-8deg); }
+.holo-frame-corrupted .holo-frame-corner { border-color: rgb(196 42 85); filter: drop-shadow(0 0 4px rgb(196 42 85)); }
+@media (prefers-reduced-motion: no-preference) {
+  .holo-frame-corrupted img { animation: portrait-glitch 8s steps(1) infinite; }
+}
+@keyframes portrait-glitch { 0%, 93%, 100% { transform: none; } 94% { transform: translate(2px, -1px); } 96% { transform: translate(-2px, 1px); }
+}

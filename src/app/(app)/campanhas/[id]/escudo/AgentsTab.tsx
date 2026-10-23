@@ -12,9 +12,14 @@ import type { AgentForm, AgentRow, NpcRow, PartyRow, ShieldHomebrew } from "@/li
 import { buildSheet, type StoredForm } from "@/rules/sheet.ts";
 import { CLASS_BY_ID } from "@/rules/data/classes.ts";
 import { ORIGIN_BY_ID } from "@/rules/data/origins.ts";
-import { ATTRIBUTES } from "@/rules/data/attributes.ts";
 import { CATALOG } from "@/rules/catalog.ts";
-import { isValidDice } from "@/rules/dice.ts";
+import { creatureSummary, normalizeCreature, testValue } from "@/rules/creatures.ts";
+import { HoloFrame, ImageField } from "@/components/media/ImageField";
+import { uploadMedia, useMediaUrl } from "@/components/media/media-client";
+import { CreatureFields } from "@/components/homebrew/CreatureFields";
+import { campaignNpcDefaults, type CampaignNpcFormValue } from "@/lib/homebrew";
+import { mediaPath } from "@/lib/media-shared";
+import type { HomebrewEntry } from "@/lib/types";
 import { agentAdjust, agentCondition, deleteNpc, giveItem, npcAdjust, npcAttack, npcCondition, npcFromHomebrew, saveNpc, type NpcInput } from "../../shield-actions";
 import { Adjuster, Empty, Meter, SectionTitle, useAct } from "./kit";
 
@@ -111,7 +116,8 @@ function AgentCard({
   return (
     <article className="chamfer border border-line-strong bg-panel-2/50 p-4">
       <header className="mb-3 flex flex-wrap items-start justify-between gap-2">
-        <div className="min-w-0">
+        <AgentPortrait agent={agent} />
+        <div className="min-w-0 flex-1">
           <h3 className="truncate text-lg text-fg">{c.name}</h3>
           <p className="text-xs text-fg-dim">
             {[CLASS_BY_ID[c.class_id ?? ""]?.name, ORIGIN_BY_ID[c.origin_id ?? ""]?.name, `nível ${c.level}`].filter(Boolean).join(" · ")}
@@ -185,10 +191,20 @@ function AgentCard({
   );
 }
 
+function AgentPortrait({ agent }: { agent: AgentRow }) {
+  const active = agent.forms.find((f) => f.kind === (agent.character.active_form ?? "base") && (f.kind === "base" || f.setup_complete)) ?? agent.forms.find((f) => f.kind === "base");
+  const url = useMediaUrl(active?.portrait_path ?? null);
+  return (
+    <div className="w-14 shrink-0">
+      <HoloFrame url={url} alt={`Foto de ${agent.character.name}`} variant={active?.kind === "lenda" ? "corrupted" : "holo"} />
+    </div>
+  );
+}
+
 function GiveItemModal({ open, onClose, campaignId, characterId, name, homebrew }: { open: boolean; onClose: () => void; campaignId: string; characterId: string; name: string; homebrew: ShieldHomebrew[] }) {
   const { act, busy } = useAct();
   const [pick, setPick] = useState("");
-  const own = homebrew.filter((h) => h.kind === "item" || h.kind === "arma");
+  const own = homebrew.filter((h) => h.kind === "item" || h.kind === "arma" || h.kind === "item_especial" || h.kind === "outro");
   return (
     <Modal open={open} onClose={onClose} title={`Dar item a ${name}`} size="md">
       <div className="space-y-4">
@@ -260,7 +276,7 @@ function NpcSection({ campaignId, npcs, setNpcs, homebrew }: { campaignId: strin
                   ))}
                 </select>
                 <Button size="sm" variant="secondary" disabled={!hb} loading={busy} onClick={() => act(() => npcFromHomebrew(campaignId, hb), (n) => (upsert(n), setHb("")))}>
-                  Usar modelo
+                  Adicionar à campanha
                 </Button>
               </>
             )}
@@ -270,10 +286,10 @@ function NpcSection({ campaignId, npcs, setNpcs, homebrew }: { campaignId: strin
           </div>
         }
       >
-        NPCs e monstros ({npcs.length})
+        NPCs e monstros da campanha ({npcs.length})
       </SectionTitle>
       {npcs.length === 0 ? (
-        <Empty>Crie NPCs e monstros desta campanha ou instancie um modelo do seu Homebrew.</Empty>
+        <Empty>Crie NPCs e monstros desta campanha ou adicione um modelo do seu Homebrew (cópia independente).</Empty>
       ) : (
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {npcs.map((n) => (
@@ -281,7 +297,7 @@ function NpcSection({ campaignId, npcs, setNpcs, homebrew }: { campaignId: strin
           ))}
         </div>
       )}
-      {editing && <NpcEditor campaignId={campaignId} npc={editing === "new" ? null : editing} onClose={() => setEditing(null)} onSaved={(n) => (upsert(n), setEditing(null))} />}
+      {editing && <NpcEditor campaignId={campaignId} npc={editing === "new" ? null : editing} library={homebrew} onClose={() => setEditing(null)} onSaved={(n) => (upsert(n), setEditing(null))} />}
     </section>
   );
 }
@@ -291,11 +307,16 @@ function NpcCard({ campaignId, npc, onChange, onEdit, onDeleted }: { campaignId:
   const toast = useToast();
   const [confirm, setConfirm] = useState(false);
   const [publicLog, setPublicLog] = useState(false);
+  const url = useMediaUrl(npc.image_path);
+  const sheet = useMemo(() => normalizeCreature(npc.data), [npc.data]);
   const down = npc.pv_current === 0;
   return (
     <article className={`border p-3 ${npc.kind === "monstro" ? "border-alert/40" : "border-line-strong"} bg-panel-2/40`}>
-      <header className="mb-2 flex items-start justify-between gap-2">
-        <div className="min-w-0">
+      <header className="mb-2 flex items-start gap-3">
+        <div className="w-14 shrink-0">
+          <HoloFrame url={url} alt={npc.name} fallback={npc.kind === "monstro" ? <Skull className="h-1/3 w-1/3" /> : undefined} />
+        </div>
+        <div className="min-w-0 flex-1">
           <h4 className={`truncate ${down ? "text-fg-muted line-through" : "text-fg"}`}>
             {down && <Skull className="mr-1 inline h-3.5 w-3.5 text-alert" aria-hidden />}
             {npc.name}
@@ -303,8 +324,9 @@ function NpcCard({ campaignId, npc, onChange, onEdit, onDeleted }: { campaignId:
           <p className="font-mono text-[0.58rem] tracking-[0.15em] text-fg-muted uppercase">
             {npc.kind === "monstro" ? "Monstro" : "NPC"}
             {npc.source_homebrew_id && " · Homebrew"}
-            {npc.visible_to_players && " · visível"}
+            {npc.visible_to_players ? " · visível" : " · secreto"}
           </p>
+          <p className="truncate text-[0.65rem] text-fg-dim">{creatureSummary(sheet)}</p>
         </div>
         <div className="flex gap-1">
           <button type="button" onClick={onEdit} className="p-1 text-fg-muted hover:text-cyan" aria-label="Editar">
@@ -335,7 +357,7 @@ function NpcCard({ campaignId, npc, onChange, onEdit, onDeleted }: { campaignId:
           onAdd={(name, turns) => act(() => npcCondition(campaignId, npc.id, "add", { name, turns }), onChange, true)}
           onRemove={(id) => act(() => npcCondition(campaignId, npc.id, "remove", { id }), onChange, true)}
         />
-        {(npc.data.attacks?.length ?? 0) > 0 && (
+        {sheet.attacks.length > 0 && (
           <div className="space-y-1 border-t border-line/50 pt-2">
             <div className="flex items-center justify-between">
               <p className="label-mono">Ataques</p>
@@ -343,39 +365,42 @@ function NpcCard({ campaignId, npc, onChange, onEdit, onDeleted }: { campaignId:
                 <input type="checkbox" className="accent-[var(--color-holo)]" checked={publicLog} onChange={(e) => setPublicLog(e.target.checked)} /> rolagem pública
               </label>
             </div>
-            {npc.data.attacks!.map((a, i) => (
-              <button
-                key={i}
-                type="button"
-                disabled={busy}
-                onClick={() =>
-                  act(
-                    () => npcAttack(campaignId, npc.name, a, null, publicLog),
-                    (r) => {
-                      const res = (r as { result?: { natural?: number; outcomeLabel?: string; hit?: boolean; finalDamage?: number } } | undefined)?.result;
-                      if (res) toast(`${a.name}: ${res.natural} — ${res.outcomeLabel}${res.hit ? ` · ${res.finalDamage} de dano` : ""}`);
-                    },
-                    true,
-                  )
-                }
-                className="flex w-full items-center justify-between gap-2 border border-line/60 px-2 py-1 text-left text-xs hover:border-cyan disabled:opacity-50"
-              >
-                <span className="flex items-center gap-1.5 text-fg">
-                  <Crosshair className="h-3 w-3 text-cyan" aria-hidden /> {a.name}
-                </span>
-                <span className="font-mono text-fg-dim">
-                  {a.skill}% · {a.damage}
-                </span>
-              </button>
-            ))}
+            {sheet.attacks.map((a) => {
+              const value = testValue(sheet, a.uses, a.value);
+              return (
+                <button
+                  key={a.id}
+                  type="button"
+                  disabled={busy}
+                  onClick={() =>
+                    act(
+                      () => npcAttack(campaignId, npc.name, { name: a.name, skill: value, damage: a.damage }, null, publicLog),
+                      (r) => {
+                        const res = (r as { result?: { natural?: number; outcomeLabel?: string; hit?: boolean; finalDamage?: number } } | undefined)?.result;
+                        if (res) toast(`${a.name}: ${res.natural} — ${res.outcomeLabel}${res.hit ? ` · ${res.finalDamage} de dano` : ""}`);
+                      },
+                      true,
+                    )
+                  }
+                  className="flex w-full items-center justify-between gap-2 border border-line/60 px-2 py-1 text-left text-xs hover:border-cyan disabled:opacity-50"
+                >
+                  <span className="flex items-center gap-1.5 text-fg">
+                    <Crosshair className="h-3 w-3 text-cyan" aria-hidden /> {a.name}
+                  </span>
+                  <span className="font-mono text-fg-dim">
+                    {value}% · {a.damage}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         )}
-        {npc.data.abilities && <p className="text-xs whitespace-pre-line text-fg-dim">{npc.data.abilities}</p>}
+        {sheet.abilities.length > 0 && <p className="text-xs text-fg-dim">Habilidades: {sheet.abilities.map((a) => a.name).join(", ")} — use-as no combate.</p>}
       </div>
       <ConfirmDialog
         open={confirm}
         title={`Excluir ${npc.name}?`}
-        description="Os participantes de combate criados a partir dele continuam no histórico."
+        description="As instâncias deste NPC em combates continuam com o estado que têm."
         confirmLabel="Excluir"
         loading={busy}
         onCancel={() => setConfirm(false)}
@@ -385,103 +410,68 @@ function NpcCard({ campaignId, npc, onChange, onEdit, onDeleted }: { campaignId:
   );
 }
 
-type AttackDraft = { name: string; skill: string; damage: string };
-
-function NpcEditor({ campaignId, npc, onClose, onSaved }: { campaignId: string; npc: NpcRow | null; onClose: () => void; onSaved: (n: NpcRow) => void }) {
+/** Editor do NPC/monstro DA CAMPANHA (instância): mesma ficha de criatura do Homebrew. */
+function NpcEditor({ campaignId, npc, library, onClose, onSaved }: { campaignId: string; npc: NpcRow | null; library: ShieldHomebrew[]; onClose: () => void; onSaved: (n: NpcRow) => void }) {
   const { act, busy } = useAct();
+  const toast = useToast();
   const [kind, setKind] = useState<NpcRow["kind"]>(npc?.kind ?? "npc");
   const [name, setName] = useState(npc?.name ?? "");
-  const [pv, setPv] = useState(npc?.pv_max?.toString() ?? "");
-  const [pc, setPc] = useState(npc?.pc_max?.toString() ?? "");
   const [visible, setVisible] = useState(npc?.visible_to_players ?? false);
-  const [description, setDescription] = useState(npc?.data.description ?? "");
-  const [abilities, setAbilities] = useState(npc?.data.abilities ?? "");
-  const [notes, setNotes] = useState(npc?.data.notes ?? "");
-  const [attrs, setAttrs] = useState<Record<string, string>>(() => Object.fromEntries(Object.entries(npc?.data.attributes ?? {}).map(([k, v]) => [k, String(v ?? "")])));
-  const [attacks, setAttacks] = useState<AttackDraft[]>(() => (npc?.data.attacks ?? []).map((a) => ({ name: a.name, skill: String(a.skill), damage: a.damage })));
-  const num = (s: string) => (s.trim() === "" ? null : Number.parseInt(s, 10));
-  const badAttack = useMemo(() => attacks.some((a) => !a.name.trim() || !Number.isInteger(Number(a.skill)) || !isValidDice(a.damage.trim())), [attacks]);
+  const [image, setImage] = useState<string | null>(npc?.image_path ?? null);
+  const url = useMediaUrl(image);
+  const [data, setData] = useState<CampaignNpcFormValue>(() => {
+    const d = campaignNpcDefaults(npc?.data);
+    // O PV/PC atuais da campanha ficam nas colunas do NPC.
+    return npc ? { ...d, pv_max: npc.pv_max, pc_max: npc.pc_max, pv_current: npc.pv_current, pc_current: npc.pc_current } : d;
+  });
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    const attributes: Record<string, number> = {};
-    for (const [k, v] of Object.entries(attrs)) if (v.trim() !== "" && Number.isInteger(Number(v))) attributes[k] = Number(v);
-    const input: NpcInput = {
-      kind,
-      name,
-      pv_max: num(pv),
-      pc_max: num(pc),
-      visible_to_players: visible,
-      data: {
-        description,
-        abilities,
-        notes,
-        attributes,
-        attacks: attacks.map((a) => ({ name: a.name.trim(), skill: Number(a.skill), damage: a.damage.trim() })),
-      },
-    };
+    const input: NpcInput = { kind, name, visible_to_players: visible, image_path: image, data };
     act(() => saveNpc(campaignId, input, npc?.id), (n) => n && onSaved(n));
   }
 
   return (
     <Modal open onClose={onClose} title={npc ? `Editar ${npc.name}` : "Novo NPC / monstro"} size="xl">
       <form onSubmit={submit} className="space-y-4">
-        <div className="grid gap-3 sm:grid-cols-[auto_1fr_6rem_6rem]">
-          <select className="field-input" value={kind} onChange={(e) => setKind(e.target.value as NpcRow["kind"])} aria-label="Tipo">
-            <option value="npc">NPC</option>
-            <option value="monstro">Monstro</option>
-          </select>
-          <input className="field-input" required maxLength={120} value={name} onChange={(e) => setName(e.target.value)} placeholder="Nome" aria-label="Nome" />
-          <input className="field-input" inputMode="numeric" value={pv} onChange={(e) => setPv(e.target.value.replace(/\D/g, ""))} placeholder="PV máx." aria-label="PV máximo" />
-          <input className="field-input" inputMode="numeric" value={pc} onChange={(e) => setPc(e.target.value.replace(/\D/g, ""))} placeholder="PC máx." aria-label="PC máximo" />
-        </div>
-        <textarea className="field-input" rows={2} value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Descrição" aria-label="Descrição" />
-        <fieldset>
-          <legend className="label-mono mb-1">Atributos (opcional)</legend>
-          <div className="grid grid-cols-4 gap-2 sm:grid-cols-8">
-            {ATTRIBUTES.map((a) => (
-              <label key={a.id} className="text-center text-[0.6rem] text-fg-muted uppercase">
-                {a.id}
-                <input className="field-input px-1 text-center text-xs" inputMode="numeric" value={attrs[a.id] ?? ""} onChange={(e) => setAttrs({ ...attrs, [a.id]: e.target.value.replace(/\D/g, "").slice(0, 3) })} />
-              </label>
-            ))}
-          </div>
-        </fieldset>
-        <fieldset className="space-y-2">
-          <legend className="label-mono mb-1">Ataques (valor do teste d100 e dano)</legend>
-          {attacks.map((a, i) => (
-            <div key={i} className="grid grid-cols-[1fr_5rem_7rem_auto] gap-2">
-              <input className="field-input text-sm" value={a.name} placeholder="Garras" onChange={(e) => setAttacks(attacks.map((x, j) => (j === i ? { ...x, name: e.target.value } : x)))} aria-label="Nome do ataque" />
-              <input className="field-input text-sm" inputMode="numeric" value={a.skill} placeholder="%" onChange={(e) => setAttacks(attacks.map((x, j) => (j === i ? { ...x, skill: e.target.value.replace(/\D/g, "").slice(0, 3) } : x)))} aria-label="Valor" />
-              <input
-                className="field-input font-mono text-sm"
-                value={a.damage}
-                placeholder="1d8+2"
-                aria-invalid={a.damage !== "" && !isValidDice(a.damage.trim()) ? true : undefined}
-                onChange={(e) => setAttacks(attacks.map((x, j) => (j === i ? { ...x, damage: e.target.value } : x)))}
-                aria-label="Dano"
-              />
-              <button type="button" className="px-2 text-fg-muted hover:text-alert" onClick={() => setAttacks(attacks.filter((_, j) => j !== i))} aria-label="Remover ataque">
-                <Trash2 className="h-4 w-4" />
-              </button>
+        <div className="grid gap-4 sm:grid-cols-[9rem_1fr]">
+          <ImageField
+            url={url}
+            label="Imagem"
+            onUpload={async (blob, ext) => {
+              const path = mediaPath("npcs", campaignId, kind, ext);
+              const up = await uploadMedia(path, blob);
+              if (!up.ok) {
+                toast(up.error, "error");
+                return false;
+              }
+              setImage(path);
+              return true;
+            }}
+            onRemove={() => setImage(null)}
+          />
+          <div className="space-y-3">
+            <div className="grid gap-3 sm:grid-cols-[auto_1fr]">
+              <select className="field-input" value={kind} onChange={(e) => setKind(e.target.value as NpcRow["kind"])} aria-label="Tipo">
+                <option value="npc">NPC</option>
+                <option value="monstro">Monstro</option>
+              </select>
+              <input className="field-input" required maxLength={120} value={name} onChange={(e) => setName(e.target.value)} placeholder="Nome" aria-label="Nome" />
             </div>
-          ))}
-          {attacks.length < 12 && (
-            <Button type="button" size="sm" variant="ghost" onClick={() => setAttacks([...attacks, { name: "", skill: "50", damage: "1d6" }])}>
-              <Plus className="h-3.5 w-3.5" aria-hidden /> Ataque
-            </Button>
-          )}
-        </fieldset>
-        <textarea className="field-input" rows={3} value={abilities} onChange={(e) => setAbilities(e.target.value)} placeholder="Habilidades e poderes" aria-label="Habilidades" />
-        <textarea className="field-input" rows={2} value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Notas do Mestre" aria-label="Notas" />
-        <label className="flex items-center gap-2 text-sm text-fg-dim">
-          <input type="checkbox" className="accent-[var(--color-holo)]" checked={visible} onChange={(e) => setVisible(e.target.checked)} /> Visível para os jogadores
-        </label>
+            <textarea className="field-input" rows={2} value={data.description} onChange={(e) => setData({ ...data, description: e.target.value })} placeholder="Descrição (os jogadores veem se o NPC estiver visível)" aria-label="Descrição" />
+            <textarea className="field-input" rows={2} value={data.appearance} onChange={(e) => setData({ ...data, appearance: e.target.value })} placeholder="Aparência (visível)" aria-label="Aparência" />
+            <textarea className="field-input border-alert/40" rows={2} value={data.master_notes} onChange={(e) => setData({ ...data, master_notes: e.target.value })} placeholder="Segredos do Mestre (nunca vão para os jogadores)" aria-label="Segredos" />
+            <label className="flex items-center gap-2 text-sm text-fg-dim">
+              <input type="checkbox" className="accent-[var(--color-holo)]" checked={visible} onChange={(e) => setVisible(e.target.checked)} /> Visível para os jogadores (nome, imagem, descrição e aparência)
+            </label>
+          </div>
+        </div>
+        <CreatureFields value={data} onChange={setData} library={library as unknown as HomebrewEntry[]} showInventory />
         <div className="flex justify-end gap-2">
           <Button type="button" variant="ghost" onClick={onClose}>
             Cancelar
           </Button>
-          <Button type="submit" loading={busy} disabled={badAttack || !name.trim()}>
+          <Button type="submit" loading={busy} disabled={!name.trim()}>
             Salvar
           </Button>
         </div>

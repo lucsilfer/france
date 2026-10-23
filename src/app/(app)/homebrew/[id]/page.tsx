@@ -1,33 +1,35 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageShell } from "@/components/PageShell";
 import { requireUser } from "@/lib/supabase/server";
 import type { HomebrewEntry } from "@/lib/types";
-import type { HomebrewInput } from "@/lib/validation";
-import { HomebrewForm } from "../HomebrewForm";
+import { HOMEBREW_COLUMNS } from "@/lib/homebrew-server";
+import { signMedia } from "@/lib/media";
+import { EntryView } from "./EntryView";
 
-export const metadata: Metadata = { title: "Editar homebrew" };
+export const metadata: Metadata = { title: "Homebrew" };
 
-export default async function EditHomebrewPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function HomebrewDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   if (!/^[0-9a-f-]{36}$/i.test(id)) notFound();
   const { supabase, user } = await requireUser();
-  const { data } = await supabase.from("homebrew").select("id, kind, name, description, data, updated_at").eq("id", id).eq("owner_id", user.id).maybeSingle();
+  // O RLS entrega o conteúdo se ele for seu ou estiver compartilhado com uma campanha de que você participa.
+  const { data } = await supabase.from("homebrew").select(HOMEBREW_COLUMNS).eq("id", id).maybeSingle();
   if (!data) notFound();
-  const e = data as HomebrewEntry;
-  const d = (e.data ?? {}) as Record<string, string>;
-  const defaults: HomebrewInput = {
-    kind: e.kind,
-    name: e.name,
-    description: e.description,
-    effect_dice: d.effect_dice ?? "",
-    effect_kind: (["dano", "cura", "condicao", "utilidade", "personalizado", "outro"].includes(d.effect_kind) ? d.effect_kind : "") as HomebrewInput["effect_kind"],
-    range: d.range ?? "",
-    special_rules: d.special_rules ?? "",
-  };
+  const entry = data as HomebrewEntry & { owner_id: string };
+  const isOwner = entry.owner_id === user.id;
+  const [urls, camps, shares, chars] = await Promise.all([
+    signMedia(supabase, [entry.image_path]),
+    supabase.from("campaigns").select("id, name").eq("owner_id", user.id).order("created_at", { ascending: false }),
+    isOwner ? supabase.from("homebrew_shares").select("campaign_id").eq("homebrew_id", id) : Promise.resolve({ data: [] }),
+    supabase.from("characters").select("id, name").eq("owner_id", user.id).eq("status", "active").order("updated_at", { ascending: false }),
+  ]);
   return (
-    <PageShell eyebrow="Homebrew" title={`Editar: ${e.name}`} back="/painel?aba=homebrew" backLabel="Voltar à biblioteca">
-      <HomebrewForm id={e.id} defaults={defaults} />
-    </PageShell>
+    <EntryView
+      entry={{ ...entry, image_url: entry.image_path ? (urls[entry.image_path] ?? null) : null }}
+      isOwner={isOwner}
+      campaigns={(camps.data ?? []) as { id: string; name: string }[]}
+      sharedWith={((shares.data ?? []) as { campaign_id: string }[]).map((s) => s.campaign_id)}
+      characters={(chars.data ?? []) as { id: string; name: string }[]}
+    />
   );
 }

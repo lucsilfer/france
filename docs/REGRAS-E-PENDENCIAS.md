@@ -134,6 +134,20 @@ Muto (partes consumidas), Elo (objeto místico), Amaldiçoado (buff/debuff do Me
 
 ---
 
+## 12. Decisões da Fase 5
+
+| # | Ponto | Decisão atual | Onde mudar |
+|---|---|---|---|
+| 67 | 🟡 Testes de monstros/NPCs | d100 contra o valor da perícia/atributo/valor fixo, com normal / bom / extremo como nos jogadores; sem limite de 75 | `rules/creatures.ts` |
+| 68 | 🟡 Dano de ataques de criaturas | Extremo ×1,5 e crítico ×2 (mesma regra dos personagens) | `rollCreatureAttack` |
+| 69 | 🟡 Habilidade de criatura sem PC suficiente | Recusada (não fica com PC negativo) | `combatant_spend_pc` |
+| 70 | 🟡 Numeração das cópias | Monstros do Homebrew sempre numerados (“Leshy 1”…); NPC da campanha só ganha número quando há mais de uma cópia | `addCombatant` |
+| 71 | 🟡 Modificadores personalizados | Contam no limite de 2 junto com os oficiais; “regra especial” não ocupa vaga | `validate_item`, `modifierSlotsUsed` |
+| 72 | 🟡 Itens de cura | Usar rola a expressão e cura a forma ativa (até o máximo calculado pelo banco) | `useItem` |
+| 73 | 🟡 Compartilhamento | Só armas, equipamentos, itens especiais, modificadores e outros; monstros e NPCs ficam com o Mestre | `guard_homebrew_share` |
+
+---
+
 ## Para confirmar com o autor (prioridade)
 
 1. Técnicas do Arsenal e aparatos da Engrenagem por nível (#50, #51).

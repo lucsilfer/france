@@ -5,7 +5,7 @@ import { ATTACK_KIND_LABEL } from "@/rules/catalog.ts";
 import { planAttack } from "@/rules/combat.ts";
 import { SKILL_BY_ID } from "@/rules/data/skills.ts";
 import type { SheetState } from "../Sheet";
-import { ActiveEffects, AttackButton, UsePowerButton, weaponOf } from "./actions-ui";
+import { ActiveEffects, AttackButton, UseItemButton, UsePowerButton, weaponOf } from "./actions-ui";
 import { QuickTechniques } from "./TechniquesPanel";
 
 /** Itens e poderes marcados com ★, prontos para usar em combate. */
@@ -45,6 +45,7 @@ export function QuickTab({ state, goTo }: { state: SheetState; goTo: (tab: "inve
                     )}
                   </div>
                   {w && <AttackButton state={state} item={i} />}
+                  {!w && <UseItemButton state={state} item={i} />}
                 </li>
               );
             })}

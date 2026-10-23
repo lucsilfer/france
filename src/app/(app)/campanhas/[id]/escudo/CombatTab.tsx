@@ -1,12 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight, Crosshair, Dice5, Eye, EyeOff, Flag, Play, Plus, RotateCcw, Skull, Swords, Trash2 } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight, Dice5, Eye, EyeOff, Flag, Play, Plus, RotateCcw, Skull, Swords, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { useToast } from "@/components/ui/Toast";
 import { ConditionChips } from "@/components/campaign/ConditionChips";
-import type { AgentRow, CombatantRow, CombatLogRow, CombatRow, NpcRow } from "@/lib/campaign-types";
+import type { AgentRow, CombatantRow, CombatLogRow, CombatRow, NpcRow, ShieldHomebrew } from "@/lib/campaign-types";
+import { AddCombatantModal, CombatAvatar, CreatureActions } from "./CombatCreature";
 import {
   addCombatant,
   combatApply,
@@ -16,7 +17,6 @@ import {
   createCombat,
   deleteCombat,
   fetchCombat,
-  npcAttack,
   removeCombatant,
   rollInitiative,
   setCombatOrder,
@@ -43,6 +43,7 @@ export function CombatTab({
   agents,
   npcs,
   tick,
+  homebrew = [],
 }: {
   campaignId: string;
   initialCombats: CombatRow[];
@@ -51,6 +52,7 @@ export function CombatTab({
   agents: AgentRow[];
   npcs: NpcRow[];
   tick: number;
+  homebrew?: ShieldHomebrew[];
 }) {
   const toast = useToast();
   const { act, busy } = useAct();
@@ -62,6 +64,7 @@ export function CombatTab({
   const [newMode, setNewMode] = useState<CombatRow["initiative_mode"]>("manual");
   const [confirmEnd, setConfirmEnd] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [adding, setAdding] = useState(false);
 
   const combat = combats.find((c) => c.id === selected) ?? null;
   const list = useMemo(() => orderOf(combatants.filter((c) => c.combat_id === selected)), [combatants, selected]);
@@ -229,8 +232,15 @@ export function CombatTab({
               </p>
             </div>
 
+            {combat.status !== "ended" && (
+              <div className="flex justify-end">
+                <Button onClick={() => setAdding(true)}>
+                  <Plus className="h-4 w-4" aria-hidden /> Adicionar combatente
+                </Button>
+              </div>
+            )}
             {list.length === 0 ? (
-              <Empty>Adicione participantes abaixo.</Empty>
+              <Empty>Nenhum participante. Use “+ Adicionar combatente” para trazer personagens, NPCs e monstros do Homebrew.</Empty>
             ) : (
               <ol className="space-y-2">
                 {list.map((c, i) => (
@@ -244,6 +254,8 @@ export function CombatTab({
                     active={current?.id === c.id}
                     stats={liveStats(c)}
                     npc={c.npc_id ? npcs.find((n) => n.id === c.npc_id) : undefined}
+                    targets={list.filter((x) => x.id !== c.id).map((x) => ({ id: x.id, name: x.name }))}
+                    portrait={c.character_id ? (agents.find((a) => a.character.id === c.character_id)?.forms.find((f) => f.id === c.form_id)?.portrait_path ?? null) : (c.image_path ?? null)}
                     onMove={(dir) => {
                       const ids = list.map((x) => x.id);
                       const j = i + dir;
@@ -264,7 +276,9 @@ export function CombatTab({
               </ol>
             )}
 
-            {combat.status !== "ended" && <AddParticipant campaignId={campaignId} combat={combat} agents={agents} npcs={npcs} present={list} onAdded={() => void reload()} />}
+            {combat.status !== "ended" && (
+              <AddCombatantModal open={adding} onClose={() => setAdding(false)} campaignId={campaignId} combat={combat} agents={agents} npcs={npcs} homebrew={homebrew} present={list} onAdded={() => void reload()} />
+            )}
 
             <div className="grid gap-4 lg:grid-cols-2">
               <NoteBox campaignId={campaignId} combatId={combat.id} onDone={() => void reload()} />
@@ -337,6 +351,8 @@ function CombatantCard({
   active,
   stats,
   npc,
+  targets,
+  portrait,
   onMove,
   onChanged,
   onRemoved,
@@ -349,14 +365,14 @@ function CombatantCard({
   active: boolean;
   stats: { pv: number | null; pvMax: number | null; pc: number | null; pcMax: number | null; prodigio: boolean; conditions: CombatantRow["conditions"] };
   npc?: NpcRow;
+  targets: { id: string; name: string }[];
+  portrait: string | null;
   onMove: (dir: -1 | 1) => void;
   onChanged: (patch?: Partial<CombatantRow>) => void;
   onRemoved: () => void;
 }) {
   const { act, busy } = useAct();
-  const toast = useToast();
   const [ini, setIni] = useState(c.initiative?.toString() ?? "");
-  const [publicRoll, setPublicRoll] = useState(false);
   const down = stats.pv === 0;
   const ended = combat.status === "ended";
   const kindLabel = c.character_id ? "Agente" : c.kind === "monstro" ? "Monstro" : c.kind === "npc" ? "NPC" : "Outro";
@@ -381,6 +397,7 @@ function CombatantCard({
           </button>
         </div>
         <span className="font-mono text-sm text-fg-muted tabular-nums">{String(index + 1).padStart(2, "0")}</span>
+        <CombatAvatar path={portrait} name={c.name} kind={c.kind} />
         <div className="min-w-36 flex-1">
           <p className={`truncate ${down ? "text-fg-muted line-through" : "text-fg"}`}>
             {down && <Skull className="mr-1 inline h-3.5 w-3.5 text-alert" aria-label="caído" />}
@@ -460,104 +477,9 @@ function CombatantCard({
           onRemove={ended ? undefined : (id) => act(() => combatCondition(campaignId, c.id, "remove", { id }), (conds) => onChanged(conds && !c.character_id ? { conditions: conds } : undefined), true)}
         />
       </div>
-      {npc && (npc.data.attacks?.length ?? 0) > 0 && !ended && (
-        <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t border-line/40 pt-2">
-          {npc.data.attacks!.map((a, i) => (
-            <button
-              key={i}
-              type="button"
-              disabled={busy}
-              onClick={() =>
-                act(
-                  () => npcAttack(campaignId, c.name, a, combat.id, publicRoll),
-                  (r) => {
-                    const res = (r as { result?: { natural?: number; outcomeLabel?: string; hit?: boolean; finalDamage?: number } } | undefined)?.result;
-                    if (res) toast(`${c.name} — ${a.name}: ${res.natural} (${res.outcomeLabel})${res.hit ? ` · ${res.finalDamage} de dano` : ""}`);
-                    onChanged();
-                  },
-                  true,
-                )
-              }
-              className="inline-flex items-center gap-1 border border-line-strong px-2 py-1 font-mono text-[0.62rem] text-fg hover:border-cyan disabled:opacity-50"
-            >
-              <Crosshair className="h-3 w-3 text-cyan" aria-hidden /> {a.name} ({a.skill}% · {a.damage})
-            </button>
-          ))}
-          <label className="ml-auto flex items-center gap-1 text-[0.65rem] text-fg-muted">
-            <input type="checkbox" className="accent-[var(--color-holo)]" checked={publicRoll} onChange={(e) => setPublicRoll(e.target.checked)} /> rolagem pública
-          </label>
-        </div>
-      )}
+      {!c.character_id && <CreatureActions campaignId={campaignId} combatant={c} npc={npc} targets={targets} disabled={ended} onChanged={() => onChanged()} />}
       {c.character_id && <p className="mt-1 text-[0.65rem] text-fg-muted">Ataques e poderes do agente são rolados pelo jogador na ficha; o PC é cobrado lá, uma única vez.</p>}
     </li>
-  );
-}
-
-function AddParticipant({ campaignId, combat, agents, npcs, present, onAdded }: { campaignId: string; combat: CombatRow; agents: AgentRow[]; npcs: NpcRow[]; present: CombatantRow[]; onAdded: () => void }) {
-  const { act, busy } = useAct();
-  const [pick, setPick] = useState("");
-  const [name, setName] = useState("");
-  const [pv, setPv] = useState("");
-  const [pc, setPc] = useState("");
-  const [ini, setIni] = useState("");
-  const freeAgents = agents.filter((a) => !present.some((p) => p.character_id === a.character.id));
-  const initiative = ini.trim() === "" ? null : Number.parseInt(ini, 10);
-
-  function add() {
-    const [k, id] = pick.split(":");
-    const who = k === "char" ? { characterId: id } : k === "npc" ? { npcId: id } : { name, pv: pv ? Number(pv) : null, pc: pc ? Number(pc) : null };
-    act(
-      () => addCombatant(campaignId, combat.id, who, initiative),
-      () => {
-        setName("");
-        setPv("");
-        setPc("");
-        setIni("");
-        if (k === "char") setPick("");
-        onAdded();
-      },
-      true,
-    );
-  }
-
-  return (
-    <section className="space-y-2 border border-line/70 p-3">
-      <p className="label-mono text-holo">Adicionar participante</p>
-      <div className="flex flex-wrap items-end gap-2">
-        <select className="field-input w-auto min-w-48 text-sm" value={pick} onChange={(e) => setPick(e.target.value)} aria-label="Participante">
-          <option value="">Avulso (digitar nome)</option>
-          {freeAgents.length > 0 && (
-            <optgroup label="Agentes">
-              {freeAgents.map((a) => (
-                <option key={a.character.id} value={`char:${a.character.id}`}>
-                  {a.character.name}
-                </option>
-              ))}
-            </optgroup>
-          )}
-          {npcs.length > 0 && (
-            <optgroup label="NPCs e monstros (cada inclusão é uma cópia)">
-              {npcs.map((n) => (
-                <option key={n.id} value={`npc:${n.id}`}>
-                  {n.name}
-                </option>
-              ))}
-            </optgroup>
-          )}
-        </select>
-        {!pick && (
-          <>
-            <input className="field-input w-40 text-sm" value={name} maxLength={120} onChange={(e) => setName(e.target.value)} placeholder="Nome" aria-label="Nome" />
-            <input className="field-input w-20 text-sm" inputMode="numeric" value={pv} onChange={(e) => setPv(e.target.value.replace(/\D/g, ""))} placeholder="PV" aria-label="PV" />
-            <input className="field-input w-20 text-sm" inputMode="numeric" value={pc} onChange={(e) => setPc(e.target.value.replace(/\D/g, ""))} placeholder="PC" aria-label="PC" />
-          </>
-        )}
-        <input className="field-input w-20 text-sm" inputMode="numeric" value={ini} onChange={(e) => setIni(e.target.value.replace(/[^\d-]/g, ""))} placeholder="Inic." aria-label="Iniciativa" />
-        <Button size="sm" onClick={add} loading={busy} disabled={!pick && !name.trim()}>
-          <Plus className="h-3.5 w-3.5" aria-hidden /> Adicionar
-        </Button>
-      </div>
-    </section>
   );
 }
 

@@ -57,7 +57,7 @@ export const campaignSchema = z.object({
 });
 
 export const homebrewSchema = z.object({
-  kind: z.enum(["item", "arma", "modificador", "monstro", "npc", "outro"]),
+  kind: z.enum(["item", "arma", "modificador", "monstro", "npc", "item_especial", "outro"]),
   name: z.string().trim().min(1, "Dê um nome.").max(120, "Máximo de 120 caracteres."),
   description: z.string().trim().max(10000, "Texto longo demais."),
   effect_dice: z

@@ -1,4 +1,5 @@
 import "server-only";
+import { signMedia } from "@/lib/media";
 import { notFound, redirect } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
 import type {
@@ -94,11 +95,11 @@ export async function loadShield(id: string): Promise<ShieldData> {
     supabase
       .from("campaign_characters")
       .select(
-        "status, master_can_edit, characters!inner(id, name, player_name, class_id, origin_id, origin_path_id, level, owner_id, active_form, character_forms(id, kind, name, setup_complete, pv_current, pc_current, pv_other_bonus, pc_other_bonus, conditions, form_attributes(attribute, base_value, other_bonus, temp_bonus), form_skills(skill_id, points, other_bonus, temp_bonus), level_progressions(level, pv_gain, pc_gain)))",
+        "status, master_can_edit, characters!inner(id, name, player_name, class_id, origin_id, origin_path_id, level, owner_id, active_form, character_forms(id, kind, name, setup_complete, pv_current, pc_current, pv_other_bonus, pc_other_bonus, conditions, portrait_path, form_attributes(attribute, base_value, other_bonus, temp_bonus), form_skills(skill_id, points, other_bonus, temp_bonus), level_progressions(level, pv_gain, pc_gain)))",
       )
       .eq("campaign_id", id)
       .eq("status", "accepted"),
-    supabase.from("npcs").select("id, kind, name, data, pv_current, pv_max, pc_current, pc_max, conditions, visible_to_players, source_homebrew_id, created_at").eq("campaign_id", id).order("created_at"),
+    supabase.from("npcs").select("id, kind, name, data, pv_current, pv_max, pc_current, pc_max, conditions, visible_to_players, source_homebrew_id, image_path, created_at").eq("campaign_id", id).order("created_at"),
     supabase.from("combats").select(COMBAT_COLUMNS).eq("campaign_id", id).order("created_at", { ascending: false }).limit(20),
     supabase.from("investigations").select("id, title, description, location, status, characters, visible_to_players, created_at").eq("campaign_id", id).order("created_at", { ascending: false }),
     supabase.from("investigation_secrets").select("investigation_id, master_notes"),
@@ -108,14 +109,14 @@ export async function loadShield(id: string): Promise<ShieldData> {
     supabase.from("reports").select("id, title, report_date, description, participants, events, conclusions, attachments, is_private, created_at").eq("campaign_id", id).order("report_date", { ascending: false }),
     supabase.from("campaign_notes").select("id, title, category, content, is_private, updated_at").eq("campaign_id", id).order("updated_at", { ascending: false }),
     supabase.from("roll_log").select(ROLL_COLUMNS).eq("campaign_id", id).order("created_at", { ascending: false }).limit(80),
-    supabase.from("homebrew").select("id, kind, name, description, data").eq("owner_id", user.id).in("kind", ["npc", "monstro", "item", "arma"]).order("name"),
+    supabase.from("homebrew").select("id, kind, name, description, data, image_path").eq("owner_id", user.id).in("kind", ["npc", "monstro", "item", "arma", "item_especial", "modificador", "outro"]).order("name"),
   ]);
 
   const combatList = (combats.data ?? []) as CombatRow[];
   const combatIds = combatList.map((c) => c.id);
   const [combatants, logs] = combatIds.length
     ? await Promise.all([
-        supabase.from("combatants").select("id, combat_id, character_id, npc_id, kind, form_id, name, initiative, sort_order, pv_current, pv_max, pc_current, pc_max, conditions, hidden, hide_stats, notes").in("combat_id", combatIds),
+        supabase.from("combatants").select("id, combat_id, character_id, npc_id, kind, form_id, name, initiative, sort_order, pv_current, pv_max, pc_current, pc_max, conditions, hidden, hide_stats, notes, data, image_path, homebrew_id").in("combat_id", combatIds),
         supabase.from("combat_log").select("id, combat_id, round, turn_index, kind, message, public, created_at").in("combat_id", combatIds).order("id", { ascending: false }).limit(300),
       ])
     : [{ data: [] }, { data: [] }];
@@ -129,15 +130,26 @@ export async function loadShield(id: string): Promise<ShieldData> {
   const invIds = new Set(((investigations.data ?? []) as InvestigationRow[]).map((i) => i.id));
   const secretBy = new Map(((secrets.data ?? []) as { investigation_id: string; master_notes: string }[]).map((s) => [s.investigation_id, s.master_notes]));
 
+  const npcList = (npcs.data ?? []) as NpcRow[];
+  const combatantList = (combatants.data ?? []) as CombatantRow[];
+  const homebrewList = (homebrew.data ?? []) as ShieldHomebrew[];
+  const media = await signMedia(supabase, [
+    ...agents.flatMap((a) => a.forms.map((f) => f.portrait_path)),
+    ...npcList.map((n) => n.image_path),
+    ...combatantList.map((c) => c.image_path),
+    ...homebrewList.filter((h) => h.kind === "monstro" || h.kind === "npc").map((h) => h.image_path),
+  ]);
+
   return {
     campaign,
     userId: user.id,
     members: (members.data ?? []) as MemberRow[],
     party: (party.data ?? []) as PartyRow[],
     agents,
-    npcs: (npcs.data ?? []) as NpcRow[],
+    media,
+    npcs: npcList,
     combats: combatList,
-    combatants: (combatants.data ?? []) as CombatantRow[],
+    combatants: combatantList,
     combatLog: (logs.data ?? []) as CombatLogRow[],
     investigations: ((investigations.data ?? []) as InvestigationRow[]).map((i) => ({ ...i, secret: secretBy.get(i.id) ?? "" })),
     clues: ((clues.data ?? []) as ClueRow[]).filter((c) => invIds.has(c.investigation_id)),
@@ -146,6 +158,6 @@ export async function loadShield(id: string): Promise<ShieldData> {
     reports: (reports.data ?? []) as ReportRow[],
     notes: (notes.data ?? []) as NoteRow[],
     rolls: (rolls.data ?? []) as RollRow[],
-    homebrew: (homebrew.data ?? []) as ShieldHomebrew[],
+    homebrew: homebrewList,
   };
 }

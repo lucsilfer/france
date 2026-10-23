@@ -11,6 +11,11 @@ import { OUTCOME_LABEL, rollTest, isSuccess } from "@/rules/d100.ts";
 import { isValidDice, rollExpression } from "@/rules/dice.ts";
 import { RULES_CONFIG } from "@/rules/config.ts";
 import { buildSheet } from "@/rules/sheet.ts";
+import { normalizeCreature, rollCreatureAbility, rollCreatureAttack } from "@/rules/creatures.ts";
+import { campaignNpcData, inventoryRowFrom, type CampaignNpcFormValue } from "@/lib/homebrew";
+import type { HomebrewKind } from "@/lib/types";
+import { isMediaPath } from "@/lib/media-shared";
+import { removeMedia } from "@/lib/media";
 
 const uuid = z.string().uuid();
 
@@ -87,6 +92,7 @@ export async function giveItem(campaignId: string, characterId: string, source: 
     if (!uuid.safeParse(characterId).success) return fail("Personagem inválido.");
     const { supabase, user } = await master(campaignId);
     let row: Record<string, unknown> | null = null;
+    let official: string[] = [];
     if (source.catalogId) {
       const c = CATALOG_BY_ID[source.catalogId];
       if (!c) return fail("Item inválido.");
@@ -107,30 +113,21 @@ export async function giveItem(campaignId: string, characterId: string, source: 
         tags: c.tags,
       };
     } else if (source.homebrewId && uuid.safeParse(source.homebrewId).success) {
-      const { data: hb } = await supabase.from("homebrew").select("kind, name, description, data").eq("id", source.homebrewId).eq("owner_id", user.id).maybeSingle();
-      if (!hb || !["item", "arma"].includes(hb.kind as string)) return fail("Item da biblioteca não encontrado.");
-      const d = (hb.data ?? {}) as Record<string, unknown>;
-      const dice = typeof d.effect_dice === "string" && isValidDice(d.effect_dice) ? d.effect_dice : null;
-      const weapon = hb.kind === "arma" || d.item_type === "arma";
-      row = {
-        source_kind: "homebrew",
-        source_ref: source.homebrewId,
-        name: hb.name,
-        description: hb.description ?? "",
-        item_type: weapon ? "arma" : ((d.item_type as string) ?? "equipamento"),
-        category: (d.category as string) ?? "",
-        effect_kind: d.effect_kind === "outro" ? "personalizado" : ((d.effect_kind as string) || (weapon ? "dano" : null)),
-        effect_dice: dice,
-        attack_kind: weapon ? ((d.attack_kind as string) || "melee") : null,
-        damage_type: weapon ? ((d.damage_type as string) || null) : null,
-        range: (d.range as string) ?? "",
-        special_rules: (d.special_rules as string) ?? "",
-        tags: weapon && Array.isArray(d.tags) ? d.tags : [],
-      };
-      if (weapon && !dice) return fail("Esta arma da biblioteca não tem dano válido.");
+      const { data: hb } = await supabase.from("homebrew").select("kind, name, description, data, image_path").eq("id", source.homebrewId).eq("owner_id", user.id).maybeSingle();
+      if (!hb || !["item", "arma", "item_especial", "outro"].includes(hb.kind as string)) return fail("Item da biblioteca não encontrado.");
+      let conv: ReturnType<typeof inventoryRowFrom> = null;
+      try {
+        conv = inventoryRowFrom(hb.kind as HomebrewKind, hb.name as string, (hb.description as string) ?? "", (hb.data ?? {}) as Record<string, unknown>);
+      } catch {
+        return fail("Este modelo está incompleto. Abra-o no Homebrew e salve de novo.");
+      }
+      if (!conv) return fail("Este conteúdo não vai para o inventário.");
+      row = { ...conv.row, source_kind: "homebrew", source_ref: source.homebrewId, image_path: hb.image_path ?? null };
+      official = conv.officialModifiers;
     } else return fail("Escolha um item.");
-    const { error } = await supabase.from("items").insert({ ...row, character_id: characterId });
-    if (error) return fail(msg(error, "O jogador não autorizou o Mestre a editar esta ficha."));
+    const { data: created, error } = await supabase.from("items").insert({ ...row, character_id: characterId }).select("id").single();
+    if (error || !created) return fail(msg(error, "O jogador não autorizou o Mestre a editar esta ficha."));
+    for (const m of official) await supabase.from("item_modifiers").insert({ item_id: created.id, modifier_id: m, is_temporary: false });
     return { ok: true, message: `${row.name} entregue ao inventário.` };
   });
 }
@@ -140,36 +137,52 @@ export async function giveItem(campaignId: string, characterId: string, source: 
 const npcSchema = z.object({
   kind: z.enum(["npc", "monstro"]),
   name: z.string().trim().min(1, "Dê um nome.").max(120),
-  pv_max: z.number().int().min(0).max(99999).nullable(),
-  pc_max: z.number().int().min(0).max(99999).nullable(),
   visible_to_players: z.boolean(),
-  data: z.object({
-    description: z.string().max(10000).optional(),
-    attributes: z.record(z.string(), z.number().int().min(0).max(300)).optional(),
-    attacks: z
-      .array(z.object({ name: z.string().trim().min(1).max(80), skill: z.number().int().min(0).max(200), damage: z.string().trim().max(60).refine((v) => isValidDice(v), "Dano inválido (ex.: 1d8+2).") }))
-      .max(12)
-      .optional(),
-    abilities: z.string().max(10000).optional(),
-    notes: z.string().max(10000).optional(),
-  }),
+  image_path: z.string().max(200).nullable(),
+  data: campaignNpcData,
 });
-export type NpcInput = z.infer<typeof npcSchema>;
+export interface NpcInput {
+  kind: "npc" | "monstro";
+  name: string;
+  visible_to_players: boolean;
+  image_path: string | null;
+  data: CampaignNpcFormValue;
+}
 
-const NPC_COLUMNS = "id, kind, name, data, pv_current, pv_max, pc_current, pc_max, conditions, visible_to_players, source_homebrew_id, created_at";
+const NPC_COLUMNS = "id, kind, name, data, pv_current, pv_max, pc_current, pc_max, conditions, visible_to_players, source_homebrew_id, image_path, created_at";
 
 export async function saveNpc(campaignId: string, input: NpcInput, id?: string | null): Promise<ActionResult<NpcRow>> {
   return run(async () => {
     const parsed = npcSchema.safeParse(input);
-    if (!parsed.success) return fail(parsed.error.issues[0]?.message ?? "Revise os campos.");
+    if (!parsed.success) {
+      const i = parsed.error.issues[0];
+      return fail(i ? `${i.message}${i.path.length ? ` (${i.path.join(" › ")})` : ""}` : "Revise os campos.");
+    }
     if (id && !uuid.safeParse(id).success) return fail("NPC inválido.");
-    const { supabase } = await master(campaignId);
+    const { supabase, user } = await master(campaignId);
     const d = parsed.data;
+    if (d.image_path && !isMediaPath(d.image_path, "npcs", campaignId) && !isMediaPath(d.image_path, "homebrew", user.id)) return fail("Imagem inválida.");
+    const c = d.data as CampaignNpcFormValue;
+    const base = { kind: d.kind, name: d.name, visible_to_players: d.visible_to_players, image_path: d.image_path, data: c, pv_max: c.pv_max, pc_max: c.pc_max };
+    let prevImage: string | null = null;
+    if (id) {
+      const { data: prev } = await supabase.from("npcs").select("image_path").eq("id", id).eq("campaign_id", campaignId).maybeSingle();
+      prevImage = (prev?.image_path as string | null) ?? null;
+    }
     const q = id
-      ? supabase.from("npcs").update({ ...d }).eq("id", id).eq("campaign_id", campaignId).select(NPC_COLUMNS)
-      : supabase.from("npcs").insert({ ...d, campaign_id: campaignId, pv_current: d.pv_max, pc_current: d.pc_max }).select(NPC_COLUMNS);
+      ? supabase
+          .from("npcs")
+          .update({ ...base, ...(c.pv_current != null ? { pv_current: Math.min(c.pv_current, c.pv_max ?? c.pv_current) } : {}), ...(c.pc_current != null ? { pc_current: Math.min(c.pc_current, c.pc_max ?? c.pc_current) } : {}) })
+          .eq("id", id)
+          .eq("campaign_id", campaignId)
+          .select(NPC_COLUMNS)
+      : supabase
+          .from("npcs")
+          .insert({ ...base, campaign_id: campaignId, pv_current: c.pv_current ?? c.pv_max, pc_current: c.pc_current ?? c.pc_max, conditions: (c.conditions ?? []).map((x) => ({ id: randomUUID(), name: x.name, turns: x.turns })) })
+          .select(NPC_COLUMNS);
     const { data, error } = await q;
     if (error || !data?.length) return fail(msg(error, "Não foi possível salvar o NPC."));
+    if (prevImage && prevImage !== d.image_path && prevImage.startsWith(`npcs/${campaignId}/`)) await removeMedia(supabase, prevImage);
     return { ok: true, data: data[0] as NpcRow, message: id ? "NPC salvo." : `${d.kind === "monstro" ? "Monstro" : "NPC"} criado.` };
   });
 }
@@ -179,11 +192,10 @@ export async function npcFromHomebrew(campaignId: string, homebrewId: string): P
   return run(async () => {
     if (!uuid.safeParse(homebrewId).success) return fail("Modelo inválido.");
     const { supabase, user } = await master(campaignId);
-    const { data: hb } = await supabase.from("homebrew").select("id, kind, name, description, data").eq("id", homebrewId).eq("owner_id", user.id).maybeSingle();
+    const { data: hb } = await supabase.from("homebrew").select("id, kind, name, description, data, image_path").eq("id", homebrewId).eq("owner_id", user.id).maybeSingle();
     if (!hb || !["npc", "monstro"].includes(hb.kind as string)) return fail("Modelo de NPC/monstro não encontrado.");
-    const d = (hb.data ?? {}) as Record<string, unknown>;
-    const pv = Number.isInteger(d.pv_max) ? (d.pv_max as number) : Number.isInteger(d.pv) ? (d.pv as number) : null;
-    const pc = Number.isInteger(d.pc_max) ? (d.pc_max as number) : Number.isInteger(d.pc) ? (d.pc as number) : null;
+    const raw = (hb.data ?? {}) as Record<string, unknown>;
+    const c = normalizeCreature(raw);
     const { data, error } = await supabase
       .from("npcs")
       .insert({
@@ -191,11 +203,13 @@ export async function npcFromHomebrew(campaignId: string, homebrewId: string): P
         source_homebrew_id: hb.id,
         kind: hb.kind,
         name: hb.name,
-        data: { ...d, description: hb.description ?? "" },
-        pv_max: pv,
-        pv_current: pv,
-        pc_max: pc,
-        pc_current: pc,
+        image_path: hb.image_path ?? null,
+        data: { ...raw, ...c, description: hb.description ?? "" },
+        pv_max: c.pv_max,
+        pv_current: c.pv_current ?? c.pv_max,
+        pc_max: c.pc_max,
+        pc_current: c.pc_current ?? c.pc_max,
+        conditions: c.conditions.map((x) => ({ id: randomUUID(), name: x.name, turns: x.turns })),
       })
       .select(NPC_COLUMNS)
       .single();
@@ -301,7 +315,7 @@ export async function npcAttack(campaignId: string, npcName: string, attack: { n
 // ===================================================================== Combates
 
 const COMBAT_COLUMNS = "id, name, status, round, turn_index, version, initiative_mode, started_at, ended_at, created_at";
-const COMBATANT_COLUMNS = "id, combat_id, character_id, npc_id, kind, form_id, name, initiative, sort_order, pv_current, pv_max, pc_current, pc_max, conditions, hidden, hide_stats, notes";
+const COMBATANT_COLUMNS = "id, combat_id, character_id, npc_id, kind, form_id, name, initiative, sort_order, pv_current, pv_max, pc_current, pc_max, conditions, hidden, hide_stats, notes, data, image_path, homebrew_id";
 
 export async function createCombat(campaignId: string, name: string, mode: "manual" | "reflexo" | "d20"): Promise<ActionResult<CombatRow>> {
   return run(async () => {
@@ -327,41 +341,214 @@ export async function deleteCombat(campaignId: string, combatId: string): Promis
   });
 }
 
+/** Snapshot da ficha da criatura para a instância de combate (independente do modelo). */
+function creatureSnapshot(raw: Record<string, unknown>, description: string) {
+  const c = normalizeCreature(raw);
+  return {
+    sheet: c,
+    data: {
+      description: description.slice(0, 4000),
+      attributes: c.attributes,
+      skills: c.skills,
+      defense: c.defense,
+      resistances: c.resistances,
+      vulnerabilities: c.vulnerabilities,
+      immunities: c.immunities,
+      movement: c.movement,
+      attacks: c.attacks,
+      abilities: c.abilities,
+    },
+  };
+}
+
+/**
+ * Adiciona participantes. Monstros/NPCs (do Homebrew ou da campanha) viram INSTÂNCIAS:
+ * cada cópia tem PV, PC, condições e iniciativa próprios ("Leshy 1", "Leshy 2"…).
+ */
 export async function addCombatant(
   campaignId: string,
   combatId: string,
-  who: { characterId?: string; npcId?: string; name?: string; pv?: number | null; pc?: number | null },
+  who: { characterId?: string; npcId?: string; homebrewId?: string; name?: string; pv?: number | null; pc?: number | null },
   initiative: number | null,
-): Promise<ActionResult<CombatantRow>> {
+  quantity = 1,
+): Promise<ActionResult<CombatantRow[]>> {
   return run(async () => {
     if (!uuid.safeParse(combatId).success) return fail("Combate inválido.");
     if (initiative !== null && (!Number.isInteger(initiative) || Math.abs(initiative) > 10000)) return fail("Iniciativa inválida.");
-    const { supabase } = await master(campaignId);
+    if (!Number.isInteger(quantity) || quantity < 1 || quantity > 20) return fail("Quantidade entre 1 e 20.");
+    const { supabase, user } = await master(campaignId);
+    const { data: cb } = await supabase.from("combats").select("id").eq("id", combatId).eq("campaign_id", campaignId).maybeSingle();
+    if (!cb) return fail("Combate não encontrado.");
     const { count } = await supabase.from("combatants").select("id", { count: "exact", head: true }).eq("combat_id", combatId);
-    let row: Record<string, unknown>;
+    let rows: Record<string, unknown>[] = [];
     if (who.characterId && uuid.safeParse(who.characterId).success) {
       const { data: ch } = await supabase.from("characters").select("name").eq("id", who.characterId).maybeSingle();
       if (!ch) return fail("Personagem não encontrado (precisa estar aceito na campanha).");
-      row = { character_id: who.characterId, name: ch.name };
-    } else if (who.npcId && uuid.safeParse(who.npcId).success) {
-      // Instância independente: copia os valores do NPC; o modelo não muda.
-      const { data: n } = await supabase.from("npcs").select("id, kind, name, pv_max, pc_max").eq("id", who.npcId).eq("campaign_id", campaignId).maybeSingle();
-      if (!n) return fail("NPC não encontrado.");
-      const same = await supabase.from("combatants").select("id", { count: "exact", head: true }).eq("combat_id", combatId).eq("npc_id", n.id);
-      const suffix = (same.count ?? 0) > 0 ? ` ${(same.count ?? 0) + 1}` : "";
-      row = { npc_id: n.id, kind: n.kind, name: `${n.name}${suffix}`, pv_max: n.pv_max, pv_current: n.pv_max, pc_max: n.pc_max, pc_current: n.pc_max };
+      rows = [{ character_id: who.characterId, name: ch.name }];
+    } else if ((who.npcId && uuid.safeParse(who.npcId).success) || (who.homebrewId && uuid.safeParse(who.homebrewId).success)) {
+      let base: { name: string; kind: string; pv_max: number | null; pc_max: number | null; pv_current: number | null; pc_current: number | null; image_path: string | null; data: Record<string, unknown>; conditions: unknown[] };
+      let link: Record<string, unknown>;
+      if (who.npcId) {
+        const { data: n } = await supabase.from("npcs").select("id, kind, name, data, pv_max, pv_current, pc_max, pc_current, image_path, conditions").eq("id", who.npcId).eq("campaign_id", campaignId).maybeSingle();
+        if (!n) return fail("NPC não encontrado.");
+        const snap = creatureSnapshot((n.data ?? {}) as Record<string, unknown>, String((n.data as Record<string, unknown>)?.description ?? ""));
+        base = { name: n.name as string, kind: n.kind as string, pv_max: n.pv_max as number | null, pc_max: n.pc_max as number | null, pv_current: n.pv_current as number | null, pc_current: n.pc_current as number | null, image_path: (n.image_path as string | null) ?? null, data: snap.data, conditions: (n.conditions as unknown[]) ?? [] };
+        link = { npc_id: n.id };
+      } else {
+        const { data: hb } = await supabase.from("homebrew").select("id, kind, name, description, data, image_path").eq("id", who.homebrewId!).eq("owner_id", user.id).maybeSingle();
+        if (!hb || !["monstro", "npc"].includes(hb.kind as string)) return fail("Monstro do Homebrew não encontrado.");
+        const snap = creatureSnapshot((hb.data ?? {}) as Record<string, unknown>, (hb.description as string) ?? "");
+        base = {
+          name: hb.name as string,
+          kind: hb.kind as string,
+          pv_max: snap.sheet.pv_max,
+          pc_max: snap.sheet.pc_max,
+          pv_current: snap.sheet.pv_current ?? snap.sheet.pv_max,
+          pc_current: snap.sheet.pc_current ?? snap.sheet.pc_max,
+          image_path: (hb.image_path as string | null) ?? null,
+          data: snap.data,
+          conditions: snap.sheet.conditions.map((x) => ({ id: randomUUID(), name: x.name, turns: x.turns })),
+        };
+        link = { homebrew_id: hb.id };
+      }
+      // Numeração continua a partir das cópias que já estão no combate.
+      const sameQ = supabase.from("combatants").select("id", { count: "exact", head: true }).eq("combat_id", combatId);
+      const same = await (who.npcId ? sameQ.eq("npc_id", who.npcId) : sameQ.eq("homebrew_id", who.homebrewId!));
+      const already = same.count ?? 0;
+      const numbered = quantity > 1 || already > 0 || Boolean(who.homebrewId);
+      for (let k = 0; k < quantity; k++) {
+        rows.push({
+          ...link,
+          kind: base.kind,
+          name: numbered ? `${base.name} ${already + k + 1}`.slice(0, 120) : base.name,
+          pv_max: base.pv_max,
+          pv_current: base.pv_current ?? base.pv_max,
+          pc_max: base.pc_max,
+          pc_current: base.pc_current ?? base.pc_max,
+          image_path: base.image_path,
+          data: base.data,
+          conditions: (base.conditions as { id: string }[]).map((x) => ({ ...x, id: randomUUID() })),
+        });
+      }
     } else {
       const name = (who.name ?? "").trim();
       if (!name || name.length > 120) return fail("Dê um nome ao participante.");
-      row = { kind: "other", name, pv_max: who.pv ?? null, pv_current: who.pv ?? null, pc_max: who.pc ?? null, pc_current: who.pc ?? null };
+      rows = [{ kind: "other", name, pv_max: who.pv ?? null, pv_current: who.pv ?? null, pc_max: who.pc ?? null, pc_current: who.pc ?? null }];
     }
     const { data, error } = await supabase
       .from("combatants")
-      .insert({ ...row, combat_id: combatId, initiative, sort_order: count ?? 0 })
-      .select(COMBATANT_COLUMNS)
-      .single();
-    if (error || !data) return fail(msg(error, "Não foi possível adicionar."));
-    return { ok: true, data: data as CombatantRow };
+      .insert(rows.map((r, i) => ({ ...r, combat_id: combatId, initiative, sort_order: (count ?? 0) + i })))
+      .select(COMBATANT_COLUMNS);
+    if (error || !data?.length) return fail(msg(error, "Não foi possível adicionar."));
+    return { ok: true, data: data as CombatantRow[], message: rows.length > 1 ? `${rows.length} participantes adicionados.` : undefined };
+  });
+}
+
+/** Ficha da instância (snapshot); combatentes antigos (Fase 4) usam a ficha do NPC. */
+async function combatantSheet(supabase: Awaited<ReturnType<typeof master>>["supabase"], c: { data: Record<string, unknown> | null; npc_id: string | null }) {
+  let sheet = normalizeCreature(c.data ?? {});
+  if (sheet.attacks.length === 0 && sheet.abilities.length === 0 && c.npc_id) {
+    const { data: n } = await supabase.from("npcs").select("data").eq("id", c.npc_id).maybeSingle();
+    if (n) sheet = normalizeCreature(n.data ?? {});
+  }
+  return sheet;
+}
+
+/** Ataque de uma instância (monstro/NPC) direto do Escudo: d100 + dano rolados no servidor. Aplicar no alvo é um passo à parte. */
+export async function combatantAttack(campaignId: string, combatantId: string, attackId: string, publicLog = false) {
+  return run(async () => {
+    if (!uuid.safeParse(combatantId).success || typeof attackId !== "string" || attackId.length > 40) return fail("Dados inválidos.");
+    const { supabase, user } = await master(campaignId);
+    const { data: c } = await supabase.from("combatants").select("id, combat_id, name, npc_id, data, hidden").eq("id", combatantId).maybeSingle();
+    if (!c) return fail("Participante não encontrado.");
+    const sheet = await combatantSheet(supabase, c as { data: Record<string, unknown>; npc_id: string | null });
+    const atk = sheet.attacks.find((a) => a.id === attackId);
+    if (!atk) return fail("Ataque não encontrado.");
+    const r = rollCreatureAttack(sheet, atk);
+    const result = {
+      kind: "attack",
+      weapon: atk.name,
+      skillName: c.name,
+      natural: r.test.natural,
+      rolls: r.test.rolls,
+      effective: r.test.effective,
+      rollModifier: r.test.rollModifier,
+      thresholds: r.test.thresholds,
+      outcome: r.test.outcome,
+      outcomeLabel: r.outcomeLabel,
+      hit: r.hit,
+      damage: r.damage ? { expression: r.damage.expression, rolls: r.damage.terms.flatMap((t) => t.rolls), total: r.damage.total } : null,
+      multiplier: r.multiplier,
+      finalDamage: r.finalDamage,
+      applied: [],
+      conditions: r.conditions.map((x) => `${x.name}${x.turns ? ` (${x.turns} turnos)` : ""}`),
+      note: r.test.outcome === "critical_failure" ? "Falha crítica: o Mestre decide a consequência." : null,
+    };
+    const visible = publicLog && !c.hidden;
+    await supabase
+      .from("roll_log")
+      .insert({ user_id: user.id, campaign_id: campaignId, label: `${c.name}: ${atk.name}`, expression: `1d100 + ${atk.damage}`, result, visibility: visible ? "public" : "self" });
+    await supabase.rpc("combat_note", {
+      p_combat: c.combat_id,
+      p_kind: "ataque",
+      p_message: `${c.name} — ${atk.name}: ${r.test.natural} contra ${r.value} (${r.outcomeLabel})${r.hit ? `, ${r.finalDamage} de dano` : ", sem dano"}.`,
+      p_data: {},
+      p_public: visible,
+      p_request: null,
+    });
+    return {
+      ok: true as const,
+      data: { attack: atk.name, value: r.value, natural: r.test.natural, outcomeLabel: r.outcomeLabel, hit: r.hit, damage: result.damage, multiplier: r.multiplier, finalDamage: r.finalDamage, conditions: r.conditions },
+    };
+  });
+}
+
+/** Habilidade de uma instância: cobra o PC (recusa se faltar), rola dano/cura e devolve a condição para aplicar. */
+export async function combatantAbility(campaignId: string, combatantId: string, abilityId: string, requestId: string, publicLog = false) {
+  return run(async () => {
+    if (!uuid.safeParse(combatantId).success || !uuid.safeParse(requestId).success || typeof abilityId !== "string" || abilityId.length > 40) return fail("Dados inválidos.");
+    const { supabase, user } = await master(campaignId);
+    const { data: c } = await supabase.from("combatants").select("id, combat_id, name, npc_id, data, hidden, character_id").eq("id", combatantId).maybeSingle();
+    if (!c || c.character_id) return fail("Participante não encontrado.");
+    const sheet = await combatantSheet(supabase, c as { data: Record<string, unknown>; npc_id: string | null });
+    const ab = sheet.abilities.find((a) => a.id === abilityId);
+    if (!ab) return fail("Habilidade não encontrada.");
+    if (ab.pc_cost) {
+      const { error } = await supabase.rpc("combatant_spend_pc", { p_combatant: combatantId, p_amount: ab.pc_cost, p_request: requestId, p_note: ab.name });
+      if (error) return fail(msg(error, "Não foi possível pagar o custo."));
+    }
+    const r = rollCreatureAbility(sheet, ab);
+    const parts = [
+      r.test ? `${r.test.natural} (${r.outcomeLabel})` : "",
+      r.damage ? `${r.damage.total} de dano` : "",
+      r.heal ? `${r.heal.total} de cura` : "",
+      r.condition ? `condição ${r.condition.name}` : "",
+      ab.pc_cost ? `−${ab.pc_cost} PC` : "",
+      r.manual ? "efeito manual" : "",
+    ].filter(Boolean);
+    const visible = publicLog && !c.hidden;
+    const detail = (x: typeof r.damage) => (x ? { expression: x.expression, rolls: x.terms.flatMap((t) => t.rolls), total: x.total } : null);
+    await supabase.from("roll_log").insert({
+      user_id: user.id,
+      campaign_id: campaignId,
+      label: `${c.name}: ${ab.name}`,
+      expression: [ab.damage, ab.heal].filter(Boolean).join(" / ") || "—",
+      result: {
+        kind: "power",
+        power: ab.name,
+        cost: ab.pc_cost ?? 0,
+        pcAfter: 0,
+        effects: [r.damage && { ...detail(r.damage), label: "Dano", effect: "dano" }, r.heal && { ...detail(r.heal), label: "Cura", effect: "cura" }].filter(Boolean),
+        notes: [ab.description, ab.special, r.condition && `Condição: ${r.condition.name}`].filter(Boolean),
+        continuous: null,
+      },
+      visibility: visible ? "public" : "self",
+    });
+    await supabase.rpc("combat_note", { p_combat: c.combat_id, p_kind: "poder", p_message: `${c.name} usa ${ab.name}${parts.length ? `: ${parts.join(", ")}` : ""}.`, p_data: {}, p_public: visible, p_request: null });
+    return {
+      ok: true as const,
+      data: { ability: ab.name, success: r.success, outcomeLabel: r.outcomeLabel, natural: r.test?.natural ?? null, damage: detail(r.damage), heal: detail(r.heal), condition: r.condition, manual: r.manual, pcCost: ab.pc_cost ?? 0, text: [ab.description, ab.special].filter(Boolean).join("\n") },
+    };
   });
 }
 

@@ -50,7 +50,7 @@ src/rules  ← motor de regras em TypeScript puro, sem dependências e sem React
 | `/perfil` | logado | 1 ✅ |
 | `/campanhas/nova` | logado | 1 ✅ |
 | `/convite/[codigo]` | logado | 1 ✅ |
-| `/homebrew/novo`, `/homebrew/[id]` | dono | 1 ✅ (formulário básico; editores de monstro/NPC na 5) |
+| `/homebrew/novo?tipo=…`, `/homebrew/[id]`, `/homebrew/[id]/editar` | dono (detalhes também para jogadores de campanha com o conteúdo compartilhado) | 5 ✅ |
 | `/personagens/[id]/criar` (assistente) | dono | 2 ✅ |
 | `/personagens/[id]` (ficha) | dono / Mestre autorizado | 2 ✅ · 3 ✅ (inventário, poderes, níveis, formas) |
 | `/personagens/[id]/lenda` (assistente da Lenda) | dono (Artificial) | 3 ✅ |
@@ -142,8 +142,15 @@ Permissões (RLS): dono vê/edita tudo do seu personagem; Mestre vê fichas vinc
 - [x] 20 fluxos testados no banco + regressão 3.5
 - [ ] Conferir em navegador e `npm run build` (sem npm/navegador no ambiente de desenvolvimento)
 
-### Fase 5 — Homebrew
-- [ ] Editores completos de monstro e NPC no Homebrew (a Fase 4 já instancia modelos em campanhas e combates)
+### Fase 5 — Homebrew, monstros em combate e fotos ✅
+- [x] Fotos de personagem (Storage privado, recorte, ficha, cartões, duas formas do Artificial)
+- [x] Biblioteca Homebrew com 7 categorias, cartões, pesquisa, filtros e ordenação
+- [x] Editores de monstro, NPC (simplificado/completo), arma, equipamento/item especial, modificador e outros
+- [x] Monstros/NPCs do Homebrew como instâncias independentes nos combates, com ataques, habilidades (PC) e aplicação no alvo
+- [x] Modificadores personalizados com compatibilidade e limite (navegador, servidor e banco); uso de itens com usos/quantidade
+- [x] Compartilhamento de conteúdos com campanhas; segredos de NPC protegidos
+- [x] 20 fluxos testados no banco (com Storage simulado) + regressão
+- [ ] Conferir em navegador, `npm run build` e Storage real
 
 ### Fase 6 — Finalização
 - [ ] Revisão visual, testes de ponta a ponta, desempenho, publicação

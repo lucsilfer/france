@@ -18,6 +18,8 @@ import {
   addCatalogItem,
   addHomebrewItem,
   addModifier,
+  addCustomModifier,
+  removeCustomModifier,
   createCustomItem,
   removeItem,
   removeModifier,
@@ -26,7 +28,8 @@ import {
   updateItem,
 } from "../../inventory-actions";
 import type { SheetState } from "../Sheet";
-import { AttackButton } from "./actions-ui";
+import { AttackButton, UseItemButton } from "./actions-ui";
+import { customModifierCompatible, modifierSlotsUsed } from "@/rules/combat.ts";
 import { KitChoices } from "@/components/sheet/KitChoices";
 import { kitRef, startingKit, validateKitChoices, type KitChoices as Choices } from "@/rules/data/startingKits.ts";
 import { CLASS_BY_ID } from "@/rules/data/classes.ts";
@@ -127,9 +130,15 @@ function ItemCard({ state, item }: { state: SheetState; item: ItemRow }) {
   const cid = state.character.id;
   const weapon = Boolean(item.attack_kind && item.effect_dice);
   const mods = item.item_modifiers;
-  const permanent = mods.filter((m) => !m.is_temporary).length;
+  const customMods = item.custom_modifiers ?? [];
+  const permanent = modifierSlotsUsed(mods.filter((m) => !m.is_temporary).length, customMods);
   const compatible = weapon ? compatibleModifiers(item.tags).filter((m) => !mods.some((x) => x.modifier_id === m.id)) : [];
   const canAddMod = weapon && permanent < RULES_CONFIG.maxWeaponModifiers;
+  const [customPick, setCustomPick] = useState("");
+  const libraryMods = weapon
+    ? state.homebrew.filter((h) => h.kind === "modificador" && !customMods.some((m) => m.id === `hb:${h.id}`) && customModifierCompatible({ requires: ((h.data?.requires as string) || "qualquer") as "qualquer" }, item.tags))
+    : [];
+  const exhausted = item.uses_max != null ? (item.uses_left ?? 0) <= 0 : item.item_type === "consumivel" && item.quantity <= 0;
 
   type Res<T> = { ok: true; data?: T; message?: string } | { ok: false; error: string };
   /** Executa no servidor e aplica o resultado localmente (sem recarregar a ficha). */
@@ -154,6 +163,7 @@ function ItemCard({ state, item }: { state: SheetState; item: ItemRow }) {
     });
   }
 
+
   return (
     <li className={`border bg-panel-2/40 transition-colors ${open ? "border-holo/60" : "border-line/70 hover:border-line-strong"}`}>
       <div className="flex items-center gap-2 px-3 py-2">
@@ -174,10 +184,16 @@ function ItemCard({ state, item }: { state: SheetState; item: ItemRow }) {
           {item.quantity !== 1 && <span className="shrink-0 font-mono text-[0.65rem] text-fg-dim">×{item.quantity}</span>}
           <span className="shrink-0 font-mono text-[0.6rem] tracking-[0.12em] text-fg-muted uppercase">{ITEM_TYPE_LABEL[item.item_type as ItemType] ?? item.item_type}</span>
           {item.effect_dice && <span className="shrink-0 font-mono text-[0.65rem] text-cyan">{item.effect_dice}</span>}
-          {mods.length > 0 && <span className="shrink-0 font-mono text-[0.6rem] text-holo">+{mods.length} MOD</span>}
+          {mods.length + customMods.length > 0 && <span className="shrink-0 font-mono text-[0.6rem] text-holo">+{mods.length + customMods.length} MOD</span>}
+          {item.uses_max != null && (
+            <span className={`shrink-0 font-mono text-[0.6rem] ${exhausted ? "text-alert" : "text-fg-dim"}`}>
+              {item.uses_left ?? 0}/{item.uses_max} usos
+            </span>
+          )}
           <ChevronDown className={`ml-auto h-4 w-4 shrink-0 text-fg-muted transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
         </button>
         {weapon && <AttackButton state={state} item={item} compact />}
+        <UseItemButton state={state} item={item} />
       </div>
 
       <AnimatePresence initial={false}>
@@ -284,6 +300,59 @@ function ItemCard({ state, item }: { state: SheetState; item: ItemRow }) {
                         </div>
                       )}
                       {modPick && <p className="mt-1 text-xs text-fg-dim">{WEAPON_MODIFIER_BY_ID[modPick]?.text}</p>}
+                      {customMods.length > 0 && (
+                        <ul className="mt-2 space-y-2">
+                          {customMods.map((m) => (
+                            <li key={m.id} className="flex items-start justify-between gap-2 border border-holo/40 p-2">
+                              <div>
+                                <p className="text-sm text-fg">
+                                  {m.name} <span className="font-mono text-[0.6rem] text-holo">HOMEBREW{m.ignoreLimit ? " · SEM VAGA" : ""}</span>
+                                </p>
+                                {m.text && <p className="text-xs whitespace-pre-line text-fg-dim">{m.text}</p>}
+                                {m.condition && <p className="mt-1 text-xs text-cyan-dim">Condição: {m.condition}</p>}
+                              </div>
+                              {state.canEdit && (
+                                <button
+                                  onClick={() => run(() => removeCustomModifier(cid, item.id, m.id), (fresh) => fresh && patchItem(fresh))}
+                                  className="shrink-0 p-1 text-fg-muted hover:text-alert"
+                                  aria-label={`Remover ${m.name}`}
+                                  disabled={pending}
+                                >
+                                  <X className="h-3.5 w-3.5" />
+                                </button>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      {state.canEdit && libraryMods.length > 0 && (
+                        <div className="mt-2 flex flex-wrap items-center gap-2">
+                          <select className="field-input max-w-xs py-1 text-sm" value={customPick} onChange={(e) => setCustomPick(e.target.value)} aria-label="Modificador do Homebrew">
+                            <option value="">Modificador do Homebrew…</option>
+                            {libraryMods.map((h) => (
+                              <option key={h.id} value={h.id}>
+                                {h.name}
+                              </option>
+                            ))}
+                          </select>
+                          <Button
+                            size="sm"
+                            variant="secondary"
+                            disabled={!customPick || pending}
+                            onClick={() =>
+                              run(
+                                () => addCustomModifier(cid, item.id, customPick),
+                                (fresh) => {
+                                  if (fresh) patchItem(fresh);
+                                  setCustomPick("");
+                                },
+                              )
+                            }
+                          >
+                            <Plus className="h-3.5 w-3.5" aria-hidden /> Aplicar
+                          </Button>
+                        </div>
+                      )}
                     </section>
                   )}
 
@@ -351,7 +420,9 @@ function AddItemModal({ state, onClose }: { state: SheetState; onClose: () => vo
   const library = useMemo(
     () =>
       state.homebrew.filter((h) => {
-        const t = (h.data.item_type as string) ?? (h.kind === "arma" ? "arma" : "equipamento");
+        if (h.kind === "modificador") return false; // modificadores entram pela arma
+        const raw = (h.data.item_type as string) ?? (h.kind === "arma" ? "arma" : "equipamento");
+        const t = h.kind === "arma" ? "arma" : raw === "cura" ? "consumivel" : ["especial", "mistico", "utilidade"].includes(raw) ? "equipamento" : raw;
         return (!type || t === type) && (!q || norm(`${h.name} ${h.description}`).includes(norm(q)));
       }),
     [state.homebrew, q, type],

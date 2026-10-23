@@ -4,7 +4,7 @@ import { Field } from "@/components/ui/Field";
 import type { IdentityInput } from "../../actions";
 import type { DraftCharacter } from "./Wizard";
 
-export function StepIdentity({ character, onChange }: { character: DraftCharacter; onChange: (patch: Partial<IdentityInput>) => void }) {
+export function StepIdentity({ character, onChange, photo }: { character: DraftCharacter; onChange: (patch: Partial<IdentityInput>) => void; photo?: React.ReactNode }) {
   const nameError = character.name.trim() ? undefined : "Obrigatório para finalizar.";
   const playerError = character.player_name.trim() ? undefined : "Obrigatório para finalizar.";
   return (
@@ -15,6 +15,15 @@ export function StepIdentity({ character, onChange }: { character: DraftCharacte
       </div>
       <div className="hud-panel space-y-5 px-5 pt-7 pb-6 sm:px-8">
         <span className="hud-tag">Registro</span>
+        {photo && (
+          <div className="grid gap-5 sm:grid-cols-[12rem_1fr] sm:items-start">
+            <div>{photo}</div>
+            <p className="text-sm text-fg-dim">
+              <strong className="label-mono block text-holo">Foto do personagem</strong>
+              Opcional. Aparece no topo da ficha e no cartão da aba Personagens. Você pode recortar, reposicionar, trocar ou remover depois.
+            </p>
+          </div>
+        )}
         <div className="grid gap-5 sm:grid-cols-2">
           <Field label="Nome do personagem" error={nameError}>
             <input className="field-input" value={character.name} maxLength={120} onChange={(e) => onChange({ name: e.target.value })} />

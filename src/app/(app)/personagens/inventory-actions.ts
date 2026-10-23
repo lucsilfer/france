@@ -5,11 +5,14 @@ import { z } from "zod";
 import type { ActionResult } from "@/lib/types";
 import type { AttackPayload, DiceDetail, EffectTickPayload, PowerPayload, RollEntry } from "@/lib/rolls";
 import { CATALOG_BY_ID } from "@/rules/catalog.ts";
-import { performAttack, planAttack, planPowerUse, rollPowerEffects, type WeaponLike } from "@/rules/combat.ts";
+import { customModifierCompatible, modifierSlotsUsed, performAttack, planAttack, planPowerUse, rollPowerEffects, type CustomModifier, type WeaponLike } from "@/rules/combat.ts";
+import { RULES_CONFIG } from "@/rules/config.ts";
+import { customModifierData, defaultData, inventoryRowFrom, toCustomModifier, type ModifierData } from "@/lib/homebrew";
+import type { HomebrewKind } from "@/lib/types";
 import { OUTCOME_LABEL } from "@/rules/d100.ts";
 import { WEAPON_MODIFIER_BY_ID, type WeaponTag } from "@/rules/data/equipment.ts";
 import { SKILL_BY_ID } from "@/rules/data/skills.ts";
-import { isValidDice, type RollResult } from "@/rules/dice.ts";
+import { isValidDice, rollExpression, type RollResult } from "@/rules/dice.ts";
 import { computePowerCost, type PowerComponent } from "@/rules/powers.ts";
 import { ITEM_COLUMNS, POWER_COLUMNS, type ItemModifierRow, type ItemRow, type PowerRow } from "@/lib/character";
 import { abilityStatus } from "@/rules/abilities.ts";
@@ -83,7 +86,7 @@ function itemRow(d: ItemInput) {
 }
 
 function normalizeItem(i: ItemRow): ItemRow {
-  return { ...i, tags: i.tags ?? [], item_modifiers: i.item_modifiers ?? [] };
+  return { ...i, tags: i.tags ?? [], item_modifiers: i.item_modifiers ?? [], custom_modifiers: i.custom_modifiers ?? [] };
 }
 
 export async function addCatalogItem(characterId: string, catalogId: string, quantity = 1): Promise<ActionResult<ItemRow>> {
@@ -118,36 +121,118 @@ export async function addCatalogItem(characterId: string, catalogId: string, qua
 export async function addHomebrewItem(characterId: string, homebrewId: string): Promise<ActionResult<ItemRow>> {
   return guard(async () => {
     if (!uuid.safeParse(homebrewId).success) return fail("Item inválido.");
-    const { supabase, user } = await editContext(characterId);
-    const { data: hb } = await supabase.from("homebrew").select("kind, name, description, data").eq("id", homebrewId).eq("owner_id", user.id).maybeSingle();
-    if (!hb || !["item", "arma"].includes(hb.kind as string)) return fail("Item da biblioteca não encontrado.");
-    const d = (hb.data ?? {}) as Record<string, unknown>;
-    const parsed = itemSchema.safeParse({
-      name: hb.name,
-      description: hb.description ?? "",
-      item_type: (d.item_type as string) ?? (hb.kind === "arma" ? "arma" : "equipamento"),
-      category: (d.category as string) ?? "",
-      quantity: 1,
-      range: (d.range as string) ?? "",
-      // Modelos antigos usavam "outro"; hoje é "personalizado".
-      effect_kind: d.effect_kind === "outro" ? "personalizado" : (d.effect_kind as string) || null,
-      effect_dice: (d.effect_dice as string) || null,
-      special_rules: (d.special_rules as string) ?? "",
-      attack_kind: (d.attack_kind as string) || (hb.kind === "arma" ? "melee" : null),
-      damage_type: (d.damage_type as string) || null,
-      skill_override: (d.skill_override as string) || null,
-      tags: Array.isArray(d.tags) ? d.tags : [],
-    });
-    if (!parsed.success) return fail(`Este modelo está incompleto: ${parsed.error.issues[0]?.message}`);
-    // Cópia independente: editar na ficha não altera o modelo da biblioteca.
+    const { supabase } = await editContext(characterId);
+    // O RLS entrega o modelo se ele for seu OU estiver compartilhado com uma campanha de que você participa.
+    const { data: hb } = await supabase.from("homebrew").select("id, kind, name, description, data, image_path").eq("id", homebrewId).maybeSingle();
+    if (!hb || !["item", "arma", "item_especial", "outro"].includes(hb.kind as string)) return fail("Item da biblioteca não encontrado.");
+    let conv: ReturnType<typeof inventoryRowFrom>;
+    try {
+      conv = inventoryRowFrom(hb.kind as HomebrewKind, hb.name as string, (hb.description as string) ?? "", (hb.data ?? {}) as Record<string, unknown>);
+    } catch {
+      return fail("Este modelo está incompleto. Abra-o no Homebrew e salve de novo.");
+    }
+    if (!conv) return fail("Este conteúdo não vai para o inventário.");
+    // Cópia independente: editar na ficha (ou o modelo depois) não altera o outro.
     const { data, error } = await supabase
       .from("items")
-      .insert({ ...itemRow(parsed.data), character_id: characterId, source_kind: "homebrew", source_ref: homebrewId })
+      .insert({ ...conv.row, character_id: characterId, source_kind: "homebrew", source_ref: homebrewId, image_path: hb.image_path ?? null })
       .select(ITEM_COLUMNS)
       .single();
     if (error || !data) return fail(dbMessage(error, "Não foi possível adicionar o item."));
+    const itemId = (data as { id: string }).id;
+    for (const m of conv.officialModifiers) {
+      await supabase.from("item_modifiers").insert({ item_id: itemId, modifier_id: m, is_temporary: false });
+    }
+    const { data: fresh } = conv.officialModifiers.length ? await supabase.from("items").select(ITEM_COLUMNS).eq("id", itemId).single() : { data };
     touch(characterId);
-    return { ok: true, data: normalizeItem(data as unknown as ItemRow), message: `${hb.name} adicionado (cópia da biblioteca).` };
+    return { ok: true, data: normalizeItem((fresh ?? data) as unknown as ItemRow), message: `${hb.name} adicionado (cópia da biblioteca).` };
+  });
+}
+
+/** Aplica um modificador personalizado (Homebrew) a uma arma do inventário — copiado para a arma. */
+export async function addCustomModifier(characterId: string, itemId: string, homebrewId: string): Promise<ActionResult<ItemRow>> {
+  return guard(async () => {
+    if (!uuid.safeParse(itemId).success || !uuid.safeParse(homebrewId).success) return fail("Dados inválidos.");
+    const { supabase } = await editContext(characterId);
+    const { data: hb } = await supabase.from("homebrew").select("id, kind, name, description, data").eq("id", homebrewId).maybeSingle();
+    if (!hb || hb.kind !== "modificador") return fail("Modificador não encontrado.");
+    const parsed = customModifierData.safeParse(defaultData("modificador", (hb.data ?? {}) as Record<string, unknown>));
+    if (!parsed.success) return fail("Modificador incompleto.");
+    const mod = toCustomModifier(hb.id as string, hb.name as string, parsed.data as ModifierData, (hb.description as string) ?? "");
+    const { data: item } = await supabase.from("items").select("attack_kind, tags, custom_modifiers, item_modifiers(is_temporary)").eq("id", itemId).eq("character_id", characterId).maybeSingle();
+    if (!item?.attack_kind) return fail("Modificadores só podem ser aplicados a armas.");
+    if (!customModifierCompatible(mod, (item.tags as string[]) ?? [])) return fail("Modificador incompatível com esta arma.");
+    const current = ((item.custom_modifiers ?? []) as CustomModifier[]).filter((m) => m.id !== mod.id);
+    const official = ((item.item_modifiers ?? []) as { is_temporary: boolean }[]).filter((m) => !m.is_temporary).length;
+    if (!mod.ignoreLimit && modifierSlotsUsed(official, current) >= RULES_CONFIG.maxWeaponModifiers) return fail(`Cada arma suporta até ${RULES_CONFIG.maxWeaponModifiers} modificações.`);
+    const { error } = await supabase.from("items").update({ custom_modifiers: [...current, mod] }).eq("id", itemId).eq("character_id", characterId);
+    if (error) return fail(dbMessage(error, "Não foi possível aplicar o modificador."));
+    const { data: fresh } = await supabase.from("items").select(ITEM_COLUMNS).eq("id", itemId).single();
+    touch(characterId);
+    return { ok: true, data: normalizeItem(fresh as unknown as ItemRow), message: `${mod.name} aplicado.` };
+  });
+}
+
+export async function removeCustomModifier(characterId: string, itemId: string, modId: string): Promise<ActionResult<ItemRow>> {
+  return guard(async () => {
+    if (!uuid.safeParse(itemId).success || typeof modId !== "string" || modId.length > 60) return fail("Dados inválidos.");
+    const { supabase } = await editContext(characterId);
+    const { data: item } = await supabase.from("items").select("custom_modifiers").eq("id", itemId).eq("character_id", characterId).maybeSingle();
+    if (!item) return fail("Item não encontrado.");
+    const next = ((item.custom_modifiers ?? []) as CustomModifier[]).filter((m) => m.id !== modId);
+    const { error } = await supabase.from("items").update({ custom_modifiers: next }).eq("id", itemId).eq("character_id", characterId);
+    if (error) return fail("Não foi possível remover.");
+    const { data: fresh } = await supabase.from("items").select(ITEM_COLUMNS).eq("id", itemId).single();
+    touch(characterId);
+    return { ok: true, data: normalizeItem(fresh as unknown as ItemRow), message: "Modificador removido." };
+  });
+}
+
+/**
+ * Usa um item: consome 1 unidade (consumível) ou 1 uso (itens com usos) no banco, de forma atômica,
+ * e aplica o efeito suportado (cura → recupera PV da forma usada; dano/outros → rolagem registrada).
+ */
+export async function useItem(characterId: string, itemId: string, formId?: string | null): Promise<ActionResult<{ entry: RollEntry | null; quantity: number; uses_left: number | null; pv?: number }>> {
+  return guard(async () => {
+    if (!uuid.safeParse(itemId).success) return fail("Item inválido.");
+    const { bundle, form, sheet } = await sheetContext(characterId, formId);
+    const item = bundle.items.find((i) => i.id === itemId);
+    if (!item) return fail("Item não encontrado.");
+    const { supabase } = await editContext(characterId);
+    const { data: left, error } = await supabase.rpc("consume_item", { p_item: itemId });
+    if (error) return fail(dbMessage(error, "Não foi possível usar o item."));
+    const state = (left ?? {}) as { quantity: number; uses_left: number | null };
+    let entry: RollEntry | null = null;
+    let pv: number | undefined;
+    if (item.effect_dice) {
+      const r = rollExpression(item.effect_dice);
+      const notes: string[] = [];
+      if (item.effect_kind === "cura") {
+        const { data: newPv, error: e2 } = await supabase.rpc("adjust_form_resource", { p_form: form.id, p_resource: "pv", p_delta: r.total, p_max: sheet.resources.pvMax });
+        if (!e2 && typeof newPv === "number") {
+          pv = newPv;
+          notes.push(`Recuperou ${r.total} PV (agora ${newPv}/${sheet.resources.pvMax}).`);
+        }
+      } else if (item.effect_kind === "dano") notes.push(`${r.total} de dano — o Mestre aplica no alvo.`);
+      if (item.special_rules) notes.push(item.special_rules);
+      const label = item.effect_kind === "cura" ? "Cura" : item.effect_kind === "dano" ? "Dano" : "Efeito";
+      const payload: PowerPayload = {
+        kind: "power",
+        power: item.name,
+        cost: 0,
+        pcAfter: form.pc_current,
+        effects: [{ ...detail(r), label, effect: item.effect_kind ?? "personalizado" }],
+        notes,
+        continuous: null,
+      };
+      entry = await logRoll(characterId, `Usar: ${item.name}`, item.effect_dice, payload);
+    }
+    touch(characterId);
+    return {
+      ok: true,
+      data: { entry, quantity: state.quantity, uses_left: state.uses_left ?? null, pv },
+      message: entry ? undefined : `${item.name} usado.${item.special_rules ? ` ${item.special_rules.slice(0, 160)}` : ""}`,
+    };
   });
 }
 
@@ -276,6 +361,7 @@ export async function attackWithItem(characterId: string, itemId: string, option
       tags: item.tags,
       skillOverride: item.skill_override,
       modifiers: item.item_modifiers.map((m) => m.modifier_id),
+      customModifiers: item.custom_modifiers ?? [],
     };
     const skillValues = Object.fromEntries(sheet.skills.map((s) => [s.id, s.final]));
     // Técnicas do Arsenal: só as aprendidas, não suspensas e disponíveis nesta cena entram no ataque.

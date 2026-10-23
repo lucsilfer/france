@@ -19,3 +19,4 @@ export * from "./catalog.ts";
 export * from "./abilities.ts";
 export * from "./data/startingKits.ts";
 export * from "./techniques.ts";
+export * from "./creatures.ts";

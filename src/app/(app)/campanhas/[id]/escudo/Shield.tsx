@@ -9,6 +9,7 @@ import { HudTabs } from "@/components/campaign/HudTabs";
 import { DicePanel } from "@/components/campaign/DicePanel";
 import { useRealtime, liveLabel } from "@/components/campaign/useRealtime";
 import { createClient } from "@/lib/supabase/client";
+import { primeMediaUrls } from "@/components/media/media-client";
 import { AgentsTab } from "./AgentsTab";
 import { CombatTab } from "./CombatTab";
 import { InvestigationTab } from "./InvestigationTab";
@@ -22,6 +23,7 @@ export function Shield({ data }: { data: ShieldData }) {
   const router = useRouter();
   const sb = useMemo(() => createClient(), []);
   const cid = data.campaign.id;
+  primeMediaUrls(data.media);
   const [agents, setAgents] = useState<AgentRow[]>(data.agents);
   const [npcs, setNpcs] = useState<NpcRow[]>(data.npcs);
   const [rolls, setRolls] = useState<RollRow[]>(data.rolls);
@@ -29,7 +31,7 @@ export function Shield({ data }: { data: ShieldData }) {
 
   const charIds = useMemo(() => agents.map((a) => a.character.id).sort(), [agents]);
   const refetchNpcs = useCallback(async () => {
-    const { data: n } = await sb.from("npcs").select("id, kind, name, data, pv_current, pv_max, pc_current, pc_max, conditions, visible_to_players, source_homebrew_id, created_at").eq("campaign_id", cid).order("created_at");
+    const { data: n } = await sb.from("npcs").select("id, kind, name, data, pv_current, pv_max, pc_current, pc_max, conditions, visible_to_players, source_homebrew_id, image_path, created_at").eq("campaign_id", cid).order("created_at");
     if (n) setNpcs(n as NpcRow[]);
   }, [sb, cid]);
 
@@ -141,7 +143,7 @@ export function Shield({ data }: { data: ShieldData }) {
             case "agentes":
               return <AgentsTab campaignId={cid} agents={agents} setAgents={setAgents} npcs={npcs} setNpcs={setNpcs} party={data.party} homebrew={data.homebrew} />;
             case "combates":
-              return <CombatTab campaignId={cid} initialCombats={data.combats} initialCombatants={data.combatants} initialLog={data.combatLog} agents={agents} npcs={npcs} tick={combatTick} />;
+              return <CombatTab campaignId={cid} initialCombats={data.combats} initialCombatants={data.combatants} initialLog={data.combatLog} agents={agents} npcs={npcs} tick={combatTick} homebrew={data.homebrew} />;
             case "investigacao":
               return <InvestigationTab campaignId={cid} initial={data} />;
             case "relatorios":

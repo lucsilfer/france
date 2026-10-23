@@ -8,6 +8,7 @@ import { ORIGIN_BY_ID } from "@/rules/data/origins.ts";
 import type { CharacterSummary } from "@/lib/types";
 import { Button } from "@/components/ui/Button";
 import { StatusDot } from "@/components/hud/Panel";
+import { HoloFrame } from "@/components/media/ImageField";
 import { deleteCharacter } from "../actions";
 import { createCharacter } from "../personagens/actions";
 import { EmptyState, SectionHeader, useConfirmedAction } from "./shared";
@@ -49,10 +50,13 @@ export function CharactersPanel({ characters }: { characters: CharacterSummary[]
       <SectionHeader title="Personagens" subtitle="Suas fichas salvas." action={<CreateCharacterButton />} />
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {characters.map((c, i) => (
-          <li key={c.id} className="hud-panel hud-card p-5 pt-6">
+          <li key={c.id} className="hud-panel hud-card flex flex-col p-4 pt-6">
             <span className="hud-tag">Unidade {String(i + 1).padStart(3, "0")}</span>
-            <div className="flex items-start justify-between gap-3">
-              <div className="min-w-0">
+            <div className="flex gap-4">
+              <div className="w-28 shrink-0 sm:w-32">
+                <HoloFrame url={c.portrait_url ?? null} alt={`Foto de ${c.name || "personagem"}`} variant={c.lenda ? "corrupted" : "holo"} />
+              </div>
+              <div className="min-w-0 flex-1 space-y-2">
                 <h3 className="truncate font-head text-xl tracking-wide text-fg">
                   <Link
                     href={c.status === "draft" ? `/personagens/${c.id}/criar` : `/personagens/${c.id}`}
@@ -61,14 +65,20 @@ export function CharactersPanel({ characters }: { characters: CharacterSummary[]
                     {c.name || "Sem nome"}
                   </Link>
                 </h3>
-                <p className="mt-1 text-sm text-fg-dim">
-                  {(c.class_id && CLASS_BY_ID[c.class_id]?.name) || "Sem classe"} ·{" "}
-                  {(c.origin_id && ORIGIN_BY_ID[c.origin_id]?.name) || "Sem origem"}
-                </p>
-              </div>
-              <div className="text-center">
-                <span className="label-mono block">Nível</span>
-                <span className="font-display text-2xl text-holo text-glow">{String(c.level).padStart(2, "0")}</span>
+                <dl className="space-y-1 font-mono text-[0.6rem] tracking-[0.16em] uppercase">
+                  <div className="flex gap-2">
+                    <dt className="w-14 shrink-0 text-fg-muted">Origem</dt>
+                    <dd className="truncate text-xs tracking-normal text-fg normal-case">{(c.origin_id && ORIGIN_BY_ID[c.origin_id]?.name) || "—"}</dd>
+                  </div>
+                  <div className="flex gap-2">
+                    <dt className="w-14 shrink-0 text-fg-muted">Classe</dt>
+                    <dd className="truncate text-xs tracking-normal text-fg normal-case">{(c.class_id && CLASS_BY_ID[c.class_id]?.name) || "—"}</dd>
+                  </div>
+                  <div className="flex items-baseline gap-2">
+                    <dt className="w-14 shrink-0 text-fg-muted">Nível</dt>
+                    <dd className="font-display text-2xl leading-none text-holo text-glow">{String(c.level).padStart(2, "0")}</dd>
+                  </div>
+                </dl>
               </div>
             </div>
             <div className="mt-4 flex items-center justify-between border-t border-line pt-3">

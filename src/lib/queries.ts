@@ -2,6 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { requireUser } from "@/lib/supabase/server";
 import type { CampaignSummary, CharacterSummary, HomebrewEntry, Profile } from "@/lib/types";
+import { signMedia } from "@/lib/media";
 
 /** Perfil da sessão — memorizado por requisição (layout e página compartilham a mesma consulta). */
 export const getSessionProfile = cache(async function getSessionProfile() {
@@ -25,10 +26,10 @@ export const getSessionProfile = cache(async function getSessionProfile() {
 export async function getDashboardData() {
   const { supabase, user, profile } = await getSessionProfile();
 
-  const [chars, camps, brews] = await Promise.all([
+  const [chars, camps, brews, sharedBrews] = await Promise.all([
     supabase
       .from("characters")
-      .select("id, name, status, class_id, origin_id, level, updated_at")
+      .select("id, name, status, class_id, origin_id, level, updated_at, active_form, character_forms(kind, portrait_path, setup_complete)")
       .eq("owner_id", user.id)
       .order("updated_at", { ascending: false }),
     supabase
@@ -37,9 +38,16 @@ export async function getDashboardData() {
       .order("created_at", { ascending: false }),
     supabase
       .from("homebrew")
-      .select("id, kind, name, description, data, updated_at")
+      .select("id, kind, name, description, data, image_path, updated_at")
       .eq("owner_id", user.id)
       .order("updated_at", { ascending: false }),
+    // Conteúdos que Mestres disponibilizaram nas campanhas de que participo (o RLS só devolve esses).
+    supabase
+      .from("homebrew")
+      .select("id, kind, name, description, data, image_path, updated_at")
+      .neq("owner_id", user.id)
+      .order("updated_at", { ascending: false })
+      .limit(200),
   ]);
 
   const error = chars.error ?? camps.error ?? brews.error;
@@ -70,11 +78,28 @@ export async function getDashboardData() {
     };
   });
 
+  // Foto do cartão: a da forma ativa (Lenda pronta) ou a da forma humana.
+  type CharRow = Omit<CharacterSummary, "portrait_path" | "portrait_url"> & {
+    active_form: "base" | "lenda";
+    character_forms: { kind: "base" | "lenda"; portrait_path: string | null; setup_complete: boolean }[] | null;
+  };
+  const charRows = ((chars.data ?? []) as CharRow[]).map(({ character_forms, active_form, ...c }) => {
+    const forms = character_forms ?? [];
+    const lenda = forms.find((f) => f.kind === "lenda" && f.setup_complete);
+    const base = forms.find((f) => f.kind === "base");
+    const path = (active_form === "lenda" && lenda?.portrait_path) || base?.portrait_path || null;
+    return { ...c, portrait_path: path, lenda: active_form === "lenda" && Boolean(lenda?.portrait_path) };
+  });
+  const brewRows = (brews.data ?? []) as HomebrewEntry[];
+  const sharedRows = (sharedBrews.data ?? []) as HomebrewEntry[];
+  const urls = await signMedia(supabase, [...charRows.map((c) => c.portrait_path), ...brewRows.map((b) => b.image_path), ...sharedRows.map((b) => b.image_path)]);
+
   return {
     profile,
-    characters: (chars.data ?? []) as CharacterSummary[],
+    characters: charRows.map((c) => ({ ...c, portrait_url: c.portrait_path ? (urls[c.portrait_path] ?? null) : null })) as CharacterSummary[],
     campaigns,
-    homebrew: (brews.data ?? []) as HomebrewEntry[],
+    homebrew: brewRows.map((b) => ({ ...b, image_url: b.image_path ? (urls[b.image_path] ?? null) : null })),
+    sharedHomebrew: sharedRows.map((b) => ({ ...b, image_url: b.image_path ? (urls[b.image_path] ?? null) : null })),
     loadError: error ? "Não foi possível carregar todos os dados. Atualize a página." : null,
   };
 }

@@ -14,6 +14,7 @@ import { StepOrigin } from "./StepOrigin";
 import { StepClass } from "./StepClass";
 import { StepSkills } from "./StepSkills";
 import { StepIdentity } from "./StepIdentity";
+import { FormPortrait } from "../SheetHeader";
 import { StepReview } from "./StepReview";
 
 export interface DraftCharacter extends IdentityInput {
@@ -29,12 +30,15 @@ interface Props {
   initialCharacter: DraftCharacter;
   initialForm: StoredForm;
   initialPending: RolledSet | null;
+  baseForm: { id: string; kind: "base"; portrait_path: string | null };
+  portraits: Record<string, string>;
 }
 
-export function Wizard({ characterId, initialStep, initialCharacter, initialForm, initialPending }: Props) {
+export function Wizard({ characterId, initialStep, initialCharacter, initialForm, initialPending, baseForm, portraits }: Props) {
   const [character, setCharacter] = useState(initialCharacter);
   const [form, setForm] = useState(initialForm);
   const [pending, setPending] = useState(initialPending);
+  const [portrait, setPortrait] = useState(baseForm);
 
   const checks = useMemo(
     () =>
@@ -174,7 +178,13 @@ export function Wizard({ characterId, initialStep, initialCharacter, initialForm
             />
           )}
           {step === 4 && <StepSkills classId={character.class_id} form={form} onChange={updateSkills} />}
-          {step === 5 && <StepIdentity character={character} onChange={updateIdentity} />}
+          {step === 5 && (
+            <StepIdentity
+              character={character}
+              onChange={updateIdentity}
+              photo={<FormPortrait characterId={characterId} form={portrait} label="Foto do personagem" portraits={portraits} onChange={(_id, p) => setPortrait((f) => ({ ...f, ...p }))} />}
+            />
+          )}
           {step === 6 && <StepReview characterId={characterId} character={character} form={form} checks={checks} goTo={go} beforeFinalize={() => Promise.all([identitySave.flush(), skillsSave.flush()])} />}
         </motion.section>
       </AnimatePresence>

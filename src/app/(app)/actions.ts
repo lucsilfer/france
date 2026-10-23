@@ -166,7 +166,7 @@ export async function deleteHomebrew(id: string): Promise<ActionResult> {
 export async function duplicateHomebrew(id: string): Promise<ActionResult<{ id: string }>> {
   if (!uuid.safeParse(id).success) return { ok: false, error: "Conteúdo inválido." };
   const { supabase, user } = await requireUser();
-  const { data: src, error } = await supabase.from("homebrew").select("kind, name, description, data").eq("id", id).eq("owner_id", user.id).single();
+  const { data: src, error } = await supabase.from("homebrew").select("kind, name, description, data, image_path").eq("id", id).eq("owner_id", user.id).single();
   if (error || !src) return { ok: false, error: "Conteúdo não encontrado." };
   const { data, error: insErr } = await supabase
     .from("homebrew")

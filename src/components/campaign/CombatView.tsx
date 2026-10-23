@@ -3,6 +3,17 @@
 import { Skull, Swords } from "lucide-react";
 import type { CombatRow, PublicCombatant } from "@/lib/campaign-types";
 import { ConditionChips } from "./ConditionChips";
+import { HoloFrame } from "@/components/media/ImageField";
+import { useMediaUrl } from "@/components/media/media-client";
+
+function Avatar({ path, name }: { path?: string | null; name: string }) {
+  const url = useMediaUrl(path ?? null);
+  return (
+    <span className="block w-8 shrink-0">
+      <HoloFrame url={url} alt={name} aspect="square" />
+    </span>
+  );
+}
 
 function Bar({ cur, max, tone }: { cur: number | null; max: number | null; tone: "pv" | "pc" }) {
   if (cur == null || max == null || max <= 0) return null;
@@ -50,6 +61,7 @@ export function CombatView({ combat, combatants }: { combat: CombatRow | null; c
               aria-current={active ? "true" : undefined}
             >
               <span className="w-6 font-mono text-xs text-fg-muted tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+              <Avatar path={c.image_path} name={c.name} />
               <span className={`min-w-0 flex-1 truncate text-sm ${down ? "text-fg-muted line-through" : "text-fg"}`}>
                 {down && <Skull className="mr-1 inline h-3.5 w-3.5 text-alert" aria-label="caído" />}
                 {c.name}

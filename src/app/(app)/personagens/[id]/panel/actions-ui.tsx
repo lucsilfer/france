@@ -11,7 +11,7 @@ import { attackOptions, isContinuous, planAttack, type WeaponLike } from "@/rule
 import { techniqueAttackOptions } from "@/rules/techniques.ts";
 import { WEAPON_MODIFIER_BY_ID } from "@/rules/data/equipment.ts";
 import { SKILL_BY_ID } from "@/rules/data/skills.ts";
-import { advanceEffect, attackWithItem, endEffect, newRequestId, usePower } from "../../inventory-actions";
+import { advanceEffect, attackWithItem, endEffect, newRequestId, useItem, usePower } from "../../inventory-actions";
 import type { SheetState } from "../Sheet";
 
 /** Identificador único por intenção de uso (evita cobrança dupla em cliques repetidos ou reenvio). */
@@ -33,7 +33,42 @@ export function weaponOf(item: ItemRow): WeaponLike | null {
     tags: item.tags,
     skillOverride: item.skill_override,
     modifiers: item.item_modifiers.map((m) => m.modifier_id),
+    customModifiers: item.custom_modifiers ?? [],
   };
+}
+
+/** Itens que podem ser "usados" (consumível, cura/dano/efeito com dados ou usos limitados). */
+export function isUsableItem(item: ItemRow): boolean {
+  return !item.attack_kind && (Boolean(item.effect_dice) || item.uses_max != null || item.item_type === "consumivel");
+}
+
+/** Usa o item: desconta quantidade/uso no banco e aplica a cura na forma ativa; a rolagem aparece na bandeja. */
+export function UseItemButton({ state, item }: { state: SheetState; item: ItemRow }) {
+  const toast = useToast();
+  const [busy, setBusy] = useState(false);
+  const exhausted = item.uses_max != null ? (item.uses_left ?? 0) <= 0 : item.item_type === "consumivel" && item.quantity <= 0;
+  if (!state.canEdit || !isUsableItem(item)) return null;
+  async function use() {
+    setBusy(true);
+    const token = item.effect_dice ? state.beginRoll(`Usar: ${item.name}`) : null;
+    const res = await useItem(state.character.id, item.id, state.form.id);
+    setBusy(false);
+    if (!res.ok) {
+      if (token) state.failRoll(token);
+      return toast(res.error, "error");
+    }
+    const d = res.data!;
+    state.setItems((list) => list.map((i) => (i.id === item.id ? { ...i, quantity: d.quantity, uses_left: d.uses_left } : i)));
+    if (typeof d.pv === "number") state.patchForm(state.form.id, { pv_current: d.pv });
+    if (token && d.entry) state.finishRoll(token, d.entry);
+    else if (token) state.failRoll(token);
+    if (res.message) toast(res.message);
+  }
+  return (
+    <Button size="sm" variant="secondary" onClick={use} disabled={busy || exhausted} title={exhausted ? "Sem usos ou quantidade" : "Usar item"}>
+      Usar
+    </Button>
+  );
 }
 
 /** Dispara o ataque sem esperar: a janela de resultado abre no clique e se preenche quando o servidor responde. */

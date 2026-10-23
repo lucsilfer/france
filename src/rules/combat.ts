@@ -19,6 +19,31 @@ export interface WeaponLike {
   /** Perícia definida no item (arma personalizada / decisão do Mestre). */
   skillOverride?: string | null;
   modifiers: string[];
+  /** Modificadores personalizados (Homebrew), copiados para a arma. */
+  customModifiers?: CustomModifier[];
+}
+
+/** Modificador criado no Homebrew. `requires: "qualquer"` serve para qualquer arma. */
+export interface CustomModifier {
+  id: string;
+  name: string;
+  requires: WeaponTag | "qualquer";
+  text?: string;
+  always?: RollEffect;
+  onCritical?: RollEffect;
+  condition?: string;
+  requirements?: string;
+  /** Regra especial: não ocupa vaga do limite de modificadores. */
+  ignoreLimit?: boolean;
+}
+
+export function customModifierCompatible(m: Pick<CustomModifier, "requires">, tags: readonly string[]): boolean {
+  return m.requires === "qualquer" || tags.includes(m.requires);
+}
+
+/** Vagas de modificação ocupadas (oficiais permanentes + personalizados que contam no limite). */
+export function modifierSlotsUsed(officialPermanent: number, custom: readonly Pick<CustomModifier, "ignoreLimit">[]): number {
+  return officialPermanent + custom.filter((m) => !m.ignoreLimit).length;
 }
 
 export interface AttackContext {
@@ -52,6 +77,12 @@ export function adjustWeaponDice(expr: string, n: number): string {
 }
 
 /** Opções situacionais disponíveis para esta arma e este personagem. */
+/** Prévia dos efeitos de uma arma (sem bônus de classe/origem): usada pelos criadores do Homebrew. */
+export function weaponPreview(weapon: WeaponLike): { attackBonus: number; damage: string; critical: string; applied: string[]; conditions: string[] } {
+  const p = planAttack(weapon, { classId: null, originId: null, pathId: null, level: 1, skillValues: {} });
+  return { attackBonus: -p.rollModifier, damage: p.damageExpr, critical: p.criticalExpr, applied: p.applied, conditions: p.conditions };
+}
+
 export function attackOptions(weapon: WeaponLike, ctx: Pick<AttackContext, "classId" | "originId" | "pathId">): AttackOption[] {
   const out: AttackOption[] = [];
   for (const id of weapon.modifiers) {
@@ -109,6 +140,15 @@ export function planAttack(weapon: WeaponLike, ctx: AttackContext): AttackPlan {
         applied.push(`${m.name}: ${o.label}`);
       }
     }
+    if (m.condition) conditions.push(`${m.name} — ${m.condition}`);
+  }
+  for (const m of weapon.customModifiers ?? []) {
+    if (!customModifierCompatible(m, weapon.tags)) continue;
+    if (m.always) {
+      mergeEffect(m.always, acc);
+      applied.push(m.name);
+    }
+    if (m.onCritical) mergeEffect(m.onCritical, crit);
     if (m.condition) conditions.push(`${m.name} — ${m.condition}`);
   }
 
