@@ -8,18 +8,19 @@ O projeto já está conectado ao repositório **`lucsilfer/france`** — não cr
 | `atualizacao-3.5` | 3.5 |
 | `fase-4` | Fase 4 (contém a 3.5) |
 | `fase-5` | Fase 5 (contém a 4) |
-| `versao-6` | **6.0** (contém todas as anteriores) |
+| `versao-6` | 6.0 |
+| `versao-6.1` | **6.1** — correção “menor d100 vence” (contém todas as anteriores) — **use esta** |
 
-## Levar a 6.0 para `main` (recomendado antes de publicar na Vercel)
+## Levar a 6.1 para `main` (recomendado antes de publicar na Vercel)
 
-Pelo site do GitHub: *Pull requests → New pull request* → base `main`, compare `versao-6` → *Create* → *Merge*. O histórico de todas as fases fica preservado.
+Pelo site do GitHub: *Pull requests → New pull request* → base `main`, compare `versao-6.1` → *Create* → *Merge*. O histórico de todas as fases fica preservado.
 
 Pelo terminal:
 
 ```bash
 git checkout main
 git pull
-git merge --no-ff versao-6 -m "F.R.A.N.C.E 6.0"
+git merge --no-ff versao-6.1 -m "F.R.A.N.C.E 6.1"
 git push origin main
 ```
 

@@ -26,28 +26,34 @@ const P = (skillValue: number) => ({ name: "Jogador", isPlayer: true, skillValue
 const N = (skillValue: number) => ({ name: "NPC", isPlayer: false, skillValue });
 
 describe("combate por rolagens opostas (v6)", () => {
-  it("vence quem tirar o MAIOR d100 (configurável)", () => {
-    assert.equal(RULES_CONFIG.opposed.winner, "higher");
-    assert.equal(confrontOutcome(80, 20, N(50), N(50)).winner, "attacker");
-    assert.equal(confrontOutcome(20, 80, N(50), N(50)).winner, "defender");
+  it("vence quem tirar o MENOR d100 (correção v6.1)", () => {
+    assert.equal(RULES_CONFIG.opposed.winner, "lower");
+    assert.equal(confrontOutcome(20, 80, N(50), N(50)).winner, "attacker");
+    assert.equal(confrontOutcome(80, 20, N(50), N(50)).winner, "defender");
+    assert.equal(confrontOutcome(1, 2, N(50), N(50)).winner, "attacker", "1 vence qualquer outro resultado");
+    assert.equal(confrontOutcome(100, 99, N(50), N(50)).winner, "defender", "100 perde para qualquer outro");
   });
 
   it("separa o vencedor da qualidade da rolagem (menor é melhor contra a perícia)", () => {
-    const o = confrontOutcome(80, 20, N(50), N(50));
+    // 70 contra perícia 50 é "falha" de qualidade, mas vence um defensor que tirou 90: dano padrão.
+    const o = confrontOutcome(70, 90, N(50), N(50));
     assert.equal(o.winner, "attacker");
     assert.equal(o.quality, "failure");
     assert.equal(o.multiplier, 1, "venceu o confronto: dano padrão");
-    const g = confrontOutcome(20, 10, N(50), N(50));
+    const g = confrontOutcome(20, 30, N(50), N(50));
     assert.equal(g.quality, "good");
     assert.equal(g.multiplier, 1, "acerto bom: dano padrão");
+    const n = confrontOutcome(40, 60, N(50), N(50));
+    assert.deepEqual([n.quality, n.multiplier], ["normal", 1], "acerto normal: dano padrão");
   });
 
   it("extremo ×1,5 e resultado 1 ×2, só para quem vence e sem acumular", () => {
-    assert.equal(confrontOutcome(9, 3, N(50), N(50)).multiplier, 1.5);
-    assert.equal(confrontOutcome(9, 50, N(50), N(50)).multiplier, 0);
-    const crit = confrontOutcome(1, 1, P(50), N(50));
-    assert.equal(crit.quality, "critical_success");
-    assert.equal(crit.multiplier, 2);
+    assert.equal(confrontOutcome(9, 50, N(50), N(50)).multiplier, 1.5);
+    assert.equal(confrontOutcome(9, 3, N(50), N(50)).multiplier, 0, "perdeu: sem dano");
+    const crit = confrontOutcome(1, 40, N(50), N(50));
+    assert.deepEqual([crit.winner, crit.quality, crit.multiplier], ["attacker", "critical_success", 2]);
+    const tieCrit = confrontOutcome(1, 1, P(50), N(50));
+    assert.deepEqual([tieCrit.winner, tieCrit.multiplier], ["attacker", 2], "1 × 1: desempate, jogador vence com ×2");
   });
 
   it("empate jogador × NPC/monstro: o jogador vence atacando ou defendendo", () => {
@@ -64,13 +70,13 @@ describe("combate por rolagens opostas (v6)", () => {
   });
 
   it("confronto completo: repete no empate total, rola o dano e aplica o multiplicador", () => {
-    // 1ª rodada 40×40 (mesma perícia) → nova rolagem; 2ª: 9×5 (extremo) → dano 2d6 = 3+4 = 7 ×1,5 = 10,5
-    const r = performConfrontation(N(50), N(50), { expr: "2d6" }, { rng: seq(40, 40, 9, 5, 3, 4) });
+    // 1ª rodada 40×40 (mesma perícia) → nova rolagem; 2ª: 9×50 (extremo, menor vence) → dano 2d6 = 3+4 = 7 ×1,5 = 10,5
+    const r = performConfrontation(N(50), N(50), { expr: "2d6" }, { rng: seq(40, 40, 9, 50, 3, 4) });
     assert.equal(r.rounds.length, 2);
     assert.equal(r.hit, true);
     assert.equal(r.finalDamage, 10.5);
     assert.equal(r.appliedDamage, 10, "PV recebe inteiro (arredondado para baixo)");
-    const miss = performConfrontation(N(50), N(50), { expr: "2d6" }, { rng: seq(10, 90) });
+    const miss = performConfrontation(N(50), N(50), { expr: "2d6" }, { rng: seq(90, 10) });
     assert.equal(miss.hit, false);
     assert.equal(miss.damageRoll, null);
   });

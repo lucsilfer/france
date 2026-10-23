@@ -873,484 +873,484 @@ begin
     raise exception 'confronto 1×1 40/85 false/false: banco % / motor defender skill critical_success 0', r;
   end if;
   r := public.confront_outcome(1, 2, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×2 50/50 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×2 50/50 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 2, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×2 50/50 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×2 50/50 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 2, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×2 50/50 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×2 50/50 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 2, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×2 50/50 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×2 50/50 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 2, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×2 85/40 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×2 85/40 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 2, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×2 85/40 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×2 85/40 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 2, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×2 85/40 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×2 85/40 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 2, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×2 85/40 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×2 85/40 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 2, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×2 40/85 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×2 40/85 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 2, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×2 40/85 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×2 40/85 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 2, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×2 40/85 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×2 40/85 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 2, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×2 40/85 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×2 40/85 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 9, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×9 50/50 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×9 50/50 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 9, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×9 50/50 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×9 50/50 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 9, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×9 50/50 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×9 50/50 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 9, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×9 50/50 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×9 50/50 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 9, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×9 85/40 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×9 85/40 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 9, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×9 85/40 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×9 85/40 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 9, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×9 85/40 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×9 85/40 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 9, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×9 85/40 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×9 85/40 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 9, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×9 40/85 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×9 40/85 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 9, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×9 40/85 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×9 40/85 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 9, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×9 40/85 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×9 40/85 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 9, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×9 40/85 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×9 40/85 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 17, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×17 50/50 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×17 50/50 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 17, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×17 50/50 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×17 50/50 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 17, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×17 50/50 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×17 50/50 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 17, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×17 50/50 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×17 50/50 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 17, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×17 85/40 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×17 85/40 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 17, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×17 85/40 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×17 85/40 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 17, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×17 85/40 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×17 85/40 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 17, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×17 85/40 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×17 85/40 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 17, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×17 40/85 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×17 40/85 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 17, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×17 40/85 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×17 40/85 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 17, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×17 40/85 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×17 40/85 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 17, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×17 40/85 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×17 40/85 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 34, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×34 50/50 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×34 50/50 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 34, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×34 50/50 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×34 50/50 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 34, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×34 50/50 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×34 50/50 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 34, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×34 50/50 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×34 50/50 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 34, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×34 85/40 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×34 85/40 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 34, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×34 85/40 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×34 85/40 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 34, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×34 85/40 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×34 85/40 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 34, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×34 85/40 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×34 85/40 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 34, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×34 40/85 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×34 40/85 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 34, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×34 40/85 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×34 40/85 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 34, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×34 40/85 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×34 40/85 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 34, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×34 40/85 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×34 40/85 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 50, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×50 50/50 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×50 50/50 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 50, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×50 50/50 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×50 50/50 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 50, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×50 50/50 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×50 50/50 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 50, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×50 50/50 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×50 50/50 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 50, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×50 85/40 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×50 85/40 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 50, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×50 85/40 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×50 85/40 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 50, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×50 85/40 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×50 85/40 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 50, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×50 85/40 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×50 85/40 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 50, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×50 40/85 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×50 40/85 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 50, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×50 40/85 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×50 40/85 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 50, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×50 40/85 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×50 40/85 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 50, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×50 40/85 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×50 40/85 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 51, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×51 50/50 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×51 50/50 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 51, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×51 50/50 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×51 50/50 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 51, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×51 50/50 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×51 50/50 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 51, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×51 50/50 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×51 50/50 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 51, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×51 85/40 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×51 85/40 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 51, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×51 85/40 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×51 85/40 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 51, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×51 85/40 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×51 85/40 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 51, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×51 85/40 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×51 85/40 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 51, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×51 40/85 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×51 40/85 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 51, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×51 40/85 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×51 40/85 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 51, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×51 40/85 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×51 40/85 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 51, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×51 40/85 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×51 40/85 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 75, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×75 50/50 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×75 50/50 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 75, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×75 50/50 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×75 50/50 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 75, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×75 50/50 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×75 50/50 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 75, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×75 50/50 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×75 50/50 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 75, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×75 85/40 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×75 85/40 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 75, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×75 85/40 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×75 85/40 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 75, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×75 85/40 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×75 85/40 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 75, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×75 85/40 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×75 85/40 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 75, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×75 40/85 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×75 40/85 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 75, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×75 40/85 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×75 40/85 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 75, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×75 40/85 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×75 40/85 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 75, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×75 40/85 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×75 40/85 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 99, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×99 50/50 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×99 50/50 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 99, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×99 50/50 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×99 50/50 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 99, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×99 50/50 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×99 50/50 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 99, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×99 50/50 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×99 50/50 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 99, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×99 85/40 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×99 85/40 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 99, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×99 85/40 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×99 85/40 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 99, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×99 85/40 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×99 85/40 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 99, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×99 85/40 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×99 85/40 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 99, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×99 40/85 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×99 40/85 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 99, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×99 40/85 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×99 40/85 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 99, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×99 40/85 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×99 40/85 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 99, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×99 40/85 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×99 40/85 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 100, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×100 50/50 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×100 50/50 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 100, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×100 50/50 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×100 50/50 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 100, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×100 50/50 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×100 50/50 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 100, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×100 50/50 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×100 50/50 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 100, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×100 85/40 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×100 85/40 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 100, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×100 85/40 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×100 85/40 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 100, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×100 85/40 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×100 85/40 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 100, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×100 85/40 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×100 85/40 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 100, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×100 40/85 true/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×100 40/85 true/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 100, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×100 40/85 false/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×100 40/85 false/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 100, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×100 40/85 true/true: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×100 40/85 true/true: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(1, 100, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 1×100 40/85 false/false: banco % / motor defender none critical_success 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_success' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 2 then
+    raise exception 'confronto 1×100 40/85 false/false: banco % / motor attacker none critical_success 2', r;
   end if;
   r := public.confront_outcome(2, 1, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 2×1 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 2×1 50/50 true/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(2, 1, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 2×1 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 2×1 50/50 false/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(2, 1, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 2×1 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 2×1 50/50 true/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(2, 1, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 2×1 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 2×1 50/50 false/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(2, 1, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 2×1 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 2×1 85/40 true/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(2, 1, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 2×1 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 2×1 85/40 false/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(2, 1, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 2×1 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 2×1 85/40 true/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(2, 1, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 2×1 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 2×1 85/40 false/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(2, 1, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 2×1 40/85 true/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 2×1 40/85 true/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(2, 1, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 2×1 40/85 false/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 2×1 40/85 false/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(2, 1, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 2×1 40/85 true/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 2×1 40/85 true/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(2, 1, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 2×1 40/85 false/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 2×1 40/85 false/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(2, 2, 50, 50, true, false, 0);
   if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'player' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
@@ -1401,484 +1401,484 @@ begin
     raise exception 'confronto 2×2 40/85 false/false: banco % / motor defender skill extreme 0', r;
   end if;
   r := public.confront_outcome(2, 9, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×9 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×9 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 9, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×9 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×9 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 9, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×9 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×9 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 9, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×9 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×9 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 9, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×9 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×9 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 9, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×9 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×9 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 9, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×9 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×9 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 9, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×9 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×9 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 9, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×9 40/85 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×9 40/85 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 9, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×9 40/85 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×9 40/85 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 9, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×9 40/85 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×9 40/85 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 9, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×9 40/85 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×9 40/85 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 17, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×17 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×17 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 17, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×17 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×17 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 17, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×17 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×17 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 17, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×17 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×17 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 17, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×17 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×17 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 17, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×17 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×17 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 17, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×17 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×17 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 17, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×17 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×17 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 17, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×17 40/85 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×17 40/85 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 17, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×17 40/85 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×17 40/85 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 17, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×17 40/85 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×17 40/85 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 17, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×17 40/85 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×17 40/85 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 34, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×34 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×34 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 34, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×34 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×34 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 34, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×34 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×34 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 34, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×34 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×34 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 34, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×34 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×34 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 34, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×34 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×34 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 34, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×34 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×34 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 34, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×34 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×34 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 34, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×34 40/85 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×34 40/85 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 34, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×34 40/85 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×34 40/85 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 34, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×34 40/85 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×34 40/85 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 34, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×34 40/85 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×34 40/85 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 50, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×50 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×50 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 50, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×50 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×50 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 50, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×50 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×50 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 50, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×50 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×50 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 50, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×50 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×50 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 50, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×50 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×50 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 50, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×50 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×50 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 50, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×50 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×50 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 50, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×50 40/85 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×50 40/85 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 50, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×50 40/85 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×50 40/85 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 50, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×50 40/85 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×50 40/85 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 50, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×50 40/85 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×50 40/85 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 51, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×51 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×51 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 51, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×51 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×51 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 51, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×51 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×51 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 51, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×51 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×51 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 51, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×51 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×51 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 51, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×51 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×51 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 51, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×51 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×51 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 51, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×51 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×51 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 51, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×51 40/85 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×51 40/85 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 51, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×51 40/85 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×51 40/85 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 51, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×51 40/85 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×51 40/85 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 51, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×51 40/85 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×51 40/85 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 75, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×75 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×75 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 75, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×75 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×75 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 75, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×75 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×75 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 75, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×75 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×75 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 75, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×75 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×75 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 75, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×75 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×75 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 75, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×75 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×75 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 75, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×75 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×75 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 75, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×75 40/85 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×75 40/85 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 75, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×75 40/85 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×75 40/85 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 75, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×75 40/85 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×75 40/85 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 75, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×75 40/85 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×75 40/85 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 99, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×99 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×99 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 99, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×99 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×99 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 99, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×99 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×99 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 99, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×99 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×99 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 99, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×99 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×99 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 99, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×99 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×99 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 99, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×99 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×99 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 99, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×99 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×99 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 99, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×99 40/85 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×99 40/85 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 99, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×99 40/85 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×99 40/85 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 99, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×99 40/85 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×99 40/85 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 99, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×99 40/85 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×99 40/85 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 100, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×100 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×100 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 100, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×100 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×100 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 100, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×100 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×100 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 100, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×100 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×100 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 100, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×100 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×100 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 100, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×100 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×100 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 100, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×100 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×100 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 100, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×100 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×100 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 100, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×100 40/85 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×100 40/85 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 100, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×100 40/85 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×100 40/85 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 100, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×100 40/85 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×100 40/85 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(2, 100, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 2×100 40/85 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 2×100 40/85 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 1, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×1 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×1 50/50 true/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 1, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×1 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×1 50/50 false/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 1, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×1 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×1 50/50 true/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 1, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×1 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×1 50/50 false/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 1, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×1 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×1 85/40 true/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 1, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×1 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×1 85/40 false/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 1, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×1 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×1 85/40 true/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 1, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×1 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×1 85/40 false/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 1, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 9×1 40/85 true/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×1 40/85 true/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(9, 1, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 9×1 40/85 false/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×1 40/85 false/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(9, 1, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 9×1 40/85 true/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×1 40/85 true/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(9, 1, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 9×1 40/85 false/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×1 40/85 false/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(9, 2, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×2 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×2 50/50 true/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 2, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×2 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×2 50/50 false/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 2, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×2 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×2 50/50 true/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 2, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×2 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×2 50/50 false/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 2, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×2 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×2 85/40 true/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 2, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×2 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×2 85/40 false/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 2, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×2 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×2 85/40 true/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 2, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 9×2 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×2 85/40 false/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(9, 2, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 9×2 40/85 true/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×2 40/85 true/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(9, 2, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 9×2 40/85 false/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×2 40/85 false/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(9, 2, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 9×2 40/85 true/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×2 40/85 true/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(9, 2, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 9×2 40/85 false/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 9×2 40/85 false/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(9, 9, 50, 50, true, false, 0);
   if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'player' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
@@ -1929,484 +1929,484 @@ begin
     raise exception 'confronto 9×9 40/85 false/false: banco % / motor defender skill good 0', r;
   end if;
   r := public.confront_outcome(9, 17, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×17 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×17 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 17, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×17 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×17 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 17, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×17 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×17 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 17, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×17 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×17 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 17, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×17 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×17 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 17, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×17 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×17 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 17, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×17 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×17 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 17, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×17 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×17 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 17, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×17 40/85 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×17 40/85 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 17, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×17 40/85 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×17 40/85 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 17, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×17 40/85 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×17 40/85 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 17, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×17 40/85 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×17 40/85 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 34, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×34 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×34 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 34, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×34 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×34 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 34, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×34 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×34 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 34, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×34 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×34 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 34, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×34 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×34 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 34, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×34 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×34 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 34, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×34 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×34 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 34, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×34 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×34 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 34, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×34 40/85 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×34 40/85 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 34, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×34 40/85 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×34 40/85 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 34, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×34 40/85 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×34 40/85 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 34, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×34 40/85 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×34 40/85 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 50, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×50 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×50 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 50, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×50 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×50 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 50, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×50 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×50 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 50, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×50 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×50 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 50, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×50 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×50 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 50, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×50 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×50 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 50, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×50 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×50 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 50, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×50 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×50 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 50, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×50 40/85 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×50 40/85 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 50, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×50 40/85 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×50 40/85 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 50, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×50 40/85 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×50 40/85 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 50, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×50 40/85 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×50 40/85 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 51, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×51 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×51 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 51, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×51 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×51 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 51, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×51 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×51 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 51, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×51 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×51 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 51, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×51 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×51 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 51, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×51 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×51 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 51, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×51 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×51 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 51, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×51 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×51 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 51, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×51 40/85 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×51 40/85 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 51, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×51 40/85 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×51 40/85 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 51, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×51 40/85 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×51 40/85 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 51, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×51 40/85 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×51 40/85 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 75, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×75 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×75 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 75, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×75 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×75 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 75, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×75 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×75 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 75, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×75 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×75 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 75, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×75 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×75 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 75, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×75 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×75 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 75, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×75 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×75 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 75, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×75 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×75 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 75, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×75 40/85 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×75 40/85 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 75, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×75 40/85 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×75 40/85 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 75, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×75 40/85 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×75 40/85 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 75, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×75 40/85 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×75 40/85 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 99, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×99 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×99 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 99, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×99 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×99 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 99, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×99 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×99 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 99, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×99 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×99 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 99, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×99 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×99 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 99, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×99 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×99 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 99, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×99 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×99 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 99, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×99 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×99 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 99, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×99 40/85 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×99 40/85 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 99, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×99 40/85 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×99 40/85 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 99, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×99 40/85 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×99 40/85 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 99, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×99 40/85 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×99 40/85 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 100, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×100 50/50 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×100 50/50 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 100, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×100 50/50 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×100 50/50 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 100, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×100 50/50 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×100 50/50 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 100, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×100 50/50 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×100 50/50 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 100, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×100 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×100 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 100, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×100 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×100 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 100, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×100 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×100 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 100, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×100 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 9×100 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(9, 100, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×100 40/85 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×100 40/85 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 100, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×100 40/85 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×100 40/85 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 100, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×100 40/85 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×100 40/85 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(9, 100, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 9×100 40/85 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 9×100 40/85 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 1, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×1 50/50 true/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×1 50/50 true/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 1, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×1 50/50 false/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×1 50/50 false/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 1, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×1 50/50 true/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×1 50/50 true/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 1, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×1 50/50 false/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×1 50/50 false/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 1, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 17×1 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×1 85/40 true/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(17, 1, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 17×1 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×1 85/40 false/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(17, 1, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 17×1 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×1 85/40 true/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(17, 1, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 17×1 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×1 85/40 false/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(17, 1, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×1 40/85 true/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×1 40/85 true/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 1, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×1 40/85 false/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×1 40/85 false/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 1, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×1 40/85 true/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×1 40/85 true/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 1, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×1 40/85 false/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×1 40/85 false/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 2, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×2 50/50 true/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×2 50/50 true/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 2, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×2 50/50 false/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×2 50/50 false/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 2, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×2 50/50 true/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×2 50/50 true/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 2, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×2 50/50 false/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×2 50/50 false/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 2, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 17×2 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×2 85/40 true/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(17, 2, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 17×2 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×2 85/40 false/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(17, 2, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 17×2 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×2 85/40 true/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(17, 2, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 17×2 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×2 85/40 false/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(17, 2, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×2 40/85 true/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×2 40/85 true/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 2, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×2 40/85 false/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×2 40/85 false/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 2, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×2 40/85 true/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×2 40/85 true/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 2, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×2 40/85 false/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×2 40/85 false/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 9, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×9 50/50 true/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×9 50/50 true/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 9, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×9 50/50 false/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×9 50/50 false/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 9, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×9 50/50 true/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×9 50/50 true/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 9, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×9 50/50 false/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×9 50/50 false/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 9, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 17×9 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×9 85/40 true/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(17, 9, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 17×9 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×9 85/40 false/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(17, 9, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 17×9 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×9 85/40 true/true: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(17, 9, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1.5 then
-    raise exception 'confronto 17×9 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×9 85/40 false/false: banco % / motor defender none extreme 0', r;
   end if;
   r := public.confront_outcome(17, 9, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×9 40/85 true/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×9 40/85 true/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 9, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×9 40/85 false/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×9 40/85 false/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 9, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×9 40/85 true/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×9 40/85 true/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 9, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 17×9 40/85 false/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 17×9 40/85 false/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(17, 17, 50, 50, true, false, 0);
   if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'player' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
@@ -2457,484 +2457,484 @@ begin
     raise exception 'confronto 17×17 40/85 false/false: banco % / motor defender skill good 0', r;
   end if;
   r := public.confront_outcome(17, 34, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×34 50/50 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×34 50/50 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 34, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×34 50/50 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×34 50/50 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 34, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×34 50/50 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×34 50/50 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 34, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×34 50/50 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×34 50/50 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 34, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×34 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×34 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 34, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×34 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×34 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 34, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×34 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×34 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 34, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×34 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×34 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 34, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×34 40/85 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×34 40/85 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 34, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×34 40/85 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×34 40/85 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 34, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×34 40/85 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×34 40/85 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 34, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×34 40/85 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×34 40/85 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 50, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×50 50/50 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×50 50/50 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 50, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×50 50/50 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×50 50/50 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 50, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×50 50/50 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×50 50/50 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 50, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×50 50/50 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×50 50/50 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 50, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×50 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×50 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 50, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×50 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×50 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 50, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×50 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×50 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 50, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×50 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×50 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 50, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×50 40/85 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×50 40/85 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 50, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×50 40/85 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×50 40/85 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 50, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×50 40/85 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×50 40/85 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 50, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×50 40/85 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×50 40/85 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 51, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×51 50/50 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×51 50/50 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 51, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×51 50/50 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×51 50/50 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 51, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×51 50/50 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×51 50/50 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 51, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×51 50/50 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×51 50/50 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 51, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×51 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×51 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 51, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×51 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×51 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 51, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×51 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×51 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 51, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×51 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×51 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 51, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×51 40/85 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×51 40/85 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 51, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×51 40/85 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×51 40/85 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 51, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×51 40/85 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×51 40/85 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 51, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×51 40/85 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×51 40/85 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 75, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×75 50/50 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×75 50/50 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 75, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×75 50/50 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×75 50/50 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 75, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×75 50/50 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×75 50/50 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 75, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×75 50/50 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×75 50/50 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 75, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×75 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×75 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 75, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×75 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×75 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 75, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×75 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×75 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 75, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×75 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×75 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 75, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×75 40/85 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×75 40/85 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 75, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×75 40/85 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×75 40/85 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 75, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×75 40/85 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×75 40/85 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 75, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×75 40/85 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×75 40/85 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 99, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×99 50/50 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×99 50/50 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 99, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×99 50/50 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×99 50/50 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 99, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×99 50/50 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×99 50/50 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 99, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×99 50/50 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×99 50/50 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 99, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×99 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×99 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 99, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×99 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×99 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 99, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×99 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×99 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 99, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×99 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×99 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 99, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×99 40/85 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×99 40/85 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 99, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×99 40/85 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×99 40/85 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 99, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×99 40/85 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×99 40/85 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 99, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×99 40/85 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×99 40/85 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 100, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×100 50/50 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×100 50/50 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 100, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×100 50/50 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×100 50/50 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 100, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×100 50/50 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×100 50/50 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 100, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×100 50/50 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×100 50/50 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 100, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×100 85/40 true/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×100 85/40 true/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 100, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×100 85/40 false/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×100 85/40 false/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 100, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×100 85/40 true/true: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×100 85/40 true/true: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 100, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×100 85/40 false/false: banco % / motor defender none extreme 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'extreme' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1.5 then
+    raise exception 'confronto 17×100 85/40 false/false: banco % / motor attacker none extreme 1.5', r;
   end if;
   r := public.confront_outcome(17, 100, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×100 40/85 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×100 40/85 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 100, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×100 40/85 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×100 40/85 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 100, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×100 40/85 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×100 40/85 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(17, 100, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 17×100 40/85 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 17×100 40/85 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 1, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×1 50/50 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×1 50/50 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 1, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×1 50/50 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×1 50/50 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 1, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×1 50/50 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×1 50/50 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 1, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×1 50/50 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×1 50/50 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 1, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×1 85/40 true/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×1 85/40 true/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 1, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×1 85/40 false/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×1 85/40 false/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 1, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×1 85/40 true/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×1 85/40 true/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 1, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×1 85/40 false/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×1 85/40 false/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 1, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×1 40/85 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×1 40/85 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 1, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×1 40/85 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×1 40/85 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 1, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×1 40/85 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×1 40/85 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 1, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×1 40/85 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×1 40/85 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 2, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×2 50/50 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×2 50/50 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 2, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×2 50/50 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×2 50/50 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 2, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×2 50/50 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×2 50/50 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 2, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×2 50/50 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×2 50/50 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 2, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×2 85/40 true/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×2 85/40 true/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 2, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×2 85/40 false/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×2 85/40 false/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 2, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×2 85/40 true/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×2 85/40 true/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 2, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×2 85/40 false/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×2 85/40 false/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 2, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×2 40/85 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×2 40/85 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 2, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×2 40/85 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×2 40/85 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 2, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×2 40/85 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×2 40/85 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 2, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×2 40/85 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×2 40/85 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 9, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×9 50/50 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×9 50/50 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 9, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×9 50/50 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×9 50/50 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 9, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×9 50/50 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×9 50/50 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 9, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×9 50/50 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×9 50/50 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 9, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×9 85/40 true/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×9 85/40 true/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 9, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×9 85/40 false/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×9 85/40 false/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 9, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×9 85/40 true/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×9 85/40 true/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 9, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×9 85/40 false/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×9 85/40 false/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 9, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×9 40/85 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×9 40/85 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 9, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×9 40/85 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×9 40/85 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 9, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×9 40/85 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×9 40/85 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 9, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×9 40/85 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×9 40/85 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 17, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×17 50/50 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×17 50/50 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 17, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×17 50/50 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×17 50/50 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 17, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×17 50/50 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×17 50/50 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 17, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×17 50/50 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×17 50/50 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 17, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×17 85/40 true/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×17 85/40 true/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 17, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×17 85/40 false/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×17 85/40 false/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 17, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×17 85/40 true/true: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×17 85/40 true/true: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 17, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×17 85/40 false/false: banco % / motor attacker none good 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×17 85/40 false/false: banco % / motor defender none good 0', r;
   end if;
   r := public.confront_outcome(34, 17, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×17 40/85 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×17 40/85 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 17, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×17 40/85 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×17 40/85 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 17, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×17 40/85 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×17 40/85 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 17, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 34×17 40/85 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 34×17 40/85 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(34, 34, 50, 50, true, false, 0);
   if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'player' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
@@ -2985,484 +2985,484 @@ begin
     raise exception 'confronto 34×34 40/85 false/false: banco % / motor defender skill normal 0', r;
   end if;
   r := public.confront_outcome(34, 50, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×50 50/50 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×50 50/50 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 50, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×50 50/50 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×50 50/50 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 50, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×50 50/50 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×50 50/50 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 50, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×50 50/50 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×50 50/50 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 50, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×50 85/40 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×50 85/40 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 50, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×50 85/40 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×50 85/40 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 50, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×50 85/40 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×50 85/40 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 50, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×50 85/40 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×50 85/40 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 50, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×50 40/85 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×50 40/85 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 50, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×50 40/85 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×50 40/85 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 50, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×50 40/85 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×50 40/85 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 50, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×50 40/85 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×50 40/85 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 51, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×51 50/50 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×51 50/50 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 51, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×51 50/50 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×51 50/50 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 51, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×51 50/50 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×51 50/50 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 51, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×51 50/50 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×51 50/50 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 51, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×51 85/40 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×51 85/40 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 51, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×51 85/40 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×51 85/40 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 51, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×51 85/40 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×51 85/40 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 51, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×51 85/40 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×51 85/40 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 51, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×51 40/85 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×51 40/85 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 51, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×51 40/85 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×51 40/85 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 51, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×51 40/85 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×51 40/85 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 51, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×51 40/85 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×51 40/85 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 75, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×75 50/50 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×75 50/50 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 75, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×75 50/50 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×75 50/50 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 75, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×75 50/50 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×75 50/50 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 75, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×75 50/50 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×75 50/50 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 75, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×75 85/40 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×75 85/40 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 75, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×75 85/40 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×75 85/40 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 75, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×75 85/40 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×75 85/40 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 75, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×75 85/40 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×75 85/40 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 75, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×75 40/85 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×75 40/85 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 75, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×75 40/85 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×75 40/85 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 75, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×75 40/85 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×75 40/85 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 75, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×75 40/85 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×75 40/85 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 99, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×99 50/50 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×99 50/50 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 99, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×99 50/50 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×99 50/50 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 99, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×99 50/50 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×99 50/50 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 99, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×99 50/50 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×99 50/50 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 99, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×99 85/40 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×99 85/40 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 99, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×99 85/40 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×99 85/40 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 99, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×99 85/40 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×99 85/40 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 99, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×99 85/40 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×99 85/40 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 99, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×99 40/85 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×99 40/85 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 99, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×99 40/85 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×99 40/85 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 99, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×99 40/85 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×99 40/85 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 99, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×99 40/85 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×99 40/85 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 100, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×100 50/50 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×100 50/50 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 100, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×100 50/50 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×100 50/50 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 100, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×100 50/50 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×100 50/50 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 100, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×100 50/50 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×100 50/50 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 100, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×100 85/40 true/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×100 85/40 true/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 100, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×100 85/40 false/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×100 85/40 false/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 100, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×100 85/40 true/true: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×100 85/40 true/true: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 100, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×100 85/40 false/false: banco % / motor defender none good 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'good' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×100 85/40 false/false: banco % / motor attacker none good 1', r;
   end if;
   r := public.confront_outcome(34, 100, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×100 40/85 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×100 40/85 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 100, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×100 40/85 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×100 40/85 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 100, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×100 40/85 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×100 40/85 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(34, 100, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 34×100 40/85 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 34×100 40/85 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 1, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×1 50/50 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×1 50/50 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 1, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×1 50/50 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×1 50/50 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 1, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×1 50/50 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×1 50/50 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 1, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×1 50/50 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×1 50/50 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 1, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×1 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×1 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 1, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×1 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×1 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 1, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×1 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×1 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 1, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×1 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×1 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 1, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×1 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×1 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 1, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×1 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×1 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 1, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×1 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×1 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 1, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×1 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×1 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 2, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×2 50/50 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×2 50/50 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 2, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×2 50/50 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×2 50/50 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 2, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×2 50/50 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×2 50/50 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 2, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×2 50/50 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×2 50/50 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 2, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×2 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×2 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 2, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×2 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×2 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 2, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×2 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×2 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 2, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×2 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×2 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 2, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×2 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×2 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 2, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×2 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×2 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 2, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×2 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×2 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 2, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×2 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×2 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 9, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×9 50/50 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×9 50/50 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 9, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×9 50/50 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×9 50/50 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 9, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×9 50/50 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×9 50/50 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 9, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×9 50/50 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×9 50/50 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 9, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×9 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×9 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 9, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×9 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×9 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 9, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×9 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×9 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 9, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×9 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×9 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 9, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×9 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×9 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 9, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×9 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×9 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 9, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×9 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×9 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 9, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×9 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×9 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 17, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×17 50/50 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×17 50/50 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 17, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×17 50/50 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×17 50/50 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 17, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×17 50/50 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×17 50/50 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 17, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×17 50/50 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×17 50/50 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 17, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×17 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×17 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 17, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×17 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×17 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 17, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×17 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×17 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 17, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×17 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×17 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 17, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×17 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×17 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 17, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×17 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×17 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 17, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×17 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×17 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 17, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×17 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×17 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 34, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×34 50/50 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×34 50/50 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 34, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×34 50/50 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×34 50/50 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 34, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×34 50/50 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×34 50/50 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 34, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×34 50/50 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×34 50/50 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 34, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×34 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×34 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 34, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×34 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×34 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 34, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×34 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×34 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 34, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×34 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×34 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(50, 34, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×34 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×34 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 34, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×34 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×34 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 34, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×34 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×34 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 34, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 50×34 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 50×34 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(50, 50, 50, 50, true, false, 0);
   if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'player' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
@@ -3513,484 +3513,484 @@ begin
     raise exception 'confronto 50×50 40/85 false/false: banco % / motor defender skill failure 0', r;
   end if;
   r := public.confront_outcome(50, 51, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×51 50/50 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×51 50/50 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 51, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×51 50/50 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×51 50/50 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 51, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×51 50/50 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×51 50/50 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 51, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×51 50/50 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×51 50/50 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 51, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×51 85/40 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×51 85/40 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 51, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×51 85/40 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×51 85/40 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 51, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×51 85/40 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×51 85/40 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 51, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×51 85/40 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×51 85/40 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 51, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×51 40/85 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×51 40/85 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 51, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×51 40/85 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×51 40/85 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 51, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×51 40/85 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×51 40/85 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 51, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×51 40/85 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×51 40/85 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 75, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×75 50/50 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×75 50/50 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 75, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×75 50/50 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×75 50/50 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 75, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×75 50/50 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×75 50/50 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 75, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×75 50/50 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×75 50/50 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 75, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×75 85/40 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×75 85/40 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 75, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×75 85/40 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×75 85/40 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 75, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×75 85/40 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×75 85/40 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 75, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×75 85/40 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×75 85/40 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 75, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×75 40/85 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×75 40/85 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 75, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×75 40/85 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×75 40/85 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 75, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×75 40/85 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×75 40/85 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 75, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×75 40/85 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×75 40/85 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 99, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×99 50/50 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×99 50/50 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 99, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×99 50/50 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×99 50/50 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 99, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×99 50/50 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×99 50/50 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 99, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×99 50/50 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×99 50/50 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 99, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×99 85/40 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×99 85/40 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 99, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×99 85/40 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×99 85/40 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 99, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×99 85/40 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×99 85/40 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 99, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×99 85/40 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×99 85/40 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 99, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×99 40/85 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×99 40/85 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 99, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×99 40/85 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×99 40/85 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 99, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×99 40/85 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×99 40/85 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 99, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×99 40/85 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×99 40/85 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 100, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×100 50/50 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×100 50/50 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 100, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×100 50/50 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×100 50/50 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 100, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×100 50/50 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×100 50/50 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 100, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×100 50/50 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×100 50/50 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 100, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×100 85/40 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×100 85/40 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 100, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×100 85/40 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×100 85/40 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 100, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×100 85/40 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×100 85/40 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 100, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×100 85/40 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×100 85/40 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(50, 100, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×100 40/85 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×100 40/85 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 100, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×100 40/85 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×100 40/85 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 100, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×100 40/85 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×100 40/85 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(50, 100, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 50×100 40/85 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 50×100 40/85 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 1, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×1 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×1 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 1, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×1 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×1 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 1, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×1 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×1 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 1, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×1 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×1 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 1, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×1 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×1 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 1, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×1 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×1 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 1, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×1 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×1 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 1, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×1 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×1 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 1, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×1 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×1 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 1, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×1 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×1 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 1, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×1 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×1 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 1, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×1 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×1 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 2, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×2 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×2 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 2, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×2 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×2 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 2, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×2 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×2 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 2, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×2 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×2 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 2, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×2 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×2 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 2, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×2 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×2 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 2, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×2 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×2 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 2, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×2 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×2 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 2, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×2 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×2 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 2, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×2 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×2 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 2, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×2 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×2 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 2, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×2 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×2 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 9, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×9 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×9 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 9, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×9 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×9 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 9, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×9 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×9 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 9, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×9 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×9 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 9, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×9 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×9 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 9, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×9 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×9 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 9, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×9 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×9 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 9, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×9 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×9 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 9, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×9 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×9 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 9, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×9 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×9 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 9, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×9 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×9 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 9, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×9 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×9 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 17, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×17 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×17 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 17, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×17 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×17 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 17, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×17 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×17 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 17, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×17 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×17 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 17, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×17 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×17 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 17, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×17 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×17 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 17, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×17 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×17 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 17, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×17 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×17 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 17, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×17 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×17 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 17, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×17 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×17 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 17, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×17 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×17 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 17, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×17 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×17 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 34, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×34 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×34 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 34, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×34 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×34 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 34, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×34 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×34 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 34, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×34 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×34 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 34, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×34 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×34 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 34, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×34 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×34 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 34, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×34 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×34 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 34, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×34 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×34 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 34, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×34 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×34 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 34, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×34 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×34 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 34, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×34 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×34 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 34, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×34 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×34 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 50, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×50 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×50 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 50, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×50 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×50 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 50, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×50 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×50 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 50, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×50 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×50 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 50, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×50 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×50 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 50, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×50 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×50 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 50, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×50 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×50 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 50, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×50 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×50 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(51, 50, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×50 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×50 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 50, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×50 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×50 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 50, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×50 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×50 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 50, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 51×50 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 51×50 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(51, 51, 50, 50, true, false, 0);
   if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'player' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
@@ -4041,484 +4041,484 @@ begin
     raise exception 'confronto 51×51 40/85 false/false: banco % / motor defender skill failure 0', r;
   end if;
   r := public.confront_outcome(51, 75, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×75 50/50 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×75 50/50 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 75, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×75 50/50 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×75 50/50 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 75, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×75 50/50 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×75 50/50 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 75, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×75 50/50 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×75 50/50 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 75, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×75 85/40 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×75 85/40 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(51, 75, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×75 85/40 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×75 85/40 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(51, 75, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×75 85/40 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×75 85/40 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(51, 75, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×75 85/40 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×75 85/40 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(51, 75, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×75 40/85 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×75 40/85 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 75, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×75 40/85 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×75 40/85 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 75, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×75 40/85 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×75 40/85 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 75, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×75 40/85 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×75 40/85 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 99, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×99 50/50 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×99 50/50 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 99, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×99 50/50 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×99 50/50 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 99, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×99 50/50 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×99 50/50 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 99, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×99 50/50 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×99 50/50 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 99, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×99 85/40 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×99 85/40 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(51, 99, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×99 85/40 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×99 85/40 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(51, 99, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×99 85/40 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×99 85/40 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(51, 99, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×99 85/40 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×99 85/40 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(51, 99, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×99 40/85 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×99 40/85 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 99, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×99 40/85 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×99 40/85 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 99, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×99 40/85 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×99 40/85 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 99, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×99 40/85 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×99 40/85 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 100, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×100 50/50 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×100 50/50 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 100, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×100 50/50 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×100 50/50 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 100, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×100 50/50 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×100 50/50 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 100, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×100 50/50 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×100 50/50 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 100, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×100 85/40 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×100 85/40 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(51, 100, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×100 85/40 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×100 85/40 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(51, 100, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×100 85/40 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×100 85/40 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(51, 100, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×100 85/40 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×100 85/40 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(51, 100, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×100 40/85 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×100 40/85 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 100, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×100 40/85 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×100 40/85 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 100, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×100 40/85 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×100 40/85 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(51, 100, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 51×100 40/85 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 51×100 40/85 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 1, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×1 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×1 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 1, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×1 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×1 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 1, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×1 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×1 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 1, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×1 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×1 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 1, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×1 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×1 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 1, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×1 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×1 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 1, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×1 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×1 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 1, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×1 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×1 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 1, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×1 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×1 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 1, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×1 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×1 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 1, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×1 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×1 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 1, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×1 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×1 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 2, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×2 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×2 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 2, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×2 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×2 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 2, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×2 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×2 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 2, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×2 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×2 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 2, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×2 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×2 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 2, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×2 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×2 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 2, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×2 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×2 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 2, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×2 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×2 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 2, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×2 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×2 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 2, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×2 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×2 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 2, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×2 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×2 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 2, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×2 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×2 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 9, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×9 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×9 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 9, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×9 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×9 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 9, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×9 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×9 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 9, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×9 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×9 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 9, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×9 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×9 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 9, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×9 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×9 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 9, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×9 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×9 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 9, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×9 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×9 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 9, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×9 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×9 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 9, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×9 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×9 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 9, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×9 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×9 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 9, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×9 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×9 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 17, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×17 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×17 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 17, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×17 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×17 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 17, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×17 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×17 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 17, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×17 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×17 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 17, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×17 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×17 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 17, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×17 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×17 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 17, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×17 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×17 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 17, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×17 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×17 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 17, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×17 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×17 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 17, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×17 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×17 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 17, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×17 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×17 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 17, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×17 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×17 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 34, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×34 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×34 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 34, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×34 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×34 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 34, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×34 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×34 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 34, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×34 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×34 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 34, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×34 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×34 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 34, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×34 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×34 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 34, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×34 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×34 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 34, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×34 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×34 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 34, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×34 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×34 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 34, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×34 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×34 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 34, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×34 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×34 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 34, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×34 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×34 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 50, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×50 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×50 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 50, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×50 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×50 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 50, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×50 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×50 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 50, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×50 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×50 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 50, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×50 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×50 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 50, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×50 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×50 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 50, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×50 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×50 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 50, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×50 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×50 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 50, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×50 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×50 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 50, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×50 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×50 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 50, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×50 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×50 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 50, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×50 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×50 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 51, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×51 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×51 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 51, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×51 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×51 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 51, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×51 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×51 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 51, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×51 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×51 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 51, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×51 85/40 true/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×51 85/40 true/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 51, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×51 85/40 false/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×51 85/40 false/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 51, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×51 85/40 true/true: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×51 85/40 true/true: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 51, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×51 85/40 false/false: banco % / motor attacker none normal 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×51 85/40 false/false: banco % / motor defender none normal 0', r;
   end if;
   r := public.confront_outcome(75, 51, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×51 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×51 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 51, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×51 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×51 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 51, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×51 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×51 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 51, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 75×51 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 75×51 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(75, 75, 50, 50, true, false, 0);
   if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'player' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
@@ -4569,484 +4569,484 @@ begin
     raise exception 'confronto 75×75 40/85 false/false: banco % / motor defender skill failure 0', r;
   end if;
   r := public.confront_outcome(75, 99, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×99 50/50 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×99 50/50 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 99, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×99 50/50 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×99 50/50 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 99, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×99 50/50 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×99 50/50 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 99, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×99 50/50 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×99 50/50 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 99, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×99 85/40 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×99 85/40 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(75, 99, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×99 85/40 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×99 85/40 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(75, 99, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×99 85/40 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×99 85/40 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(75, 99, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×99 85/40 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×99 85/40 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(75, 99, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×99 40/85 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×99 40/85 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 99, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×99 40/85 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×99 40/85 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 99, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×99 40/85 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×99 40/85 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 99, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×99 40/85 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×99 40/85 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 100, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×100 50/50 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×100 50/50 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 100, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×100 50/50 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×100 50/50 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 100, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×100 50/50 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×100 50/50 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 100, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×100 50/50 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×100 50/50 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 100, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×100 85/40 true/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×100 85/40 true/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(75, 100, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×100 85/40 false/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×100 85/40 false/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(75, 100, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×100 85/40 true/true: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×100 85/40 true/true: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(75, 100, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×100 85/40 false/false: banco % / motor defender none normal 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'normal' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×100 85/40 false/false: banco % / motor attacker none normal 1', r;
   end if;
   r := public.confront_outcome(75, 100, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×100 40/85 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×100 40/85 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 100, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×100 40/85 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×100 40/85 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 100, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×100 40/85 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×100 40/85 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(75, 100, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 75×100 40/85 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 75×100 40/85 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(99, 1, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×1 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×1 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 1, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×1 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×1 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 1, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×1 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×1 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 1, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×1 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×1 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 1, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×1 85/40 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×1 85/40 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 1, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×1 85/40 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×1 85/40 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 1, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×1 85/40 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×1 85/40 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 1, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×1 85/40 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×1 85/40 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 1, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×1 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×1 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 1, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×1 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×1 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 1, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×1 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×1 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 1, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×1 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×1 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 2, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×2 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×2 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 2, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×2 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×2 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 2, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×2 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×2 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 2, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×2 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×2 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 2, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×2 85/40 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×2 85/40 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 2, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×2 85/40 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×2 85/40 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 2, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×2 85/40 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×2 85/40 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 2, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×2 85/40 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×2 85/40 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 2, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×2 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×2 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 2, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×2 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×2 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 2, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×2 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×2 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 2, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×2 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×2 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 9, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×9 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×9 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 9, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×9 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×9 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 9, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×9 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×9 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 9, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×9 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×9 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 9, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×9 85/40 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×9 85/40 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 9, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×9 85/40 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×9 85/40 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 9, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×9 85/40 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×9 85/40 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 9, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×9 85/40 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×9 85/40 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 9, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×9 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×9 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 9, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×9 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×9 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 9, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×9 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×9 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 9, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×9 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×9 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 17, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×17 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×17 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 17, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×17 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×17 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 17, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×17 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×17 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 17, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×17 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×17 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 17, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×17 85/40 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×17 85/40 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 17, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×17 85/40 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×17 85/40 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 17, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×17 85/40 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×17 85/40 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 17, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×17 85/40 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×17 85/40 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 17, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×17 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×17 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 17, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×17 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×17 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 17, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×17 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×17 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 17, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×17 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×17 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 34, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×34 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×34 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 34, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×34 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×34 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 34, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×34 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×34 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 34, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×34 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×34 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 34, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×34 85/40 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×34 85/40 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 34, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×34 85/40 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×34 85/40 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 34, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×34 85/40 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×34 85/40 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 34, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×34 85/40 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×34 85/40 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 34, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×34 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×34 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 34, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×34 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×34 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 34, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×34 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×34 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 34, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×34 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×34 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 50, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×50 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×50 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 50, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×50 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×50 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 50, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×50 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×50 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 50, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×50 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×50 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 50, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×50 85/40 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×50 85/40 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 50, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×50 85/40 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×50 85/40 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 50, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×50 85/40 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×50 85/40 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 50, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×50 85/40 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×50 85/40 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 50, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×50 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×50 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 50, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×50 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×50 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 50, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×50 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×50 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 50, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×50 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×50 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 51, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×51 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×51 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 51, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×51 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×51 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 51, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×51 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×51 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 51, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×51 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×51 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 51, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×51 85/40 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×51 85/40 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 51, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×51 85/40 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×51 85/40 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 51, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×51 85/40 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×51 85/40 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 51, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×51 85/40 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×51 85/40 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 51, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×51 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×51 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 51, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×51 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×51 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 51, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×51 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×51 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 51, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×51 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×51 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 75, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×75 50/50 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×75 50/50 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 75, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×75 50/50 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×75 50/50 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 75, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×75 50/50 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×75 50/50 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 75, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×75 50/50 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×75 50/50 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 75, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×75 85/40 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×75 85/40 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 75, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×75 85/40 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×75 85/40 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 75, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×75 85/40 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×75 85/40 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 75, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×75 85/40 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×75 85/40 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 75, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×75 40/85 true/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×75 40/85 true/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 75, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×75 40/85 false/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×75 40/85 false/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 75, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×75 40/85 true/true: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×75 40/85 true/true: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 75, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 99×75 40/85 false/false: banco % / motor attacker none failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 99×75 40/85 false/false: banco % / motor defender none failure 0', r;
   end if;
   r := public.confront_outcome(99, 99, 50, 50, true, false, 0);
   if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'player' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
@@ -5097,484 +5097,484 @@ begin
     raise exception 'confronto 99×99 40/85 false/false: banco % / motor defender skill failure 0', r;
   end if;
   r := public.confront_outcome(99, 100, 50, 50, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 99×100 50/50 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 99×100 50/50 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(99, 100, 50, 50, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 99×100 50/50 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 99×100 50/50 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(99, 100, 50, 50, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 99×100 50/50 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 99×100 50/50 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(99, 100, 50, 50, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 99×100 50/50 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 99×100 50/50 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(99, 100, 85, 40, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 99×100 85/40 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 99×100 85/40 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(99, 100, 85, 40, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 99×100 85/40 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 99×100 85/40 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(99, 100, 85, 40, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 99×100 85/40 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 99×100 85/40 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(99, 100, 85, 40, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 99×100 85/40 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 99×100 85/40 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(99, 100, 40, 85, true, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 99×100 40/85 true/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 99×100 40/85 true/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(99, 100, 40, 85, false, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 99×100 40/85 false/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 99×100 40/85 false/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(99, 100, 40, 85, true, true, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 99×100 40/85 true/true: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 99×100 40/85 true/true: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(99, 100, 40, 85, false, false, 0);
-  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 0 then
-    raise exception 'confronto 99×100 40/85 false/false: banco % / motor defender none failure 0', r;
+  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
+    raise exception 'confronto 99×100 40/85 false/false: banco % / motor attacker none failure 1', r;
   end if;
   r := public.confront_outcome(100, 1, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×1 50/50 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×1 50/50 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 1, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×1 50/50 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×1 50/50 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 1, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×1 50/50 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×1 50/50 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 1, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×1 50/50 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×1 50/50 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 1, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×1 85/40 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×1 85/40 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 1, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×1 85/40 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×1 85/40 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 1, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×1 85/40 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×1 85/40 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 1, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×1 85/40 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×1 85/40 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 1, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×1 40/85 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×1 40/85 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 1, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×1 40/85 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×1 40/85 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 1, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×1 40/85 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×1 40/85 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 1, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×1 40/85 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_success' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×1 40/85 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 2, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×2 50/50 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×2 50/50 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 2, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×2 50/50 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×2 50/50 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 2, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×2 50/50 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×2 50/50 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 2, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×2 50/50 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×2 50/50 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 2, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×2 85/40 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×2 85/40 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 2, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×2 85/40 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×2 85/40 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 2, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×2 85/40 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×2 85/40 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 2, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×2 85/40 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×2 85/40 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 2, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×2 40/85 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×2 40/85 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 2, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×2 40/85 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×2 40/85 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 2, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×2 40/85 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×2 40/85 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 2, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×2 40/85 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×2 40/85 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 9, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×9 50/50 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×9 50/50 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 9, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×9 50/50 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×9 50/50 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 9, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×9 50/50 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×9 50/50 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 9, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×9 50/50 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×9 50/50 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 9, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×9 85/40 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×9 85/40 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 9, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×9 85/40 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×9 85/40 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 9, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×9 85/40 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×9 85/40 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 9, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×9 85/40 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×9 85/40 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 9, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×9 40/85 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×9 40/85 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 9, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×9 40/85 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×9 40/85 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 9, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×9 40/85 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×9 40/85 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 9, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×9 40/85 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×9 40/85 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 17, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×17 50/50 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×17 50/50 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 17, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×17 50/50 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×17 50/50 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 17, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×17 50/50 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×17 50/50 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 17, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×17 50/50 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×17 50/50 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 17, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×17 85/40 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×17 85/40 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 17, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×17 85/40 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×17 85/40 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 17, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×17 85/40 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×17 85/40 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 17, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×17 85/40 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×17 85/40 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 17, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×17 40/85 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×17 40/85 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 17, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×17 40/85 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×17 40/85 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 17, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×17 40/85 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×17 40/85 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 17, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×17 40/85 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'extreme' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×17 40/85 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 34, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×34 50/50 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×34 50/50 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 34, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×34 50/50 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×34 50/50 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 34, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×34 50/50 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×34 50/50 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 34, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×34 50/50 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×34 50/50 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 34, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×34 85/40 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×34 85/40 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 34, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×34 85/40 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×34 85/40 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 34, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×34 85/40 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×34 85/40 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 34, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×34 85/40 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×34 85/40 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 34, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×34 40/85 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×34 40/85 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 34, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×34 40/85 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×34 40/85 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 34, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×34 40/85 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×34 40/85 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 34, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×34 40/85 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'good' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×34 40/85 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 50, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×50 50/50 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×50 50/50 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 50, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×50 50/50 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×50 50/50 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 50, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×50 50/50 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×50 50/50 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 50, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×50 50/50 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×50 50/50 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 50, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×50 85/40 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×50 85/40 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 50, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×50 85/40 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×50 85/40 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 50, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×50 85/40 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×50 85/40 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 50, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×50 85/40 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×50 85/40 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 50, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×50 40/85 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×50 40/85 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 50, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×50 40/85 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×50 40/85 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 50, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×50 40/85 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×50 40/85 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 50, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×50 40/85 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×50 40/85 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 51, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×51 50/50 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×51 50/50 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 51, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×51 50/50 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×51 50/50 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 51, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×51 50/50 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×51 50/50 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 51, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×51 50/50 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×51 50/50 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 51, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×51 85/40 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×51 85/40 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 51, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×51 85/40 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×51 85/40 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 51, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×51 85/40 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×51 85/40 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 51, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×51 85/40 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×51 85/40 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 51, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×51 40/85 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×51 40/85 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 51, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×51 40/85 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×51 40/85 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 51, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×51 40/85 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×51 40/85 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 51, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×51 40/85 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×51 40/85 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 75, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×75 50/50 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×75 50/50 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 75, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×75 50/50 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×75 50/50 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 75, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×75 50/50 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×75 50/50 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 75, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×75 50/50 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×75 50/50 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 75, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×75 85/40 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×75 85/40 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 75, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×75 85/40 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×75 85/40 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 75, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×75 85/40 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×75 85/40 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 75, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×75 85/40 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×75 85/40 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 75, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×75 40/85 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×75 40/85 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 75, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×75 40/85 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×75 40/85 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 75, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×75 40/85 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×75 40/85 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 75, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×75 40/85 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×75 40/85 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 99, 50, 50, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×99 50/50 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×99 50/50 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 99, 50, 50, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×99 50/50 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×99 50/50 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 99, 50, 50, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×99 50/50 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×99 50/50 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 99, 50, 50, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×99 50/50 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×99 50/50 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 99, 85, 40, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×99 85/40 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×99 85/40 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 99, 85, 40, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×99 85/40 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×99 85/40 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 99, 85, 40, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×99 85/40 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×99 85/40 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 99, 85, 40, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×99 85/40 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×99 85/40 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 99, 40, 85, true, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×99 40/85 true/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×99 40/85 true/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 99, 40, 85, false, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×99 40/85 false/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×99 40/85 false/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 99, 40, 85, true, true, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×99 40/85 true/true: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×99 40/85 true/true: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 99, 40, 85, false, false, 0);
-  if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then
-    raise exception 'confronto 100×99 40/85 false/false: banco % / motor attacker none critical_failure 1', r;
+  if r->>'winner' <> 'defender' or r->>'tie_break' <> 'none' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then
+    raise exception 'confronto 100×99 40/85 false/false: banco % / motor defender none critical_failure 0', r;
   end if;
   r := public.confront_outcome(100, 100, 50, 50, true, false, 0);
   if r->>'winner' <> 'attacker' or r->>'tie_break' <> 'player' or r->>'quality' <> 'critical_failure' or r->>'defender_quality' <> 'critical_failure' or (r->>'multiplier')::numeric <> 1 then
@@ -5625,13 +5625,13 @@ begin
     raise exception 'confronto 100×100 40/85 false/false: banco % / motor defender skill critical_failure 0', r;
   end if;
   r := public.confront_outcome(60, 40, 0, 50, false, false, -15);
-  if r->>'quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then raise exception 'modificador 0: banco %', r; end if;
+  if r->>'quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then raise exception 'modificador 0: banco %', r; end if;
   r := public.confront_outcome(60, 40, 40, 50, false, false, -15);
-  if r->>'quality' <> 'failure' or (r->>'multiplier')::numeric <> 1 then raise exception 'modificador 40: banco %', r; end if;
+  if r->>'quality' <> 'failure' or (r->>'multiplier')::numeric <> 0 then raise exception 'modificador 40: banco %', r; end if;
   r := public.confront_outcome(60, 40, 50, 50, false, false, -15);
-  if r->>'quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then raise exception 'modificador 50: banco %', r; end if;
+  if r->>'quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then raise exception 'modificador 50: banco %', r; end if;
   r := public.confront_outcome(60, 40, 85, 50, false, false, -15);
-  if r->>'quality' <> 'normal' or (r->>'multiplier')::numeric <> 1 then raise exception 'modificador 85: banco %', r; end if;
+  if r->>'quality' <> 'normal' or (r->>'multiplier')::numeric <> 0 then raise exception 'modificador 85: banco %', r; end if;
   v := public.form_skill_value((select id from public.character_forms where character_id = '60000000-0000-0000-0000-000000000001' and kind = 'base'), 'luta');
   if v <> 52 then raise exception 'perícia brawler/luta: banco % / motor 52', v; end if;
   v := public.form_skill_value((select id from public.character_forms where character_id = '60000000-0000-0000-0000-000000000001' and kind = 'base'), 'reflexo');

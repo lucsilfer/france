@@ -143,7 +143,7 @@ function GrenadeDialog({ state, item, onClose }: { state: SheetState; item: Item
         <p className="mt-3 text-xs text-fg-muted">Sem alvo: a cobertura é aplicada em você.</p>
       )}
       <p className="mt-3 text-[0.68rem] text-fg-muted">
-        Para cada alvo: sua Pontaria × Reflexo do alvo, 1d100 contra 1d100 no servidor; vence o maior. Desconta 1 granada (uma vez por lançamento). O Mestre confirma o dano.
+        Para cada alvo: sua Pontaria × Reflexo do alvo, 1d100 contra 1d100 no servidor; vence o menor. Desconta 1 granada (uma vez por lançamento). O Mestre confirma o dano.
       </p>
     </Modal>
   );
@@ -304,7 +304,7 @@ function AttackDialog({ state, item, weapon, onClose }: { state: SheetState; ite
             </label>
           </div>
           <p className="text-[0.68rem] text-fg-muted">
-            Rolagens opostas: você e o alvo rolam 1d100 no servidor; vence o maior. A sua perícia define a qualidade do acerto. O Mestre confirma o dano.
+            Rolagens opostas: você e o alvo rolam 1d100 no servidor; vence o menor. A sua perícia define a qualidade do acerto. O Mestre confirma o dano.
           </p>
         </div>
       )}

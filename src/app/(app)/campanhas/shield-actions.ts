@@ -709,7 +709,7 @@ export type ConfrontAttack =
   | { kind: "free"; label: string; skill: string; damage: string; attackKind: "melee" | "ranged" | "firearm" };
 
 /**
- * Confronto entre dois participantes: atacante e defensor rolam 1d100 NO BANCO, vence o maior.
+ * Confronto entre dois participantes: atacante e defensor rolam 1d100 NO BANCO, vence o menor.
  * O Mestre conduz qualquer confronto (criatura × agente, agente × criatura, PvP, NPC × NPC).
  */
 export async function combatConfront(

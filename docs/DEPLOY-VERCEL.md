@@ -6,7 +6,7 @@ O site fica hospedado na **Vercel** (Next.js), os dados e as imagens no **Supaba
 
 ## 0. Antes de começar
 
-- Banco atualizado: todas as migrações do README aplicadas no seu projeto Supabase (inclusive as duas da 6.0).
+- Banco atualizado: todas as migrações do README aplicadas no seu projeto Supabase (inclusive as da 6.0 e da 6.1 — a última confere sozinha a regra “menor vence”).
 - Bucket `france-media` aparece em *Storage → Buckets* como **Private** (criado pela migração da Fase 5).
 - Em mãos, no Supabase (*Project Settings → API*): **Project URL** e **anon public key**. **Não** use a `service_role`.
 

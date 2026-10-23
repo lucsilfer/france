@@ -1,17 +1,23 @@
-# F.R.A.N.C.E — Versão 6.0 (Fase 6: finalização)
+# F.R.A.N.C.E — Versão 6.1 (Fase 6: finalização + correção do combate)
+
+> **6.1 (correção urgente):** no confronto de rolagens opostas **vence o MENOR d100** (a 6.0 dizia maior). Corrigido no motor, no banco, na ficha, no Escudo, nas granadas e nos testes. Desempates, classificação (menor é melhor) e multiplicadores não mudaram.
 
 Incremental sobre a Fase 5: mesmo projeto Supabase, nenhum dado apagado. Migrações novas (nesta ordem):
 
 1. `supabase/migrations/20261027000000_rules_sync_v6.sql` — gerada pelo motor (`npm run rules:sql`): limiares do d100, multiplicadores, perícias de ataque, configuração do confronto e granadas.
 2. `supabase/migrations/20261027000100_v6_finalizacao.sql` — confrontos rolados no banco, granadas em combate, dano contínuo, kit do Demolidor por tipo, fotos no grupo da campanha.
+3. `supabase/migrations/20261028000000_rules_sync_v6_1.sql` — **6.1**: regras do motor com "menor d100 vence".
+4. `supabase/migrations/20261028000100_v6_1_menor_vence.sql` — **6.1**: função do confronto com o novo padrão e uma conferência automática (falha com mensagem clara se a 3 não foi aplicada).
+
+Quem ainda não aplicou nada da 6.0 roda as quatro, em ordem. Quem já aplicou a 1 e a 2 roda só a 3 e a 4. Confrontos já registrados no histórico não são alterados.
 
 Guias: [publicar na Vercel](DEPLOY-VERCEL.md) · [GitHub](GITHUB.md) · [README](../README.md).
 
 ## 1. Combate por rolagens opostas
 
-- Atacante e defensor rolam **1d100**; **vence o maior** (`RULES_CONFIG.opposed.winner = "higher"`). Vale para jogador × jogador, jogador × NPC/monstro, NPC/monstro × jogador e NPC/monstro × NPC/monstro.
+- Atacante e defensor rolam **1d100**; **vence o menor** (`RULES_CONFIG.opposed.winner = "lower"`). O 1 vence qualquer outro resultado (contra outro 1, vale o desempate); o 100 perde para qualquer outro. Vale para jogador × jogador, jogador × NPC/monstro, NPC/monstro × jogador e NPC/monstro × NPC/monstro.
 - **Resultado do confronto** e **qualidade da rolagem** são separados: a qualidade é a classificação normal do d100 do atacante (menor é melhor) contra a perícia de ataque — Luta (corpo a corpo), Pontaria (distância), Arma de Fogo (armas de fogo). A reação do defensor é Luta (bloquear) ou Reflexo (esquivar); padrão: Luta contra corpo a corpo, Reflexo contra ataques à distância.
-- Dano só quando o ataque vence: normal e bom = dano padrão; extremo ×1,5; resultado 1 ×2; não acumulam. Vencer com qualidade “falha” causa dano padrão.
+- Dano só quando o ataque vence: normal e bom = dano padrão; extremo ×1,5; resultado 1 ×2; não acumulam. Vencer com qualidade “falha” (ex.: 70 contra perícia 50, mas o defensor tirou 90) causa dano padrão.
 - **Desempate**: jogador × NPC/monstro → o jogador vence (atacando ou defendendo). PvP e NPC × NPC → maior valor na perícia correspondente (perícia de ataque × perícia de reação, com bônus permanentes e temporários); empate também na perícia → nova rolagem oposta automática.
 - **Onde os dados são rolados**: no banco (`public.combat_confront`). O valor da perícia do personagem é calculado no banco a partir da ficha (`form_skill_value`), igual ao motor (2.086 casos de paridade). Ninguém escolhe o número nem grava um confronto direto.
 - **Telas**:
@@ -78,7 +84,7 @@ Conferidas por testes: 8 atributos e rolagem de criação; normal/bom/extremo; b
 
 ## Pendências
 
-- **Regra do maior d100**: implementada exatamente como pedido. Efeito colateral: o resultado 1 (crítico) só vence em empate e o 100 sempre vence. Se o autor decidir que **o menor vence**, basta trocar `opposed.winner` para `"lower"` em `src/rules/config.ts` e rodar `npm run rules:sql` (gera a próxima migração de regras).
+- ~~Regra do maior d100~~ — **resolvida na 6.1**: menor vence.
 - Granadas: um confronto (e uma rolagem de dano) **por alvo**; se a mesa preferir um único dano para a área, é uma decisão a registrar.
 - O histórico de rolagens livres da ficha ainda é gravado pela ação do servidor com a sessão do usuário; confrontos, granadas e rolagens da campanha são rolados no banco e não podem ser forjados.
 - Habilidades de criaturas continuam como teste simples (não são ataques); ataques com essas habilidades podem ser feitos como “ataque livre” em confronto.

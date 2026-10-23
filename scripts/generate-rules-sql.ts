@@ -32,8 +32,8 @@ import {
 import { SKILLS } from "../src/rules/data/skills.ts";
 import { parseDice } from "../src/rules/dice.ts";
 
-/** Versão atual. As anteriores (rules_sync, rules_sync_fase3, rules_sync_3_5, rules_sync_fase4) ficam congeladas — já foram aplicadas. */
-export const RULES_SQL_PATH = fileURLToPath(new URL("../supabase/migrations/20261027000000_rules_sync_v6.sql", import.meta.url));
+/** Versão atual. As anteriores (rules_sync, _fase3, _3_5, _fase4, _v6) ficam congeladas — podem já ter sido aplicadas. */
+export const RULES_SQL_PATH = fileURLToPath(new URL("../supabase/migrations/20261028000000_rules_sync_v6_1.sql", import.meta.url));
 
 /** "1d12+2" → { count: 1, sides: 12, bonus: 2 } (só o formato usado na evolução). */
 function simpleDice(expr: string | null) {

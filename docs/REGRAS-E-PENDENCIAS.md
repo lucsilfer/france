@@ -152,7 +152,7 @@ Muto (partes consumidas), Elo (objeto místico), Amaldiçoado (buff/debuff do Me
 
 | # | Ponto | Decisão atual | Onde mudar |
 |---|---|---|---|
-| 74 | 🔴 Confronto | Atacante e defensor rolam 1d100; **vence o maior** (pedido do autor). Qualidade = d100 do atacante contra a perícia (menor é melhor). Efeito: 1 só vence em empate; 100 sempre vence | `RULES_CONFIG.opposed.winner` |
+| 74 | 🟢 Confronto | Atacante e defensor rolam 1d100; **vence o MENOR** (correção do autor, v6.1). Qualidade = d100 do atacante contra a perícia (menor é melhor). O 1 vence qualquer outro; 100 perde para qualquer outro | `RULES_CONFIG.opposed.winner` |
 | 75 | 🟡 Dano ao vencer | Normal/bom/“falha” de qualidade = dano padrão; extremo ×1,5; resultado 1 ×2; sem acumular | `confrontOutcome` / `confront_outcome` |
 | 76 | 🟡 Desempate | Jogador × NPC/monstro: jogador vence. PvP e NPC × NPC: maior perícia (ataque × reação, com bônus temporários); igual → nova rolagem automática (até 10) | `RULES_CONFIG.opposed` |
 | 77 | 🟡 Reação padrão | Corpo a corpo → Luta (bloquear); distância e fogo → Reflexo (esquivar). O defensor pode escolher | `opposed.defaultReaction` |
@@ -164,7 +164,6 @@ Muto (partes consumidas), Elo (objeto místico), Amaldiçoado (buff/debuff do Me
 
 ## Para confirmar com o autor (prioridade)
 
-0. Confronto: o **maior** ou o **menor** d100 vence? (#74 — hoje: maior, como pedido).
 
 1. Técnicas do Arsenal e aparatos da Engrenagem por nível (#50, #51).
 2. Categoria de cada arma para os modificadores (#18).

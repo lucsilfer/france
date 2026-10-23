@@ -450,7 +450,7 @@ export function ReactionSelect({ value, onChange }: { value: string; onChange: (
 
 /**
  * Confronto conduzido pelo Mestre para um AGENTE (arma da ficha) ou ataque livre de qualquer participante.
- * Atacante e defensor rolam 1d100 no banco; vence o maior; a perícia do atacante define a qualidade.
+ * Atacante e defensor rolam 1d100 no banco; vence o menor; a perícia do atacante define a qualidade.
  */
 export function AgentConfront({
   campaignId,

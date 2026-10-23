@@ -9,7 +9,7 @@
 
 export type RoundingMode = "floor" | "round" | "ceil" | "none";
 
-export const RULES_VERSION = "livro-1.0+site-2026.10-v6";
+export const RULES_VERSION = "livro-1.0+site-2026.10-v6.1";
 
 export const RULES_CONFIG = {
   /** Geração de atributos: ficha → "rolar 3 dados de 3d6*5 e pegar o melhor". */
@@ -88,13 +88,13 @@ export const RULES_CONFIG = {
 
   /**
    * COMBATE POR ROLAGENS OPOSTAS (Fase 6 — regra do autor):
-   * atacante e defensor rolam 1d100; vence o confronto quem tirar o MAIOR resultado.
+   * atacante e defensor rolam 1d100; vence o confronto quem tirar o MENOR resultado (correção do autor, v6.1).
    * A QUALIDADE do acerto continua sendo a classificação normal do d100 (menor é melhor) contra a perícia
    * do atacante; só multiplica o dano quando o ataque vence (extremo ×1,5; resultado 1 ×2; nunca acumula).
-   * `winner: "lower"` inverte a comparação numa linha, se o autor decidir que o menor vence.
+   * O resultado 1 vence qualquer outro (exceto outro 1, que vai para o desempate).
    */
   opposed: {
-    winner: "higher" as "higher" | "lower",
+    winner: "lower" as "higher" | "lower",
     /** Empate jogador × NPC/monstro: o jogador vence (atacando ou defendendo). */
     tiePlayerWins: true,
     /** Novas rolagens automáticas quando o desempate pela perícia também empata. */

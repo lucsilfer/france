@@ -2,11 +2,11 @@
 
 **Sistema de Gerenciamento de Lendas** — plataforma digital do RPG de mesa **Tríade das Lendas**: contas, fichas, rolagens, campanhas, Escudo do Mestre, homebrew e fotos de personagens.
 
-> **Versão 6.0** — combate por rolagens opostas, granadas, layout da ficha revisado e preparação para publicação (GitHub + Vercel + Supabase). Usa o mesmo banco das versões anteriores: só acrescenta duas migrações incrementais.
+> **Versão 6.1** — combate por rolagens opostas (**vence o menor d100**), granadas, layout da ficha revisado e preparação para publicação (GitHub + Vercel + Supabase). Usa o mesmo banco das versões anteriores: só acrescenta migrações incrementais.
 
 | Documento | Conteúdo |
 |---|---|
-| [`docs/VERSAO6.md`](docs/VERSAO6.md) | O que mudou na 6.0, resultados dos testes e pendências |
+| [`docs/VERSAO6.md`](docs/VERSAO6.md) | O que mudou na 6.0/6.1, resultados dos testes e pendências |
 | [`docs/DEPLOY-VERCEL.md`](docs/DEPLOY-VERCEL.md) | Publicar na internet (Vercel + Supabase) |
 | [`docs/GITHUB.md`](docs/GITHUB.md) | Enviar novas versões ao mesmo repositório, preservando o histórico |
 | [`supabase/STORAGE.md`](supabase/STORAGE.md) | Bucket de imagens e políticas |
@@ -37,16 +37,19 @@ Execute no *SQL Editor* do Supabase **só as que faltam**, sempre nesta ordem (o
 | 10 | `20261026000100_fase5_homebrew.sql` | Fase 5 (configura também o Storage) |
 | 11 | `20261027000000_rules_sync_v6.sql` | **6.0** |
 | 12 | `20261027000100_v6_finalizacao.sql` | **6.0** |
+| 13 | `20261028000000_rules_sync_v6_1.sql` | **6.1** (menor d100 vence) |
+| 14 | `20261028000100_v6_1_menor_vence.sql` | **6.1** |
 
 ### Atualizar a partir da Fase 5
 
 1. **Backup** — *Database → Backups* (ou `supabase db dump`).
-2. Rode **11** e depois **12**. O que elas fazem com dados existentes:
+2. Rode **11**, **12**, **13** e **14**, nessa ordem (se já tinha aplicado 11 e 12, rode só 13 e 14). O que elas fazem com dados existentes:
    - Regras do motor sincronizadas (classificação do d100, confronto, granadas) — nada guardado muda.
    - Nova tabela `combat_confrontations` (histórico dos confrontos) e `item_uses` (impede consumo duplo). Combates antigos continuam iguais.
    - Granadas: o item genérico antigo continua nas fichas que já o têm; os 5 tipos novos entram no catálogo. Demolidores que já receberam o kit **não** recebem granadas de novo.
    - `campaign_party` passa a devolver a foto da forma ativa (colegas de campanha veem as fotos do grupo).
    - `combat_confrontations` entra na publicação Realtime.
+   - 13 e 14 (6.1): no confronto passa a vencer o **menor** d100; a 14 confere sozinha se a regra foi atualizada.
 3. Atualize o código (veja [`docs/GITHUB.md`](docs/GITHUB.md)). Na Vercel, cada `git push` publica sozinho.
 
 ## Instalação local
@@ -94,7 +97,7 @@ docs/                guias e histórico
 
 - Só a **anon key** vai para o navegador. Nunca coloque a `service_role` key em variáveis `NEXT_PUBLIC_*` nem no código — o app não precisa dela.
 - Toda permissão é aplicada no banco (RLS + funções `security definer`); a interface só reflete o que o banco permite.
-- **Dados que decidem o jogo são rolados no banco**: confrontos (os dois d100 e o dano), granadas em combate e rolagens livres da campanha. O valor da perícia de um personagem é calculado no banco a partir da ficha — não é aceito do navegador.
+- **Dados que decidem o jogo são rolados no banco**: confrontos (os dois d100 — vence o menor — e o dano), granadas em combate e rolagens livres da campanha. O valor da perícia de um personagem é calculado no banco a partir da ficha — não é aceito do navegador.
 - Pedidos repetidos não descontam duas vezes (PV, PC, granadas, técnicas, dano de confronto).
 - Imagens no bucket privado `france-media`; o banco guarda só o caminho; links assinados com a sessão de quem vê.
 - Entrar por convite sempre torna a pessoa **jogadora**. O Mestre só vê fichas com vínculo aceito e só altera PV/PC/condições se o jogador autorizar.

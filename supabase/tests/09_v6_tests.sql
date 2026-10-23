@@ -16,18 +16,22 @@ reset role;
 do $$
 declare r jsonb;
 begin
-  -- maior d100 vence
-  r := public.confront_outcome(70, 30, 50, 50, false, false, 0);
-  assert r ->> 'winner' = 'attacker', 'maior resultado vence (atacante)';
+  -- v6.1: MENOR d100 vence
   r := public.confront_outcome(30, 70, 50, 50, false, false, 0);
-  assert r ->> 'winner' = 'defender', 'maior resultado vence (defensor)';
-  -- qualidade separada do vencedor: 70 contra perícia 50 = falha de qualidade, mas acerta com dano padrão
+  assert r ->> 'winner' = 'attacker', 'menor resultado vence (atacante)';
   r := public.confront_outcome(70, 30, 50, 50, false, false, 0);
-  assert r ->> 'quality' = 'failure' and (r ->> 'multiplier')::numeric = 1, 'venceu: dano padrão mesmo com qualidade baixa';
+  assert r ->> 'winner' = 'defender', 'menor resultado vence (defensor)';
+  r := public.confront_outcome(1, 2, 50, 50, false, false, 0);
+  assert r ->> 'winner' = 'attacker' and (r ->> 'multiplier')::numeric = 2, 'resultado 1 vence com ×2';
+  r := public.confront_outcome(100, 99, 50, 50, false, false, 0);
+  assert r ->> 'winner' = 'defender', '100 perde';
+  -- qualidade separada do vencedor: 70 contra perícia 50 = falha de qualidade, mas vence o 90 com dano padrão
+  r := public.confront_outcome(70, 90, 50, 50, false, false, 0);
+  assert r ->> 'winner' = 'attacker' and r ->> 'quality' = 'failure' and (r ->> 'multiplier')::numeric = 1, 'venceu: dano padrão mesmo com qualidade baixa';
   -- extremo ×1,5 só quando vence
-  r := public.confront_outcome(9, 5, 50, 50, false, false, 0);
-  assert r ->> 'quality' = 'extreme' and (r ->> 'multiplier')::numeric = 1.5, 'extremo ×1,5 ao vencer';
   r := public.confront_outcome(9, 40, 50, 50, false, false, 0);
+  assert r ->> 'quality' = 'extreme' and (r ->> 'multiplier')::numeric = 1.5, 'extremo ×1,5 ao vencer';
+  r := public.confront_outcome(9, 5, 50, 50, false, false, 0);
   assert r ->> 'winner' = 'defender' and (r ->> 'multiplier')::numeric = 0, 'perdeu: sem dano';
   -- empates
   r := public.confront_outcome(40, 40, 10, 90, true, false, 0);
@@ -38,7 +42,7 @@ begin
   assert r ->> 'winner' = 'attacker' and r ->> 'tie_break' = 'skill', 'PvP: maior perícia vence o empate';
   r := public.confront_outcome(40, 40, 55, 55, false, false, 0);
   assert r ->> 'winner' = 'reroll', 'mesma perícia: nova rolagem';
-  -- resultado 1 (só vence no empate): ×2, sem acumular com extremo
+  -- resultado 1 contra 1: desempate (jogador vence) e ×2, sem acumular com extremo
   r := public.confront_outcome(1, 1, 50, 50, true, false, 0);
   assert r ->> 'quality' = 'critical_success' and (r ->> 'multiplier')::numeric = 2, 'crítico ×2';
 end $$;
@@ -67,6 +71,9 @@ begin
   r := public.combat_confront(cb, m, b, '{"label":"Garras","skill":"luta","damage":"2d6","attack_kind":"melee"}', null, 'a9000000-0000-0000-0000-000000000001', true, true);
   assert (r ->> 'attack_roll')::int between 1 and 100 and (r ->> 'defend_roll')::int between 1 and 100, 'dois d100 rolados no banco';
   assert r ->> 'reaction_skill' = 'luta', 'reação automática corpo a corpo: Luta';
+  assert ((r ->> 'attack_roll')::int < (r ->> 'defend_roll')::int and r ->> 'winner' = 'attacker')
+      or ((r ->> 'attack_roll')::int > (r ->> 'defend_roll')::int and r ->> 'winner' = 'defender')
+      or ((r ->> 'attack_roll')::int = (r ->> 'defend_roll')::int), 'no combate, o menor d100 vence';
   assert (r ->> 'attack_value')::int = 70, 'perícia do monstro vem da ficha copiada';
   select pv_current into pv_after from public.character_forms where character_id = '40000000-0000-0000-0000-000000000001' and kind = 'base';
   if r ->> 'winner' = 'attacker' then

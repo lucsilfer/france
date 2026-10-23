@@ -440,7 +440,7 @@ export async function combatTargets(characterId: string): Promise<ActionResult<{
 
 /**
  * Ataque dentro do combate (Fase 6): ROLAGENS OPOSTAS no banco — o atacante e o alvo rolam 1d100,
- * vence o maior; a qualidade e o dano seguem a perícia de ataque. O dano fica para o Mestre confirmar.
+ * vence o menor; a qualidade e o dano seguem a perícia de ataque. O dano fica para o Mestre confirmar.
  */
 export async function attackInCombat(
   characterId: string,

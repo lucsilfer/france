@@ -2,7 +2,7 @@
  * Combate por rolagens opostas (Fase 6).
  *
  * 1. Atacante e defensor rolam 1d100.
- * 2. Vence o CONFRONTO quem tirar o maior resultado (RULES_CONFIG.opposed.winner).
+ * 2. Vence o CONFRONTO quem tirar o MENOR resultado (RULES_CONFIG.opposed.winner = "lower").
  * 3. Empate: jogador × NPC/monstro → o jogador vence; jogador × jogador e NPC × NPC → maior valor na
  *    perícia correspondente (ataque × reação); persistindo o empate → nova rolagem oposta.
  * 4. A QUALIDADE (normal / bom / extremo / crítico) é a classificação normal do d100 do atacante contra a
